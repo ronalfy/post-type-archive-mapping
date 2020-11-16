@@ -107,6 +107,18 @@ class Enqueue {
 			}
 		}
 
+		$ptam_instance = \PostTypeArchiveMapping::get_instance();
+		$post_types = $ptam_instance->get_post_types();
+		$post_type_meta = array();
+		foreach( $post_types as $post_type ) {
+			$post_object = get_post_type_object( $post_type );
+			$taxonomies = get_object_taxonomies( $post_type, OBJECT );
+			$post_type_meta[ $post_type ] = array(
+				'post_type' => $post_object,
+				'taxonomies' => $taxonomies,
+			);
+		}
+
 		// Pass in i18n variables.
 		wp_localize_script(
 			'ptam-custom-posts-gutenberg',
@@ -123,6 +135,7 @@ class Enqueue {
 				'featured_posts_block_preview' => esc_url( \PostTypeArchiveMapping::get_plugin_url( 'img/featured-posts-block.jpg' ) ),
 				'wpml_installed'               => defined( 'ICL_SITEPRESS_VERSION' ) ? true : false,
 				'wpml_languages'               => $wpml_languages,
+				'post_type_meta' => $post_type_meta,
 			)
 		);
 		wp_set_script_translations( 'ptam-custom-posts-gutenberg', 'post-type-archive-mapping' );

@@ -79,8 +79,12 @@ class PostTypeArchiveMapping {
 		$this->rest->run();
 
 		// Register Custom Post Type Block.
-		$this->cpt_block_one = new PTAM\Includes\Blocks\Custom_Post_Types\Custom_Post_Types();
+		$this->cpt_block_one = new PTAM\Includes\Blocks\Advanced_Custom_Posts\Custom_Posts();
 		$this->cpt_block_one->run();
+
+		// Register Advanced Custom Post Type Block.
+		$this->cpt_block_two = new PTAM\Includes\Blocks\Custom_Post_Types\Custom_Post_Types();
+		$this->cpt_block_two->run();
 
 		// Register Term Grid Block.
 		$this->term_grid = new PTAM\Includes\Blocks\Term_Grid\Terms();
@@ -374,6 +378,18 @@ class PostTypeArchiveMapping {
 			'post-type-archive-mapping'
 		);
 
+	}
+
+	public function get_post_types() {
+		$post_types = get_post_types(
+			array(
+				'public'      => true,
+			)
+		);
+		if ( isset( $post_types['attachment'] ) ) {
+			unset( $post_types['attachment'] );
+		}
+		return $post_types;
 	}
 
 	/**
