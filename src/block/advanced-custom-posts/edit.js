@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import classnames from "classnames";
 import axios from "axios";
 var HtmlToReactParser = require("html-to-react").Parser;
+import TermSelect from '../components/TermSelect';
 
 const { Component, Fragment, useState, useEffect} = wp.element;
 
@@ -125,14 +126,19 @@ const AdvancedCustomPosts = (props) => {
 		<div id="ptam-advanced-custom-posts-wrapper">See Posts</div>
 	};
 
+	const onTermSelect = ( terms, postType, taxonomy ) => {
+
+	}
+
 	const getTaxonomies = (
 		taxonomyData.map((taxData, index) => (
 			<Fragment key={index}>
-				<h2 key={index}>{taxData.label}</h2>
-				<SelectControl
-					label={__('Select', 'post-type-archive-mapping') + ' ' + taxData.label}
-					value='all'
-					options={termControls}
+				<TermSelect
+					initialTerms={[]}
+					heading={taxData.label}
+					key={index}
+					parent={props}
+					onTermSelect={onTermSelect}
 				/>
 			</Fragment>
 		 ) )
