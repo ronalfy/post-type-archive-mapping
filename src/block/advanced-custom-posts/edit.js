@@ -6,7 +6,7 @@ import classnames from "classnames";
 import axios from "axios";
 var HtmlToReactParser = require("html-to-react").Parser;
 
-const { Component, Fragment, useState } = wp.element;
+const { Component, Fragment, useState, useEffect} = wp.element;
 
 const { __ } = wp.i18n;
 
@@ -36,11 +36,36 @@ const {
 const MAX_POSTS_COLUMNS = 6;
 
 const AdvancedCustomPosts = (props) => {
-	const [showQueryEditor, setShowQueryEditor] = useState(false);
+	const [showQueryEditor, setShowQueryEditor] = useState(true);
+	const [ postTypeData, setPostTypeData ] = useState([]);
+	const [ taxonomyData, setTaxonomyData ] = useState([]);
+
+	const ptamGlobalPostTypeData = ptam_globals.post_type_meta;
+
+	useEffect(()=> {
+
+		let postTypes = [];
+		let taxes = [];
+
+		// Set post type data and taxonomies.
+		for (const key in ptamGlobalPostTypeData) {
+			if (ptamGlobalPostTypeData.hasOwnProperty(key)) {
+				postTypes.push( { value: ptamGlobalPostTypeData[ key ].post_type.name, label: ptamGlobalPostTypeData[ key ].post_type.label } );
+				for( const tax in ptamGlobalPostTypeData[ key ].taxonomies ) {
+					taxes.push( {
+						value: ptamGlobalPostTypeData[ key ].taxonomies[tax].name,
+						label: ptamGlobalPostTypeData[ key ].taxonomies[tax].label,
+					});
+				}
+			}
+		}
+		setPostTypeData(postTypes);
+		setTaxonomyData(taxes);
+	},[]);
 
 	const { attributes, setAttributes } = props;
 
-	const { align, postType } = attributes;
+	const { align, postType, taxonomies, wpmlLanguage } = attributes;
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody
@@ -77,6 +102,21 @@ const AdvancedCustomPosts = (props) => {
 		},
 	];
 
+	const termControls = [
+		{
+			value: 'all',
+			label: __('All Terms', 'post-type-archive-mapping'),
+		},
+		{
+			value: 'all_exclude',
+			label: __('All Terms Except...', 'post-type-archive-mapping'),
+		},
+		{
+			value: "none_include",
+			label: __('No Terms Except...', 'post-type-archive-mapping'),
+		},
+	];
+
 	const QueryEditor = (
 		<div id="ptam-query-editor-wrapper">Edit Query</div>
 	);
@@ -85,13 +125,18 @@ const AdvancedCustomPosts = (props) => {
 		<div id="ptam-advanced-custom-posts-wrapper">See Posts</div>
 	};
 
-	const ptamGlobalPostTypeData = ptam_globals.post_type_meta;
-
-	console.log( ptamGlobalPostTypeData );
-
-	const postTypes = ptamGlobalPostTypeData[ postType ];
-
-	console.log( postTypes );
+	const getTaxonomies = (
+		taxonomyData.map((taxData, index) => (
+			<Fragment key={index}>
+				<h2 key={index}>{taxData.label}</h2>
+				<SelectControl
+					label={__('Select', 'post-type-archive-mapping') + ' ' + taxData.label}
+					value='all'
+					options={termControls}
+				/>
+			</Fragment>
+		 ) )
+	);
 
 	return (
 		<Fragment>
@@ -105,13 +150,13 @@ const AdvancedCustomPosts = (props) => {
 					<div id="ptam-query-editor-wrapper">
 						<SelectControl
 							label={__('Post Type', 'post-type-archive-mapping')}
-							value={postType}
-							options={ptamGlobalPostTypeData}
+							value='post'
+							options={postTypeData}
 							onChange={(value) => {
 								setAttributes({fontWeight: value});
 							}}
 						/>
-						Edit Query
+						{getTaxonomies}
 					</div>
 				}
 			</Fragment>

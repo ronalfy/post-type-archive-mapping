@@ -33,22 +33,53 @@ class Custom_Posts {
 			'ptam/advanced-custom-posts',
 			array(
 				'attributes'      => array(
-					'wpmlLanguage'         => array(
+					'wpmlLanguage' => array(
 						'type'    => 'string',
 						'default' => 'en',
 					),
-					'postType'         => array(
+					'postType'     => array(
 						'type'    => 'string',
 						'default' => 'post',
 					),
-					'postType'         => array(
+					'postType'     => array(
 						'type'    => 'string',
 						'default' => 'post',
 					),
-					'align'         => array(
+					'align'        => array(
 						'type'    => 'string',
 						'default' => 'full',
 					),
+					'taxonomies'   =>
+						array(
+							'type'    => 'array',
+							'items'   => array(
+								'type'       => 'object',
+								'properties' => array(
+									'label' => array(
+										'type'     => 'string',
+										'required' => true,
+										'default'  => __( 'Category', 'post-type-archive-mapping' ),
+									),
+									'taxonomy' => array(
+										'type'     => 'string',
+										'required' => true,
+										'default'  => 'category',
+									),
+									'terms'    => array(
+										'type'    => 'array',
+										'default' => array(),
+									),
+								),
+							),
+							'default' => array(
+								array(
+									'label' => __( 'Category', 'post-type-archive-mapping' ),
+									'taxonomy' => 'category',
+									'terms'    => array(),
+								),
+							),
+						),
+
 				),
 				'render_callback' => array( $this, 'advanced_custom_posts' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
