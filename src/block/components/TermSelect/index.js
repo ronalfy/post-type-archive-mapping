@@ -25,7 +25,7 @@ const TermSelect = (props) => {
 	const { setAttributes, attributes } = props.parent;
 	const { initialTerms, heading, taxonomy, postType } = props;
 
-	const { mode, setMode } = useState("all");
+	const [ mode, setMode ] = useState("all");
 
 	const termControls = [
 		{
@@ -42,6 +42,15 @@ const TermSelect = (props) => {
 		},
 	];
 
+	const defaultTerms = [
+		{
+			label: 'Test', value: 'test',
+		},
+		{
+			label: 'Test 2', value: 'test2',
+		}
+	]
+
 	return (
 		<Fragment>
 			<PanelBody title={heading} initialOpen={false}>
@@ -54,6 +63,16 @@ const TermSelect = (props) => {
 							setMode(value);
 						}}
 					/>
+					{'all_exclude' === mode || 'none_include' === mode &&
+						<Fragment>
+							<AsyncSelect
+								isMulti={true}
+								cacheOptions={true}
+								defaultValue={defaultTerms}
+								defaultOptions={defaultTerms}
+							/>
+						</Fragment>
+					}
 				</PanelRow>
 			</PanelBody>
 		</Fragment>
