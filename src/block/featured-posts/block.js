@@ -14,12 +14,6 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 // Import JS
 import edit from './edit';
 
-// Extend component
-const { Component } = wp.element;
-
-// Register alignments
-const validAlignments = [ 'full' ];
-
 export const name = 'ptam/featured-posts';
 
 /**
