@@ -36,9 +36,9 @@ const PTAM_Featured_Posts = ( props ) => {
 	const [ userTaxonomies, setUserTaxonomies ] = useState( {} );
 	const [ userTerms, setUserTerms ] = useState( {} );
 
-	useEffect( async() => {
+	useEffect(() => {
 		setLoading( true );
-		await getLatestData( {} );
+		getLatestData( {} );
 	}, [] );
 
 	/**
@@ -62,7 +62,7 @@ const PTAM_Featured_Posts = ( props ) => {
 		const { postType, taxonomy } = jQuery.extend( {}, props.attributes, object );
 
 		try {
-			const [ result ] = await axios.post(
+			const result = await axios.post(
 				ptam_globals.rest_url + `ptam/v2/get_terms`,
 				{
 					taxonomy,
@@ -77,10 +77,9 @@ const PTAM_Featured_Posts = ( props ) => {
 				jQuery.each( result.data, function( key, value ) {
 					termListArr.push( { value: value.term_id, label: value.name } );
 				} );
-				setTermList( termListArr );
-				setLoading( false );
-
 			}
+			setTermList( termListArr );
+			setLoading( false );
 		} catch ( e ) {
 			// Error :(
 		}
@@ -121,10 +120,7 @@ const PTAM_Featured_Posts = ( props ) => {
 				}
 			);
 			setLatestPosts( result.data.posts );
-			setUserTaxonomies( result.data.taxonomies );
-			setUserTerms( result.data.terms );
 			setLoading( false );
-
 		} catch ( e ) {
 			// Error :(
 		}
@@ -174,32 +170,32 @@ const PTAM_Featured_Posts = ( props ) => {
 	// Get the current list of featured posts.
 	const getFeaturedPosts = () => {
 		return axios.post( ptam_globals.rest_url + `ptam/v2/get_featured_posts`, {
-			post_type: props.postType,
-			order: props.order,
-			orderby: props.orderBy,
-			taxonomy: props.taxonomy,
-			term: props.term,
-			posts_per_page: props.postsToShow,
-			image_size: props.imageCrop,
-			avatar_size: props.avatarSize,
-			image_type: props.imageType,
-			image_size: props.imageTypeSize,
-			default_image: props.fallbackImg,
+			post_type: props.attributes.postType,
+			order: props.attributes.order,
+			orderby: props.attributes.orderBy,
+			taxonomy: props.attributes.taxonomy,
+			term: props.attributes.term,
+			posts_per_page: props.attributes.postsToShow,
+			image_size: props.attributes.imageCrop,
+			avatar_size: props.attributes.avatarSize,
+			image_type: props.attributes.imageType,
+			image_size: props.attributes.imageTypeSize,
+			default_image: props.attributes.fallbackImg,
 		} );
 	};
 
 	// Retrieve a list of terms by taxonomy and post type.
 	const getTerms = () => {
 		return axios.post( ptam_globals.rest_url + `ptam/v2/get_terms`, {
-			taxonomy: props.taxonomy,
-			post_type: props.postType,
+			taxonomy: props.attributes.taxonomy,
+			post_type: props.attributes.postType,
 		} );
 	};
 
 	// Retrieve a list of all taxonomies by post type.
 	const getTaxonomies = () => {
 		return axios.post( ptam_globals.rest_url + `ptam/v2/get_taxonomies`, {
-			post_type: props.postType,
+			post_type: props.attributes.postType,
 		} );
 	};
 
@@ -335,13 +331,12 @@ const PTAM_Featured_Posts = ( props ) => {
 	};
 
 	const itemNumberRender = ( value ) => {
-		const postsToShow = value;
 		if ( itemNumberTimer ) {
 			clearTimeout( itemNumberTimer );
 		}
 		setItemNumberTimer(
 			setTimeout( () => {
-				getLatestData( { postsToShow } );
+				getLatestData( { value } );
 			}, 1000 )
 		);
 	};
@@ -359,10 +354,8 @@ const PTAM_Featured_Posts = ( props ) => {
 		);
 	}
 
-	const htmlToReactParser = new HtmlToReactParser();
 	const { attributes, setAttributes } = props;
 	const {
-		align,
 		postType,
 		imageTypeSize,
 		postsToShow,
@@ -371,8 +364,6 @@ const PTAM_Featured_Posts = ( props ) => {
 		taxonomy,
 		order,
 		orderBy,
-		postLayout,
-		displayPostContent,
 		termDisplayPaddingBottom,
 		termDisplayPaddingTop,
 		termDisplayPaddingLeft,
@@ -455,41 +446,6 @@ const PTAM_Featured_Posts = ( props ) => {
 		{ value: 'rand', label: __( 'Random', 'post-type-archive-mapping' ) },
 	];
 
-	const featuredImageOptions = [
-		{ value: 'none', label: __( 'None', 'post-type-archive-mapping' ) },
-		{
-			value: 'featured',
-			label: __( 'Featured Image', 'post-type-archive-mapping' ),
-		},
-		{ value: 'gravatar', label: __( 'Gravatar', 'post-type-archive-mapping' ) },
-	];
-
-	const backgroundTypeOptions = [
-		{ value: 'none', label: __( 'None', 'post-type-archive-mapping' ) },
-		{
-			value: 'color',
-			label: __( 'Background Color', 'post-type-archive-mapping' ),
-		},
-		{
-			value: 'gradient',
-			label: __( 'Background Gradient', 'post-type-archive-mapping' ),
-		},
-		{
-			value: 'image',
-			label: __( 'Background Image', 'post-type-archive-mapping' ),
-		},
-	];
-
-	// Title Heading Options
-	const titleHeadingOptions = [
-		{ value: 'h1', label: __( 'H1', 'post-type-archive-mapping' ) },
-		{ value: 'h2', label: __( 'H2', 'post-type-archive-mapping' ) },
-		{ value: 'h3', label: __( 'H3', 'post-type-archive-mapping' ) },
-		{ value: 'h4', label: __( 'H4', 'post-type-archive-mapping' ) },
-		{ value: 'h5', label: __( 'H5', 'post-type-archive-mapping' ) },
-		{ value: 'H6', label: __( 'H6', 'post-type-archive-mapping' ) },
-	];
-
 	// Get the term label.
 	let selectedTerm = 0;
 	for ( const key in termList ) {
@@ -550,9 +506,9 @@ const PTAM_Featured_Posts = ( props ) => {
 					options={ taxonomyList }
 					value={ taxonomy }
 					onChange={ ( value ) => {
-						props.setAttributes( { taxonomy: value } );
+						props.setAttributes( { taxonomy: value, term: 0 } );
 						getTermList( { taxonomy: value, term: 0 } );
-						getLatestPosts( { term: value } );
+						getLatestPosts( { taxonomy: value, term: 0 } );
 					} }
 				/>
 				<SelectControl
@@ -1070,6 +1026,16 @@ const PTAM_Featured_Posts = ( props ) => {
 		);
 	}
 	if ( ! term ) {
+		if ( 0 === termList.length) {
+			return (
+				<Fragment>
+					{ inspectorControls }
+					<h2 style={ { textAlign: 'center' } }>
+						{ __( 'Please select a different taxonomy. No terms were found.', 'post-type-archive-mapping' ) }
+					</h2>
+				</Fragment>
+			);
+		}
 		return (
 			<Fragment>
 				{ inspectorControls }

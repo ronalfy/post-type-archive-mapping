@@ -16733,7 +16733,6 @@ registerBlockType('ptam/featured-posts', {
   description: __('Highlight a term (category) and show the items within it. Perfect for term archives.', 'post-type-archive-mapping'),
   keywords: [__('featured', 'post-type-archive-mapping'), __('post', 'poost-type-archive-mapping'), __('posts', 'poost-type-archive-mapping'), __('category', 'post-type-archive-mapping'), __('term', 'post-type-archive-mapping')],
   supports: {
-    align: ['wide', 'full', 'center'],
     anchor: true,
     html: false
   },
@@ -16871,22 +16870,10 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       userTerms = _useState20[0],
       setUserTerms = _useState20[1];
 
-  useEffect( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            setLoading(true);
-            _context.next = 3;
-            return getLatestData({});
-
-          case 3:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })), []);
+  useEffect(function () {
+    setLoading(true);
+    getLatestData({});
+  }, []);
   /**
    *
    * @param {string} excerpt The excerpt to parse down.
@@ -16903,35 +16890,31 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getTermList = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var object,
           termListArr,
           _jQuery$extend,
           postType,
           taxonomy,
-          _yield$axios$post,
-          _yield$axios$post2,
           result,
-          _args2 = arguments;
+          _args = arguments;
 
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context.prev = _context.next) {
             case 0:
-              object = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
+              object = _args.length > 0 && _args[0] !== undefined ? _args[0] : {};
               termListArr = [];
               _jQuery$extend = jQuery.extend({}, props.attributes, object), postType = _jQuery$extend.postType, taxonomy = _jQuery$extend.taxonomy;
-              _context2.prev = 3;
-              _context2.next = 6;
+              _context.prev = 3;
+              _context.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
                 taxonomy: taxonomy,
                 post_type: postType
               });
 
             case 6:
-              _yield$axios$post = _context2.sent;
-              _yield$axios$post2 = _slicedToArray(_yield$axios$post, 1);
-              result = _yield$axios$post2[0];
+              result = _context.sent;
 
               if (Object.keys(result.data).length > 0) {
                 termListArr.push({
@@ -16944,32 +16927,32 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
                     label: value.name
                   });
                 });
-                setTermList(termListArr);
-                setLoading(false);
               }
 
-              _context2.next = 14;
+              setTermList(termListArr);
+              setLoading(false);
+              _context.next = 14;
               break;
 
             case 12:
-              _context2.prev = 12;
-              _context2.t0 = _context2["catch"](3);
+              _context.prev = 12;
+              _context.t0 = _context["catch"](3);
 
             case 14:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2, null, [[3, 12]]);
+      }, _callee, null, [[3, 12]]);
     }));
 
     return function getTermList() {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
 
   var getLatestPosts = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       var object,
           _jQuery$extend2,
           postType,
@@ -16985,17 +16968,17 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           fallbackImg,
           _axios$post,
           result,
-          _args3 = arguments;
+          _args2 = arguments;
 
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              object = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {};
+              object = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
               _jQuery$extend2 = jQuery.extend({}, props.attributes, object), postType = _jQuery$extend2.postType, order = _jQuery$extend2.order, orderBy = _jQuery$extend2.orderBy, avatarSize = _jQuery$extend2.avatarSize, imageType = _jQuery$extend2.imageType, imageTypeSize = _jQuery$extend2.imageTypeSize, taxonomy = _jQuery$extend2.taxonomy, term = _jQuery$extend2.term, postsToShow = _jQuery$extend2.postsToShow, imageCrop = _jQuery$extend2.imageCrop, fallbackImg = _jQuery$extend2.fallbackImg;
               setLoading(true);
-              _context3.prev = 3;
-              _context3.next = 6;
+              _context2.prev = 3;
+              _context2.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
                 post_type: postType,
                 order: order,
@@ -17009,33 +16992,31 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               }, _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "default_image", fallbackImg), _axios$post));
 
             case 6:
-              result = _context3.sent;
+              result = _context2.sent;
               setLatestPosts(result.data.posts);
-              setUserTaxonomies(result.data.taxonomies);
-              setUserTerms(result.data.terms);
               setLoading(false);
-              _context3.next = 15;
+              _context2.next = 13;
               break;
 
-            case 13:
-              _context3.prev = 13;
-              _context3.t0 = _context3["catch"](3);
+            case 11:
+              _context2.prev = 11;
+              _context2.t0 = _context2["catch"](3);
 
-            case 15:
+            case 13:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, null, [[3, 13]]);
+      }, _callee2, null, [[3, 11]]);
     }));
 
     return function getLatestPosts() {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
   var getLatestData = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var object,
           taxonomyListArr,
           termsListArr,
@@ -17044,22 +17025,22 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           restFeaturedPosts,
           restGetTerms,
           restGetTaxonomies,
-          _args4 = arguments;
+          _args3 = arguments;
 
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              object = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : {};
+              object = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {};
               setLoading(true);
               taxonomyListArr = [];
               termsListArr = [];
-              _context4.prev = 4;
-              _context4.next = 7;
+              _context3.prev = 4;
+              _context3.next = 7;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.all([getFeaturedPosts(), getTerms(), getTaxonomies()]);
 
             case 7:
-              _yield$axios$all = _context4.sent;
+              _yield$axios$all = _context3.sent;
               _yield$axios$all2 = _slicedToArray(_yield$axios$all, 3);
               restFeaturedPosts = _yield$axios$all2[0];
               restGetTerms = _yield$axios$all2[1];
@@ -17096,23 +17077,23 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               setUserTaxonomies(restFeaturedPosts.data.taxonomies);
               setTermList(termsListArr);
               setLoading(false);
-              _context4.next = 23;
+              _context3.next = 23;
               break;
 
             case 21:
-              _context4.prev = 21;
-              _context4.t0 = _context4["catch"](4);
+              _context3.prev = 21;
+              _context3.t0 = _context3["catch"](4);
 
             case 23:
             case "end":
-              return _context4.stop();
+              return _context3.stop();
           }
         }
-      }, _callee4, null, [[4, 21]]);
+      }, _callee3, null, [[4, 21]]);
     }));
 
     return function getLatestData() {
-      return _ref4.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }(); // Get the current list of featured posts.
 
@@ -17121,30 +17102,30 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     var _axios$post2;
 
     return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post2 = {
-      post_type: props.postType,
-      order: props.order,
-      orderby: props.orderBy,
-      taxonomy: props.taxonomy,
-      term: props.term,
-      posts_per_page: props.postsToShow,
-      image_size: props.imageCrop,
-      avatar_size: props.avatarSize,
-      image_type: props.imageType
-    }, _defineProperty(_axios$post2, "image_size", props.imageTypeSize), _defineProperty(_axios$post2, "default_image", props.fallbackImg), _axios$post2));
+      post_type: props.attributes.postType,
+      order: props.attributes.order,
+      orderby: props.attributes.orderBy,
+      taxonomy: props.attributes.taxonomy,
+      term: props.attributes.term,
+      posts_per_page: props.attributes.postsToShow,
+      image_size: props.attributes.imageCrop,
+      avatar_size: props.attributes.avatarSize,
+      image_type: props.attributes.imageType
+    }, _defineProperty(_axios$post2, "image_size", props.attributes.imageTypeSize), _defineProperty(_axios$post2, "default_image", props.attributes.fallbackImg), _axios$post2));
   }; // Retrieve a list of terms by taxonomy and post type.
 
 
   var getTerms = function getTerms() {
     return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
-      taxonomy: props.taxonomy,
-      post_type: props.postType
+      taxonomy: props.attributes.taxonomy,
+      post_type: props.attributes.postType
     });
   }; // Retrieve a list of all taxonomies by post type.
 
 
   var getTaxonomies = function getTaxonomies() {
     return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
-      post_type: props.postType
+      post_type: props.attributes.postType
     });
   };
 
@@ -17247,15 +17228,13 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   };
 
   var itemNumberRender = function itemNumberRender(value) {
-    var postsToShow = value;
-
     if (itemNumberTimer) {
       clearTimeout(itemNumberTimer);
     }
 
     setItemNumberTimer(setTimeout(function () {
       getLatestData({
-        postsToShow: postsToShow
+        value: value
       });
     }, 1000));
   };
@@ -17274,11 +17253,9 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     }));
   }
 
-  var htmlToReactParser = new HtmlToReactParser();
   var attributes = props.attributes,
       setAttributes = props.setAttributes;
-  var align = attributes.align,
-      postType = attributes.postType,
+  var postType = attributes.postType,
       imageTypeSize = attributes.imageTypeSize,
       postsToShow = attributes.postsToShow,
       fallbackImg = attributes.fallbackImg,
@@ -17286,8 +17263,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       taxonomy = attributes.taxonomy,
       order = attributes.order,
       orderBy = attributes.orderBy,
-      postLayout = attributes.postLayout,
-      displayPostContent = attributes.displayPostContent,
       termDisplayPaddingBottom = attributes.termDisplayPaddingBottom,
       termDisplayPaddingTop = attributes.termDisplayPaddingTop,
       termDisplayPaddingLeft = attributes.termDisplayPaddingLeft,
@@ -17386,49 +17361,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   }, {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
-  }];
-  var featuredImageOptions = [{
-    value: 'none',
-    label: __('None', 'post-type-archive-mapping')
-  }, {
-    value: 'featured',
-    label: __('Featured Image', 'post-type-archive-mapping')
-  }, {
-    value: 'gravatar',
-    label: __('Gravatar', 'post-type-archive-mapping')
-  }];
-  var backgroundTypeOptions = [{
-    value: 'none',
-    label: __('None', 'post-type-archive-mapping')
-  }, {
-    value: 'color',
-    label: __('Background Color', 'post-type-archive-mapping')
-  }, {
-    value: 'gradient',
-    label: __('Background Gradient', 'post-type-archive-mapping')
-  }, {
-    value: 'image',
-    label: __('Background Image', 'post-type-archive-mapping')
-  }]; // Title Heading Options
-
-  var titleHeadingOptions = [{
-    value: 'h1',
-    label: __('H1', 'post-type-archive-mapping')
-  }, {
-    value: 'h2',
-    label: __('H2', 'post-type-archive-mapping')
-  }, {
-    value: 'h3',
-    label: __('H3', 'post-type-archive-mapping')
-  }, {
-    value: 'h4',
-    label: __('H4', 'post-type-archive-mapping')
-  }, {
-    value: 'h5',
-    label: __('H5', 'post-type-archive-mapping')
-  }, {
-    value: 'H6',
-    label: __('H6', 'post-type-archive-mapping')
   }]; // Get the term label.
 
   var selectedTerm = 0;
@@ -17490,14 +17422,16 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     value: taxonomy,
     onChange: function onChange(value) {
       props.setAttributes({
-        taxonomy: value
+        taxonomy: value,
+        term: 0
       });
       getTermList({
         taxonomy: value,
         term: 0
       });
       getLatestPosts({
-        term: value
+        taxonomy: value,
+        term: 0
       });
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {
@@ -17780,8 +17714,8 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     },
     type: "image",
     value: fallbackImg.url,
-    render: function render(_ref5) {
-      var open = _ref5.open;
+    render: function render(_ref4) {
+      var open = _ref4.open;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
         className: "ptam-media-alt-upload components-button is-button is-secondary",
         onClick: open
@@ -17994,6 +17928,14 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   }
 
   if (!term) {
+    if (0 === termList.length) {
+      return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement("h2", {
+        style: {
+          textAlign: 'center'
+        }
+      }, __('Please select a different taxonomy. No terms were found.', 'post-type-archive-mapping')));
+    }
+
     return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement("h2", {
       style: {
         textAlign: 'center'

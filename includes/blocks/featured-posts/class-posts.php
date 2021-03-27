@@ -344,7 +344,6 @@ class Posts {
 			);
 			echo wp_kses_post( '<div class="ptam-pagination">' . $pagination . '</div>' );
 		}
-		$wp_query = $temp; // phpcs:ignore
 		?>
 		</div><!-- .ptam-fp-wrapper -->
 		<?php

@@ -66,7 +66,6 @@ registerBlockType( 'ptam/featured-posts', {
 		__( 'term', 'post-type-archive-mapping' ),
 	],
 	supports: {
-		align: [ 'wide', 'full', 'center' ],
 		anchor: true,
 		html: false,
 	},
