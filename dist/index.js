@@ -16871,10 +16871,22 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       userTerms = _useState20[0],
       setUserTerms = _useState20[1];
 
-  useEffect(function () {
-    setLoading(true);
-    getLatestData({});
-  }, []);
+  useEffect( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            setLoading(true);
+            _context.next = 3;
+            return getLatestData({});
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })), []);
   /**
    *
    * @param {string} excerpt The excerpt to parse down.
@@ -16891,7 +16903,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getTermList = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       var object,
           termListArr,
           _jQuery$extend,
@@ -16900,24 +16912,24 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           _yield$axios$post,
           _yield$axios$post2,
           result,
-          _args = arguments;
+          _args2 = arguments;
 
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              object = _args.length > 0 && _args[0] !== undefined ? _args[0] : {};
+              object = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
               termListArr = [];
               _jQuery$extend = jQuery.extend({}, props.attributes, object), postType = _jQuery$extend.postType, taxonomy = _jQuery$extend.taxonomy;
-              _context.prev = 3;
-              _context.next = 6;
+              _context2.prev = 3;
+              _context2.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
                 taxonomy: taxonomy,
                 post_type: postType
               });
 
             case 6:
-              _yield$axios$post = _context.sent;
+              _yield$axios$post = _context2.sent;
               _yield$axios$post2 = _slicedToArray(_yield$axios$post, 1);
               result = _yield$axios$post2[0];
 
@@ -16936,28 +16948,28 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
                 setLoading(false);
               }
 
-              _context.next = 14;
+              _context2.next = 14;
               break;
 
             case 12:
-              _context.prev = 12;
-              _context.t0 = _context["catch"](3);
+              _context2.prev = 12;
+              _context2.t0 = _context2["catch"](3);
 
             case 14:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[3, 12]]);
+      }, _callee2, null, [[3, 12]]);
     }));
 
     return function getTermList() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
   var getLatestPosts = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var object,
           _jQuery$extend2,
           postType,
@@ -16973,17 +16985,17 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           fallbackImg,
           _axios$post,
           result,
-          _args2 = arguments;
+          _args3 = arguments;
 
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              object = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {};
+              object = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {};
               _jQuery$extend2 = jQuery.extend({}, props.attributes, object), postType = _jQuery$extend2.postType, order = _jQuery$extend2.order, orderBy = _jQuery$extend2.orderBy, avatarSize = _jQuery$extend2.avatarSize, imageType = _jQuery$extend2.imageType, imageTypeSize = _jQuery$extend2.imageTypeSize, taxonomy = _jQuery$extend2.taxonomy, term = _jQuery$extend2.term, postsToShow = _jQuery$extend2.postsToShow, imageCrop = _jQuery$extend2.imageCrop, fallbackImg = _jQuery$extend2.fallbackImg;
               setLoading(true);
-              _context2.prev = 3;
-              _context2.next = 6;
+              _context3.prev = 3;
+              _context3.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
                 post_type: postType,
                 order: order,
@@ -16997,35 +17009,33 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               }, _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "default_image", fallbackImg), _axios$post));
 
             case 6:
-              result = _context2.sent;
-              console.log(result);
+              result = _context3.sent;
               setLatestPosts(result.data.posts);
               setUserTaxonomies(result.data.taxonomies);
               setUserTerms(result.data.terms);
               setLoading(false);
-              _context2.next = 17;
+              _context3.next = 15;
               break;
 
-            case 14:
-              _context2.prev = 14;
-              _context2.t0 = _context2["catch"](3);
-              console.log(_context2.t0); // Error :(
+            case 13:
+              _context3.prev = 13;
+              _context3.t0 = _context3["catch"](3);
 
-            case 17:
+            case 15:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, null, [[3, 14]]);
+      }, _callee3, null, [[3, 13]]);
     }));
 
     return function getLatestPosts() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
 
   var getLatestData = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
       var object,
           taxonomyListArr,
           termsListArr,
@@ -17034,22 +17044,22 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           restFeaturedPosts,
           restGetTerms,
           restGetTaxonomies,
-          _args3 = arguments;
+          _args4 = arguments;
 
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              object = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {};
+              object = _args4.length > 0 && _args4[0] !== undefined ? _args4[0] : {};
               setLoading(true);
               taxonomyListArr = [];
               termsListArr = [];
-              _context3.prev = 4;
-              _context3.next = 7;
+              _context4.prev = 4;
+              _context4.next = 7;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.all([getFeaturedPosts(), getTerms(), getTaxonomies()]);
 
             case 7:
-              _yield$axios$all = _context3.sent;
+              _yield$axios$all = _context4.sent;
               _yield$axios$all2 = _slicedToArray(_yield$axios$all, 3);
               restFeaturedPosts = _yield$axios$all2[0];
               restGetTerms = _yield$axios$all2[1];
@@ -17086,24 +17096,23 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               setUserTaxonomies(restFeaturedPosts.data.taxonomies);
               setTermList(termsListArr);
               setLoading(false);
-              _context3.next = 24;
+              _context4.next = 23;
               break;
 
             case 21:
-              _context3.prev = 21;
-              _context3.t0 = _context3["catch"](4);
-              console.log(_context3.t0);
+              _context4.prev = 21;
+              _context4.t0 = _context4["catch"](4);
 
-            case 24:
+            case 23:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3, null, [[4, 21]]);
+      }, _callee4, null, [[4, 21]]);
     }));
 
     return function getLatestData() {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }(); // Get the current list of featured posts.
 
@@ -17423,7 +17432,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   }]; // Get the term label.
 
   var selectedTerm = 0;
-  console.log('blah');
 
   for (var _key3 in termList) {
     if (termList[_key3].value == term) {
@@ -17772,8 +17780,8 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     },
     type: "image",
     value: fallbackImg.url,
-    render: function render(_ref4) {
-      var open = _ref4.open;
+    render: function render(_ref5) {
+      var open = _ref5.open;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
         className: "ptam-media-alt-upload components-button is-button is-secondary",
         onClick: open

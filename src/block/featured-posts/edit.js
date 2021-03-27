@@ -36,9 +36,9 @@ const PTAM_Featured_Posts = ( props ) => {
 	const [ userTaxonomies, setUserTaxonomies ] = useState( {} );
 	const [ userTerms, setUserTerms ] = useState( {} );
 
-	useEffect( () => {
+	useEffect( async() => {
 		setLoading( true );
-		getLatestData( {} );
+		await getLatestData( {} );
 	}, [] );
 
 	/**
@@ -120,20 +120,18 @@ const PTAM_Featured_Posts = ( props ) => {
 					default_image: fallbackImg,
 				}
 			);
-			console.log( result );
 			setLatestPosts( result.data.posts );
 			setUserTaxonomies( result.data.taxonomies );
 			setUserTerms( result.data.terms );
 			setLoading( false );
 
 		} catch ( e ) {
-			console.log( e );
 			// Error :(
 		}
 	};
 
 	const getLatestData = async( object = {} ) => {
-		setLoading( true );
+		setLoading(true);
 
 		const taxonomyListArr = [];
 		const termsListArr = [];
@@ -170,7 +168,6 @@ const PTAM_Featured_Posts = ( props ) => {
 			setTermList( termsListArr );
 			setLoading( false );
 		} catch ( e ) {
-			console.log( e );
 		}
 	};
 
@@ -495,7 +492,6 @@ const PTAM_Featured_Posts = ( props ) => {
 
 	// Get the term label.
 	let selectedTerm = 0;
-	console.log( 'blah' );
 	for ( const key in termList ) {
 		if ( termList[ key ].value == term ) {
 			selectedTerm = termList[ key ].label;
