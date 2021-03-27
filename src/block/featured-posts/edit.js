@@ -26,15 +26,11 @@ const { MediaUpload, InspectorControls, PanelColorSettings } = wp.blockEditor;
 
 const PTAM_Featured_Posts = ( props ) => {
 	const [ loading, setLoading ] = useState( true );
-	const [ selectedTaxonomy, setSelectedTaxonomy ] = useState( 'category' );
-	const [ currentPostType, setCurrentPostType ] = useState( 'post' );
 	const [ imageSizes, setImageSizes ] = useState( ptam_globals.post_types );
 	const [ taxonomyList, setTaxonomyList ] = useState( [] );
 	const [ termList, setTermList ] = useState( [] );
 	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );
 	const [ latestPosts, setLatestPosts ] = useState( {} );
-	const [ userTaxonomies, setUserTaxonomies ] = useState( {} );
-	const [ userTerms, setUserTerms ] = useState( {} );
 
 	useEffect(() => {
 		setLoading( true );
@@ -161,7 +157,6 @@ const PTAM_Featured_Posts = ( props ) => {
 			setTaxonomyList( taxonomyListArr );
 
 			setLatestPosts( restFeaturedPosts.data.posts );
-			setUserTaxonomies( restFeaturedPosts.data.taxonomies );
 			setTermList( termsListArr );
 			setLoading( false );
 		} catch ( e ) {

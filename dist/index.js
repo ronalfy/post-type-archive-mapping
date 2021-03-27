@@ -16825,50 +16825,30 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       loading = _useState2[0],
       setLoading = _useState2[1];
 
-  var _useState3 = useState('category'),
+  var _useState3 = useState(ptam_globals.post_types),
       _useState4 = _slicedToArray(_useState3, 2),
-      selectedTaxonomy = _useState4[0],
-      setSelectedTaxonomy = _useState4[1];
+      imageSizes = _useState4[0],
+      setImageSizes = _useState4[1];
 
-  var _useState5 = useState('post'),
+  var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      currentPostType = _useState6[0],
-      setCurrentPostType = _useState6[1];
+      taxonomyList = _useState6[0],
+      setTaxonomyList = _useState6[1];
 
-  var _useState7 = useState(ptam_globals.post_types),
+  var _useState7 = useState([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      imageSizes = _useState8[0],
-      setImageSizes = _useState8[1];
+      termList = _useState8[0],
+      setTermList = _useState8[1];
 
-  var _useState9 = useState([]),
+  var _useState9 = useState(0),
       _useState10 = _slicedToArray(_useState9, 2),
-      taxonomyList = _useState10[0],
-      setTaxonomyList = _useState10[1];
+      itemNumberTimer = _useState10[0],
+      setItemNumberTimer = _useState10[1];
 
-  var _useState11 = useState([]),
+  var _useState11 = useState({}),
       _useState12 = _slicedToArray(_useState11, 2),
-      termList = _useState12[0],
-      setTermList = _useState12[1];
-
-  var _useState13 = useState(0),
-      _useState14 = _slicedToArray(_useState13, 2),
-      itemNumberTimer = _useState14[0],
-      setItemNumberTimer = _useState14[1];
-
-  var _useState15 = useState({}),
-      _useState16 = _slicedToArray(_useState15, 2),
-      latestPosts = _useState16[0],
-      setLatestPosts = _useState16[1];
-
-  var _useState17 = useState({}),
-      _useState18 = _slicedToArray(_useState17, 2),
-      userTaxonomies = _useState18[0],
-      setUserTaxonomies = _useState18[1];
-
-  var _useState19 = useState({}),
-      _useState20 = _slicedToArray(_useState19, 2),
-      userTerms = _useState20[0],
-      setUserTerms = _useState20[1];
+      latestPosts = _useState12[0],
+      setLatestPosts = _useState12[1];
 
   useEffect(function () {
     setLoading(true);
@@ -17077,22 +17057,21 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
               setTaxonomyList(taxonomyListArr);
               setLatestPosts(restFeaturedPosts.data.posts);
-              setUserTaxonomies(restFeaturedPosts.data.taxonomies);
               setTermList(termsListArr);
               setLoading(false);
-              _context3.next = 23;
+              _context3.next = 22;
               break;
 
-            case 21:
-              _context3.prev = 21;
+            case 20:
+              _context3.prev = 20;
               _context3.t0 = _context3["catch"](4);
 
-            case 23:
+            case 22:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[4, 21]]);
+      }, _callee3, null, [[4, 20]]);
     }));
 
     return function getLatestData() {
