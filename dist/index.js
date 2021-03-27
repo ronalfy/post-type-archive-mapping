@@ -16927,6 +16927,9 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
                     label: value.name
                   });
                 });
+                props.setAttributes({
+                  term: 'all'
+                });
               }
 
               setTermList(termListArr);
@@ -17302,30 +17305,30 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
   var fontOptions = [];
 
-  for (var key in ptam_globals.fonts) {
+  for (var fontKey in ptam_globals.fonts) {
     fontOptions.push({
-      value: key,
-      label: ptam_globals.fonts[key]
+      value: fontKey,
+      label: ptam_globals.fonts[fontKey]
     });
   } // Post Types.
 
 
   var postTypeOptions = [];
 
-  for (var _key in ptam_globals.post_types) {
+  for (var postTypeKey in ptam_globals.post_types) {
     postTypeOptions.push({
-      value: _key,
-      label: ptam_globals.post_types[_key]
+      value: postTypeKey,
+      label: ptam_globals.post_types[postTypeKey]
     });
   } // Image Sizes.
 
 
   var imageSizeOptions = [];
 
-  for (var _key2 in imageSizes) {
+  for (var imageKey in imageSizes) {
     imageSizeOptions.push({
-      value: _key2,
-      label: _key2
+      value: imageKey,
+      label: imageKey
     });
   } // Order Params.
 
@@ -17365,12 +17368,13 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
   var selectedTerm = 0;
 
-  for (var _key3 in termList) {
-    if (termList[_key3].value == term) {
-      selectedTerm = termList[_key3].label;
+  for (var termKey in termList) {
+    if (termList[termKey].value == term) {
+      selectedTerm = termList[termKey].label;
       break;
     }
-  }
+  } // Custom term title.
+
 
   if (termTitle !== '') {
     selectedTerm = termTitle;
@@ -17431,7 +17435,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
         });
         getLatestPosts({
           taxonomy: value,
-          term: 'all'
+          term: 0
         });
       }
     }
@@ -17957,7 +17961,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       style: termContainerStyles
     }, /*#__PURE__*/React.createElement("span", {
       style: termButtonStyles
-    }, selectedTerm)), getPostHtml()));
+    }, selectedTerm ? selectedTerm : __('All', 'post-type-archive-mapping'))), getPostHtml()));
   }
 };
 

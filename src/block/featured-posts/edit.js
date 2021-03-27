@@ -77,6 +77,7 @@ const PTAM_Featured_Posts = ( props ) => {
 				jQuery.each( result.data, function( key, value ) {
 					termListArr.push( { value: value.term_id, label: value.name } );
 				} );
+				props.setAttributes({term: 'all' } );
 			}
 			setTermList( termListArr );
 			setLoading( false );
@@ -404,20 +405,20 @@ const PTAM_Featured_Posts = ( props ) => {
 
 	// Fonts
 	const fontOptions = [];
-	for ( const key in ptam_globals.fonts ) {
-		fontOptions.push( { value: key, label: ptam_globals.fonts[ key ] } );
+	for ( const fontKey in ptam_globals.fonts ) {
+		fontOptions.push( { value: fontKey, label: ptam_globals.fonts[ fontKey ] } );
 	}
 
 	// Post Types.
 	const postTypeOptions = [];
-	for ( const key in ptam_globals.post_types ) {
-		postTypeOptions.push( { value: key, label: ptam_globals.post_types[ key ] } );
+	for ( const postTypeKey in ptam_globals.post_types ) {
+		postTypeOptions.push( { value: postTypeKey, label: ptam_globals.post_types[ postTypeKey ] } );
 	}
 
 	// Image Sizes.
 	const imageSizeOptions = [];
-	for ( const key in imageSizes ) {
-		imageSizeOptions.push( { value: key, label: key } );
+	for ( const imageKey in imageSizes ) {
+		imageSizeOptions.push( { value: imageKey, label: imageKey } );
 	}
 
 	// Order Params.
@@ -448,12 +449,14 @@ const PTAM_Featured_Posts = ( props ) => {
 
 	// Get the term label.
 	let selectedTerm = 0;
-	for ( const key in termList ) {
-		if ( termList[ key ].value == term ) {
-			selectedTerm = termList[ key ].label;
+	for ( const termKey in termList ) {
+		if ( termList[ termKey ].value == term ) {
+			selectedTerm = termList[ termKey ].label;
 			break;
 		}
 	}
+
+	// Custom term title.
 	if ( termTitle !== '' ) {
 		selectedTerm = termTitle;
 	}
@@ -509,7 +512,7 @@ const PTAM_Featured_Posts = ( props ) => {
 						if ( 'none' !== value ) {
 							props.setAttributes( { taxonomy: value, term: 0 } );
 							getTermList( { taxonomy: value } );
-							getLatestPosts( { taxonomy: value, term: 'all' } );
+							getLatestPosts( { taxonomy: value, term: 0 } );
 						}
 					} }
 				/>
@@ -1068,7 +1071,7 @@ const PTAM_Featured_Posts = ( props ) => {
 				) }
 				<div className="ptam-fp-wrapper" id={ containerId }>
 					<h4 className="ptam-fp-term" style={ termContainerStyles }>
-						<span style={ termButtonStyles }>{ selectedTerm }</span>
+						<span style={ termButtonStyles }>{ selectedTerm ? selectedTerm : __( 'All', 'post-type-archive-mapping' ) }</span>
 					</h4>
 					{ getPostHtml() }
 				</div>
