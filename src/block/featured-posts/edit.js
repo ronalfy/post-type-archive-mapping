@@ -26,7 +26,7 @@ const { MediaUpload, InspectorControls, PanelColorSettings } = wp.blockEditor;
 
 const PTAM_Featured_Posts = ( props ) => {
 	const [ loading, setLoading ] = useState( true );
-	const [ imageSizes, setImageSizes ] = useState( ptam_globals.post_types );
+	const [ imageSizes, setImageSizes ] = useState( ptam_globals.image_sizes );
 	const [ taxonomyList, setTaxonomyList ] = useState( [] );
 	const [ termList, setTermList ] = useState( [] );
 	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );

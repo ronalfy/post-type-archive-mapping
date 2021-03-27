@@ -16825,7 +16825,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       loading = _useState2[0],
       setLoading = _useState2[1];
 
-  var _useState3 = useState(ptam_globals.post_types),
+  var _useState3 = useState(ptam_globals.image_sizes),
       _useState4 = _slicedToArray(_useState3, 2),
       imageSizes = _useState4[0],
       setImageSizes = _useState4[1];
