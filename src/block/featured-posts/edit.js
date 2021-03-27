@@ -506,9 +506,11 @@ const PTAM_Featured_Posts = ( props ) => {
 					options={ taxonomyList }
 					value={ taxonomy }
 					onChange={ ( value ) => {
-						props.setAttributes( { taxonomy: value, term: 0 } );
-						getTermList( { taxonomy: value, term: 0 } );
-						getLatestPosts( { taxonomy: value, term: 0 } );
+						if ( 'none' !== value ) {
+							props.setAttributes( { taxonomy: value, term: 0 } );
+							getTermList( { taxonomy: value } );
+							getLatestPosts( { taxonomy: value, term: 'all' } );
+						}
 					} }
 				/>
 				<SelectControl

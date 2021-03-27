@@ -17421,18 +17421,19 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     options: taxonomyList,
     value: taxonomy,
     onChange: function onChange(value) {
-      props.setAttributes({
-        taxonomy: value,
-        term: 0
-      });
-      getTermList({
-        taxonomy: value,
-        term: 0
-      });
-      getLatestPosts({
-        taxonomy: value,
-        term: 0
-      });
+      if ('none' !== value) {
+        props.setAttributes({
+          taxonomy: value,
+          term: 0
+        });
+        getTermList({
+          taxonomy: value
+        });
+        getLatestPosts({
+          taxonomy: value,
+          term: 'all'
+        });
+      }
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Terms', 'post-type-archive-mapping'),
