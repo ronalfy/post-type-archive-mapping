@@ -14,12 +14,6 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 // Import JS
 import edit from './edit';
 
-// Extend component
-const { Component } = wp.element;
-
-// Register alignments
-const validAlignments = [ 'full' ];
-
 export const name = 'ptam/featured-posts';
 
 /**
@@ -72,7 +66,6 @@ registerBlockType( 'ptam/featured-posts', {
 		__( 'term', 'post-type-archive-mapping' ),
 	],
 	supports: {
-		align: [ 'wide', 'full', 'center' ],
 		anchor: true,
 		html: false,
 	},
