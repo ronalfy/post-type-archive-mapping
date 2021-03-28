@@ -16759,16 +16759,14 @@ registerBlockType('ptam/featured-posts', {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _woocommerce_components_build_search_list_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @woocommerce/components/build/search-list-control */ "./node_modules/@woocommerce/components/build/search-list-control/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -16795,12 +16793,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
 var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
 
+
 var _wp$element = wp.element,
-    Component = _wp$element.Component,
     Fragment = _wp$element.Fragment,
     useState = _wp$element.useState,
     useEffect = _wp$element.useEffect;
@@ -16852,7 +16848,15 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
   useEffect(function () {
     setLoading(true);
-    getLatestData({});
+    getLatestData({}); // Get unique ID for the block. Props @generateblocks.
+
+    var id = props.clientId.substr(2, 9).replace('-', '');
+
+    if (!props.attributes.uniqueId) {
+      props.setAttributes({
+        uniqueId: id
+      });
+    }
   }, []);
   /**
    *
@@ -16888,7 +16892,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               _jQuery$extend = jQuery.extend({}, props.attributes, object), postType = _jQuery$extend.postType, taxonomy = _jQuery$extend.taxonomy;
               _context.prev = 3;
               _context.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
                 taxonomy: taxonomy,
                 post_type: postType
               });
@@ -16962,7 +16966,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               setLoading(true);
               _context2.prev = 3;
               _context2.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
                 post_type: postType,
                 order: order,
                 orderby: orderBy,
@@ -17020,7 +17024,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               termsListArr = [];
               _context3.prev = 4;
               _context3.next = 7;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.all([getFeaturedPosts(), getTerms(), getTaxonomies()]);
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.all([getFeaturedPosts(), getTerms(), getTaxonomies()]);
 
             case 7:
               _yield$axios$all = _context3.sent;
@@ -17083,7 +17087,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   var getFeaturedPosts = function getFeaturedPosts() {
     var _axios$post2;
 
-    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post2 = {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post2 = {
       post_type: props.attributes.postType,
       order: props.attributes.order,
       orderby: props.attributes.orderBy,
@@ -17098,7 +17102,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getTerms = function getTerms() {
-    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
       taxonomy: props.attributes.taxonomy,
       post_type: props.attributes.postType
     });
@@ -17106,7 +17110,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getTaxonomies = function getTaxonomies() {
-    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
       post_type: props.attributes.postType
     });
   };
@@ -17126,7 +17130,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
         showFeaturedImage = _props$attributes.showFeaturedImage,
         showReadMore = _props$attributes.showReadMore,
         showExcerpt = _props$attributes.showExcerpt,
-        excerptLength = _props$attributes.excerptLength,
         excerptFont = _props$attributes.excerptFont,
         excerptFontSize = _props$attributes.excerptFontSize,
         excerptTextColor = _props$attributes.excerptTextColor,
@@ -17142,31 +17145,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       return /*#__PURE__*/React.createElement("h2", null, __('No posts could be found.', 'post-type-archive-mapping'));
     }
 
-    var titleStyles = {
-      fontFamily: titleFont,
-      fontSize: titleFontSize + 'px',
-      color: titleColor
-    };
-    var excerptStyles = {
-      fontFamily: excerptFont,
-      fontSize: excerptFontSize + 'px',
-      color: excerptTextColor
-    };
-
-    if (disableStyles) {
-      titleStyles = {};
-      excerptStyles = {};
-    }
-
-    var readMoreButtonStyles = !disableStyles ? {
-      color: readMoreButtonTextColor,
-      backgroundColor: readMoreButtonBackgroundColor,
-      borderWidth: readMoreButtonBorder + 'px',
-      borderColor: readMoreButtonBorderColor,
-      borderRadius: readMoreButtonBorderRadius + 'px',
-      fontFamily: "".concat(readMoreButtonFont),
-      borderStyle: 'solid'
-    } : {};
     return Object.keys(posts).map(function (term, i) {
       return /*#__PURE__*/React.createElement(Fragment, {
         key: i
@@ -17177,7 +17155,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       }, /*#__PURE__*/React.createElement("h3", {
         className: "entry-title"
       }, /*#__PURE__*/React.createElement("a", {
-        style: titleStyles,
         href: posts[i].link
       }, posts[i].post_title)), showMeta && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
         className: "entry-meta"
@@ -17188,23 +17165,21 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       }, posts[i].author_info.display_name)), showMetaDate && /*#__PURE__*/React.createElement("span", {
         className: "post-date"
       }, /*#__PURE__*/React.createElement("time", {
-        dateTime: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format(),
+        dateTime: dayjs__WEBPACK_IMPORTED_MODULE_1___default()(posts[i].post_date_gmt).format(),
         className: 'ptam-block-post-grid-date'
-      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY'))), showMetaComments && /*#__PURE__*/React.createElement("span", {
+      }, dayjs__WEBPACK_IMPORTED_MODULE_1___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY'))), showMetaComments && /*#__PURE__*/React.createElement("span", {
         className: "post-comments"
       }, posts[i].comment_count, ' ', _n('Comment', 'Comments', posts[i].comment_count, 'post-type-archive-mapping'))))), posts[i].featured_image_src && showFeaturedImage && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
         className: "ptam-featured-post-image"
       }, /*#__PURE__*/React.createElement("a", {
         href: posts[i].link
       }, htmlToReactParser.parse(posts[i].featured_image_src)))), showExcerpt && /*#__PURE__*/React.createElement("div", {
-        className: "ptam-featured-post-content",
-        style: excerptStyles
+        className: "ptam-featured-post-content"
       }, excerptParse(posts[i].post_excerpt)), showReadMore && /*#__PURE__*/React.createElement("div", {
         className: "ptam-featured-post-button"
       }, /*#__PURE__*/React.createElement("a", {
         className: "btn btn-primary",
-        href: posts[i].link,
-        style: readMoreButtonStyles
+        href: posts[i].link
       }, readMoreButtonText))));
     });
   };
@@ -17280,7 +17255,8 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       readMoreButtonBorder = attributes.readMoreButtonBorder,
       readMoreButtonBorderColor = attributes.readMoreButtonBorderColor,
       readMoreButtonBorderRadius = attributes.readMoreButtonBorderRadius,
-      showPagination = attributes.showPagination; // Fonts
+      showPagination = attributes.showPagination,
+      uniqueId = attributes.uniqueId; // Fonts
 
   var fontOptions = [];
 
@@ -17357,27 +17333,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
   if (termTitle !== '') {
     selectedTerm = termTitle;
-  } // Term Styles
-
-
-  var termContainerStyles = {
-    borderBottom: "2px solid ".concat(termBackgroundColor),
-    marginBottom: '20px'
-  };
-  var termButtonStyles = {
-    paddingBottom: termDisplayPaddingBottom + 'px',
-    paddingTop: termDisplayPaddingTop + 'px',
-    paddingLeft: termDisplayPaddingLeft + 'px',
-    paddingRight: termDisplayPaddingRight + 'px',
-    backgroundColor: termBackgroundColor,
-    color: termTextColor,
-    fontFamily: termFont,
-    fontSize: termFontSize + 'px'
-  };
-
-  if (disableStyles) {
-    termContainerStyles = {};
-    termButtonStyles = {};
   }
 
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
@@ -17906,7 +17861,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
         fill: '#662583',
         opacity: 0.8
       }
-    })), ' ', __('Featured Posts by Category', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    })), ' ', __('Featured Posts by Category', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_3__["default"], {
       cssClass: "ptam-term-grid-loading-animation"
     })))));
   }
@@ -17928,19 +17883,22 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   }
 
   if (!loading) {
-    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, !disableStyles && /*#__PURE__*/React.createElement("style", {
-      dangerouslySetInnerHTML: {
-        __html: "\n\t\t\t\t\t\t\t#".concat(containerId, " .entry-title a:hover {\n\t\t\t\t\t\t\t\tcolor: ").concat(titleColorHover, " !important;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t#").concat(containerId, " .ptam-featured-post-button a:hover {\n\t\t\t\t\t\t\t\tcolor: ").concat(readMoreButtonTextHoverColor, " !important;\n\t\t\t\t\t\t\t\tbackground-color: ").concat(readMoreButtonBackgroundHoverColor, " !important;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t")
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "ptam-fp-wrapper",
-      id: containerId
+    var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_2___default()(_defineProperty({
+      'ptam-fp-wrapper': true
+    }, "ptam-fp-wrapper-".concat(uniqueId), true));
+    var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_4__["default"]("ptam-fp-wrapper-".concat(uniqueId));
+    builder.addCSS('.ptam-featured-post-item .entry-title a', "\n\t\t\tfont-family: ".concat(titleFont, ";\n\t\t\tfont-size: ").concat(titleFontSize, "px;\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-content', "\n\t\t\tfont-family: ".concat(excerptFont, ";\n\t\t\tfont-size: ").concat(excerptFontSize, "px;\n\t\t\tcolor: ").concat(excerptTextColor, ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-button a', "\n\t\t\tcolor: ".concat(readMoreButtonTextColor, ";\n\t\t\tbackground-color: ").concat(readMoreButtonBackgroundColor, ";\n\t\t\tborder-width: ").concat(readMoreButtonBorder, "px;\n\t\t\tborder-color: ").concat(readMoreButtonBorderColor, ";\n\t\t\tborder-radius: ").concat(readMoreButtonBorderRadius, "px;\n\t\t\tfont-family: ").concat(readMoreButtonFont, ";\n\t\t\tborder-style: solid;\n\t\t\t"));
+    builder.addCSS('.entry-title a:hover', "\n\t\t\tcolor: ".concat(titleColorHover, " !important;\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-button a:hover', "\n\t\t\tcolor: ".concat(readMoreButtonTextHoverColor, " !important;\n\t\t\tbackground-color: ").concat(readMoreButtonBackgroundHoverColor, " !important;\n\t\t\t"));
+    builder.addCSS('.ptam-fp-term', "\n\t\t\tborder-bottom: 2px solid ".concat(termBackgroundColor, ";\n\t\t\tmargin-bottom: 20px;\n\t\t\t"));
+    builder.addCSS('.ptam-fp-term span', "\n\t\t\tpadding-top: ".concat(termDisplayPaddingTop, "px;\n\t\t\tpadding-bottom: ").concat(termDisplayPaddingBottom, "px;\n\t\t\tpadding-left: ").concat(termDisplayPaddingLeft, "px;\n\t\t\tpadding-right: ").concat(termDisplayPaddingRight, "px;\n\t\t\tbackground-color: ").concat(termBackgroundColor, ";\n\t\t\tcolor: ").concat(termTextColor, ";\n\t\t\tfont-family: ").concat(termFont, ";\n\t\t\tfont-size: ").concat(termFontSize, "px;\n\t\t\t"));
+    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, !disableStyles && builder.printCSS(), /*#__PURE__*/React.createElement("div", {
+      className: wrapperClass
     }, /*#__PURE__*/React.createElement("h4", {
-      className: "ptam-fp-term",
-      style: termContainerStyles
-    }, /*#__PURE__*/React.createElement("span", {
-      style: termButtonStyles
-    }, selectedTerm ? selectedTerm : __('All', 'post-type-archive-mapping'))), getPostHtml()));
+      className: "ptam-fp-term"
+    }, /*#__PURE__*/React.createElement("span", null, selectedTerm ? selectedTerm : __('All', 'post-type-archive-mapping'))), getPostHtml()));
   }
 };
 
@@ -19238,6 +19196,79 @@ __webpack_require__.r(__webpack_exports__);
  // Import term grid block.
 
  // Import Featured Posts Block.
+
+/***/ }),
+
+/***/ "./src/utilities/css-builder/index.js":
+/*!********************************************!*\
+  !*** ./src/utilities/css-builder/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CSSBuilder; });
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var CSSBuilder = function CSSBuilder(wrapperClass) {
+  var _this = this;
+
+  _classCallCheck(this, CSSBuilder);
+
+  _defineProperty(this, "wrapperClass", '');
+
+  _defineProperty(this, "cssRules", []);
+
+  _defineProperty(this, "addCSS", function (selector, rule) {
+    if (selector in _this.cssRules) {
+      _this.cssRules[selector].push(rule);
+    } else {
+      _this.cssRules[selector] = [];
+
+      _this.cssRules[selector].push(rule);
+    }
+  });
+
+  _defineProperty(this, "printCSS", function () {
+    var output = '';
+
+    for (var _i = 0, _Object$keys = Object.keys(_this.cssRules); _i < _Object$keys.length; _i++) {
+      var selector = _Object$keys[_i];
+      output += ".".concat(_this.wrapperClass, " ").concat(selector, " {");
+
+      var _iterator = _createForOfIteratorHelper(_this.cssRules[selector]),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var rule = _step.value;
+          output += rule;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      output += '}';
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, output));
+  });
+
+  this.wrapperClass = wrapperClass;
+};
+
+
 
 /***/ }),
 

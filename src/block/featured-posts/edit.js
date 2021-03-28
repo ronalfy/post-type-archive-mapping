@@ -1,15 +1,14 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { SearchListControl } from '@woocommerce/components/build/search-list-control';
+import classnames from 'classnames';
 import Loading from '../../components/Loading';
-import hexToRgba from 'hex-to-rgba';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
+import CSSBuilder from '../../utilities/css-builder';
 
-const { Component, Fragment, useState, useEffect } = wp.element;
+const { Fragment, useState, useEffect } = wp.element;
 
 const { __, _n } = wp.i18n;
 
@@ -35,6 +34,14 @@ const PTAM_Featured_Posts = ( props ) => {
 	useEffect(() => {
 		setLoading( true );
 		getLatestData( {} );
+
+		// Get unique ID for the block. Props @generateblocks.
+		const id = props.clientId.substr( 2, 9 ).replace( '-', '' );
+		if ( ! props.attributes.uniqueId ) {
+			props.setAttributes( {
+				uniqueId: id,
+			} );
+		}
 	}, [] );
 
 	/**
@@ -210,7 +217,6 @@ const PTAM_Featured_Posts = ( props ) => {
 			showFeaturedImage,
 			showReadMore,
 			showExcerpt,
-			excerptLength,
 			excerptFont,
 			excerptFontSize,
 			excerptTextColor,
@@ -227,37 +233,13 @@ const PTAM_Featured_Posts = ( props ) => {
 				<h2>{ __( 'No posts could be found.', 'post-type-archive-mapping' ) }</h2>
 			);
 		}
-		let titleStyles = {
-			fontFamily: titleFont,
-			fontSize: titleFontSize + 'px',
-			color: titleColor,
-		};
-		let excerptStyles = {
-			fontFamily: excerptFont,
-			fontSize: excerptFontSize + 'px',
-			color: excerptTextColor,
-		};
-		if ( disableStyles ) {
-			titleStyles = {};
-			excerptStyles = {};
-		}
-		const readMoreButtonStyles = ! disableStyles
-			? {
-				color: readMoreButtonTextColor,
-				backgroundColor: readMoreButtonBackgroundColor,
-				borderWidth: readMoreButtonBorder + 'px',
-				borderColor: readMoreButtonBorderColor,
-				borderRadius: readMoreButtonBorderRadius + 'px',
-				fontFamily: `${ readMoreButtonFont }`,
-				borderStyle: 'solid',
-			  }
-			: {};
+
 		return Object.keys( posts ).map( ( term, i ) => (
 			<Fragment key={ i }>
 				<div className="ptam-featured-post-item">
 					<div className="ptam-featured-post-meta">
 						<h3 className="entry-title">
-							<a style={ titleStyles } href={ posts[ i ].link }>
+							<a href={ posts[ i ].link }>
 								{ posts[ i ].post_title }
 							</a>
 						</h3>
@@ -306,7 +288,7 @@ const PTAM_Featured_Posts = ( props ) => {
 						</Fragment>
 					) }
 					{ showExcerpt && (
-						<div className="ptam-featured-post-content" style={ excerptStyles }>
+						<div className="ptam-featured-post-content">
 							{ excerptParse( posts[ i ].post_excerpt ) }
 						</div>
 					) }
@@ -315,7 +297,6 @@ const PTAM_Featured_Posts = ( props ) => {
 							<a
 								className="btn btn-primary"
 								href={ posts[ i ].link }
-								style={ readMoreButtonStyles }
 							>
 								{ readMoreButtonText }
 							</a>
@@ -396,6 +377,7 @@ const PTAM_Featured_Posts = ( props ) => {
 		readMoreButtonBorderColor,
 		readMoreButtonBorderRadius,
 		showPagination,
+		uniqueId,
 	} = attributes;
 
 	// Fonts
@@ -454,26 +436,6 @@ const PTAM_Featured_Posts = ( props ) => {
 	// Custom term title.
 	if ( termTitle !== '' ) {
 		selectedTerm = termTitle;
-	}
-
-	// Term Styles
-	let termContainerStyles = {
-		borderBottom: `2px solid ${ termBackgroundColor }`,
-		marginBottom: '20px',
-	};
-	let termButtonStyles = {
-		paddingBottom: termDisplayPaddingBottom + 'px',
-		paddingTop: termDisplayPaddingTop + 'px',
-		paddingLeft: termDisplayPaddingLeft + 'px',
-		paddingRight: termDisplayPaddingRight + 'px',
-		backgroundColor: termBackgroundColor,
-		color: termTextColor,
-		fontFamily: termFont,
-		fontSize: termFontSize + 'px',
-	};
-	if ( disableStyles ) {
-		termContainerStyles = {};
-		termButtonStyles = {};
 	}
 
 	const inspectorControls = (
@@ -1046,27 +1008,83 @@ const PTAM_Featured_Posts = ( props ) => {
 		);
 	}
 	if ( ! loading ) {
+		const wrapperClass = classnames( {
+			'ptam-fp-wrapper': true,
+			[ `ptam-fp-wrapper-${ uniqueId }` ]: true,
+		} );
+
+		const builder = new CSSBuilder( `ptam-fp-wrapper-${ uniqueId }` );
+		builder.addCSS(
+			'.ptam-featured-post-item .entry-title a',
+			`
+			font-family: ${ titleFont };
+			font-size: ${ titleFontSize }px;
+			color: ${ titleColor };
+			`
+		);
+		builder.addCSS(
+			'.ptam-featured-post-content',
+			`
+			font-family: ${ excerptFont };
+			font-size: ${ excerptFontSize }px;
+			color: ${ excerptTextColor };
+			`
+		);
+		builder.addCSS(
+			'.ptam-featured-post-button a',
+			`
+			color: ${ readMoreButtonTextColor };
+			background-color: ${ readMoreButtonBackgroundColor };
+			border-width: ${ readMoreButtonBorder }px;
+			border-color: ${ readMoreButtonBorderColor };
+			border-radius: ${ readMoreButtonBorderRadius }px;
+			font-family: ${ readMoreButtonFont };
+			border-style: solid;
+			`
+		);
+		builder.addCSS(
+			'.entry-title a:hover',
+			`
+			color: ${ titleColorHover } !important;
+			`
+		);
+		builder.addCSS(
+			'.ptam-featured-post-button a:hover',
+			`
+			color: ${ readMoreButtonTextHoverColor } !important;
+			background-color: ${ readMoreButtonBackgroundHoverColor } !important;
+			`
+		);
+		builder.addCSS(
+			'.ptam-fp-term',
+			`
+			border-bottom: 2px solid ${ termBackgroundColor };
+			margin-bottom: 20px;
+			`
+		);
+		builder.addCSS(
+			'.ptam-fp-term span',
+			`
+			padding-top: ${ termDisplayPaddingTop }px;
+			padding-bottom: ${ termDisplayPaddingBottom }px;
+			padding-left: ${ termDisplayPaddingLeft }px;
+			padding-right: ${ termDisplayPaddingRight }px;
+			background-color: ${ termBackgroundColor };
+			color: ${ termTextColor };
+			font-family: ${ termFont };
+			font-size: ${ termFontSize }px;
+			`
+		);
+
 		return (
 			<Fragment>
 				{ inspectorControls }
-				{ ! disableStyles && (
-					<style
-						dangerouslySetInnerHTML={ {
-							__html: `
-							#${ containerId } .entry-title a:hover {
-								color: ${ titleColorHover } !important;
-							}
-							#${ containerId } .ptam-featured-post-button a:hover {
-								color: ${ readMoreButtonTextHoverColor } !important;
-								background-color: ${ readMoreButtonBackgroundHoverColor } !important;
-							}
-							`,
-						} }
-					></style>
-				) }
-				<div className="ptam-fp-wrapper" id={ containerId }>
-					<h4 className="ptam-fp-term" style={ termContainerStyles }>
-						<span style={ termButtonStyles }>{ selectedTerm ? selectedTerm : __( 'All', 'post-type-archive-mapping' ) }</span>
+				{ ! disableStyles &&
+					builder.printCSS()
+				}
+				<div className={wrapperClass}>
+					<h4 className="ptam-fp-term">
+						<span>{ selectedTerm ? selectedTerm : __( 'All', 'post-type-archive-mapping' ) }</span>
 					</h4>
 					{ getPostHtml() }
 				</div>

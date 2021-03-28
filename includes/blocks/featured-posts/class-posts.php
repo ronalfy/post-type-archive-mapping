@@ -584,6 +584,10 @@ class Posts {
 						'type'    => 'boolean',
 						'default' => false,
 					),
+					'uniqueId' => array(
+						'type' => 'string',
+						'default' => '',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
