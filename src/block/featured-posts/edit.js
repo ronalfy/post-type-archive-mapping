@@ -8,6 +8,8 @@ import hexToRgba from "hex-to-rgba";
 import Loading from '../../components/Loading';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import CSSBuilder from '../../utilities/css-builder';
+import valueWithUnit from '../../utilities/value-with-unit';
+import shorthandCSS from '../../utilities/shorthand-css';
 
 const { Fragment, useState, useEffect } = wp.element;
 
@@ -355,7 +357,6 @@ const PTAM_Featured_Posts = ( props ) => {
 		titleFontSize,
 		titleColor,
 		titleColorHover,
-		containerId,
 		disableStyles,
 		showMeta,
 		showMetaAuthor,
@@ -516,16 +517,6 @@ const PTAM_Featured_Posts = ( props ) => {
 				initialOpen={ true }
 				title={ __( 'Container', 'post-type-archive-mapping' ) }
 			>
-				<TextControl
-					label={ __( 'Container ID', 'post-type-archive-mapping' ) }
-					help={ __(
-						'Unique CSS ID for styling if you have more than one featured category on the same page.',
-						'post-type-archive-mapping'
-					) }
-					type="text"
-					value={ containerId }
-					onChange={ ( value ) => props.setAttributes( { containerId: value } ) }
-				/>
 				<ToggleControl
 					label={ __( 'Disable Styles', 'post-type-archive-mapping' ) }
 					checked={ disableStyles }
@@ -1019,7 +1010,7 @@ const PTAM_Featured_Posts = ( props ) => {
 			'.ptam-featured-post-item .entry-title a',
 			`
 			font-family: ${ titleFont };
-			font-size: ${ titleFontSize }px;
+			font-size: ${ valueWithUnit( titleFontSize ) };
 			color: ${ hexToRgba( titleColor, 1 ) };
 			`
 		);
@@ -1027,7 +1018,7 @@ const PTAM_Featured_Posts = ( props ) => {
 			'.ptam-featured-post-content',
 			`
 			font-family: ${ excerptFont };
-			font-size: ${ excerptFontSize }px;
+			font-size: ${ valueWithUnit( excerptFontSize ) };
 			color: ${ hexToRgba( excerptTextColor, 1 ) };
 			`
 		);
@@ -1036,9 +1027,9 @@ const PTAM_Featured_Posts = ( props ) => {
 			`
 			color: ${ hexToRgba( readMoreButtonTextColor ) };
 			background-color: ${ hexToRgba( readMoreButtonBackgroundColor ) };
-			border-width: ${ readMoreButtonBorder }px;
+			border-width: ${ valueWithUnit( readMoreButtonBorder ) };
 			border-color: ${ hexToRgba( readMoreButtonBorderColor, 1 ) };
-			border-radius: ${ readMoreButtonBorderRadius }px;
+			border-radius: ${ valueWithUnit( readMoreButtonBorderRadius ) };
 			font-family: ${ readMoreButtonFont };
 			border-style: solid;
 			`
@@ -1066,14 +1057,14 @@ const PTAM_Featured_Posts = ( props ) => {
 		builder.addCSS(
 			'.ptam-fp-term span',
 			`
-			padding-top: ${ termDisplayPaddingTop }px;
-			padding-bottom: ${ termDisplayPaddingBottom }px;
-			padding-left: ${ termDisplayPaddingLeft }px;
-			padding-right: ${ termDisplayPaddingRight }px;
+			padding-top: ${ valueWithUnit( termDisplayPaddingTop ) };
+			padding-bottom: ${ valueWithUnit( termDisplayPaddingBottom ) };
+			padding-left: ${ valueWithUnit( termDisplayPaddingLeft ) };
+			padding-right: ${ valueWithUnit( termDisplayPaddingRight ) };
 			background-color: ${ hexToRgba( termBackgroundColor, 1 ) };
 			color: ${ hexToRgba( termTextColor, 1 ) };
 			font-family: ${ termFont };
-			font-size: ${ termFontSize }px;
+			font-size: ${ valueWithUnit( termFontSize ) };
 			`
 		);
 

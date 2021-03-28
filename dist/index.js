@@ -16769,6 +16769,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
 /* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
+/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
+/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -16797,6 +16799,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
+
+
 
 
 var _wp$element = wp.element,
@@ -17236,7 +17240,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       titleFontSize = attributes.titleFontSize,
       titleColor = attributes.titleColor,
       titleColorHover = attributes.titleColorHover,
-      containerId = attributes.containerId,
       disableStyles = attributes.disableStyles,
       showMeta = attributes.showMeta,
       showMetaAuthor = attributes.showMetaAuthor,
@@ -17426,17 +17429,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   })), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: true,
     title: __('Container', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Container ID', 'post-type-archive-mapping'),
-    help: __('Unique CSS ID for styling if you have more than one featured category on the same page.', 'post-type-archive-mapping'),
-    type: "text",
-    value: containerId,
-    onChange: function onChange(value) {
-      return props.setAttributes({
-        containerId: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
+  }, /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Disable Styles', 'post-type-archive-mapping'),
     checked: disableStyles,
     onChange: function onChange(value) {
@@ -17890,13 +17883,13 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       'ptam-fp-wrapper': true
     }, "ptam-fp-wrapper-".concat(uniqueId), true));
     var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_5__["default"]("ptam-fp-wrapper-".concat(uniqueId));
-    builder.addCSS('.ptam-featured-post-item .entry-title a', "\n\t\t\tfont-family: ".concat(titleFont, ";\n\t\t\tfont-size: ").concat(titleFontSize, "px;\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(titleColor, 1), ";\n\t\t\t"));
-    builder.addCSS('.ptam-featured-post-content', "\n\t\t\tfont-family: ".concat(excerptFont, ";\n\t\t\tfont-size: ").concat(excerptFontSize, "px;\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(excerptTextColor, 1), ";\n\t\t\t"));
-    builder.addCSS('.ptam-featured-post-button a', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonTextColor), ";\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBackgroundColor), ";\n\t\t\tborder-width: ").concat(readMoreButtonBorder, "px;\n\t\t\tborder-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBorderColor, 1), ";\n\t\t\tborder-radius: ").concat(readMoreButtonBorderRadius, "px;\n\t\t\tfont-family: ").concat(readMoreButtonFont, ";\n\t\t\tborder-style: solid;\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-item .entry-title a', "\n\t\t\tfont-family: ".concat(titleFont, ";\n\t\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(titleFontSize), ";\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(titleColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-content', "\n\t\t\tfont-family: ".concat(excerptFont, ";\n\t\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(excerptFontSize), ";\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(excerptTextColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-button a', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonTextColor), ";\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBackgroundColor), ";\n\t\t\tborder-width: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(readMoreButtonBorder), ";\n\t\t\tborder-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBorderColor, 1), ";\n\t\t\tborder-radius: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(readMoreButtonBorderRadius), ";\n\t\t\tfont-family: ").concat(readMoreButtonFont, ";\n\t\t\tborder-style: solid;\n\t\t\t"));
     builder.addCSS('.entry-title a:hover', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(titleColorHover), " !important;\n\t\t\t"));
     builder.addCSS('.ptam-featured-post-button a:hover', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonTextHoverColor, 1), " !important;\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBackgroundHoverColor, 1), " !important;\n\t\t\t"));
     builder.addCSS('.ptam-fp-term', "\n\t\t\tborder-bottom: 2px solid ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termBackgroundColor, 1), ";\n\t\t\tmargin-bottom: 20px;\n\t\t\t"));
-    builder.addCSS('.ptam-fp-term span', "\n\t\t\tpadding-top: ".concat(termDisplayPaddingTop, "px;\n\t\t\tpadding-bottom: ").concat(termDisplayPaddingBottom, "px;\n\t\t\tpadding-left: ").concat(termDisplayPaddingLeft, "px;\n\t\t\tpadding-right: ").concat(termDisplayPaddingRight, "px;\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termBackgroundColor, 1), ";\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termTextColor, 1), ";\n\t\t\tfont-family: ").concat(termFont, ";\n\t\t\tfont-size: ").concat(termFontSize, "px;\n\t\t\t"));
+    builder.addCSS('.ptam-fp-term span', "\n\t\t\tpadding-top: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(termDisplayPaddingTop), ";\n\t\t\tpadding-bottom: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(termDisplayPaddingBottom), ";\n\t\t\tpadding-left: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(termDisplayPaddingLeft), ";\n\t\t\tpadding-right: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(termDisplayPaddingRight), ";\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termBackgroundColor, 1), ";\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termTextColor, 1), ";\n\t\t\tfont-family: ").concat(termFont, ";\n\t\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_6__["default"])(termFontSize), ";\n\t\t\t"));
     return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, !disableStyles && builder.printCSS(), /*#__PURE__*/React.createElement("div", {
       className: wrapperClass
     }, /*#__PURE__*/React.createElement("h4", {
@@ -19286,6 +19279,91 @@ function CSSBuilder(wrapperClass) {
 ;
 
 
+
+/***/ }),
+
+/***/ "./src/utilities/shorthand-css/index.js":
+/*!**********************************************!*\
+  !*** ./src/utilities/shorthand-css/index.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return shorthandCSS; });
+/**
+ * Credit: @GenerateBlocks
+ * Utility for shorthand CSS.
+ */
+
+/**
+ *
+ * @param {number} top    Top value.
+ * @param {number} right  Right value.
+ * @param {number} bottom Bottom value.
+ * @param {number} left   Left value.
+ * @param {string} unit   Unit.
+ * @return {string} short hand css.
+ */
+function shorthandCSS(top, right, bottom, left, unit) {
+  if ('' === top && '' === right && '' === bottom && '' === left) {
+    return;
+  }
+
+  top = parseFloat(top) != 0 && '' !== top ? parseFloat(top) + unit + ' ' : '0 '; // eslint-disable-line eqeqeq
+
+  right = parseFloat(right) != 0 && '' !== right ? parseFloat(right) + unit + ' ' : '0 '; // eslint-disable-line eqeqeq
+
+  bottom = parseFloat(bottom) != 0 && '' !== bottom ? parseFloat(bottom) + unit + ' ' : '0 '; // eslint-disable-line eqeqeq
+
+  left = parseFloat(left) != 0 && '' !== left ? parseFloat(left) + unit + ' ' : '0 '; // eslint-disable-line eqeqeq
+
+  if (right === left) {
+    left = '';
+
+    if (top === bottom) {
+      bottom = '';
+
+      if (top === right) {
+        right = '';
+      }
+    }
+  }
+
+  var output = top + right + bottom + left;
+  return output.trim();
+}
+
+/***/ }),
+
+/***/ "./src/utilities/value-with-unit/index.js":
+/*!************************************************!*\
+  !*** ./src/utilities/value-with-unit/index.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return valueWithUnit; });
+/**
+ * Return a value with unit (e.g., 10px)
+ * Credit: @GenerateBlocks
+ *
+ * @param {number}  value The value to output.
+ * @param {string}  unit  The unit (px, em, rem).
+ * @return {string} The value with unit.
+ */
+function valueWithUnit(value) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'px';
+
+  if (!value && 0 !== value) {
+    return false;
+  }
+
+  return value + unit;
+}
 
 /***/ }),
 
