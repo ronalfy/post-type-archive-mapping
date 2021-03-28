@@ -4,6 +4,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 import classnames from 'classnames';
+import hexToRgba from "hex-to-rgba";
 import Loading from '../../components/Loading';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import CSSBuilder from '../../utilities/css-builder';
@@ -1019,7 +1020,7 @@ const PTAM_Featured_Posts = ( props ) => {
 			`
 			font-family: ${ titleFont };
 			font-size: ${ titleFontSize }px;
-			color: ${ titleColor };
+			color: ${ hexToRgba( titleColor, 1 ) };
 			`
 		);
 		builder.addCSS(
@@ -1027,16 +1028,16 @@ const PTAM_Featured_Posts = ( props ) => {
 			`
 			font-family: ${ excerptFont };
 			font-size: ${ excerptFontSize }px;
-			color: ${ excerptTextColor };
+			color: ${ hexToRgba( excerptTextColor, 1 ) };
 			`
 		);
 		builder.addCSS(
 			'.ptam-featured-post-button a',
 			`
-			color: ${ readMoreButtonTextColor };
-			background-color: ${ readMoreButtonBackgroundColor };
+			color: ${ hexToRgba( readMoreButtonTextColor ) };
+			background-color: ${ hexToRgba( readMoreButtonBackgroundColor ) };
 			border-width: ${ readMoreButtonBorder }px;
-			border-color: ${ readMoreButtonBorderColor };
+			border-color: ${ hexToRgba( readMoreButtonBorderColor, 1 ) };
 			border-radius: ${ readMoreButtonBorderRadius }px;
 			font-family: ${ readMoreButtonFont };
 			border-style: solid;
@@ -1045,20 +1046,20 @@ const PTAM_Featured_Posts = ( props ) => {
 		builder.addCSS(
 			'.entry-title a:hover',
 			`
-			color: ${ titleColorHover } !important;
+			color: ${ hexToRgba( titleColorHover  )} !important;
 			`
 		);
 		builder.addCSS(
 			'.ptam-featured-post-button a:hover',
 			`
-			color: ${ readMoreButtonTextHoverColor } !important;
-			background-color: ${ readMoreButtonBackgroundHoverColor } !important;
+			color: ${ hexToRgba( readMoreButtonTextHoverColor, 1 )} !important;
+			background-color: ${ hexToRgba( readMoreButtonBackgroundHoverColor, 1 ) } !important;
 			`
 		);
 		builder.addCSS(
 			'.ptam-fp-term',
 			`
-			border-bottom: 2px solid ${ termBackgroundColor };
+			border-bottom: 2px solid ${ hexToRgba( termBackgroundColor, 1 ) };
 			margin-bottom: 20px;
 			`
 		);
@@ -1069,8 +1070,8 @@ const PTAM_Featured_Posts = ( props ) => {
 			padding-bottom: ${ termDisplayPaddingBottom }px;
 			padding-left: ${ termDisplayPaddingLeft }px;
 			padding-right: ${ termDisplayPaddingRight }px;
-			background-color: ${ termBackgroundColor };
-			color: ${ termTextColor };
+			background-color: ${ hexToRgba( termBackgroundColor, 1 ) };
+			color: ${ hexToRgba( termTextColor, 1 ) };
 			font-family: ${ termFont };
 			font-size: ${ termFontSize }px;
 			`
