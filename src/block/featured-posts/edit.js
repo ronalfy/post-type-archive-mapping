@@ -1037,13 +1037,13 @@ const PTAM_Featured_Posts = ( props ) => {
 		builder.addCSS(
 			'.entry-title a:hover',
 			`
-			color: ${ hexToRgba( titleColorHover  )} !important;
+			color: ${ hexToRgba( titleColorHover )} !important;
 			`
 		);
 		builder.addCSS(
 			'.ptam-featured-post-button a:hover',
 			`
-			color: ${ hexToRgba( readMoreButtonTextHoverColor, 1 )} !important;
+			color: ${ hexToRgba( readMoreButtonTextHoverColor, 1 ) } !important;
 			background-color: ${ hexToRgba( readMoreButtonBackgroundHoverColor, 1 ) } !important;
 			`
 		);
