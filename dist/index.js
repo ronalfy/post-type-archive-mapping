@@ -16765,8 +16765,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -16788,6 +16790,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -17861,7 +17864,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
         fill: '#662583',
         opacity: 0.8
       }
-    })), ' ', __('Featured Posts by Category', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), ' ', __('Featured Posts by Category', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], {
       cssClass: "ptam-term-grid-loading-animation"
     })))));
   }
@@ -17886,14 +17889,14 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_2___default()(_defineProperty({
       'ptam-fp-wrapper': true
     }, "ptam-fp-wrapper-".concat(uniqueId), true));
-    var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_4__["default"]("ptam-fp-wrapper-".concat(uniqueId));
-    builder.addCSS('.ptam-featured-post-item .entry-title a', "\n\t\t\tfont-family: ".concat(titleFont, ";\n\t\t\tfont-size: ").concat(titleFontSize, "px;\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\t"));
-    builder.addCSS('.ptam-featured-post-content', "\n\t\t\tfont-family: ".concat(excerptFont, ";\n\t\t\tfont-size: ").concat(excerptFontSize, "px;\n\t\t\tcolor: ").concat(excerptTextColor, ";\n\t\t\t"));
-    builder.addCSS('.ptam-featured-post-button a', "\n\t\t\tcolor: ".concat(readMoreButtonTextColor, ";\n\t\t\tbackground-color: ").concat(readMoreButtonBackgroundColor, ";\n\t\t\tborder-width: ").concat(readMoreButtonBorder, "px;\n\t\t\tborder-color: ").concat(readMoreButtonBorderColor, ";\n\t\t\tborder-radius: ").concat(readMoreButtonBorderRadius, "px;\n\t\t\tfont-family: ").concat(readMoreButtonFont, ";\n\t\t\tborder-style: solid;\n\t\t\t"));
-    builder.addCSS('.entry-title a:hover', "\n\t\t\tcolor: ".concat(titleColorHover, " !important;\n\t\t\t"));
-    builder.addCSS('.ptam-featured-post-button a:hover', "\n\t\t\tcolor: ".concat(readMoreButtonTextHoverColor, " !important;\n\t\t\tbackground-color: ").concat(readMoreButtonBackgroundHoverColor, " !important;\n\t\t\t"));
-    builder.addCSS('.ptam-fp-term', "\n\t\t\tborder-bottom: 2px solid ".concat(termBackgroundColor, ";\n\t\t\tmargin-bottom: 20px;\n\t\t\t"));
-    builder.addCSS('.ptam-fp-term span', "\n\t\t\tpadding-top: ".concat(termDisplayPaddingTop, "px;\n\t\t\tpadding-bottom: ").concat(termDisplayPaddingBottom, "px;\n\t\t\tpadding-left: ").concat(termDisplayPaddingLeft, "px;\n\t\t\tpadding-right: ").concat(termDisplayPaddingRight, "px;\n\t\t\tbackground-color: ").concat(termBackgroundColor, ";\n\t\t\tcolor: ").concat(termTextColor, ";\n\t\t\tfont-family: ").concat(termFont, ";\n\t\t\tfont-size: ").concat(termFontSize, "px;\n\t\t\t"));
+    var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_5__["default"]("ptam-fp-wrapper-".concat(uniqueId));
+    builder.addCSS('.ptam-featured-post-item .entry-title a', "\n\t\t\tfont-family: ".concat(titleFont, ";\n\t\t\tfont-size: ").concat(titleFontSize, "px;\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(titleColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-content', "\n\t\t\tfont-family: ".concat(excerptFont, ";\n\t\t\tfont-size: ").concat(excerptFontSize, "px;\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(excerptTextColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-button a', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonTextColor), ";\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBackgroundColor), ";\n\t\t\tborder-width: ").concat(readMoreButtonBorder, "px;\n\t\t\tborder-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBorderColor, 1), ";\n\t\t\tborder-radius: ").concat(readMoreButtonBorderRadius, "px;\n\t\t\tfont-family: ").concat(readMoreButtonFont, ";\n\t\t\tborder-style: solid;\n\t\t\t"));
+    builder.addCSS('.entry-title a:hover', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(titleColorHover), " !important;\n\t\t\t"));
+    builder.addCSS('.ptam-featured-post-button a:hover', "\n\t\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonTextHoverColor, 1), " !important;\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(readMoreButtonBackgroundHoverColor, 1), " !important;\n\t\t\t"));
+    builder.addCSS('.ptam-fp-term', "\n\t\t\tborder-bottom: 2px solid ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termBackgroundColor, 1), ";\n\t\t\tmargin-bottom: 20px;\n\t\t\t"));
+    builder.addCSS('.ptam-fp-term span', "\n\t\t\tpadding-top: ".concat(termDisplayPaddingTop, "px;\n\t\t\tpadding-bottom: ").concat(termDisplayPaddingBottom, "px;\n\t\t\tpadding-left: ").concat(termDisplayPaddingLeft, "px;\n\t\t\tpadding-right: ").concat(termDisplayPaddingRight, "px;\n\t\t\tbackground-color: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termBackgroundColor, 1), ";\n\t\t\tcolor: ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_3___default()(termTextColor, 1), ";\n\t\t\tfont-family: ").concat(termFont, ";\n\t\t\tfont-size: ").concat(termFontSize, "px;\n\t\t\t"));
     return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, !disableStyles && builder.printCSS(), /*#__PURE__*/React.createElement("div", {
       className: wrapperClass
     }, /*#__PURE__*/React.createElement("h4", {
@@ -19219,7 +19222,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var CSSBuilder = function CSSBuilder(wrapperClass) {
+/**
+ * CSS Builder Helper.
+ */
+var CSSBuilder =
+/**
+ *
+ * @param {string} wrapperClass The wrapper class for the CSS.
+ */
+function CSSBuilder(wrapperClass) {
   var _this = this;
 
   _classCallCheck(this, CSSBuilder);
@@ -19266,7 +19277,13 @@ var CSSBuilder = function CSSBuilder(wrapperClass) {
   });
 
   this.wrapperClass = wrapperClass;
-};
+}
+/**
+ *
+ * @param {string} selector The CSS Selector.
+ * @param {string} rule     CSS string.
+ */
+;
 
 
 
