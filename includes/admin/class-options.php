@@ -98,6 +98,8 @@ class Options {
 			'disable_archive_mapping' => 'off',
 			'disable_page_columns'    => 'off',
 			'disable_image_sizes'     => 'off',
+			'enable_excerpts'         => 'off',
+			'enable_featured_images'  => 'off',
 		);
 
 		/**
@@ -132,6 +134,32 @@ class Options {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Checks if blocks have featurd images enabled or not.
+	 *
+	 * @return bool true if disabled, false if not.
+	 */
+	public static function is_featured_images_enabled() {
+		$maybe_disabled = self::get_options( false, 'enable_featured_images' );
+		if ( is_string( $maybe_disabled ) && 'on' === $maybe_disabled ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if blocks have excerpts enabled or not.
+	 *
+	 * @return bool true if disabled, false if not.
+	 */
+	public static function is_excerpts_enabled() {
+		$maybe_disabled = self::get_options( false, 'enable_excerpts' );
+		if ( is_string( $maybe_disabled ) && 'on' === $maybe_disabled ) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
