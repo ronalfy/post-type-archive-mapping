@@ -18024,7 +18024,8 @@ var _wp$element = wp.element,
     Fragment = _wp$element.Fragment;
 var _wp$i18n = wp.i18n,
     __ = _wp$i18n.__,
-    _n = _wp$i18n._n;
+    _n = _wp$i18n._n,
+    _x = _wp$i18n._x;
 var decodeEntities = wp.htmlEntities.decodeEntities;
 var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
@@ -18077,6 +18078,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     });
   }
 
+  var hierarchyOptions = [{
+    value: 'parents',
+    label: __('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
+  }, {
+    value: 'children',
+    label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
+  }];
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
@@ -18087,6 +18095,15 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     onChange: function onChange(value) {
       setAttributes({
         postType: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Hierarchy', 'post-type-archive-mapping'),
+    options: hierarchyOptions,
+    value: hierarchy,
+    onChange: function onChange(value) {
+      setAttributes({
+        hierarchy: value
       });
     }
   }))); // Toolbar option group.

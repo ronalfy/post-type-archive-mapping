@@ -14,7 +14,7 @@ const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { Component, Fragment } = wp.element;
 
-const { __, _n } = wp.i18n;
+const { __, _n, _x } = wp.i18n;
 
 const { decodeEntities } = wp.htmlEntities;
 
@@ -64,6 +64,19 @@ const PTAMHierarchy = ( props ) => {
 		postTypeOptions.push( { value: postTypeKey, label: ptam_globals.post_types_hierarchical[ postTypeKey ] } );
 	}
 
+	const hierarchyOptions = [
+		{
+			value: 'parents',
+			label: __( 'Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping' ),
+
+		},
+		{
+			value: 'children',
+			label: __( 'Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping' ),
+
+		},
+	];
+
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody
@@ -77,6 +90,16 @@ const PTAMHierarchy = ( props ) => {
 					onChange={ ( value ) => {
 						setAttributes({
 							postType: value,
+						});
+					} }
+				/>
+				<SelectControl
+					label={ __( 'Hierarchy', 'post-type-archive-mapping' ) }
+					options={ hierarchyOptions }
+					value={ hierarchy }
+					onChange={ ( value ) => {
+						setAttributes({
+							hierarchy: value,
 						});
 					} }
 				/>
