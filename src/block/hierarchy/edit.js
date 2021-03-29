@@ -70,28 +70,22 @@ const PTAMHierarchy = ( props ) => {
 	];
 
 	const selectedView = () => {
-		switch( view ) {
+		switch ( view ) {
 			case 'grid':
-				return(
-					<GridIcon />
-				);
+				return <GridIcon />;
 			case 'full':
-				return(
-					<FullIcon />
-				);
+				return <FullIcon />;
 			case 'list':
 			default:
-				return(
-					<ListIcon />
-				);
+				return <ListIcon />;
 		}
-	}
+	};
 
 	const toolbar = (
 		<BlockControls>
 			<ToolbarGroup
 				isCollapsed={ true }
-				icon={<PreviewIcon />}
+				icon={ <PreviewIcon /> }
 				label={ __(
 					'Change the layout of the hierarchy.',
 					'post-type-archive-mapping'
@@ -102,7 +96,7 @@ const PTAMHierarchy = ( props ) => {
 	);
 	return (
 		<>
-			{toolbar}
+			{ toolbar }
 			<h2>{ view }</h2>
 		</>
 	);
