@@ -377,6 +377,10 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => '',
 					),
+					'view' => array(
+						'type' => 'string',
+						'default' => 'list',
+					)
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
