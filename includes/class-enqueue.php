@@ -114,9 +114,7 @@ class Enqueue {
 			'objects'
 		);
 		foreach ( $post_types_hierarchical as $post_type => $type ) {
-			if ( get_object_taxonomies( $post_type, 'names' ) ) {
-				$post_type_hierarchical_array[ $post_type ] = $type->label;
-			}
+			$post_type_hierarchical_array[ $post_type ] = $type->label;
 		}
 
 		$wpml_languages = array();

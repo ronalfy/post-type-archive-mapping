@@ -38,10 +38,53 @@ const {
 } = wp.blockEditor;
 
 const PTAMHierarchy = ( props ) => {
+
+	/**
+	 *
+	 * @return {JSX} Current selected view.
+	 */
+	 const selectedView = () => {
+		switch ( view ) {
+			case 'grid':
+				return <GridIcon />;
+			case 'full':
+				return <FullIcon />;
+			case 'list':
+			default:
+				return <ListIcon />;
+		}
+	};
 	const { attributes, setAttributes } = props;
 
-	const { uniqueId, view } = attributes;
+	const { uniqueId, view, postType, hierarchy } = attributes;
 
+	// Hierarchical Post Types.
+	const postTypeOptions = [];
+	for ( const postTypeKey in ptam_globals.post_types_hierarchical ) {
+		postTypeOptions.push( { value: postTypeKey, label: ptam_globals.post_types_hierarchical[ postTypeKey ] } );
+	}
+
+	const inspectorControls = (
+		<InspectorControls>
+			<PanelBody
+				title={ __( 'Query', 'post-type-archive-mapping' ) }
+				initialOpen={ false }
+			>
+				<SelectControl
+					label={ __( 'Post Type', 'post-type-archive-mapping' ) }
+					options={ postTypeOptions }
+					value={ postType }
+					onChange={ ( value ) => {
+						setAttributes({
+							postType: value,
+						});
+					} }
+				/>
+			</PanelBody>
+		</InspectorControls>
+	);
+
+	// Toolbar option group.
 	const viewOptions = [
 		[
 			{
@@ -69,23 +112,11 @@ const PTAMHierarchy = ( props ) => {
 		],
 	];
 
-	const selectedView = () => {
-		switch ( view ) {
-			case 'grid':
-				return <GridIcon />;
-			case 'full':
-				return <FullIcon />;
-			case 'list':
-			default:
-				return <ListIcon />;
-		}
-	};
-
 	const toolbar = (
 		<BlockControls>
 			<ToolbarGroup
 				isCollapsed={ true }
-				icon={ <PreviewIcon /> }
+				icon={ selectedView() }
 				label={ __(
 					'Change the layout of the hierarchy.',
 					'post-type-archive-mapping'
@@ -96,6 +127,7 @@ const PTAMHierarchy = ( props ) => {
 	);
 	return (
 		<>
+			{ inspectorControls }
 			{ toolbar }
 			<h2>{ view }</h2>
 		</>

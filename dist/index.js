@@ -18043,10 +18043,54 @@ var _wp$blockEditor = wp.blockEditor,
     BlockControls = _wp$blockEditor.BlockControls;
 
 var PTAMHierarchy = function PTAMHierarchy(props) {
+  /**
+   *
+   * @return {JSX} Current selected view.
+   */
+  var selectedView = function selectedView() {
+    switch (view) {
+      case 'grid':
+        return /*#__PURE__*/React.createElement(_grid_icon__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+
+      case 'full':
+        return /*#__PURE__*/React.createElement(_full_icon__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+
+      case 'list':
+      default:
+        return /*#__PURE__*/React.createElement(_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+    }
+  };
+
   var attributes = props.attributes,
       setAttributes = props.setAttributes;
   var uniqueId = attributes.uniqueId,
-      view = attributes.view;
+      view = attributes.view,
+      postType = attributes.postType,
+      hierarchy = attributes.hierarchy; // Hierarchical Post Types.
+
+  var postTypeOptions = [];
+
+  for (var postTypeKey in ptam_globals.post_types_hierarchical) {
+    postTypeOptions.push({
+      value: postTypeKey,
+      label: ptam_globals.post_types_hierarchical[postTypeKey]
+    });
+  }
+
+  var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Query', 'post-type-archive-mapping'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Post Type', 'post-type-archive-mapping'),
+    options: postTypeOptions,
+    value: postType,
+    onChange: function onChange(value) {
+      setAttributes({
+        postType: value
+      });
+    }
+  }))); // Toolbar option group.
+
   var viewOptions = [[{
     icon: /*#__PURE__*/React.createElement(_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
@@ -18075,28 +18119,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }]];
-
-  var selectedView = function selectedView() {
-    switch (view) {
-      case 'grid':
-        return /*#__PURE__*/React.createElement(_grid_icon__WEBPACK_IMPORTED_MODULE_6__["default"], null);
-
-      case 'full':
-        return /*#__PURE__*/React.createElement(_full_icon__WEBPACK_IMPORTED_MODULE_7__["default"], null);
-
-      case 'list':
-      default:
-        return /*#__PURE__*/React.createElement(_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-    }
-  };
-
   var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
     isCollapsed: true,
-    icon: /*#__PURE__*/React.createElement(_preview_icon__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+    icon: selectedView(),
     label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
     controls: viewOptions
   }));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, toolbar, /*#__PURE__*/React.createElement("h2", null, view));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement("h2", null, view));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PTAMHierarchy);

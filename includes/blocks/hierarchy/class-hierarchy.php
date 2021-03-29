@@ -380,7 +380,15 @@ class Hierarchy {
 					'view' => array(
 						'type' => 'string',
 						'default' => 'list',
-					)
+					),
+					'postType' => array(
+						'type' => 'string',
+						'default' => 'page',
+					),
+					'hierarchy' => array(
+						'type' => 'string',
+						'default' => 'parents', // parents or children.
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
