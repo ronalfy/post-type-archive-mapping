@@ -87,17 +87,21 @@ class PostTypeArchiveMapping {
 			$this->rest = new PTAM\Includes\Rest\Rest();
 			$this->rest->run();
 
-			// Register Custom Post Type Block.
+			// Register Custom Post Type Query Block.
 			$this->cpt_block_one = new PTAM\Includes\Blocks\Custom_Post_Types\Custom_Post_Types();
 			$this->cpt_block_one->run();
 
-			// Register Term Grid Block.
+			// Register Term Grid Query Block.
 			$this->term_grid = new PTAM\Includes\Blocks\Term_Grid\Terms();
 			$this->term_grid->run();
 
-			// Register Featured Post Block.
+			// Register Featured Post Query Block.
 			$this->featured_posts = new PTAM\Includes\Blocks\Featured_Posts\Posts();
 			$this->featured_posts->run();
+
+			// Register the Parent/Child block.
+			$this->hierarchy = new PTAM\Includes\Blocks\Hierarchy\Hierarchy();
+			$this->hierarchy->run();
 
 			// Gutenberg Helper which sets the block categories.
 			$this->gutenberg = new PTAM\Includes\Admin\Gutenberg();
