@@ -90,6 +90,7 @@ class Enqueue {
 			$tax_array[ $index ] = $taxonomy->label;
 		}
 
+		// Get all public post types.
 		$post_type_array = array();
 		$post_types      = get_post_types(
 			array(
@@ -100,6 +101,21 @@ class Enqueue {
 		foreach ( $post_types as $post_type => $type ) {
 			if ( get_object_taxonomies( $post_type, 'names' ) ) {
 				$post_type_array[ $post_type ] = $type->label;
+			}
+		}
+
+		// Get hierarchical post types.
+		$post_type_hierarchical_array = array();
+		$post_types_hierarchical      = get_post_types(
+			array(
+				'public'       => true,
+				'hierarchical' => true,
+			),
+			'objects'
+		);
+		foreach ( $post_types_hierarchical as $post_type => $type ) {
+			if ( get_object_taxonomies( $post_type, 'names' ) ) {
+				$post_type_hierarchical_array[ $post_type ] = $type->label;
 			}
 		}
 
@@ -125,6 +141,7 @@ class Enqueue {
 				'fonts'                        => Functions::get_fonts(),
 				'image_sizes'                  => Functions::get_all_image_sizes(),
 				'post_types'                   => $post_type_array,
+				'post_types_hierarchical'      => $post_type_hierarchical_array,
 				'custom_posts_block_preview'   => esc_url( \PostTypeArchiveMapping::get_plugin_url( 'img/custom-post-types-block.jpg' ) ),
 				'term_grid_block_preview'      => esc_url( \PostTypeArchiveMapping::get_plugin_url( 'img/term-grid-block.jpg' ) ),
 				'featured_posts_block_preview' => esc_url( \PostTypeArchiveMapping::get_plugin_url( 'img/featured-posts-block.jpg' ) ),
