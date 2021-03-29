@@ -115,6 +115,12 @@ class PostTypeArchiveMapping {
 			$this->page_columns->run();
 		}
 
+		// Add excerpts and featured images.
+		if ( true === Options::is_excerpts_enabled() || true === Options::is_featured_images_enabled() ) {
+			$this->post_type_supports = new PTAM\Includes\Admin\Post_Type_Args();
+			$this->post_type_supports->run();
+		}
+
 		// Yoast Compatibility.
 		$this->yoast = new PTAM\Includes\Yoast();
 		$this->yoast->run();
