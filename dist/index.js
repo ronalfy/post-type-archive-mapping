@@ -18004,9 +18004,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid-icon */ "./src/block/hierarchy/grid-icon.js");
 /* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/full-icon.js");
 /* harmony import */ var _preview_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./preview-icon */ "./src/block/hierarchy/preview-icon.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 /**
  * External dependencies
  */
+
 
 
 
@@ -18106,6 +18108,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    postType: postType
   }))); // Toolbar option group.
 
   var viewOptions = [[{
@@ -19519,6 +19523,31 @@ var Loading = function Loading(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loading);
+
+/***/ }),
+
+/***/ "./src/components/hierarchical-items/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/hierarchical-items/index.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Output hierarchical items in a combobox.
+ *
+ * @param {Object} props The post type to retrieve hierarchical items for.
+ *
+ * @return {JSX} Comboxbox for the hierarchical items.
+ */
+var HierarchicalItems = function HierarchicalItems(props) {
+  var postType = props.postType;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, postType);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HierarchicalItems);
 
 /***/ }),
 

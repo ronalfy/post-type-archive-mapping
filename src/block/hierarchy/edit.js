@@ -10,6 +10,7 @@ import ListIcon from './list-icon';
 import GridIcon from './grid-icon';
 import FullIcon from './full-icon';
 import PreviewIcon from './preview-icon';
+import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { Component, Fragment } = wp.element;
@@ -103,6 +104,9 @@ const PTAMHierarchy = ( props ) => {
 						});
 					} }
 				/>
+				{ 'children' === hierarchy &&
+					<HierarchicalItems postType={ postType } />
+				}
 			</PanelBody>
 		</InspectorControls>
 	);
