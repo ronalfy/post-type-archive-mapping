@@ -9,7 +9,6 @@ import hexToRgba from 'hex-to-rgba';
 import ListIcon from './list-icon';
 import GridIcon from './grid-icon';
 import FullIcon from './full-icon';
-import PreviewIcon from './preview-icon';
 import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
@@ -41,7 +40,27 @@ const {
 
 const PTAMHierarchy = ( props ) => {
 
+	// Shortcuts.
 	const { attributes, setAttributes } = props;
+
+	// Get attributes from props.
+	const {
+		uniqueId,
+		view,
+		postType,
+		hierarchy,
+		parentItem,
+		order,
+		orderBy,
+		postsPerPage,
+		wpmlLanguage,
+	} = attributes;
+
+	// Retrieve WPML languages.
+	// eslint-disable-next-line no-undef
+	const wpmlInstalled = ptam_globals.wpml_installed;
+	// eslint-disable-next-line no-undef
+	const wpmlLanguages = ptam_globals.wpml_languages;
 
 	const [ loading, setLoading ] = useState( true );
 	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );
@@ -51,6 +70,7 @@ const PTAMHierarchy = ( props ) => {
 			'X-WP-Nonce': ptam_globals.rest_nonce,
 		},
 	} );
+	const [ posts, setPosts ] = useState( {} );
 
 	useEffect(() => {
 		setLoading( true );
@@ -91,17 +111,55 @@ const PTAMHierarchy = ( props ) => {
 		);
 	};
 
+	/**
+	 *
+	 * @param {string} selectedLanguage The language selected.
+	 * @return {JSX} Select box with languages.
+	 */
+	const getLanguages = ( selectedLanguage ) => {
+		if ( wpmlInstalled ) {
+			return(
+				<SelectControl
+					label={ __( 'Language', 'post-type-archive-mapping' ) }
+					options={ wpmlLanguages }
+					value={ selectedLanguage }
+					onChange={ ( value ) => {
+						setAttributes( { wpmlLanguage: value } );
+					} }
+				/>
+			);
+		}
+		return (
+			<>
+			</>
+		);
+	};
 
-	const {
-		uniqueId,
-		view,
-		postType,
-		hierarchy,
-		parentItem,
-		order,
-		orderBy,
-		postsPerPage,
-	} = attributes;
+	const getPosts = async( object = {} ) => {
+
+		setLoading(true);
+
+		try {
+			const result = await axios.post(
+				// eslint-disable-next-line no-undef
+				ptam_globals.rest_url + `ptam/v2/get_hierarchical_posts`,
+				{
+					post_type: postType,
+					order,
+					orderby: orderBy,
+					posts_per_page: postsPerPage,
+					image_size: 'medium',
+					language: wpmlLanguage,
+					post_parent: parentItem,
+				},
+				config
+			);
+			setPosts( result.data );
+			setLoading( false );
+		} catch ( e ) {
+			// Error :(
+		}
+	};
 
 	// Hierarchical Post Types.
 	const postTypeOptions = [];
@@ -206,6 +264,7 @@ const PTAMHierarchy = ( props ) => {
 						setAttributes( { order: value } );
 					} }
 				/>
+				{getLanguages()}
 				<SelectControl
 					label={ __( 'Order By', 'post-type-archive-mapping' ) }
 					options={ orderByOptions }

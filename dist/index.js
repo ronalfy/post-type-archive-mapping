@@ -18055,8 +18055,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list-icon */ "./src/block/hierarchy/list-icon.js");
 /* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid-icon */ "./src/block/hierarchy/grid-icon.js");
 /* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/full-icon.js");
-/* harmony import */ var _preview_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./preview-icon */ "./src/block/hierarchy/preview-icon.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -18072,7 +18075,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
-
 
 
 
@@ -18113,8 +18115,24 @@ var _wp$blockEditor = wp.blockEditor,
     BlockControls = _wp$blockEditor.BlockControls;
 
 var PTAMHierarchy = function PTAMHierarchy(props) {
+  // Shortcuts.
   var attributes = props.attributes,
-      setAttributes = props.setAttributes;
+      setAttributes = props.setAttributes; // Get attributes from props.
+
+  var uniqueId = attributes.uniqueId,
+      view = attributes.view,
+      postType = attributes.postType,
+      hierarchy = attributes.hierarchy,
+      parentItem = attributes.parentItem,
+      order = attributes.order,
+      orderBy = attributes.orderBy,
+      postsPerPage = attributes.postsPerPage,
+      wpmlLanguage = attributes.wpmlLanguage; // Retrieve WPML languages.
+  // eslint-disable-next-line no-undef
+
+  var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
+
+  var wpmlLanguages = ptam_globals.wpml_languages;
 
   var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -18135,6 +18153,11 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       _useState6 = _slicedToArray(_useState5, 2),
       config = _useState6[0],
       setConfig = _useState6[1];
+
+  var _useState7 = useState({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      posts = _useState8[0],
+      setPosts = _useState8[1];
 
   useEffect(function () {
     setLoading(true); // Get unique ID for the block. Props @generateblocks.
@@ -18174,15 +18197,78 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     setItemNumberTimer(setTimeout(function () {// Get new items.
     }, 1000));
   };
+  /**
+   *
+   * @param {string} selectedLanguage The language selected.
+   * @return {JSX} Select box with languages.
+   */
 
-  var uniqueId = attributes.uniqueId,
-      view = attributes.view,
-      postType = attributes.postType,
-      hierarchy = attributes.hierarchy,
-      parentItem = attributes.parentItem,
-      order = attributes.order,
-      orderBy = attributes.orderBy,
-      postsPerPage = attributes.postsPerPage; // Hierarchical Post Types.
+
+  var getLanguages = function getLanguages(selectedLanguage) {
+    if (wpmlInstalled) {
+      return /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Language', 'post-type-archive-mapping'),
+        options: wpmlLanguages,
+        value: selectedLanguage,
+        onChange: function onChange(value) {
+          setAttributes({
+            wpmlLanguage: value
+          });
+        }
+      });
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  };
+
+  var getPosts = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var object,
+          result,
+          _args = arguments;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              object = _args.length > 0 && _args[0] !== undefined ? _args[0] : {};
+              setLoading(true);
+              _context.prev = 2;
+              _context.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post( // eslint-disable-next-line no-undef
+              ptam_globals.rest_url + "ptam/v2/get_hierarchical_posts", {
+                post_type: postType,
+                order: order,
+                orderby: orderBy,
+                posts_per_page: postsPerPage,
+                image_size: 'medium',
+                language: wpmlLanguage,
+                post_parent: parentItem
+              }, config);
+
+            case 5:
+              result = _context.sent;
+              setPosts(result.data);
+              setLoading(false);
+              _context.next = 12;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 10]]);
+    }));
+
+    return function getPosts() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // Hierarchical Post Types.
+
 
   var postTypeOptions = []; // eslint-disable-next-line no-undef
 
@@ -18255,7 +18341,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_8__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18274,7 +18360,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         order: value
       });
     }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
+  }), getLanguages(), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Order By', 'post-type-archive-mapping'),
     options: orderByOptions,
     value: orderBy,
@@ -18415,35 +18501,6 @@ var ListIcon = function ListIcon() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ListIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/preview-icon.js":
-/*!*********************************************!*\
-  !*** ./src/block/hierarchy/preview-icon.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var PreviewIcon = function PreviewIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    "enable-background": "new 0 0 24 24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    width: "24"
-  }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("rect", {
-    fill: "none",
-    height: "24",
-    width: "24"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M19,3H5C3.89,3,3,3.9,3,5v14c0,1.1,0.89,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.11,3,19,3z M19,19H5V7h14V19z M13.5,13 c0,0.83-0.67,1.5-1.5,1.5s-1.5-0.67-1.5-1.5c0-0.83,0.67-1.5,1.5-1.5S13.5,12.17,13.5,13z M12,9c-2.73,0-5.06,1.66-6,4 c0.94,2.34,3.27,4,6,4s5.06-1.66,6-4C17.06,10.66,14.73,9,12,9z M12,15.5c-1.38,0-2.5-1.12-2.5-2.5c0-1.38,1.12-2.5,2.5-2.5 c1.38,0,2.5,1.12,2.5,2.5C14.5,14.38,13.38,15.5,12,15.5z"
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (PreviewIcon);
 
 /***/ }),
 

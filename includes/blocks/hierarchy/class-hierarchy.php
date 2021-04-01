@@ -405,6 +405,10 @@ class Hierarchy {
 						'type' => 'integer',
 						'default' => 20,
 					),
+					'wpmlLanguage'         => array(
+						'type'    => 'string',
+						'default' => 'en',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

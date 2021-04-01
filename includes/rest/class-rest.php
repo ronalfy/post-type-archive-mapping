@@ -88,12 +88,32 @@ class Rest {
 			)
 		);
 
+		/**
+		 * Get hierarchical items for display in a combobox.
+		 *
+		 * @since 6.0.0
+		 */
 		register_rest_route(
 			'ptam/v2',
 			'/get_hierarchical_items',
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_hierarchical_items' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
+			)
+		);
+
+		/**
+		 * Retrieve hierarchical posts for use in the hierarchy block.
+		 *
+		 * @since 6.0.0
+		 */
+		register_rest_route(
+			'ptam/v2',
+			'/get_hierarchical_posts',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_hierarchical_posts' ),
 				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
@@ -665,14 +685,14 @@ class Rest {
 	 * @since 6.0.0
 	 * @param WP_REST_Request $post_data Post data.
 	 */
-	public function get_posts_hierarchical( $post_data ) {
+	public function get_hierarchical_posts( $post_data ) {
 		$order          = $post_data['order'];
 		$orderby        = $post_data['orderby'];
-		$parent         = $post_data['parent'];
 		$post_type      = $post_data['post_type'];
 		$posts_per_page = $post_data['posts_per_page'];
 		$image_size     = $post_data['image_size'];
-		$default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
+		// $default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
+		$language = $post_data['language'];
 
 		$post_args = array(
 			'post_type'      => $post_type,
@@ -680,48 +700,51 @@ class Rest {
 			'order'          => $order,
 			'orderby'        => $orderby,
 			'posts_per_page' => $posts_per_page,
-			'post_parent'    => $parent,
 		);
 
-		$posts = get_pages( $post_args );
-
-		foreach ( $posts as &$post ) {
-
-			if ( 'gravatar' === $image_type ) {
-				$thumbnail = get_avatar( $post->post_author, $avatar_size );
-			} else {
+		// WPML Compatability.
+		global $sitepress;
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $language );
+		}
+		$query = new \WP_Query( $post_args );
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $sitepress->get_default_language() );
+		}
+		$posts = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				global $post;
+				$query->the_post();
 				$thumbnail = get_the_post_thumbnail( $post->ID, $image_size );
 				if ( empty( $thumbnail ) ) {
 					$thumbnail = wp_get_attachment_image( $default_image, $image_size );
 				}
+				$post->featured_image_src = $thumbnail;
+
+				// Get author information.
+				$display_name = get_the_author_meta( 'display_name', $post->post_author );
+				$author_url   = get_author_posts_url( $post->post_author );
+
+				$post->author_info               = new \stdClass();
+				$post->author_info->display_name = $display_name;
+				$post->author_info->author_link  = $author_url;
+				$post->link                      = get_permalink( $post->ID );
+
+				if ( empty( $post->post_excerpt ) ) {
+					$post->post_excerpt = apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
+				}
+
+				if ( ! $post->post_excerpt ) {
+					$post->post_excerpt = null;
+				}
+
+				$post->post_excerpt = wp_kses_post( $post->post_excerpt );
+				$post->post_content = apply_filters( 'ptam_the_content', $post->post_content );
+				$posts[]            = $post;
 			}
-			$post->featured_image_src = $thumbnail;
-
-			// Get author information.
-			$display_name = get_the_author_meta( 'display_name', $post->post_author );
-			$author_url   = get_author_posts_url( $post->post_author );
-
-			$post->author_info               = new \stdClass();
-			$post->author_info->display_name = $display_name;
-			$post->author_info->author_link  = $author_url;
-
-			$post->link = get_permalink( $post->ID );
-
-			if ( empty( $post->post_excerpt ) ) {
-				$post->post_excerpt = wp_trim_words( apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) ), 55 );
-			}
-
-			if ( ! $post->post_excerpt ) {
-				$post->post_excerpt = null;
-			}
-
-			$post->post_excerpt = wp_kses_post( $post->post_excerpt );
-			$post->post_content = apply_filters( 'ptam_the_content', $post->post_content );
 		}
-		$return = array(
-			'posts' => $posts,
-		);
-		die( wp_json_encode( $return ) );
+		return $posts;
 	}
 
 	/**
