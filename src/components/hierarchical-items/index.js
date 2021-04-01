@@ -1,75 +1,85 @@
 import axios from 'axios';
 
-const {
-	ComboboxControl,
-} = wp.components;
+const { ComboboxControl } = wp.components;
 
-const { Fragment, useState, useEffect } = wp.element;
+const { useState, useEffect } = wp.element;
 
 /**
  * Output hierarchical items in a combobox.
  *
  * @param {Object} props The post type to retrieve hierarchical items for.
  *
- * @return {JSX} Comboxbox for the hierarchical items.
+ * @return {JSX} Combobox for the hierarchical items.
  */
 const HierarchicalItems = ( props ) => {
+	const { label, selectedItem, postType, loadingText } = props;
 
-	const [ loading, setLoading ] = useState(true);
-	const [ items, setItems ] = useState([]);
-	const [ filteredItems, setFilteredItems ] = useState([]);
+	const [ loading, setLoading ] = useState( true );
+	const [ items, setItems ] = useState( [] );
+	// eslint-disable-next-line no-unused-vars
+	const [ filteredItems, setFilteredItems ] = useState( [] );
+	const [ selectedPostType, setSelectedPostType ] = useState( postType );
 
-	useEffect(() => {
+	useEffect( () => {
 		setLoading( true );
-		retrieveItems( {} );
 	}, [] );
 
-	const retrieveItems = async () => {
+	useEffect( () => {
+		retrieveItems( {} );
+	}, [ postType ] );
+
+	const retrieveItems = async() => {
+		setLoading( true );
 		const itemList = [];
+		// eslint-disable-next-line no-undef
 		const endpoint = ptam_globals.rest_url + `ptam/v2/get_hierarchical_items`;
-		const { postType } = props;
 		try {
-			const result = await axios.post(
-				endpoint,
-				{
-					post_type: postType,
-				}
-			);
+			const result = await axios.post( endpoint, {
+				post_type: postType,
+			} );
 			if ( Object.keys( result.data ).length > 0 ) {
+				// eslint-disable-next-line no-undef
 				jQuery.each( result.data, function( key, value ) {
 					itemList.push( { value: value.id, label: value.title } );
 				} );
-				setItems(itemList);
+				setItems( itemList );
 				setLoading( false );
 			}
-
 		} catch ( e ) {
 			// Error :(
 		}
-
 	};
 
-	const {label, selectedItem} = props;
+	/*if ( ! loading && selectedPostType !== postType ) {
+		setSelectedPostType( postType );
+		retrieveItems();
+	}*/
 
 	if ( loading ) {
-		return <></>;
+		return (
+			<>
+				{ loadingText }
+			</>
+		);
 	}
 	return (
 		<>
 			<ComboboxControl
 				label={ label }
 				value={ selectedItem }
-				options={items}
-				onInputChange={(inputValue) =>
+				options={ items }
+				onInputChange={ ( inputValue ) =>
 					setFilteredItems(
-						items.filter(option =>
-							option.label.toLowerCase().startsWith(inputValue.toLowerCase())
+						items.filter( ( option ) =>
+							option.label.toLowerCase().startsWith( inputValue.toLowerCase() )
 						)
 					)
 				}
-				onChange={(value) => {
-					props.onChange(value);
-				}}
+				// eslint-disable-next-line no-unused-vars
+				onFilterValueChange={ ( inputValue ) => {} }
+				onChange={ ( value ) => {
+					props.onChange( value );
+				} }
 			/>
 		</>
 	);

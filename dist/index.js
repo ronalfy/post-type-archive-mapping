@@ -18110,14 +18110,15 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    label: __("Select a Parent Item", 'post-type-archive-mapping'),
+    label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
     onChange: function onChange(parent) {
       setAttributes({
         parentItem: parent
       });
-    }
+    },
+    loadingText: __('Retrieving items…', 'post-type-archive-mapping')
   }))); // Toolbar option group.
 
   var viewOptions = [[{
@@ -19564,7 +19565,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ComboboxControl = wp.components.ComboboxControl;
 var _wp$element = wp.element,
-    Fragment = _wp$element.Fragment,
     useState = _wp$element.useState,
     useEffect = _wp$element.useEffect;
 /**
@@ -19572,10 +19572,15 @@ var _wp$element = wp.element,
  *
  * @param {Object} props The post type to retrieve hierarchical items for.
  *
- * @return {JSX} Comboxbox for the hierarchical items.
+ * @return {JSX} Combobox for the hierarchical items.
  */
 
 var HierarchicalItems = function HierarchicalItems(props) {
+  var label = props.label,
+      selectedItem = props.selectedItem,
+      postType = props.postType,
+      loadingText = props.loadingText;
+
   var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
       loading = _useState2[0],
@@ -19584,28 +19589,37 @@ var HierarchicalItems = function HierarchicalItems(props) {
   var _useState3 = useState([]),
       _useState4 = _slicedToArray(_useState3, 2),
       items = _useState4[0],
-      setItems = _useState4[1];
+      setItems = _useState4[1]; // eslint-disable-next-line no-unused-vars
+
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
       filteredItems = _useState6[0],
       setFilteredItems = _useState6[1];
 
+  var _useState7 = useState(postType),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectedPostType = _useState8[0],
+      setSelectedPostType = _useState8[1];
+
   useEffect(function () {
     setLoading(true);
-    retrieveItems({});
   }, []);
+  useEffect(function () {
+    retrieveItems({});
+  }, [postType]);
 
   var retrieveItems = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var itemList, endpoint, postType, result;
+      var itemList, endpoint, result;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              itemList = [];
+              setLoading(true);
+              itemList = []; // eslint-disable-next-line no-undef
+
               endpoint = ptam_globals.rest_url + "ptam/v2/get_hierarchical_items";
-              postType = props.postType;
               _context.prev = 3;
               _context.next = 6;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(endpoint, {
@@ -19616,6 +19630,7 @@ var HierarchicalItems = function HierarchicalItems(props) {
               result = _context.sent;
 
               if (Object.keys(result.data).length > 0) {
+                // eslint-disable-next-line no-undef
                 jQuery.each(result.data, function (key, value) {
                   itemList.push({
                     value: value.id,
@@ -19645,12 +19660,14 @@ var HierarchicalItems = function HierarchicalItems(props) {
       return _ref.apply(this, arguments);
     };
   }();
+  /*if ( ! loading && selectedPostType !== postType ) {
+  	setSelectedPostType( postType );
+  	retrieveItems();
+  }*/
 
-  var label = props.label,
-      selectedItem = props.selectedItem;
 
   if (loading) {
-    return /*#__PURE__*/React.createElement(React.Fragment, null);
+    return /*#__PURE__*/React.createElement(React.Fragment, null, loadingText);
   }
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ComboboxControl, {
@@ -19661,7 +19678,9 @@ var HierarchicalItems = function HierarchicalItems(props) {
       return setFilteredItems(items.filter(function (option) {
         return option.label.toLowerCase().startsWith(inputValue.toLowerCase());
       }));
-    },
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onFilterValueChange: function onFilterValueChange(inputValue) {},
     onChange: function onChange(value) {
       props.onChange(value);
     }

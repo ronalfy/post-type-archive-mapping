@@ -39,12 +39,11 @@ const {
 } = wp.blockEditor;
 
 const PTAMHierarchy = ( props ) => {
-
 	/**
 	 *
 	 * @return {JSX} Current selected view.
 	 */
-	 const selectedView = () => {
+	const selectedView = () => {
 		switch ( view ) {
 			case 'grid':
 				return <GridIcon />;
@@ -62,19 +61,28 @@ const PTAMHierarchy = ( props ) => {
 	// Hierarchical Post Types.
 	const postTypeOptions = [];
 	for ( const postTypeKey in ptam_globals.post_types_hierarchical ) {
-		postTypeOptions.push( { value: postTypeKey, label: ptam_globals.post_types_hierarchical[ postTypeKey ] } );
+		postTypeOptions.push( {
+			value: postTypeKey,
+			label: ptam_globals.post_types_hierarchical[ postTypeKey ],
+		} );
 	}
 
 	const hierarchyOptions = [
 		{
 			value: 'parents',
-			label: __( 'Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping' ),
-
+			label: __(
+				'Only Parents',
+				'Parent posts in a hierarchy',
+				'post-type-archive-mapping'
+			),
 		},
 		{
 			value: 'children',
-			label: __( 'Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping' ),
-
+			label: __(
+				'Only Children',
+				'Children posts in a hierarchy',
+				'post-type-archive-mapping'
+			),
 		},
 	];
 
@@ -89,9 +97,9 @@ const PTAMHierarchy = ( props ) => {
 					options={ postTypeOptions }
 					value={ postType }
 					onChange={ ( value ) => {
-						setAttributes({
+						setAttributes( {
 							postType: value,
-						});
+						} );
 					} }
 				/>
 				<SelectControl
@@ -99,23 +107,24 @@ const PTAMHierarchy = ( props ) => {
 					options={ hierarchyOptions }
 					value={ hierarchy }
 					onChange={ ( value ) => {
-						setAttributes({
+						setAttributes( {
 							hierarchy: value,
-						});
+						} );
 					} }
 				/>
-				{ 'children' === hierarchy &&
+				{ 'children' === hierarchy && (
 					<HierarchicalItems
-						label={ __( "Select a Parent Item", 'post-type-archive-mapping' ) }
+						label={ __( 'Select a Parent Item', 'post-type-archive-mapping' ) }
 						postType={ postType }
-						selectedItem={parentItem}
-						onChange={(parent) => {
+						selectedItem={ parentItem }
+						onChange={ ( parent ) => {
 							setAttributes( {
 								parentItem: parent,
-							});
-						}}
+							} );
+						} }
+						loadingText={ __( 'Retrieving items…', 'post-type-archive-mapping' ) }
 					/>
-				}
+				) }
 			</PanelBody>
 		</InspectorControls>
 	);
