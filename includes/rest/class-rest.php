@@ -654,7 +654,7 @@ class Rest {
 		if ( ! isset( $item_data['post_type'] ) ) {
 			return array();
 		}
-		$post_type          = $item_data['post_type'];
+		$post_type          = sanitize_text_field( $item_data['post_type'] );
 		$hierarchical_items = Functions::get_hierarchical_items_from_post_type( $post_type );
 		return $hierarchical_items ? $hierarchical_items : array();
 	}
