@@ -389,6 +389,10 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => 'parents', // parents or children.
 					),
+					'parentItem' => array(
+						'type' => 'integer',
+						'default' => 0,
+					)
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

@@ -57,7 +57,7 @@ const PTAMHierarchy = ( props ) => {
 	};
 	const { attributes, setAttributes } = props;
 
-	const { uniqueId, view, postType, hierarchy } = attributes;
+	const { uniqueId, view, postType, hierarchy, parentItem } = attributes;
 
 	// Hierarchical Post Types.
 	const postTypeOptions = [];
@@ -105,7 +105,16 @@ const PTAMHierarchy = ( props ) => {
 					} }
 				/>
 				{ 'children' === hierarchy &&
-					<HierarchicalItems postType={ postType } />
+					<HierarchicalItems
+						label={ __( "Select a Parent Item", 'post-type-archive-mapping' ) }
+						postType={ postType }
+						selectedItem={parentItem}
+						onChange={(parent) => {
+							setAttributes( {
+								parentItem: parent,
+							});
+						}}
+					/>
 				}
 			</PanelBody>
 		</InspectorControls>

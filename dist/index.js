@@ -18069,7 +18069,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var uniqueId = attributes.uniqueId,
       view = attributes.view,
       postType = attributes.postType,
-      hierarchy = attributes.hierarchy; // Hierarchical Post Types.
+      hierarchy = attributes.hierarchy,
+      parentItem = attributes.parentItem; // Hierarchical Post Types.
 
   var postTypeOptions = [];
 
@@ -18109,7 +18110,14 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    postType: postType
+    label: __("Select a Parent Item", 'post-type-archive-mapping'),
+    postType: postType,
+    selectedItem: parentItem,
+    onChange: function onChange(parent) {
+      setAttributes({
+        parentItem: parent
+      });
+    }
   }))); // Toolbar option group.
 
   var viewOptions = [[{
@@ -19535,6 +19543,30 @@ var Loading = function Loading(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var ComboboxControl = wp.components.ComboboxControl;
+var _wp$element = wp.element,
+    Fragment = _wp$element.Fragment,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect;
 /**
  * Output hierarchical items in a combobox.
  *
@@ -19542,9 +19574,98 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @return {JSX} Comboxbox for the hierarchical items.
  */
+
 var HierarchicalItems = function HierarchicalItems(props) {
-  var postType = props.postType;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, postType);
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = useState([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      items = _useState4[0],
+      setItems = _useState4[1];
+
+  var _useState5 = useState([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      filteredItems = _useState6[0],
+      setFilteredItems = _useState6[1];
+
+  useEffect(function () {
+    setLoading(true);
+    retrieveItems({});
+  }, []);
+
+  var retrieveItems = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var itemList, endpoint, postType, result;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              itemList = [];
+              endpoint = ptam_globals.rest_url + "ptam/v2/get_hierarchical_items";
+              postType = props.postType;
+              _context.prev = 3;
+              _context.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(endpoint, {
+                post_type: postType
+              });
+
+            case 6:
+              result = _context.sent;
+
+              if (Object.keys(result.data).length > 0) {
+                jQuery.each(result.data, function (key, value) {
+                  itemList.push({
+                    value: value.id,
+                    label: value.title
+                  });
+                });
+                setItems(itemList);
+                setLoading(false);
+              }
+
+              _context.next = 12;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](3);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[3, 10]]);
+    }));
+
+    return function retrieveItems() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var label = props.label,
+      selectedItem = props.selectedItem;
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  }
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ComboboxControl, {
+    label: label,
+    value: selectedItem,
+    options: items,
+    onInputChange: function onInputChange(inputValue) {
+      return setFilteredItems(items.filter(function (option) {
+        return option.label.toLowerCase().startsWith(inputValue.toLowerCase());
+      }));
+    },
+    onChange: function onChange(value) {
+      props.onChange(value);
+    }
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HierarchicalItems);
