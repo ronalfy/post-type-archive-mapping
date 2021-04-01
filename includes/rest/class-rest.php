@@ -30,7 +30,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_all_terms' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -39,7 +39,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_posts' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -48,7 +48,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_taxonomies' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -57,7 +57,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_image' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -66,7 +66,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_tax_terms' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -75,7 +75,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_tax_term_data' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
@@ -84,7 +84,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_featured_posts' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 
@@ -94,7 +94,7 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_hierarchical_items' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 	}
@@ -657,5 +657,17 @@ class Rest {
 		$post_type          = sanitize_text_field( $item_data['post_type'] );
 		$hierarchical_items = Functions::get_hierarchical_items_from_post_type( $post_type );
 		return $hierarchical_items ? $hierarchical_items : array();
+	}
+
+	/**
+	 * Make sure users can edit posts to access REST API.
+	 *
+	 * @since 6.0.0
+	 */
+	public function permissions_check() {
+		if ( current_user_can( 'edit_posts' ) ) {
+			return true;
+		}
+		return false;
 	}
 }

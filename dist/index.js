@@ -15178,7 +15178,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = _this$props$attribute2.linkColor,
           fallbackImg = _this$props$attribute2.fallbackImg,
           wpmlLanguage = _this$props$attribute2.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post = {
         post_type: postType,
@@ -15189,7 +15195,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         posts_per_page: postsToShow,
         image_type: imageCrop,
         avatar_size: avatarSize
-      }, _defineProperty(_axios$post, "image_type", imageType), _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "link_color", linkColor), _defineProperty(_axios$post, "default_image", fallbackImg), _defineProperty(_axios$post, "language", wpmlLanguage), _axios$post)).then(function (response) {
+      }, _defineProperty(_axios$post, "image_type", imageType), _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "link_color", linkColor), _defineProperty(_axios$post, "default_image", fallbackImg), _defineProperty(_axios$post, "language", wpmlLanguage), _axios$post), config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
 
@@ -15220,7 +15226,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = _this$props$attribute3.linkColor,
           fallbackImg = _this$props$attribute3.fallbackImg,
           wpmlLanguage = _this$props$attribute3.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", {
         post_type: postType,
@@ -15236,7 +15248,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         link_color: linkColor,
         default_image: fallbackImg,
         language: wpmlLanguage
-      }).then(function (response) {
+      }, config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
 
@@ -15285,7 +15297,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
             linkColor = _classRef$props$attri.linkColor,
             fallbackImg = _classRef$props$attri.fallbackImg,
             wpmlLanguage = _classRef$props$attri.wpmlLanguage;
-        linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+        linkColor = linkColor.replace('#', '');
+        var config = {
+          headers: {
+            // eslint-disable-next-line no-undef
+            'X-WP-Nonce': ptam_globals.rest_nonce
+          }
+        }; // Get Latest Posts and Chain Promises
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post2 = {
           post_type: postType,
@@ -15296,7 +15314,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           posts_per_page: postsToShow,
           image_type: imageCrop,
           avatar_size: value
-        }, _defineProperty(_axios$post2, "image_type", imageType), _defineProperty(_axios$post2, "image_size", imageTypeSize), _defineProperty(_axios$post2, "link_color", linkColor), _defineProperty(_axios$post2, "default_image", fallbackImg), _defineProperty(_axios$post2, "language", wpmlLanguage), _axios$post2)).then(function (response) {
+        }, _defineProperty(_axios$post2, "image_type", imageType), _defineProperty(_axios$post2, "image_size", imageTypeSize), _defineProperty(_axios$post2, "link_color", linkColor), _defineProperty(_axios$post2, "default_image", fallbackImg), _defineProperty(_axios$post2, "language", wpmlLanguage), _axios$post2), config).then(function (response) {
           latestPosts = response.data.posts;
           imageSizes = response.data.image_sizes;
           classRef.setState({
@@ -15338,7 +15356,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
             linkColor = _classRef$props$attri2.linkColor,
             fallbackImg = _classRef$props$attri2.fallbackImg,
             wpmlLanguage = _classRef$props$attri2.wpmlLanguage;
-        linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+        linkColor = linkColor.replace('#', '');
+        var config = {
+          headers: {
+            // eslint-disable-next-line no-undef
+            'X-WP-Nonce': ptam_globals.rest_nonce
+          }
+        }; // Get Latest Posts and Chain Promises
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post3 = {
           post_type: postType,
@@ -15349,7 +15373,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           posts_per_page: postsToShow,
           image_type: imageCrop,
           avatar_size: avatarSize
-        }, _defineProperty(_axios$post3, "image_type", imageType), _defineProperty(_axios$post3, "image_size", imageTypeSize), _defineProperty(_axios$post3, "link_color", linkColor), _defineProperty(_axios$post3, "default_image", fallbackImg), _defineProperty(_axios$post3, "language", wpmlLanguage), _axios$post3)).then(function (response) {
+        }, _defineProperty(_axios$post3, "image_type", imageType), _defineProperty(_axios$post3, "image_size", imageTypeSize), _defineProperty(_axios$post3, "link_color", linkColor), _defineProperty(_axios$post3, "default_image", fallbackImg), _defineProperty(_axios$post3, "language", wpmlLanguage), _axios$post3), config).then(function (response) {
           latestPosts = response.data.posts;
           imageSizes = response.data.image_sizes;
           classRef.setState({
@@ -15468,6 +15492,12 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           fallbackImg = props.fallbackImg,
           wpmlLanguage = props.wpmlLanguage;
       linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post4 = {
         post_type: postType,
         order: order,
@@ -15478,7 +15508,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         image_size: imageCrop,
         avatar_size: avatarSize,
         image_type: imageType
-      }, _defineProperty(_axios$post4, "image_size", imageTypeSize), _defineProperty(_axios$post4, "link_color", linkColor), _defineProperty(_axios$post4, "default_image", fallbackImg), _defineProperty(_axios$post4, "language", wpmlLanguage), _axios$post4)).then(function (response) {
+      }, _defineProperty(_axios$post4, "image_size", imageTypeSize), _defineProperty(_axios$post4, "link_color", linkColor), _defineProperty(_axios$post4, "default_image", fallbackImg), _defineProperty(_axios$post4, "language", wpmlLanguage), _axios$post4), config).then(function (response) {
         // Now Set State
         _this2.setState({
           loading: false,
@@ -15500,10 +15530,16 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
       var props = jQuery.extend({}, this.props.attributes, object);
       var postType = props.postType,
           taxonomy = props.taxonomy;
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
         taxonomy: taxonomy,
         post_type: postType
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           termsList.push({
             value: 0,
@@ -15555,7 +15591,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = props.linkColor,
           fallbackImg = props.fallbackImg,
           wpmlLanguage = props.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post5 = {
         post_type: postType,
@@ -15567,7 +15609,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         image_size: imageCrop,
         avatar_size: avatarSize,
         image_type: imageType
-      }, _defineProperty(_axios$post5, "image_size", imageTypeSize), _defineProperty(_axios$post5, "link_color", linkColor), _defineProperty(_axios$post5, "default_image", fallbackImg), _defineProperty(_axios$post5, "language", wpmlLanguage), _axios$post5)).then(function (response) {
+      }, _defineProperty(_axios$post5, "image_size", imageTypeSize), _defineProperty(_axios$post5, "link_color", linkColor), _defineProperty(_axios$post5, "default_image", fallbackImg), _defineProperty(_axios$post5, "language", wpmlLanguage), _axios$post5), config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
         userTaxonomies = response.data.taxonomies;
@@ -15586,7 +15628,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
             taxonomy: taxonomy,
             post_type: postType
-          }).then(function (response) {
+          }, config).then(function (response) {
             if (Object.keys(response.data).length > 0) {
               termsList.push({
                 value: 0,
@@ -15603,7 +15645,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
 
             axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
               post_type: postType
-            }).then(function (response) {
+            }, config).then(function (response) {
               if (Object.keys(response.data).length > 0) {
                 taxonomyList.push({
                   value: 'none',
@@ -16853,6 +16895,16 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       latestPosts = _useState12[0],
       setLatestPosts = _useState12[1];
 
+  var _useState13 = useState({
+    headers: {
+      // eslint-disable-next-line no-undef
+      'X-WP-Nonce': ptam_globals.rest_nonce
+    }
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      config = _useState14[0],
+      setConfig = _useState14[1];
+
   useEffect(function () {
     setLoading(true);
     getLatestData({}); // Get unique ID for the block. Props @generateblocks.
@@ -16868,7 +16920,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   /**
    *
    * @param {string} excerpt The excerpt to parse down.
-   * @return React HTML.
+   * @return {JSX} React HTML.
    */
 
   var excerptParse = function excerptParse(excerpt) {
@@ -16902,7 +16954,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
                 taxonomy: taxonomy,
                 post_type: postType
-              });
+              }, config);
 
             case 6:
               result = _context.sent;
@@ -16960,7 +17012,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           postsToShow,
           imageCrop,
           fallbackImg,
-          _axios$post,
           result,
           _args2 = arguments;
 
@@ -16973,17 +17024,18 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               setLoading(true);
               _context2.prev = 3;
               _context2.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", {
                 post_type: postType,
                 order: order,
                 orderby: orderBy,
                 taxonomy: taxonomy,
                 term: term,
                 posts_per_page: postsToShow,
-                image_size: imageCrop,
                 avatar_size: avatarSize,
-                image_type: imageType
-              }, _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "default_image", fallbackImg), _axios$post));
+                image_type: imageType,
+                image_size: imageTypeSize,
+                default_image: fallbackImg
+              }, config);
 
             case 6:
               result = _context2.sent;
@@ -17092,9 +17144,9 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getFeaturedPosts = function getFeaturedPosts() {
-    var _axios$post2;
+    var _axios$post;
 
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post2 = {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post = {
       post_type: props.attributes.postType,
       order: props.attributes.order,
       orderby: props.attributes.orderBy,
@@ -17104,7 +17156,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       image_size: props.attributes.imageCrop,
       avatar_size: props.attributes.avatarSize,
       image_type: props.attributes.imageType
-    }, _defineProperty(_axios$post2, "image_size", props.attributes.imageTypeSize), _defineProperty(_axios$post2, "default_image", props.attributes.fallbackImg), _axios$post2));
+    }, _defineProperty(_axios$post, "image_size", props.attributes.imageTypeSize), _defineProperty(_axios$post, "default_image", props.attributes.fallbackImg), _axios$post), config);
   }; // Retrieve a list of terms by taxonomy and post type.
 
 
@@ -17112,14 +17164,14 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
       taxonomy: props.attributes.taxonomy,
       post_type: props.attributes.postType
-    });
+    }, config);
   }; // Retrieve a list of all taxonomies by post type.
 
 
   var getTaxonomies = function getTaxonomies() {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
       post_type: props.attributes.postType
-    });
+    }, config);
   };
 
   var getPostHtml = function getPostHtml() {
@@ -18457,9 +18509,15 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         loading: true
       });
 
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_tax_terms", {
         taxonomy: taxonomy
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           termsList.push({
             id: 0,
@@ -18513,6 +18571,12 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         termLoading: true
       });
 
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_tax_term_data", {
         terms: termsToRetrieve,
         termsExclude: termsToExclude,
@@ -18522,7 +18586,7 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         backgroundImageSource: backgroundImageSource,
         backgroundImageFallback: backgroundImageFallback,
         backgroundImageMeta: backgroundImageMeta
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           _this.setState({
             termsToDisplay: response.data.term_data
@@ -19606,22 +19670,28 @@ var HierarchicalItems = function HierarchicalItems(props) {
 
   var retrieveItems = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var itemList, endpoint, result;
+      var itemList, config, endpoint, result;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               setLoading(true);
-              itemList = []; // eslint-disable-next-line no-undef
+              itemList = [];
+              config = {
+                headers: {
+                  // eslint-disable-next-line no-undef
+                  'X-WP-Nonce': ptam_globals.rest_nonce
+                }
+              }; // eslint-disable-next-line no-undef
 
               endpoint = ptam_globals.rest_url + "ptam/v2/get_hierarchical_items";
-              _context.prev = 3;
-              _context.next = 6;
+              _context.prev = 4;
+              _context.next = 7;
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(endpoint, {
                 post_type: postType
-              });
+              }, config);
 
-            case 6:
+            case 7:
               result = _context.sent;
 
               if (Object.keys(result.data).length > 0) {
@@ -19636,19 +19706,19 @@ var HierarchicalItems = function HierarchicalItems(props) {
                 setLoading(false);
               }
 
-              _context.next = 12;
+              _context.next = 13;
               break;
 
-            case 10:
-              _context.prev = 10;
-              _context.t0 = _context["catch"](3);
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](4);
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[3, 10]]);
+      }, _callee, null, [[4, 11]]);
     }));
 
     return function retrieveItems() {

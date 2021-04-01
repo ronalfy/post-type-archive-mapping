@@ -92,6 +92,13 @@ class PTAM_Custom_Posts extends Component {
 			wpmlLanguage,
 		} = props;
 		linkColor = linkColor.replace( '#', '' );
+
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		axios
 			.post( ptam_globals.rest_url + `ptam/v2/get_posts`, {
 				post_type: postType,
@@ -107,7 +114,8 @@ class PTAM_Custom_Posts extends Component {
 				link_color: linkColor,
 				default_image: fallbackImg,
 				language: wpmlLanguage,
-			} )
+			},
+			config )
 			.then( ( response ) => {
 				// Now Set State
 				this.setState( {
@@ -125,11 +133,17 @@ class PTAM_Custom_Posts extends Component {
 		const termsList = [];
 		const props = jQuery.extend( {}, this.props.attributes, object );
 		const { postType, taxonomy } = props;
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		axios
 			.post( ptam_globals.rest_url + `ptam/v2/get_terms`, {
 				taxonomy,
 				post_type: postType,
-			} )
+			}, config )
 			.then( ( response ) => {
 				if ( Object.keys( response.data ).length > 0 ) {
 					termsList.push( {
@@ -175,7 +189,12 @@ class PTAM_Custom_Posts extends Component {
 		} = props;
 
 		linkColor = linkColor.replace( '#', '' );
-
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		// Get Latest Posts and Chain Promises
 		axios
 			.post( ptam_globals.rest_url + `ptam/v2/get_posts`, {
@@ -192,7 +211,7 @@ class PTAM_Custom_Posts extends Component {
 				link_color: linkColor,
 				default_image: fallbackImg,
 				language: wpmlLanguage,
-			} )
+			}, config )
 			.then( ( response ) => {
 				latestPosts = response.data.posts;
 				imageSizes = response.data.image_sizes;
@@ -212,7 +231,7 @@ class PTAM_Custom_Posts extends Component {
 						.post( ptam_globals.rest_url + `ptam/v2/get_terms`, {
 							taxonomy,
 							post_type: postType,
-						} )
+						}, config )
 						.then( ( response ) => {
 							if ( Object.keys( response.data ).length > 0 ) {
 								termsList.push( {
@@ -228,7 +247,7 @@ class PTAM_Custom_Posts extends Component {
 							axios
 								.post( ptam_globals.rest_url + `ptam/v2/get_taxonomies`, {
 									post_type: postType,
-								} )
+								}, config )
 								.then( ( response ) => {
 									if ( Object.keys( response.data ).length > 0 ) {
 										taxonomyList.push( {
@@ -398,6 +417,13 @@ class PTAM_Custom_Posts extends Component {
 
 		linkColor = linkColor.replace( '#', '' );
 
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
+
 		// Get Latest Posts and Chain Promises
 		axios
 			.post( ptam_globals.rest_url + `ptam/v2/get_images`, {
@@ -414,7 +440,7 @@ class PTAM_Custom_Posts extends Component {
 				link_color: linkColor,
 				default_image: fallbackImg,
 				language: wpmlLanguage,
-			} )
+			}, config )
 			.then( ( response ) => {
 				latestPosts = response.data.posts;
 				imageSizes = response.data.image_sizes;
@@ -450,6 +476,13 @@ class PTAM_Custom_Posts extends Component {
 
 		linkColor = linkColor.replace( '#', '' );
 
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
+
 		// Get Latest Posts and Chain Promises
 		axios
 			.post( ptam_globals.rest_url + `ptam/v2/get_images`, {
@@ -466,7 +499,7 @@ class PTAM_Custom_Posts extends Component {
 				link_color: linkColor,
 				default_image: fallbackImg,
 				language: wpmlLanguage,
-			} )
+			}, config )
 			.then( ( response ) => {
 				latestPosts = response.data.posts;
 				imageSizes = response.data.image_sizes;
@@ -515,6 +548,13 @@ class PTAM_Custom_Posts extends Component {
 
 			linkColor = linkColor.replace( '#', '' );
 
+			const config = {
+				headers: {
+					// eslint-disable-next-line no-undef
+					'X-WP-Nonce': ptam_globals.rest_nonce,
+				},
+			};
+
 			// Get Latest Posts and Chain Promises
 			axios
 				.post( ptam_globals.rest_url + `ptam/v2/get_images`, {
@@ -531,7 +571,7 @@ class PTAM_Custom_Posts extends Component {
 					link_color: linkColor,
 					default_image: fallbackImg,
 					language: wpmlLanguage,
-				} )
+				}, config )
 				.then( ( response ) => {
 					latestPosts = response.data.posts;
 					imageSizes = response.data.image_sizes;
@@ -572,7 +612,12 @@ class PTAM_Custom_Posts extends Component {
 			} = classRef.props.attributes;
 
 			linkColor = linkColor.replace( '#', '' );
-
+			const config = {
+				headers: {
+					// eslint-disable-next-line no-undef
+					'X-WP-Nonce': ptam_globals.rest_nonce,
+				},
+			};
 			// Get Latest Posts and Chain Promises
 			axios
 				.post( ptam_globals.rest_url + `ptam/v2/get_images`, {
@@ -589,7 +634,7 @@ class PTAM_Custom_Posts extends Component {
 					link_color: linkColor,
 					default_image: fallbackImg,
 					language: wpmlLanguage,
-				} )
+				}, config )
 				.then( ( response ) => {
 					latestPosts = response.data.posts;
 					imageSizes = response.data.image_sizes;

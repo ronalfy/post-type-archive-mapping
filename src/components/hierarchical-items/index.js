@@ -30,12 +30,18 @@ const HierarchicalItems = ( props ) => {
 	const retrieveItems = async() => {
 		setLoading( true );
 		const itemList = [];
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		// eslint-disable-next-line no-undef
 		const endpoint = ptam_globals.rest_url + `ptam/v2/get_hierarchical_items`;
 		try {
 			const result = await axios.post( endpoint, {
 				post_type: postType,
-			} );
+			}, config );
 			if ( Object.keys( result.data ).length > 0 ) {
 				// eslint-disable-next-line no-undef
 				jQuery.each( result.data, function( key, value ) {
