@@ -22,6 +22,7 @@ define( 'PTAM_SPONSORS_URL', 'https://github.com/sponsors/MediaRon' );
 require_once 'autoloader.php';
 
 use PTAM\Includes\Admin\Options as Options;
+use PTAM\Includes\Functions as Functions;
 
 /**
  * Main plugin class.
@@ -152,6 +153,8 @@ class PostTypeArchiveMapping {
 
 			// 404 page detection.
 			add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+
+			Functions::get_hierarchical_items_from_post_type( 'page' );
 		}
 	} //end init
 
