@@ -28,8 +28,8 @@ class Rest {
 			'ptam/v2',
 			'/get_terms',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_all_terms' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_all_terms' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -37,8 +37,8 @@ class Rest {
 			'ptam/v2',
 			'/get_posts',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_posts' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_posts' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -46,8 +46,8 @@ class Rest {
 			'ptam/v2',
 			'/get_taxonomies',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_taxonomies' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_taxonomies' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -55,8 +55,8 @@ class Rest {
 			'ptam/v2',
 			'/get_images',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_image' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_image' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -64,8 +64,8 @@ class Rest {
 			'ptam/v2',
 			'/get_tax_terms',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_tax_terms' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_tax_terms' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -73,8 +73,8 @@ class Rest {
 			'ptam/v2',
 			'/get_tax_term_data',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_tax_term_data' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_tax_term_data' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -82,8 +82,18 @@ class Rest {
 			'ptam/v2',
 			'/get_featured_posts',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_featured_posts' ),
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_featured_posts' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+
+		register_rest_route(
+			'ptam/v2',
+			'/get_hierarchical_items',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_hierarchical_items' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -629,5 +639,23 @@ class Rest {
 			}
 		}
 		return $clauses;
+	}
+
+
+
+	/**
+	 * Return hierarchical posts based on a post type.
+	 *
+	 * @since 6.0.0
+	 *
+	 * @param WP_REST_Request $item_data The item data.
+	 */
+	public function get_hierarchical_items( $item_data ) {
+		if ( ! isset( $item_data['post_type'] ) ) {
+			return array();
+		}
+		$post_type          = $item_data['post_type'];
+		$hierarchical_items = Functions::get_hierarchical_items_from_post_type( $post_type );
+		return $hierarchical_items ? $hierarchical_items : array();
 	}
 }
