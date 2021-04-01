@@ -691,8 +691,10 @@ class Rest {
 		$post_type      = $post_data['post_type'];
 		$posts_per_page = $post_data['posts_per_page'];
 		$image_size     = $post_data['image_size'];
+		$post_parent    = $post_data['post_parent'];
+		$language       = $post_data['language'];
 		// $default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
-		$language = $post_data['language'];
+
 
 		$post_args = array(
 			'post_type'      => $post_type,
@@ -700,6 +702,7 @@ class Rest {
 			'order'          => $order,
 			'orderby'        => $orderby,
 			'posts_per_page' => $posts_per_page,
+			'post_parent'    => $post_parent,
 		);
 
 		// WPML Compatability.

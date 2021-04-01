@@ -18154,10 +18154,15 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       config = _useState6[0],
       setConfig = _useState6[1];
 
-  var _useState7 = useState({}),
+  var _useState7 = useState(postsPerPage),
       _useState8 = _slicedToArray(_useState7, 2),
-      posts = _useState8[0],
-      setPosts = _useState8[1];
+      numItems = _useState8[0],
+      setNumItems = _useState8[1];
+
+  var _useState9 = useState({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      posts = _useState10[0],
+      setPosts = _useState10[1];
 
   useEffect(function () {
     // Get unique ID for the block. Props @generateblocks.
@@ -18172,7 +18177,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
 
   useEffect(function () {
     getPosts({});
-  }, [postType, hierarchy, parentItem, order, orderBy]);
+  }, [postType, hierarchy, parentItem, order, orderBy, numItems]);
   /**
    *
    * @return {JSX} Current selected view.
@@ -18197,7 +18202,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       clearTimeout(itemNumberTimer);
     }
 
-    setItemNumberTimer(setTimeout(function () {// Get new items.
+    setItemNumberTimer(setTimeout(function () {
+      setNumItems(value);
     }, 1000));
   };
   /**
@@ -18419,6 +18425,56 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
     controls: viewOptions
   }));
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
+      className: "ptam-term-grid-loading"
+    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 315.23 341.25",
+      width: "42",
+      height: "42"
+    }, /*#__PURE__*/React.createElement("polygon", {
+      points: "315.23 204.75 315.23 68.25 197.02 0 197.02 136.5 315.23 204.75",
+      style: {
+        fill: '#ffdd01',
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "0 204.75 0 68.25 118.21 0 118.21 136.5 0 204.75",
+      style: {
+        fill: '#2e3192',
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "157.62 159.25 275.83 91 157.62 22.75 39.4 91 157.62 159.25",
+      style: {
+        fill: '#86cedc',
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "157.62 341.25 275.83 273 157.62 204.75 39.4 273 157.62 341.25",
+      style: {
+        fill: '#f07f3b',
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "177.32 170.62 295.53 102.37 295.53 238.87 177.32 307.12 177.32 170.62",
+      style: {
+        fill: '#c10a26',
+        opacity: 0.8
+      }
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "137.91 170.62 19.7 102.37 19.7 238.87 137.91 307.12 137.91 170.62",
+      style: {
+        fill: '#662583',
+        opacity: 0.8
+      }
+    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      cssClass: "ptam-term-grid-loading-animation"
+    })))));
+  }
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement("h2", null, view));
 };
 
