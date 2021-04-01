@@ -19597,11 +19597,6 @@ var HierarchicalItems = function HierarchicalItems(props) {
       filteredItems = _useState6[0],
       setFilteredItems = _useState6[1];
 
-  var _useState7 = useState(postType),
-      _useState8 = _slicedToArray(_useState7, 2),
-      selectedPostType = _useState8[0],
-      setSelectedPostType = _useState8[1];
-
   useEffect(function () {
     setLoading(true);
   }, []);
@@ -19660,11 +19655,6 @@ var HierarchicalItems = function HierarchicalItems(props) {
       return _ref.apply(this, arguments);
     };
   }();
-  /*if ( ! loading && selectedPostType !== postType ) {
-  	setSelectedPostType( postType );
-  	retrieveItems();
-  }*/
-
 
   if (loading) {
     return /*#__PURE__*/React.createElement(React.Fragment, null, loadingText);

@@ -18,7 +18,6 @@ const HierarchicalItems = ( props ) => {
 	const [ items, setItems ] = useState( [] );
 	// eslint-disable-next-line no-unused-vars
 	const [ filteredItems, setFilteredItems ] = useState( [] );
-	const [ selectedPostType, setSelectedPostType ] = useState( postType );
 
 	useEffect( () => {
 		setLoading( true );
@@ -49,11 +48,6 @@ const HierarchicalItems = ( props ) => {
 			// Error :(
 		}
 	};
-
-	/*if ( ! loading && selectedPostType !== postType ) {
-		setSelectedPostType( postType );
-		retrieveItems();
-	}*/
 
 	if ( loading ) {
 		return (
