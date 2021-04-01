@@ -13,7 +13,7 @@ import PreviewIcon from './preview-icon';
 import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
-const { Component, Fragment } = wp.element;
+const { Component, Fragment, useState, useEffect } = wp.element;
 
 const { __, _n, _x } = wp.i18n;
 
@@ -28,6 +28,7 @@ const {
 	ToggleControl,
 	Button,
 	ToolbarGroup,
+	PanelRow,
 } = wp.components;
 
 const {
@@ -39,6 +40,30 @@ const {
 } = wp.blockEditor;
 
 const PTAMHierarchy = ( props ) => {
+
+	const { attributes, setAttributes } = props;
+
+	const [ loading, setLoading ] = useState( true );
+	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );
+	const [ config, setConfig ] = useState( {
+		headers: {
+			// eslint-disable-next-line no-undef
+			'X-WP-Nonce': ptam_globals.rest_nonce,
+		},
+	} );
+
+	useEffect(() => {
+		setLoading( true );
+
+		// Get unique ID for the block. Props @generateblocks.
+		const id = props.clientId.substr( 2, 9 ).replace( '-', '' );
+		if ( ! attributes.uniqueId ) {
+			setAttributes( {
+				uniqueId: id,
+			} );
+		}
+	}, [] );
+
 	/**
 	 *
 	 * @return {JSX} Current selected view.
@@ -54,15 +79,37 @@ const PTAMHierarchy = ( props ) => {
 				return <ListIcon />;
 		}
 	};
-	const { attributes, setAttributes } = props;
 
-	const { uniqueId, view, postType, hierarchy, parentItem } = attributes;
+	const itemNumberRender = ( value ) => {
+		if ( itemNumberTimer ) {
+			clearTimeout( itemNumberTimer );
+		}
+		setItemNumberTimer(
+			setTimeout( () => {
+				// Get new items.
+			}, 1000 )
+		);
+	};
+
+
+	const {
+		uniqueId,
+		view,
+		postType,
+		hierarchy,
+		parentItem,
+		order,
+		orderBy,
+		postsPerPage,
+	} = attributes;
 
 	// Hierarchical Post Types.
 	const postTypeOptions = [];
+	// eslint-disable-next-line no-undef
 	for ( const postTypeKey in ptam_globals.post_types_hierarchical ) {
 		postTypeOptions.push( {
 			value: postTypeKey,
+			// eslint-disable-next-line no-undef
 			label: ptam_globals.post_types_hierarchical[ postTypeKey ],
 		} );
 	}
@@ -84,6 +131,32 @@ const PTAMHierarchy = ( props ) => {
 				'post-type-archive-mapping'
 			),
 		},
+	];
+
+	// Order Params.
+	const orderOptions = [
+		{ value: 'ASC', label: __( 'ASC', 'post-type-archive-mapping' ) },
+		{ value: 'DESC', label: __( 'DESC', 'post-type-archive-mapping' ) },
+	];
+
+	const orderByOptions = [
+		{ value: 'ID', label: __( 'ID', 'post-type-archive-mapping' ) },
+		{
+			value: 'menu_order',
+			label: __( 'Menu Order', 'post-type-archive-mapping' ),
+		},
+		{
+			value: 'author',
+			label: __( 'Post Author', 'post-type-archive-mapping' ),
+		},
+		{ value: 'date', label: __( 'Date', 'post-type-archive-mapping' ) },
+		{
+			value: 'modified',
+			label: __( 'Date Modified', 'post-type-archive-mapping' ),
+		},
+		{ value: 'name', label: __( 'Post Slug', 'post-type-archive-mapping' ) },
+		{ value: 'title', label: __( 'Title', 'post-type-archive-mapping' ) },
+		{ value: 'rand', label: __( 'Random', 'post-type-archive-mapping' ) },
 	];
 
 	const inspectorControls = (
@@ -125,6 +198,32 @@ const PTAMHierarchy = ( props ) => {
 						loadingText={ __( 'Retrieving items…', 'post-type-archive-mapping' ) }
 					/>
 				) }
+				<SelectControl
+					label={ __( 'Order', 'post-type-archive-mapping' ) }
+					options={ orderOptions }
+					value={ order }
+					onChange={ ( value ) => {
+						setAttributes( { order: value } );
+					} }
+				/>
+				<SelectControl
+					label={ __( 'Order By', 'post-type-archive-mapping' ) }
+					options={ orderByOptions }
+					value={ orderBy }
+					onChange={ ( value ) => {
+						setAttributes( { orderBy: value } );
+					} }
+				/>
+				<RangeControl
+					label={ __( 'Number of Items', 'post-type-archive-mapping' ) }
+					value={ postsPerPage }
+					onChange={ ( value ) => {
+						setAttributes( { postsPerPage: value } );
+						itemNumberRender( value );
+					} }
+					min={ 1 }
+					max={ 100 }
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);

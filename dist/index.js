@@ -18057,6 +18057,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/full-icon.js");
 /* harmony import */ var _preview_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./preview-icon */ "./src/block/hierarchy/preview-icon.js");
 /* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 /**
  * External dependencies
  */
@@ -18075,7 +18087,9 @@ var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules
 
 var _wp$element = wp.element,
     Component = _wp$element.Component,
-    Fragment = _wp$element.Fragment;
+    Fragment = _wp$element.Fragment,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect;
 var _wp$i18n = wp.i18n,
     __ = _wp$i18n.__,
     _n = _wp$i18n._n,
@@ -18089,7 +18103,8 @@ var _wp$components = wp.components,
     TextControl = _wp$components.TextControl,
     ToggleControl = _wp$components.ToggleControl,
     Button = _wp$components.Button,
-    ToolbarGroup = _wp$components.ToolbarGroup;
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    PanelRow = _wp$components.PanelRow;
 var _wp$blockEditor = wp.blockEditor,
     __experimentalGradientPickerControl = _wp$blockEditor.__experimentalGradientPickerControl,
     MediaUpload = _wp$blockEditor.MediaUpload,
@@ -18098,10 +18113,45 @@ var _wp$blockEditor = wp.blockEditor,
     BlockControls = _wp$blockEditor.BlockControls;
 
 var PTAMHierarchy = function PTAMHierarchy(props) {
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes;
+
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      itemNumberTimer = _useState4[0],
+      setItemNumberTimer = _useState4[1];
+
+  var _useState5 = useState({
+    headers: {
+      // eslint-disable-next-line no-undef
+      'X-WP-Nonce': ptam_globals.rest_nonce
+    }
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      config = _useState6[0],
+      setConfig = _useState6[1];
+
+  useEffect(function () {
+    setLoading(true); // Get unique ID for the block. Props @generateblocks.
+
+    var id = props.clientId.substr(2, 9).replace('-', '');
+
+    if (!attributes.uniqueId) {
+      setAttributes({
+        uniqueId: id
+      });
+    }
+  }, []);
   /**
    *
    * @return {JSX} Current selected view.
    */
+
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
@@ -18116,19 +18166,30 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     }
   };
 
-  var attributes = props.attributes,
-      setAttributes = props.setAttributes;
+  var itemNumberRender = function itemNumberRender(value) {
+    if (itemNumberTimer) {
+      clearTimeout(itemNumberTimer);
+    }
+
+    setItemNumberTimer(setTimeout(function () {// Get new items.
+    }, 1000));
+  };
+
   var uniqueId = attributes.uniqueId,
       view = attributes.view,
       postType = attributes.postType,
       hierarchy = attributes.hierarchy,
-      parentItem = attributes.parentItem; // Hierarchical Post Types.
+      parentItem = attributes.parentItem,
+      order = attributes.order,
+      orderBy = attributes.orderBy,
+      postsPerPage = attributes.postsPerPage; // Hierarchical Post Types.
 
-  var postTypeOptions = [];
+  var postTypeOptions = []; // eslint-disable-next-line no-undef
 
   for (var postTypeKey in ptam_globals.post_types_hierarchical) {
     postTypeOptions.push({
       value: postTypeKey,
+      // eslint-disable-next-line no-undef
       label: ptam_globals.post_types_hierarchical[postTypeKey]
     });
   }
@@ -18139,6 +18200,39 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }, {
     value: 'children',
     label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
+  }]; // Order Params.
+
+  var orderOptions = [{
+    value: 'ASC',
+    label: __('ASC', 'post-type-archive-mapping')
+  }, {
+    value: 'DESC',
+    label: __('DESC', 'post-type-archive-mapping')
+  }];
+  var orderByOptions = [{
+    value: 'ID',
+    label: __('ID', 'post-type-archive-mapping')
+  }, {
+    value: 'menu_order',
+    label: __('Menu Order', 'post-type-archive-mapping')
+  }, {
+    value: 'author',
+    label: __('Post Author', 'post-type-archive-mapping')
+  }, {
+    value: 'date',
+    label: __('Date', 'post-type-archive-mapping')
+  }, {
+    value: 'modified',
+    label: __('Date Modified', 'post-type-archive-mapping')
+  }, {
+    value: 'name',
+    label: __('Post Slug', 'post-type-archive-mapping')
+  }, {
+    value: 'title',
+    label: __('Title', 'post-type-archive-mapping')
+  }, {
+    value: 'rand',
+    label: __('Random', 'post-type-archive-mapping')
   }];
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
@@ -18171,6 +18265,35 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     },
     loadingText: __('Retrieving items…', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order', 'post-type-archive-mapping'),
+    options: orderOptions,
+    value: order,
+    onChange: function onChange(value) {
+      setAttributes({
+        order: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order By', 'post-type-archive-mapping'),
+    options: orderByOptions,
+    value: orderBy,
+    onChange: function onChange(value) {
+      setAttributes({
+        orderBy: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Number of Items', 'post-type-archive-mapping'),
+    value: postsPerPage,
+    onChange: function onChange(value) {
+      setAttributes({
+        postsPerPage: value
+      });
+      itemNumberRender(value);
+    },
+    min: 1,
+    max: 100
   }))); // Toolbar option group.
 
   var viewOptions = [[{

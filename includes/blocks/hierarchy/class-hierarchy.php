@@ -373,26 +373,38 @@ class Hierarchy {
 			'ptam/hierarchy',
 			array(
 				'attributes'      => array(
-					'uniqueId' => array(
-						'type' => 'string',
+					'uniqueId'   => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'view' => array(
-						'type' => 'string',
+					'view'       => array(
+						'type'    => 'string',
 						'default' => 'list',
 					),
-					'postType' => array(
-						'type' => 'string',
+					'postType'   => array(
+						'type'    => 'string',
 						'default' => 'page',
 					),
-					'hierarchy' => array(
-						'type' => 'string',
+					'hierarchy'  => array(
+						'type'    => 'string',
 						'default' => 'parents', // parents or children.
 					),
 					'parentItem' => array(
-						'type' => 'integer',
+						'type'    => 'integer',
 						'default' => 0,
-					)
+					),
+					'order'      => array(
+						'type'    => 'string',
+						'default' => 'ASC',
+					),
+					'orderBy'    => array(
+						'type'    => 'string',
+						'default' => 'title',
+					),
+					'postsPerPage' => array(
+						'type' => 'integer',
+						'default' => 20,
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
