@@ -73,8 +73,6 @@ const PTAMHierarchy = ( props ) => {
 	const [ posts, setPosts ] = useState( {} );
 
 	useEffect(() => {
-		setLoading( true );
-
 		// Get unique ID for the block. Props @generateblocks.
 		const id = props.clientId.substr( 2, 9 ).replace( '-', '' );
 		if ( ! attributes.uniqueId ) {
@@ -83,6 +81,11 @@ const PTAMHierarchy = ( props ) => {
 			} );
 		}
 	}, [] );
+
+	// Retrieve the latest posts.
+	useEffect(() => {
+		getPosts( {} );
+	}, [ postType, hierarchy, parentItem, order, orderBy ] );
 
 	/**
 	 *
@@ -136,9 +139,7 @@ const PTAMHierarchy = ( props ) => {
 	};
 
 	const getPosts = async( object = {} ) => {
-
 		setLoading(true);
-
 		try {
 			const result = await axios.post(
 				// eslint-disable-next-line no-undef

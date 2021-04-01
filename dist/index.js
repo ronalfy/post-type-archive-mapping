@@ -18160,8 +18160,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       setPosts = _useState8[1];
 
   useEffect(function () {
-    setLoading(true); // Get unique ID for the block. Props @generateblocks.
-
+    // Get unique ID for the block. Props @generateblocks.
     var id = props.clientId.substr(2, 9).replace('-', '');
 
     if (!attributes.uniqueId) {
@@ -18169,7 +18168,11 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         uniqueId: id
       });
     }
-  }, []);
+  }, []); // Retrieve the latest posts.
+
+  useEffect(function () {
+    getPosts({});
+  }, [postType, hierarchy, parentItem, order, orderBy]);
   /**
    *
    * @return {JSX} Current selected view.
