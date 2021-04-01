@@ -18056,6 +18056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./grid-icon */ "./src/block/hierarchy/grid-icon.js");
 /* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/full-icon.js");
 /* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -18196,6 +18198,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         return /*#__PURE__*/React.createElement(_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null);
     }
   };
+  /**
+   * Set a timer for number of items and expire after one second of inactivity.
+   *
+   * @param {number} value Number of items to display.
+   */
+
 
   var itemNumberRender = function itemNumberRender(value) {
     if (itemNumberTimer) {
@@ -18207,6 +18215,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     }, 1000));
   };
   /**
+   * Output JSX for WPML languages.
    *
    * @param {string} selectedLanguage The language selected.
    * @return {JSX} Select box with languages.
@@ -18229,6 +18238,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
 
     return /*#__PURE__*/React.createElement(React.Fragment, null);
   };
+  /**
+   * Retrieve the items via REST API.
+   *
+   * @param {Object} object Object with vars to override.
+   */
+
 
   var getPosts = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -18251,7 +18266,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
                 posts_per_page: postsPerPage,
                 image_size: 'medium',
                 language: wpmlLanguage,
-                post_parent: parentItem
+                post_parent: parentItem,
+                hierarchy: hierarchy
               }, config);
 
             case 5:
@@ -18276,7 +18292,30 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     return function getPosts() {
       return _ref.apply(this, arguments);
     };
-  }(); // Hierarchical Post Types.
+  }();
+
+  var getPostHtml = function getPostHtml() {
+    if (Object.keys(posts).length === 0) {
+      return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
+    }
+
+    return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
+  };
+
+  var outputListHtml = function outputListHtml() {
+    return Object.keys(posts).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i,
+        className: "ptam-hierarchical-post-item"
+      }, /*#__PURE__*/React.createElement("a", {
+        className: "ptam-hierarchical-post-item-link",
+        href: posts[i].link,
+        onClick: function onClick(e) {
+          e.preventDefault();
+        }
+      }, posts[i].post_title));
+    });
+  }; // Hierarchical Post Types.
 
 
   var postTypeOptions = []; // eslint-disable-next-line no-undef
@@ -18425,6 +18464,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
     controls: viewOptions
   }));
+  /**
+   * Wrapper class for styling.
+   */
+
+  var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_0___default()(_defineProperty({
+    'ptam-hierarchy-wrapper': true
+  }, "ptam-hierarchy-wrapper-".concat(uniqueId), true));
 
   if (loading) {
     return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
@@ -18475,7 +18521,9 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     })))));
   }
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement("h2", null, view));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement("div", {
+    className: wrapperClass
+  }, getPostHtml()));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PTAMHierarchy);

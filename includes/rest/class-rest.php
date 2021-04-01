@@ -693,8 +693,13 @@ class Rest {
 		$image_size     = $post_data['image_size'];
 		$post_parent    = $post_data['post_parent'];
 		$language       = $post_data['language'];
+		$hierarchy      = $post_data['hierarchy'];
 		// $default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
 
+		// Set post parent to zero if hierarchy is parents only.
+		if ( 'parents' === $hierarchy ) {
+			$post_parent = 0;
+		}
 
 		$post_args = array(
 			'post_type'      => $post_type,

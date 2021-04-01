@@ -39,7 +39,6 @@ const {
 } = wp.blockEditor;
 
 const PTAMHierarchy = ( props ) => {
-
 	// Shortcuts.
 	const { attributes, setAttributes } = props;
 
@@ -73,7 +72,7 @@ const PTAMHierarchy = ( props ) => {
 	const [ numItems, setNumItems ] = useState( postsPerPage );
 	const [ posts, setPosts ] = useState( {} );
 
-	useEffect(() => {
+	useEffect( () => {
 		// Get unique ID for the block. Props @generateblocks.
 		const id = props.clientId.substr( 2, 9 ).replace( '-', '' );
 		if ( ! attributes.uniqueId ) {
@@ -84,7 +83,7 @@ const PTAMHierarchy = ( props ) => {
 	}, [] );
 
 	// Retrieve the latest posts.
-	useEffect(() => {
+	useEffect( () => {
 		getPosts( {} );
 	}, [ postType, hierarchy, parentItem, order, orderBy, numItems ] );
 
@@ -104,6 +103,11 @@ const PTAMHierarchy = ( props ) => {
 		}
 	};
 
+	/**
+	 * Set a timer for number of items and expire after one second of inactivity.
+	 *
+	 * @param {number} value Number of items to display.
+	 */
 	const itemNumberRender = ( value ) => {
 		if ( itemNumberTimer ) {
 			clearTimeout( itemNumberTimer );
@@ -116,13 +120,14 @@ const PTAMHierarchy = ( props ) => {
 	};
 
 	/**
+	 * Output JSX for WPML languages.
 	 *
 	 * @param {string} selectedLanguage The language selected.
 	 * @return {JSX} Select box with languages.
 	 */
 	const getLanguages = ( selectedLanguage ) => {
 		if ( wpmlInstalled ) {
-			return(
+			return (
 				<SelectControl
 					label={ __( 'Language', 'post-type-archive-mapping' ) }
 					options={ wpmlLanguages }
@@ -133,14 +138,16 @@ const PTAMHierarchy = ( props ) => {
 				/>
 			);
 		}
-		return (
-			<>
-			</>
-		);
+		return <></>;
 	};
 
+	/**
+	 * Retrieve the items via REST API.
+	 *
+	 * @param {Object} object Object with vars to override.
+	 */
 	const getPosts = async( object = {} ) => {
-		setLoading(true);
+		setLoading( true );
 		try {
 			const result = await axios.post(
 				// eslint-disable-next-line no-undef
@@ -153,6 +160,7 @@ const PTAMHierarchy = ( props ) => {
 					image_size: 'medium',
 					language: wpmlLanguage,
 					post_parent: parentItem,
+					hierarchy,
 				},
 				config
 			);
@@ -161,6 +169,31 @@ const PTAMHierarchy = ( props ) => {
 		} catch ( e ) {
 			// Error :(
 		}
+	};
+
+	const getPostHtml = () => {
+		if ( Object.keys( posts ).length === 0 ) {
+			return (
+				<h2>{ __( 'No items could be found.', 'post-type-archive-mapping' ) }</h2>
+			);
+		}
+		return <ul>{ outputListHtml() }</ul>;
+	};
+
+	const outputListHtml = () => {
+		return Object.keys( posts ).map( ( item, i ) => (
+			<li key={ i } className="ptam-hierarchical-post-item">
+				<a
+					className="ptam-hierarchical-post-item-link"
+					href={ posts[ i ].link }
+					onClick={ ( e ) => {
+						e.preventDefault();
+					} }
+				>
+					{ posts[ i ].post_title }
+				</a>
+			</li>
+		) );
 	};
 
 	// Hierarchical Post Types.
@@ -266,7 +299,7 @@ const PTAMHierarchy = ( props ) => {
 						setAttributes( { order: value } );
 					} }
 				/>
-				{getLanguages()}
+				{ getLanguages() }
 				<SelectControl
 					label={ __( 'Order By', 'post-type-archive-mapping' ) }
 					options={ orderByOptions }
@@ -331,6 +364,14 @@ const PTAMHierarchy = ( props ) => {
 		</BlockControls>
 	);
 
+	/**
+	 * Wrapper class for styling.
+	 */
+	const wrapperClass = classnames( {
+		'ptam-hierarchy-wrapper': true,
+		[ `ptam-hierarchy-wrapper-${ uniqueId }` ]: true,
+	} );
+
 	if ( loading ) {
 		return (
 			<Fragment>
@@ -384,7 +425,7 @@ const PTAMHierarchy = ( props ) => {
 		<>
 			{ inspectorControls }
 			{ toolbar }
-			<h2>{ view }</h2>
+			<div className={ wrapperClass }>{ getPostHtml() }</div>
 		</>
 	);
 };
