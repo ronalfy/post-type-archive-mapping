@@ -175,7 +175,14 @@ const PTAMHierarchy = ( props ) => {
 				<h2>{ __( 'No items could be found.', 'post-type-archive-mapping' ) }</h2>
 			);
 		}
-		return <ul>{ outputListHtml() }</ul>;
+		if ( 'ul' === listStyle ) {
+			return <ul>{ outputListHtml() }</ul>;
+		} else if ( 'ol' === listStyle ) {
+			return <ol>{ outputListHtml() }</ol>;
+		} else {
+			return <div>test</div>;
+		}
+
 	};
 
 	const outputListHtml = () => {

@@ -18293,7 +18293,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
     }
 
-    return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
+    if ('ul' === listStyle) {
+      return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
+    } else if ('ol' === listStyle) {
+      return /*#__PURE__*/React.createElement("ol", null, outputListHtml());
+    } else {
+      return /*#__PURE__*/React.createElement("div", null, "test");
+    }
   };
 
   var outputListHtml = function outputListHtml() {
