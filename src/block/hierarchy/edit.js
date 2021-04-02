@@ -6,17 +6,16 @@ import axios from 'axios';
 import { SearchListControl } from '@woocommerce/components/build/search-list-control';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
-import ListIcon from './list-icon';
-import GridIcon from './grid-icon';
-import FullIcon from './full-icon';
+import ListIcon from './icons/list-icon';
+import GridIcon from './icons/grid-icon';
+import FullIcon from './icons/full-icon';
+import ColumnsIcon from './icons/columns-icon';
 import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
-const { Component, Fragment, useState, useEffect } = wp.element;
+const { Fragment, useState, useEffect } = wp.element;
 
 const { __, _n, _x } = wp.i18n;
-
-const { decodeEntities } = wp.htmlEntities;
 
 const {
 	PanelBody,
@@ -63,6 +62,7 @@ const PTAMHierarchy = ( props ) => {
 
 	const [ loading, setLoading ] = useState( true );
 	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );
+	// eslint-disable-next-line no-unused-vars
 	const [ config, setConfig ] = useState( {
 		headers: {
 			// eslint-disable-next-line no-undef
@@ -97,6 +97,8 @@ const PTAMHierarchy = ( props ) => {
 				return <GridIcon />;
 			case 'full':
 				return <FullIcon />;
+			case 'columns':
+				return <ColumnsIcon />;
 			case 'list':
 			default:
 				return <ListIcon />;
@@ -143,10 +145,8 @@ const PTAMHierarchy = ( props ) => {
 
 	/**
 	 * Retrieve the items via REST API.
-	 *
-	 * @param {Object} object Object with vars to override.
 	 */
-	const getPosts = async( object = {} ) => {
+	const getPosts = async() => {
 		setLoading( true );
 		try {
 			const result = await axios.post(
@@ -338,6 +338,14 @@ const PTAMHierarchy = ( props ) => {
 				title: __( 'View as a Grid', 'post-type-archive-mapping' ),
 				isActive: 'grid' === view,
 				onClick: () => setAttributes( { view: 'grid' } ),
+			},
+		],
+		[
+			{
+				icon: <ColumnsIcon />,
+				title: __( 'View as Columns', 'post-type-archive-mapping' ),
+				isActive: 'columns' === view,
+				onClick: () => setAttributes( { view: 'columns' } ),
 			},
 		],
 		[
