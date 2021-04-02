@@ -18052,11 +18052,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
 /* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
 /* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _icons_list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icons/list-icon */ "./src/block/hierarchy/icons/list-icon.js");
-/* harmony import */ var _icons_grid_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icons/grid-icon */ "./src/block/hierarchy/icons/grid-icon.js");
-/* harmony import */ var _icons_full_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icons/full-icon */ "./src/block/hierarchy/icons/full-icon.js");
-/* harmony import */ var _icons_columns_icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons/columns-icon */ "./src/block/hierarchy/icons/columns-icon.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -18078,9 +18075,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
-
-
-
 
 
 
@@ -18129,7 +18123,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       order = attributes.order,
       orderBy = attributes.orderBy,
       postsPerPage = attributes.postsPerPage,
-      wpmlLanguage = attributes.wpmlLanguage; // Retrieve WPML languages.
+      wpmlLanguage = attributes.wpmlLanguage,
+      listStyle = attributes.listStyle; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18189,17 +18184,17 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
-        return /*#__PURE__*/React.createElement(_icons_grid_icon__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["GridIcon"], null);
 
       case 'full':
-        return /*#__PURE__*/React.createElement(_icons_full_icon__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FullIcon"], null);
 
       case 'columns':
-        return /*#__PURE__*/React.createElement(_icons_columns_icon__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ColumnsIcon"], null);
 
       case 'list':
       default:
-        return /*#__PURE__*/React.createElement(_icons_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ListIcon"], null);
     }
   };
   /**
@@ -18388,7 +18383,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18427,10 +18422,10 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     },
     min: 1,
     max: 100
-  }))); // Toolbar option group.
+  }))); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ListIcon"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
     isActive: 'list' === view,
     onClick: function onClick() {
@@ -18439,7 +18434,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons_grid_icon__WEBPACK_IMPORTED_MODULE_6__["default"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["GridIcon"], null),
     title: __('View as a Grid', 'post-type-archive-mapping'),
     isActive: 'grid' === view,
     onClick: function onClick() {
@@ -18448,7 +18443,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons_columns_icon__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ColumnsIcon"], null),
     title: __('View as Columns', 'post-type-archive-mapping'),
     isActive: 'columns' === view,
     onClick: function onClick() {
@@ -18457,7 +18452,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons_full_icon__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FullIcon"], null),
     title: __('View as Full Content', 'post-type-archive-mapping'),
     isActive: 'full' === view,
     onClick: function onClick() {
@@ -18465,13 +18460,46 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         view: 'full'
       });
     }
+  }]]; // Toolbar option group for the main layout settings.
+
+  var listStyleOptions = [[{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["UnorderedListIcon"], null),
+    title: __('Unordered List', 'post-type-archive-mapping'),
+    isActive: 'ul' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'ul'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["OrderedListIcon"], null),
+    title: __('Numbered List', 'post-type-archive-mapping'),
+    isActive: 'ol' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'ol'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FormatTextLeftIcon"], null),
+    title: __('No List', 'post-type-archive-mapping'),
+    isActive: 'none' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'none'
+      });
+    }
   }]];
-  var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+  var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
     isCollapsed: true,
     icon: selectedView(),
     label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
     controls: viewOptions
-  }));
+  })), 'list' === view && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+    isCollapsed: false,
+    label: __('Change the list appearance.', 'post-type-archive-mapping'),
+    controls: listStyleOptions
+  })));
   /**
    * Wrapper class for styling.
    */
@@ -18565,6 +18593,33 @@ var ColumnsIcon = function ColumnsIcon() {
 
 /***/ }),
 
+/***/ "./src/block/hierarchy/icons/format-text-left-icon.js":
+/*!************************************************************!*\
+  !*** ./src/block/hierarchy/icons/format-text-left-icon.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FormatTextLeftIcon = function FormatTextLeftIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormatTextLeftIcon);
+
+/***/ }),
+
 /***/ "./src/block/hierarchy/icons/full-icon.js":
 /*!************************************************!*\
   !*** ./src/block/hierarchy/icons/full-icon.js ***!
@@ -18621,6 +18676,49 @@ var GridIcon = function GridIcon() {
 
 /***/ }),
 
+/***/ "./src/block/hierarchy/icons/index.js":
+/*!********************************************!*\
+  !*** ./src/block/hierarchy/icons/index.js ***!
+  \********************************************/
+/*! exports provided: ColumnsIcon, FullIcon, GridIcon, ListIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _columns_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns-icon */ "./src/block/hierarchy/icons/columns-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColumnsIcon", function() { return _columns_icon__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/icons/full-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FullIcon", function() { return _full_icon__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./grid-icon */ "./src/block/hierarchy/icons/grid-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GridIcon", function() { return _grid_icon__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _list_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list-icon */ "./src/block/hierarchy/icons/list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIcon", function() { return _list_icon__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./format-text-left-icon */ "./src/block/hierarchy/icons/format-text-left-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormatTextLeftIcon", function() { return _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ordered-list-icon */ "./src/block/hierarchy/icons/ordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListIcon", function() { return _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unordered-list-icon */ "./src/block/hierarchy/icons/unordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UnorderedListIcon", function() { return _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/**
+ * Icons from Material UI Icons: https://fonts.google.com/icons?selected=Material+Icons
+ */
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ "./src/block/hierarchy/icons/list-icon.js":
 /*!************************************************!*\
   !*** ./src/block/hierarchy/icons/list-icon.js ***!
@@ -18645,6 +18743,60 @@ var ListIcon = function ListIcon() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ListIcon);
+
+/***/ }),
+
+/***/ "./src/block/hierarchy/icons/ordered-list-icon.js":
+/*!********************************************************!*\
+  !*** ./src/block/hierarchy/icons/ordered-list-icon.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var OrderedListIcon = function OrderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (OrderedListIcon);
+
+/***/ }),
+
+/***/ "./src/block/hierarchy/icons/unordered-list-icon.js":
+/*!**********************************************************!*\
+  !*** ./src/block/hierarchy/icons/unordered-list-icon.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var UnorderedListIcon = function UnorderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UnorderedListIcon);
 
 /***/ }),
 

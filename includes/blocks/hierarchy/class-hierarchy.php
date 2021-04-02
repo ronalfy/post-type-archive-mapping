@@ -409,6 +409,10 @@ class Hierarchy {
 						'type'    => 'string',
 						'default' => 'en',
 					),
+					'listStyle' => array(
+						'type' => 'string',
+						'default' => 'ul', /* ul, ol, none */
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

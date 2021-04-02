@@ -6,10 +6,7 @@ import axios from 'axios';
 import { SearchListControl } from '@woocommerce/components/build/search-list-control';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
-import ListIcon from './icons/list-icon';
-import GridIcon from './icons/grid-icon';
-import FullIcon from './icons/full-icon';
-import ColumnsIcon from './icons/columns-icon';
+import { ListIcon, GridIcon, FullIcon, ColumnsIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon } from './icons';
 import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
@@ -52,6 +49,7 @@ const PTAMHierarchy = ( props ) => {
 		orderBy,
 		postsPerPage,
 		wpmlLanguage,
+		listStyle,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -322,7 +320,7 @@ const PTAMHierarchy = ( props ) => {
 		</InspectorControls>
 	);
 
-	// Toolbar option group.
+	// Toolbar option group for the main layout settings.
 	const viewOptions = [
 		[
 			{
@@ -358,17 +356,60 @@ const PTAMHierarchy = ( props ) => {
 		],
 	];
 
+	// Toolbar option group for the main layout settings.
+	const listStyleOptions = [
+		[
+			{
+				icon: <UnorderedListIcon />,
+				title: __( 'Unordered List', 'post-type-archive-mapping' ),
+				isActive: 'ul' === listStyle,
+				onClick: () => setAttributes( { listStyle: 'ul' } ),
+			},
+		],
+		[
+			{
+				icon: <OrderedListIcon />,
+				title: __( 'Numbered List', 'post-type-archive-mapping' ),
+				isActive: 'ol' === listStyle,
+				onClick: () => setAttributes( { listStyle: 'ol' } ),
+			},
+		],
+		[
+			{
+				icon: <FormatTextLeftIcon />,
+				title: __( 'No List', 'post-type-archive-mapping' ),
+				isActive: 'none' === listStyle,
+				onClick: () => setAttributes( { listStyle: 'none' } ),
+			},
+		],
+	];
+
 	const toolbar = (
 		<BlockControls>
-			<ToolbarGroup
-				isCollapsed={ true }
-				icon={ selectedView() }
-				label={ __(
-					'Change the layout of the hierarchy.',
-					'post-type-archive-mapping'
-				) }
-				controls={ viewOptions }
-			/>
+			<>
+				<ToolbarGroup
+					isCollapsed={ true }
+					icon={ selectedView() }
+					label={ __(
+						'Change the layout of the hierarchy.',
+						'post-type-archive-mapping'
+					) }
+					controls={ viewOptions }
+				/>
+			</>
+			{
+				'list' === view &&
+				<>
+					<ToolbarGroup
+						isCollapsed={ false }
+						label={ __(
+							'Change the list appearance.',
+							'post-type-archive-mapping'
+						) }
+						controls={ listStyleOptions }
+					/>
+				</>
+			}
 		</BlockControls>
 	);
 
