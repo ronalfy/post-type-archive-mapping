@@ -20167,9 +20167,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  // Import CSS
 
 
-var _wp$element = wp.element,
-    useState = _wp$element.useState,
-    useEffect = _wp$element.useEffect;
+var useState = wp.element.useState;
 var __ = wp.i18n.__;
 var _wp$components = wp.components,
     Tooltip = _wp$components.Tooltip,
@@ -20197,9 +20195,28 @@ var PTAMColorPicker = function PTAMColorPicker(props) {
       label = props.label,
       _props$alpha = props.alpha,
       alpha = _props$alpha === void 0 ? false : _props$alpha,
-      valueOpacity = props.valueOpacity,
-      _props$isGradient = props.isGradient,
-      isGradient = _props$isGradient === void 0 ? false : _props$isGradient;
+      valueOpacity = props.valueOpacity;
+  var opacityIcon = /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "tint",
+    className: "svg-inline--fa fa-tint fa-w-11",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 352 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M205.22 22.09c-7.94-28.78-49.44-30.12-58.44 0C100 179.85 0 222.72 0 333.91 0 432.35 78.72 512 176 512s176-79.65 176-178.09c0-111.75-99.79-153.34-146.78-311.82zM176 448A112.14 112.14 0 0 1 64 336a16 16 0 0 1 32 0 80.09 80.09 0 0 0 80 80 16 16 0 0 1 0 32z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M176 448A112.14 112.14 0 0 1 64 336a16 16 0 0 1 32 0 80.09 80.09 0 0 0 80 80 16 16 0 0 1 0 32z"
+  })));
   /**
    * Toggle whether the color popup is showing.
    */
@@ -20271,7 +20288,7 @@ var PTAMColorPicker = function PTAMColorPicker(props) {
     className: "ptam-component-color-opacity"
   }, /*#__PURE__*/React.createElement(Tooltip, {
     text: __('Opacity', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement("h2", null, "Opacity")), /*#__PURE__*/React.createElement(RangeControl, {
+  }, opacityIcon), /*#__PURE__*/React.createElement(RangeControl, {
     value: valueOpacity ? valueOpacity : 0,
     onChange: function onChange(opacityValue) {
       return onOpacityChange(opacityValue);

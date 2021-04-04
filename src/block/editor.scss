@@ -3,38 +3,127 @@
  */
 
 .ptam-block-post-grid {
-  h2 a {
-      text-decoration: none;
-  }
-  h2.ptam-block-post-grid-title {
-    @media only screen and (min-width: 600px) {
-      font-size: 34px;
-    }
-  }
-  h3.ptam-block-post-grid-title {
-    @media only screen and (min-width: 600px) {
-      font-size: 34px;
-    }
-  }
-  h4.ptam-block-post-grid-title {
-    @media only screen and (min-width: 600px) {
-      font-size: 28px;
-    }
-  }
-  h5.ptam-block-post-grid-title {
-    @media only screen and (min-width: 600px) {
-      font-size: 22px;
-    }
-  }
-  h6.ptam-block-post-grid-title {
-    @media only screen and (min-width: 600px) {
-      font-size: 18px;
-    }
-  }
+	h2 a {
+		text-decoration: none;
+	}
+	h2.ptam-block-post-grid-title {
+		@media only screen and (min-width: 600px) {
+			font-size: 34px;
+		}
+	}
+	h3.ptam-block-post-grid-title {
+		@media only screen and (min-width: 600px) {
+			font-size: 34px;
+		}
+	}
+	h4.ptam-block-post-grid-title {
+		@media only screen and (min-width: 600px) {
+			font-size: 28px;
+		}
+	}
+	h5.ptam-block-post-grid-title {
+		@media only screen and (min-width: 600px) {
+			font-size: 22px;
+		}
+	}
+	h6.ptam-block-post-grid-title {
+		@media only screen and (min-width: 600px) {
+			font-size: 18px;
+		}
+	}
 }
 button.ptam-media-alt-upload.components-button {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 button.ptam-media-alt-reset.components-button {
-  margin: 20px 0;
+	margin: 20px 0;
+}
+
+/* Color Component (forked from @GenerateBlocks) */
+.ptam-component-color-picker-wrapper {
+	> .components-base-control__field {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.components-color-palette__item-wrapper {
+			margin: 0;
+		}
+	}
+}
+
+.ptam-component-color-picker {
+	& > .components-base-control:first-child {
+		margin-bottom: 0;
+	}
+
+	.components-color-picker__inputs-wrapper {
+		min-width: auto;
+	}
+
+	.ptam-component-color-picker-palette {
+		padding: 16px;
+		margin-top: 10px;
+
+		.components-circular-option-picker {
+			display: flex;
+			flex-wrap: wrap;
+
+			.components-circular-option-picker__option-wrapper {
+				margin: 0 8px 8px 0;
+			}
+		}
+	}
+
+	.components-base-control__field,
+	.components-color-palette {
+		margin: 0;
+	}
+
+	.components-color-picker {
+		padding: 5px;
+	}
+
+	.components-color-picker__inputs-toggle {
+		display: none;
+	}
+
+	.components-color-picker__body {
+		padding-bottom: 0;
+	}
+
+	.components-popover__content {
+		padding: 10px;
+		width: 300px;
+	}
+
+	.components-color-picker__inputs-fields {
+		margin-right: 0;
+	}
+
+	.components-color-clear-color {
+		margin: 0 16px;
+	}
+}
+
+.ptam-component-color-opacity {
+	display: flex;
+	padding: 0 16px;
+	margin: 10px 0;
+
+	svg {
+		width: 28px;
+		height: 28px;
+	}
+
+	.components-range-control {
+		flex-grow: 1;
+		padding-left: 5px;
+	}
+}
+
+.ptam-color-picker-area {
+	width: 28px;
+	height: 28px;
 }
