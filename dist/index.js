@@ -20241,11 +20241,11 @@ var DimensionsControl = function DimensionsControl(props) {
 
 
     if (allowNegatives) {
-      return number;
+      return "".concat(number);
     } // Return absolute value of number.
 
 
-    return Math.abs(number);
+    return "".concat(Math.abs(number), " ");
   };
   /**
    * Event for when the top value has been changed.
@@ -20377,15 +20377,15 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Top', 'post-type-archive-mapping'), label),
-    value: attributes[attrTop] ? attributes[attrTop] : 0,
+    value: attributes[attrTop] ? attributes[attrTop] : '',
     min: allowNegatives ? undefined : 0,
     onBlur: function onBlur() {
       if ('' === attributes[attrTop]) {
         // If we have no value and a default exists, set to 0 to prevent default from coming back.
         if (props.attributes[props.attrSyncUnits]) {
-          changeAllValues(0);
+          changeAllValues('');
         } else {
-          changeTopValue(0);
+          changeTopValue('');
         }
       }
     },
@@ -20401,15 +20401,15 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Right', 'post-type-archive-mapping'), label),
-    value: attributes[attrRight] ? attributes[attrRight] : 0,
+    value: attributes[attrRight] ? attributes[attrRight] : '',
     min: allowNegatives ? undefined : 0,
     onBlur: function onBlur() {
       if ('' === attributes[attrTop]) {
         // If we have no value and a default exists, set to 0 to prevent default from coming back.
         if (props.attributes[props.attrSyncUnits]) {
-          changeAllValues(0);
+          changeAllValues('');
         } else {
-          changeRightValue(0);
+          changeRightValue('');
         }
       }
     },
@@ -20425,15 +20425,15 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Bottom', 'post-type-archive-mapping'), label),
-    value: attributes[attrBottom] ? attributes[attrBottom] : 0,
+    value: attributes[attrBottom] ? attributes[attrBottom] : '',
     min: allowNegatives ? undefined : 0,
     onBlur: function onBlur() {
       if ('' === attributes[attrTop]) {
         // If we have no value and a default exists, set to 0 to prevent default from coming back.
         if (props.attributes[props.attrSyncUnits]) {
-          changeAllValues(0);
+          changeAllValues('');
         } else {
-          changeBottomValue(0);
+          changeBottomValue('');
         }
       }
     },
@@ -20449,15 +20449,15 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Left', 'post-type-archive-mapping'), label),
-    value: attributes[attrLeft] ? attributes[attrLeft] : 0,
+    value: attributes[attrLeft] ? attributes[attrLeft] : '',
     min: allowNegatives ? undefined : 0,
     onBlur: function onBlur() {
       if ('' === attributes[attrTop]) {
         // If we have no value and a default exists, set to 0 to prevent default from coming back.
         if (props.attributes[props.attrSyncUnits]) {
-          changeAllValues(0);
+          changeAllValues('');
         } else {
-          changeLeftValue(0);
+          changeLeftValue('');
         }
       }
     },
