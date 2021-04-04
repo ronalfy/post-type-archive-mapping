@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import axios from 'axios';
 import { SearchListControl } from '@woocommerce/components/build/search-list-control';
 import DimensionsControl from '../../components/dimensions';
+import PTAMColorPicker from '../../components/color-picker';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import { ListIcon, GridIcon, FullIcon, ColumnsIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon } from './icons';
@@ -285,6 +286,15 @@ const PTAMHierarchy = ( props ) => {
 						'rem',
 					]
 				}
+			/>
+			<PTAMColorPicker
+				value="#FFFFFF"
+				valueOpacity={1}
+				onChange={ (value) => { console.log( value ); } }
+				onOpacityChange={ (value) => { console.log( value ); } }
+				label="Hi there"
+				alpha={true}
+				isGradient={false}
 			/>
 		</PanelBody>
 	);
