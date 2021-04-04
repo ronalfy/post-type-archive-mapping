@@ -62,7 +62,7 @@ const PTAMGradientPicker = ( props ) => {
 									'post-type-archive-mapping'
 								) }
 								style={ {
-									'background-image': value ? value : 'none',
+									backgroundImage: value ? value : 'none',
 								} }
 							>
 								<span className="components-color-palette__custom-color-gradient" />
@@ -89,7 +89,7 @@ const PTAMGradientPicker = ( props ) => {
 									'post-type-archive-mapping'
 								) }
 								style={ {
-									'background-image': value ? value : 'none',
+									backgroundImage: value ? value : 'none',
 								} }
 							>
 								<span className="components-color-palette__custom-color-gradient" />

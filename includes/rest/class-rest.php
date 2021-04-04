@@ -694,7 +694,7 @@ class Rest {
 		$post_parent    = $post_data['post_parent'];
 		$language       = $post_data['language'];
 		$hierarchy      = $post_data['hierarchy'];
-		// $default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
+		$default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
 
 		// Set post parent to zero if hierarchy is parents only.
 		if ( 'parents' === $hierarchy ) {
@@ -724,9 +724,14 @@ class Rest {
 			while ( $query->have_posts() ) {
 				global $post;
 				$query->the_post();
-				$thumbnail = get_the_post_thumbnail( $post->ID, $image_size );
+				$thumbnail = get_the_post_thumbnail_url( $post->ID, $image_size );
 				if ( empty( $thumbnail ) ) {
-					$thumbnail = wp_get_attachment_image( $default_image, $image_size );
+					$maybe_image = wp_get_attachment_image_src( $default_image, $image_size );
+					if ( $maybe_image ) {
+						$thumbnail = $maybe_image[0];
+					} else {
+						$thumbnail = '';
+					}
 				}
 				$post->featured_image_src = $thumbnail;
 

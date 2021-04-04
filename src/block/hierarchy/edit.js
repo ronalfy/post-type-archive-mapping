@@ -9,7 +9,15 @@ import PTAMColorPicker from '../../components/color-picker';
 import PTAMGradientPicker from '../../components/gradient-picker';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
-import { ListIcon, GridIcon, FullIcon, ColumnsIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon } from './icons';
+import {
+	ListIcon,
+	GridIcon,
+	FullIcon,
+	ColumnsIcon,
+	FormatTextLeftIcon,
+	OrderedListIcon,
+	UnorderedListIcon,
+} from './icons';
 import HierarchicalItems from '../../components/hierarchical-items';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
@@ -59,6 +67,11 @@ const PTAMHierarchy = ( props ) => {
 		gridPaddingLeft,
 		gridPaddingUnit,
 		gridPaddingUnitsSync,
+		gridBackgroundType,
+		gridFallbackImg,
+		gridImageTypeSize,
+		gridBackgroundGradient,
+		gridBackgroundColor,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -78,6 +91,8 @@ const PTAMHierarchy = ( props ) => {
 	} );
 	const [ numItems, setNumItems ] = useState( postsPerPage );
 	const [ posts, setPosts ] = useState( {} );
+	// eslint-disable-next-line no-undef
+	const [ imageSizes, setImageSizes ] = useState( ptam_globals.image_sizes );
 
 	useEffect( () => {
 		// Get unique ID for the block. Props @generateblocks.
@@ -92,7 +107,7 @@ const PTAMHierarchy = ( props ) => {
 	// Retrieve the latest posts.
 	useEffect( () => {
 		getPosts( {} );
-	}, [ postType, hierarchy, parentItem, order, orderBy, numItems ] );
+	}, [ postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize ] );
 
 	/**
 	 *
@@ -168,6 +183,7 @@ const PTAMHierarchy = ( props ) => {
 					language: wpmlLanguage,
 					post_parent: parentItem,
 					hierarchy,
+					default_image: gridFallbackImg,
 				},
 				config
 			);
@@ -178,21 +194,63 @@ const PTAMHierarchy = ( props ) => {
 		}
 	};
 
+	/**
+	 * Retrieve post HTML based on view.
+	 *
+	 * @return {JSX} List|Grid|Column HTML.
+	 */
 	const getPostHtml = () => {
 		if ( Object.keys( posts ).length === 0 ) {
 			return (
 				<h2>{ __( 'No items could be found.', 'post-type-archive-mapping' ) }</h2>
 			);
 		}
-		if ( 'ul' === listStyle ) {
-			return <ul>{ outputListHtml() }</ul>;
-		} else if ( 'ol' === listStyle ) {
-			return <ol>{ outputListHtml() }</ol>;
-		// eslint-disable-next-line no-else-return
+		switch ( view ) {
+			case 'list':
+				if ( 'ul' === listStyle ) {
+					return <ul>{ outputListHtml() }</ul>;
+				} else if ( 'ol' === listStyle ) {
+					return <ol>{ outputListHtml() }</ol>;
+					// eslint-disable-next-line no-else-return
+				} else {
+					return <div>test</div>;
+				}
+				// eslint-disable-next-line no-unreachable
+				break;
+			case 'grid':
+				return <>{ outputGridHtml() }</>;
+				// eslint-disable-next-line no-unreachable
+				break;
 		}
-		return <div>test</div>;
+		return <></>;
 	};
 
+	/**
+	 * Output Grid HTML.
+	 *
+	 * @return {JSX} Grid HTML.
+	 */
+	const outputGridHtml = () => {
+		return Object.keys( posts ).map( ( item, i ) => (
+			<article
+				key={ i }
+				className="ptam-hierarchical-grid-item"
+				style={ {
+					backgroundImage: `url(${ posts[ i ].featured_image_src })`,
+				} }
+			>
+				<div className="ptam-hierarchical-grid-item-content">
+					<h2>{ posts[ i ].post_title }</h2>
+				</div>
+			</article>
+		) );
+	};
+
+	/**
+	 * Return posts in a list format.
+	 *
+	 * @return {JSX} List view HTML.
+	 */
 	const outputListHtml = () => {
 		return Object.keys( posts ).map( ( item, i ) => (
 			<li key={ i } className="ptam-hierarchical-post-item">
@@ -265,44 +323,164 @@ const PTAMHierarchy = ( props ) => {
 		{ value: 'rand', label: __( 'Random', 'post-type-archive-mapping' ) },
 	];
 
+	// Image Sizes.
+	const imageSizeOptions = [];
+	for ( const imageKey in imageSizes ) {
+		imageSizeOptions.push( { value: imageKey, label: imageKey } );
+	}
+
+	// Background Options.
+	const gridBackgroundChoices = [
+		{
+			value: 'featured_image',
+			label: __( 'Featured Image', 'post-type-archive-mapping' ),
+		},
+		{
+			value: 'gradient',
+			label: __( 'Gradient', 'post-type-archive-mapping' ),
+		},
+		{
+			value: 'color',
+			label: __( 'Color', 'post-type-archive-mapping' ),
+		},
+	];
+
 	const gridOptions = (
-		<PanelBody
-			title={ __( 'Padding', 'post-type-archive-mapping' ) }
-			initialOpen={true }
-		>
-			<DimensionsControl
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-				allowNegatives={ false }
-				attrTop="gridPaddingTop"
-				attrRight="gridPaddingRight"
-				attrBottom="gridPaddingBottom"
-				attrLeft="gridPaddingLeft"
-				attrUnit="gridPaddingUnit"
-				attrSyncUnits="gridPaddingUnitsSync"
-				units={
-					[
-						'px',
-						'em',
-						'rem',
-					]
-				}
-			/>
-			<PTAMColorPicker
-				value="#FFFFFF"
-				valueOpacity={1}
-				onChange={ (value) => { console.log( value ); } }
-				onOpacityChange={ (value) => { console.log( value ); } }
-				label="Hi there"
-				alpha={true}
-				isGradient={false}
-			/>
-			<PTAMGradientPicker
-				onChange={ (value) => { console.log( value ); } }
-				label="test"
-				value="linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
-			/>
-		</PanelBody>
+		<Fragment>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Background', 'post-type-archive-mapping' ) }
+			>
+				<SelectControl
+					label={ __( 'Background Type', 'post-type-archive-mapping' ) }
+					options={ gridBackgroundChoices }
+					value={ gridBackgroundType }
+					onChange={ ( value ) => {
+						setAttributes( {
+							gridBackgroundType: value,
+						} );
+					} }
+				/>
+				{ 'gradient' === gridBackgroundType && (
+					<PTAMGradientPicker
+						onChange={ ( value ) => {
+							setAttributes( {
+								gridBackgroundGradient: value,
+							} );
+						} }
+						label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
+						value={ gridBackgroundGradient }
+					/>
+				) }
+				{ 'color' === gridBackgroundType && (
+					<PTAMColorPicker
+						value={ gridBackgroundColor }
+						valueOpacity={ 1 }
+						onChange={ ( value ) => {
+							setAttributes( { gridBackgroundColor: value } );
+						} }
+						// eslint-disable-next-line no-unused-vars
+						onOpacityChange={ ( value ) => {
+						} }
+						label={ __( 'Background Color', 'post-type-archive-mapping' ) }
+						alpha={ false }
+					/>
+				) }
+
+				{ 'featured_image' === gridBackgroundType && (
+					<Fragment>
+						<MediaUpload
+							onSelect={ ( imageObject ) => {
+								props.setAttributes( { gridFallbackImg: imageObject } );
+							} }
+							type="image"
+							value={ gridFallbackImg.url }
+							render={ ( { open } ) => (
+								<Fragment>
+									<button
+										className="ptam-media-alt-upload components-button is-button is-secondary"
+										onClick={ open }
+									>
+										{ __( 'Fallback Featured Image', 'post-type-archive-mapping' ) }
+									</button>
+									{ gridFallbackImg && (
+										<Fragment>
+											<div>
+												<img
+													src={ gridFallbackImg.url }
+													alt={ __(
+														'Featured Image',
+														'post-type-archive-mapping'
+													) }
+													width="250"
+													height="250"
+												/>
+											</div>
+											<div>
+												<button
+													className="ptam-media-alt-reset components-button is-button is-secondary"
+													// eslint-disable-next-line no-unused-vars
+													onClick={ ( event ) => {
+														setAttributes( { gridFallbackImg: '' } );
+													} }
+												>
+													{ __( 'Reset Image', 'post-type-archive-mapping' ) }
+												</button>
+											</div>
+										</Fragment>
+									) }
+								</Fragment>
+							) }
+						/>
+						<SelectControl
+							label={ __( 'Featured Image Size', 'post-type-archive-mapping' ) }
+							options={ imageSizeOptions }
+							value={ gridImageTypeSize }
+							onChange={ ( value ) => {
+								setAttributes( { gridImageTypeSize: value } );
+							} }
+						/>
+					</Fragment>
+				) }
+			</PanelBody>
+			<PanelBody
+				title={ __( 'Padding', 'post-type-archive-mapping' ) }
+				initialOpen={ true }
+			>
+				<DimensionsControl
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					allowNegatives={ false }
+					attrTop="gridPaddingTop"
+					attrRight="gridPaddingRight"
+					attrBottom="gridPaddingBottom"
+					attrLeft="gridPaddingLeft"
+					attrUnit="gridPaddingUnit"
+					attrSyncUnits="gridPaddingUnitsSync"
+					units={ [ 'px', 'em', 'rem' ] }
+				/>
+				<PTAMColorPicker
+					value="#FFFFFF"
+					valueOpacity={ 1 }
+					onChange={ ( value ) => {
+						console.log( value );
+					} }
+					onOpacityChange={ ( value ) => {
+						console.log( value );
+					} }
+					label="Hi there"
+					alpha={ true }
+					isGradient={ false }
+				/>
+				<PTAMGradientPicker
+					onChange={ ( value ) => {
+						console.log( value );
+					} }
+					label="test"
+					value="linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
+				/>
+			</PanelBody>
+		</Fragment>
 	);
 
 	const inspectorControls = (
@@ -372,11 +550,7 @@ const PTAMHierarchy = ( props ) => {
 					max={ 100 }
 				/>
 			</PanelBody>
-			{ 'grid' === view &&
-				<>
-					{ gridOptions }
-				</>
-			}
+			{ 'grid' === view && <>{ gridOptions }</> }
 		</InspectorControls>
 	);
 
@@ -457,8 +631,7 @@ const PTAMHierarchy = ( props ) => {
 					controls={ viewOptions }
 				/>
 			</>
-			{
-				'list' === view &&
+			{ 'list' === view && (
 				<>
 					<ToolbarGroup
 						isCollapsed={ false }
@@ -469,7 +642,7 @@ const PTAMHierarchy = ( props ) => {
 						controls={ listStyleOptions }
 					/>
 				</>
-			}
+			) }
 		</BlockControls>
 	);
 

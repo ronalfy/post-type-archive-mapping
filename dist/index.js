@@ -18136,7 +18136,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridPaddingBottom = attributes.gridPaddingBottom,
       gridPaddingLeft = attributes.gridPaddingLeft,
       gridPaddingUnit = attributes.gridPaddingUnit,
-      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync; // Retrieve WPML languages.
+      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync,
+      gridBackgroundType = attributes.gridBackgroundType,
+      gridFallbackImg = attributes.gridFallbackImg,
+      gridImageTypeSize = attributes.gridImageTypeSize,
+      gridBackgroundGradient = attributes.gridBackgroundGradient,
+      gridBackgroundColor = attributes.gridBackgroundColor; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18172,7 +18177,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var _useState9 = useState({}),
       _useState10 = _slicedToArray(_useState9, 2),
       posts = _useState10[0],
-      setPosts = _useState10[1];
+      setPosts = _useState10[1]; // eslint-disable-next-line no-undef
+
+
+  var _useState11 = useState(ptam_globals.image_sizes),
+      _useState12 = _slicedToArray(_useState11, 2),
+      imageSizes = _useState12[0],
+      setImageSizes = _useState12[1];
 
   useEffect(function () {
     // Get unique ID for the block. Props @generateblocks.
@@ -18187,7 +18198,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
 
   useEffect(function () {
     getPosts({});
-  }, [postType, hierarchy, parentItem, order, orderBy, numItems]);
+  }, [postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize]);
   /**
    *
    * @return {JSX} Current selected view.
@@ -18273,7 +18284,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
                 image_size: 'medium',
                 language: wpmlLanguage,
                 post_parent: parentItem,
-                hierarchy: hierarchy
+                hierarchy: hierarchy,
+                default_image: gridFallbackImg
               }, config);
 
             case 4:
@@ -18299,20 +18311,65 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       return _ref.apply(this, arguments);
     };
   }();
+  /**
+   * Retrieve post HTML based on view.
+   *
+   * @return {JSX} List|Grid|Column HTML.
+   */
+
 
   var getPostHtml = function getPostHtml() {
     if (Object.keys(posts).length === 0) {
       return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
     }
 
-    if ('ul' === listStyle) {
-      return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
-    } else if ('ol' === listStyle) {
-      return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
+    switch (view) {
+      case 'list':
+        if ('ul' === listStyle) {
+          return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
+        } else if ('ol' === listStyle) {
+          return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
+        } else {
+          return /*#__PURE__*/React.createElement("div", null, "test");
+        } // eslint-disable-next-line no-unreachable
+
+
+        break;
+
+      case 'grid':
+        return /*#__PURE__*/React.createElement(React.Fragment, null, outputGridHtml()); // eslint-disable-next-line no-unreachable
+
+        break;
     }
 
-    return /*#__PURE__*/React.createElement("div", null, "test");
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
   };
+  /**
+   * Output Grid HTML.
+   *
+   * @return {JSX} Grid HTML.
+   */
+
+
+  var outputGridHtml = function outputGridHtml() {
+    return Object.keys(posts).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("article", {
+        key: i,
+        className: "ptam-hierarchical-grid-item",
+        style: {
+          backgroundImage: "url(".concat(posts[i].featured_image_src, ")")
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-grid-item-content"
+      }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
+    });
+  };
+  /**
+   * Return posts in a list format.
+   *
+   * @return {JSX} List view HTML.
+   */
+
 
   var outputListHtml = function outputListHtml() {
     return Object.keys(posts).map(function (item, i) {
@@ -18379,8 +18436,98 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }, {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
+  }]; // Image Sizes.
+
+  var imageSizeOptions = [];
+
+  for (var imageKey in imageSizes) {
+    imageSizeOptions.push({
+      value: imageKey,
+      label: imageKey
+    });
+  } // Background Options.
+
+
+  var gridBackgroundChoices = [{
+    value: 'featured_image',
+    label: __('Featured Image', 'post-type-archive-mapping')
+  }, {
+    value: 'gradient',
+    label: __('Gradient', 'post-type-archive-mapping')
+  }, {
+    value: 'color',
+    label: __('Color', 'post-type-archive-mapping')
   }];
-  var gridOptions = /*#__PURE__*/React.createElement(PanelBody, {
+  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Background', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Background Type', 'post-type-archive-mapping'),
+    options: gridBackgroundChoices,
+    value: gridBackgroundType,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridBackgroundType: value
+      });
+    }
+  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onChange: function onChange(value) {
+      setAttributes({
+        gridBackgroundGradient: value
+      });
+    },
+    label: __('Background Gradient', 'post-type-archive-mapping'),
+    value: gridBackgroundGradient
+  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: gridBackgroundColor,
+    valueOpacity: 1,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridBackgroundColor: value
+      });
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onOpacityChange: function onOpacityChange(value) {},
+    label: __('Background Color', 'post-type-archive-mapping'),
+    alpha: false
+  }), 'featured_image' === gridBackgroundType && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(imageObject) {
+      props.setAttributes({
+        gridFallbackImg: imageObject
+      });
+    },
+    type: "image",
+    value: gridFallbackImg.url,
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-upload components-button is-button is-secondary",
+        onClick: open
+      }, __('Fallback Featured Image', 'post-type-archive-mapping')), gridFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: gridFallbackImg.url,
+        alt: __('Featured Image', 'post-type-archive-mapping'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
+        ,
+        onClick: function onClick(event) {
+          setAttributes({
+            gridFallbackImg: ''
+          });
+        }
+      }, __('Reset Image', 'post-type-archive-mapping')))));
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Featured Image Size', 'post-type-archive-mapping'),
+    options: imageSizeOptions,
+    value: gridImageTypeSize,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridImageTypeSize: value
+      });
+    }
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Padding', 'post-type-archive-mapping'),
     initialOpen: true
   }, /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -18412,7 +18559,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     },
     label: "test",
     value: "linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
-  }));
+  })));
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
@@ -20789,7 +20936,7 @@ var PTAMGradientPicker = function PTAMGradientPicker(props) {
     onClick: toggleVisible,
     "aria-label": __('Gradient Color Picker', 'post-type-archive-mapping'),
     style: {
-      'background-image': value ? value : 'none'
+      backgroundImage: value ? value : 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "components-color-palette__custom-color-gradient"
@@ -20804,7 +20951,7 @@ var PTAMGradientPicker = function PTAMGradientPicker(props) {
     onClick: toggleClose,
     "aria-label": __('Custom color picker', 'post-type-archive-mapping'),
     style: {
-      'background-image': value ? value : 'none'
+      backgroundImage: value ? value : 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "components-color-palette__custom-color-gradient"

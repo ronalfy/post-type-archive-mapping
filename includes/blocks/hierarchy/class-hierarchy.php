@@ -437,6 +437,26 @@ class Hierarchy {
 						'type' => 'boolean',
 						'default' => true,
 					),
+					'gridBackgroundType' => array(
+						'type' => 'string',
+						'default' => 'featured_image', /* featured_image, gradient, color */
+					),
+					'gridImageTypeSize' => array(
+						'type' => 'string',
+						'default' => 'large',
+					),
+					'gridBackgroundGradient' => array(
+						'type' => 'string',
+						'default' => '',
+					),
+					'gridBackgroundColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'gridFallbackImg'                        => array(
+						'type'    => 'object',
+						'default' => '',
+					),
 
 				),
 				'render_callback' => array( $this, 'output' ),
