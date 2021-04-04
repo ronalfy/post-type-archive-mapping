@@ -4,6 +4,7 @@
 import classnames from 'classnames';
 import axios from 'axios';
 import { SearchListControl } from '@woocommerce/components/build/search-list-control';
+import DimensionsControl from '../../components/dimensions';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import { ListIcon, GridIcon, FullIcon, ColumnsIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon } from './icons';
@@ -50,6 +51,12 @@ const PTAMHierarchy = ( props ) => {
 		postsPerPage,
 		wpmlLanguage,
 		listStyle,
+		gridPaddingTop,
+		gridPaddingRight,
+		gridPaddingBottom,
+		gridPaddingLeft,
+		gridPaddingUnit,
+		gridPaddingUnitsSync,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -179,10 +186,9 @@ const PTAMHierarchy = ( props ) => {
 			return <ul>{ outputListHtml() }</ul>;
 		} else if ( 'ol' === listStyle ) {
 			return <ol>{ outputListHtml() }</ol>;
-		} else {
-			return <div>test</div>;
+		// eslint-disable-next-line no-else-return
 		}
-
+		return <div>test</div>;
 	};
 
 	const outputListHtml = () => {
@@ -257,6 +263,32 @@ const PTAMHierarchy = ( props ) => {
 		{ value: 'rand', label: __( 'Random', 'post-type-archive-mapping' ) },
 	];
 
+	const gridOptions = (
+		<PanelBody
+			title={ __( 'Padding', 'post-type-archive-mapping' ) }
+			initialOpen={true }
+		>
+			<DimensionsControl
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				allowNegatives={ false }
+				attrTop="gridPaddingTop"
+				attrRight="gridPaddingRight"
+				attrBottom="gridPaddingBottom"
+				attrLeft="gridPaddingLeft"
+				attrUnit="gridPaddingUnit"
+				attrSyncUnits="gridPaddingUnitsSync"
+				units={
+					[
+						'px',
+						'em',
+						'rem',
+					]
+				}
+			/>
+		</PanelBody>
+	);
+
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody
@@ -324,6 +356,11 @@ const PTAMHierarchy = ( props ) => {
 					max={ 100 }
 				/>
 			</PanelBody>
+			{ 'grid' === view &&
+				<>
+					{ gridOptions }
+				</>
+			}
 		</InspectorControls>
 	);
 

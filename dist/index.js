@@ -18049,11 +18049,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _woocommerce_components_build_search_list_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/components/build/search-list-control */ "./node_modules/@woocommerce/components/build/search-list-control/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -18075,6 +18076,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -18124,7 +18126,13 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       orderBy = attributes.orderBy,
       postsPerPage = attributes.postsPerPage,
       wpmlLanguage = attributes.wpmlLanguage,
-      listStyle = attributes.listStyle; // Retrieve WPML languages.
+      listStyle = attributes.listStyle,
+      gridPaddingTop = attributes.gridPaddingTop,
+      gridPaddingRight = attributes.gridPaddingRight,
+      gridPaddingBottom = attributes.gridPaddingBottom,
+      gridPaddingLeft = attributes.gridPaddingLeft,
+      gridPaddingUnit = attributes.gridPaddingUnit,
+      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18184,17 +18192,17 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["GridIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["GridIcon"], null);
 
       case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FullIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["FullIcon"], null);
 
       case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ColumnsIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["ColumnsIcon"], null);
 
       case 'list':
       default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ListIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["ListIcon"], null);
     }
   };
   /**
@@ -18296,10 +18304,10 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     if ('ul' === listStyle) {
       return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
     } else if ('ol' === listStyle) {
-      return /*#__PURE__*/React.createElement("ol", null, outputListHtml());
-    } else {
-      return /*#__PURE__*/React.createElement("div", null, "test");
+      return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
     }
+
+    return /*#__PURE__*/React.createElement("div", null, "test");
   };
 
   var outputListHtml = function outputListHtml() {
@@ -18368,6 +18376,21 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
   }];
+  var gridOptions = /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Padding', 'post-type-archive-mapping'),
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTop",
+    attrRight: "gridPaddingRight",
+    attrBottom: "gridPaddingBottom",
+    attrLeft: "gridPaddingLeft",
+    attrUnit: "gridPaddingUnit",
+    attrSyncUnits: "gridPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  }));
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
@@ -18389,7 +18412,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_7__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18428,10 +18451,10 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     },
     min: 1,
     max: 100
-  }))); // Toolbar option group for the main layout settings.
+  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["ListIcon"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
     isActive: 'list' === view,
     onClick: function onClick() {
@@ -18440,7 +18463,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["GridIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["GridIcon"], null),
     title: __('View as a Grid', 'post-type-archive-mapping'),
     isActive: 'grid' === view,
     onClick: function onClick() {
@@ -18449,7 +18472,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["ColumnsIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["ColumnsIcon"], null),
     title: __('View as Columns', 'post-type-archive-mapping'),
     isActive: 'columns' === view,
     onClick: function onClick() {
@@ -18458,7 +18481,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FullIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["FullIcon"], null),
     title: __('View as Full Content', 'post-type-archive-mapping'),
     isActive: 'full' === view,
     onClick: function onClick() {
@@ -18469,7 +18492,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }]]; // Toolbar option group for the main layout settings.
 
   var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["UnorderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["UnorderedListIcon"], null),
     title: __('Unordered List', 'post-type-archive-mapping'),
     isActive: 'ul' === listStyle,
     onClick: function onClick() {
@@ -18478,7 +18501,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["OrderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["OrderedListIcon"], null),
     title: __('Numbered List', 'post-type-archive-mapping'),
     isActive: 'ol' === listStyle,
     onClick: function onClick() {
@@ -18487,7 +18510,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_5__["FormatTextLeftIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__["FormatTextLeftIcon"], null),
     title: __('No List', 'post-type-archive-mapping'),
     isActive: 'none' === listStyle,
     onClick: function onClick() {
@@ -18558,7 +18581,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         fill: '#662583',
         opacity: 0.8
       }
-    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], {
       cssClass: "ptam-term-grid-loading-animation"
     })))));
   }
@@ -20081,6 +20104,342 @@ var Loading = function Loading(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/dimensions/editor.scss":
+/*!***********************************************!*\
+  !*** ./src/components/dimensions/editor.scss ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/dimensions/index.js":
+/*!********************************************!*\
+  !*** ./src/components/dimensions/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.scss */ "./src/components/dimensions/editor.scss");
+/* harmony import */ var _unit_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-picker */ "./src/components/unit-picker/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * Dimensions Component.
+ * Credit: Forked from @GenerateBlocks
+ */
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    sprintf = _wp$i18n.sprintf;
+var Fragment = wp.element.Fragment;
+var _wp$components = wp.components,
+    Button = _wp$components.Button,
+    Tooltip = _wp$components.Tooltip;
+
+var DimensionsControl = function DimensionsControl(props) {
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes,
+      _props$label = props.label,
+      label = _props$label === void 0 ? __('Padding', 'post-type-archive-mapping') : _props$label,
+      allowNegatives = props.allowNegatives,
+      attrTop = props.attrTop,
+      attrRight = props.attrRight,
+      attrBottom = props.attrBottom,
+      attrLeft = props.attrLeft,
+      attrSyncUnits = props.attrSyncUnits,
+      attrUnit = props.attrUnit,
+      _props$labelTop = props.labelTop,
+      labelTop = _props$labelTop === void 0 ? __('Top', 'post-type-archive-mapping') : _props$labelTop,
+      _props$labelRight = props.labelRight,
+      labelRight = _props$labelRight === void 0 ? __('Right', 'post-type-archive-mapping') : _props$labelRight,
+      _props$labelBottom = props.labelBottom,
+      labelBottom = _props$labelBottom === void 0 ? __('Bottom', 'post-type-archive-mapping') : _props$labelBottom,
+      _props$labelLeft = props.labelLeft,
+      labelLeft = _props$labelLeft === void 0 ? __('Left', 'post-type-archive-mapping') : _props$labelLeft,
+      units = props.units;
+  /**
+   * Change the top value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+  var changeTopValue = function changeTopValue(value) {
+    setAttributes(_defineProperty({}, props['attrTop'], value));
+  };
+  /**
+   * Change the right value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeRightValue = function changeRightValue(value) {
+    setAttributes(_defineProperty({}, props['attrRight'], value));
+  };
+  /**
+   * Change the bottom value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeBottomValue = function changeBottomValue(value) {
+    setAttributes(_defineProperty({}, props['attrBottom'], value));
+  };
+  /**
+   * Change the left value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeLeftValue = function changeLeftValue(value) {
+    setAttributes(_defineProperty({}, props['attrLeft'], value));
+  };
+  /**
+   * Change the all values in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeAllValues = function changeAllValues(value) {
+    var _setAttributes5;
+
+    setAttributes((_setAttributes5 = {}, _defineProperty(_setAttributes5, props['attrTop'], value), _defineProperty(_setAttributes5, props['attrRight'], value), _defineProperty(_setAttributes5, props['attrBottom'], value), _defineProperty(_setAttributes5, props['attrLeft'], value), _setAttributes5));
+  };
+  /**
+   * Ensures a number is positive if allowNegatives is false.
+   *
+   * @param {number} number Number to sanitize.
+   * @return {number} Sanitized number.
+   */
+
+
+  var sanitizeNumber = function sanitizeNumber(number) {
+    // Ensure number isn't empty.
+    if ('' === number) {
+      number = 0;
+    } // If negatives are allowed, return number.
+
+
+    if (allowNegatives) {
+      return number;
+    } // Return absolute value of number.
+
+
+    return Math.abs(number);
+  };
+  /**
+   * Event for when the top value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeTopValue = function onChangeTopValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeTopValue(newValue);
+    }
+  };
+  /**
+   * Event for when the Right value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeRightValue = function onChangeRightValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeRightValue(newValue);
+    }
+  };
+  /**
+   * Event for when the bottom value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeBottomValue = function onChangeBottomValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeBottomValue(newValue);
+    }
+  };
+  /**
+   * Event for when the Left value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeLeftValue = function onChangeLeftValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeLeftValue(newValue);
+    }
+  };
+  /**
+   * When the sync value is selected, sync all values to the maximum number.
+   */
+
+
+  var syncUnits = function syncUnits() {
+    var numbers = [attributes[attrTop], attributes[attrRight], attributes[attrBottom], attributes[attrLeft]];
+    var syncValue = Math.max.apply(null, numbers);
+    setAttributes(_defineProperty({}, props['attrSyncUnits'], !attributes[attrSyncUnits]));
+    changeAllValues(syncValue.toString());
+  };
+  /**
+   * Change the units.
+   *
+   * @param {string} value Unit changing (px, em, rem, vh).
+   */
+
+
+  var onChangeUnits = function onChangeUnits(value) {
+    setAttributes(_defineProperty({}, props['attrUnit'], value)); // eslint-disable-line dot-notation
+  };
+
+  var syncIcon = /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "sync",
+    className: "svg-inline--fa fa-sync fa-w-16",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M0 500V299.67a12 12 0 0 1 12-12h200.33a12 12 0 0 1 12 12v47.41a12 12 0 0 1-12.57 12l-101.87-4.88a176.07 176.07 0 0 0 317.25-56.94 12 12 0 0 1 11.67-9.26h49.09a12 12 0 0 1 11.8 14.18C478.07 417.08 377.19 504 256 504a247.43 247.43 0 0 1-188.76-87.17l4.13 82.57a12 12 0 0 1-12 12.6H12a12 12 0 0 1-12-12z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M12.3 209.82C33.93 94.92 134.81 8 256 8a247.4 247.4 0 0 1 188.9 87.34l-4-82.77A12 12 0 0 1 452.92 0h47.41a12 12 0 0 1 12 12v200.33a12 12 0 0 1-12 12H300a12 12 0 0 1-12-12v-47.41a12 12 0 0 1 12.57-12l101.53 4.88a176.07 176.07 0 0 0-317.24 56.94A12 12 0 0 1 73.19 224H24.1a12 12 0 0 1-11.8-14.18z"
+  })));
+  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "components-base-control components-ptam-dimensions-control"
+  }, /*#__PURE__*/React.createElement(_unit_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: label,
+    value: 'undefined' !== typeof attributes[attrUnit] ? attributes[attrUnit] : 'px',
+    units: units,
+    onClick: function onClick(value) {
+      if ('undefined' !== typeof attributes[attrUnit]) {
+        onChangeUnits(value);
+      } else {
+        return false;
+      }
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-dimensions-control__inputs"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeTopValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Top', 'post-type-archive-mapping'), label),
+    value: attributes[attrTop] ? attributes[attrTop] : '',
+    min: allowNegatives ? undefined : 0
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeRightValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Right', 'post-type-archive-mapping'), label),
+    value: attributes[attrRight] ? attributes[attrRight] : '',
+    min: allowNegatives ? undefined : 0
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeBottomValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Bottom', 'post-type-archive-mapping'), label),
+    value: attributes[attrBottom] ? attributes[attrBottom] : '',
+    min: allowNegatives ? undefined : 0
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeLeftValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Left', 'post-type-archive-mapping'), label),
+    value: attributes[attrLeft] ? attributes[attrLeft] : '',
+    min: allowNegatives ? undefined : 0
+  }), /*#__PURE__*/React.createElement(Tooltip, {
+    text: !!attributes[attrSyncUnits] ? __('Unsync', 'post-type-archive-mapping') : __('Sync', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    className: "components-ptam-dimensions-control_sync",
+    "aria-label": __('Sync Units', 'generateblocks'),
+    isPrimary: attributes[attrSyncUnits] ? attributes[attrSyncUnits] : false,
+    "aria-pressed": attributes[attrSyncUnits] ? attributes[attrSyncUnits] : false // eslint-disable-next-line no-unused-vars
+    ,
+    onClick: function onClick(value) {
+      return syncUnits();
+    },
+    isSmall: true
+  }, syncIcon))), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-dimensions-control__input-labels"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelTop), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelRight), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelBottom), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelLeft), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DimensionsControl);
+
+/***/ }),
+
 /***/ "./src/components/hierarchical-items/index.js":
 /*!****************************************************!*\
   !*** ./src/components/hierarchical-items/index.js ***!
@@ -20230,6 +20589,107 @@ var HierarchicalItems = function HierarchicalItems(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HierarchicalItems);
+
+/***/ }),
+
+/***/ "./src/components/unit-picker/editor.scss":
+/*!************************************************!*\
+  !*** ./src/components/unit-picker/editor.scss ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/unit-picker/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/unit-picker/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.scss */ "./src/components/unit-picker/editor.scss");
+/**
+ * Unit Picker Component.
+ * Credit: Forked from @GenerateBlocks
+ */
+// Import CSS
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    sprintf = _wp$i18n.sprintf,
+    _x = _wp$i18n._x;
+var _wp$components = wp.components,
+    ButtonGroup = _wp$components.ButtonGroup,
+    Button = _wp$components.Button,
+    Tooltip = _wp$components.Tooltip;
+
+var UnitChooser = function UnitChooser(props) {
+  var label = props.label,
+      value = props.value,
+      _onClick = props.onClick,
+      units = props.units;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-units-control-header__units"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-units-control-label__units"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-control__units"
+  }, /*#__PURE__*/React.createElement(ButtonGroup, {
+    className: "components-ptam-control-buttons__units",
+    "aria-label": __('Select Units', 'post-type-archive-mapping')
+  }, units.map(function (unit) {
+    var unitName = unit;
+
+    if ('px' === unit) {
+      unitName = _x('Pixel', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('em' === unit) {
+      unitName = _x('Em', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('%' === unit) {
+      unitName = _x('Percentage', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('rem' === unit) {
+      unitName = _x('Rem', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('deg' === unit) {
+      unitName = _x('Degree', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    return /*#__PURE__*/React.createElement(Tooltip, {
+      text: sprintf(
+      /* translators: Unit type (px, em, %) */
+      __('%s Units', 'post-type-archive-mapping'), unitName),
+      key: unit
+    }, /*#__PURE__*/React.createElement(Button, {
+      key: unit,
+      className: 'components-ptam-control-button__units--' + unit,
+      isSmall: true,
+      isPrimary: value === unit,
+      "aria-pressed": value === unit,
+      "aria-label": sprintf(
+      /* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
+      __('%s Units', 'post-type-archive-mapping'), unitName),
+      onClick: function onClick() {
+        return _onClick(unit);
+      }
+    }, unit));
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UnitChooser);
 
 /***/ }),
 

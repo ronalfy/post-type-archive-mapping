@@ -413,6 +413,31 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => 'ul', /* ul, ol, none */
 					),
+					'gridPaddingTop' => array(
+						'type' => 'integer',
+						'default' => 20,
+					),
+					'gridPaddingRight' => array(
+						'type' => 'integer',
+						'default' => 20,
+					),
+					'gridPaddingBottom' => array(
+						'type' => 'integer',
+						'default' => 20,
+					),
+					'gridPaddingLeft' => array(
+						'type' => 'integer',
+						'default' => 20,
+					),
+					'gridPaddingUnit' => array(
+						'type' => 'string',
+						'default' => 'px',
+					),
+					'gridPaddingUnitsSync' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
