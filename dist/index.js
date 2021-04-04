@@ -20377,8 +20377,22 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Top', 'post-type-archive-mapping'), label),
-    value: attributes[attrTop] ? attributes[attrTop] : '',
-    min: allowNegatives ? undefined : 0
+    value: attributes[attrTop] ? attributes[attrTop] : 0,
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues(0);
+        } else {
+          changeTopValue(0);
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
   }), /*#__PURE__*/React.createElement("input", {
     className: "components-ptam-dimensions-control__number",
     placeholder: "0",
@@ -20387,8 +20401,22 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Right', 'post-type-archive-mapping'), label),
-    value: attributes[attrRight] ? attributes[attrRight] : '',
-    min: allowNegatives ? undefined : 0
+    value: attributes[attrRight] ? attributes[attrRight] : 0,
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues(0);
+        } else {
+          changeRightValue(0);
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
   }), /*#__PURE__*/React.createElement("input", {
     className: "components-ptam-dimensions-control__number",
     placeholder: "0",
@@ -20397,8 +20425,22 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Bottom', 'post-type-archive-mapping'), label),
-    value: attributes[attrBottom] ? attributes[attrBottom] : '',
-    min: allowNegatives ? undefined : 0
+    value: attributes[attrBottom] ? attributes[attrBottom] : 0,
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues(0);
+        } else {
+          changeBottomValue(0);
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
   }), /*#__PURE__*/React.createElement("input", {
     className: "components-ptam-dimensions-control__number",
     placeholder: "0",
@@ -20407,8 +20449,22 @@ var DimensionsControl = function DimensionsControl(props) {
     "aria-label": sprintf(
     /* translators: Dimension label (padding, margin, border) */
     __('%s Left', 'post-type-archive-mapping'), label),
-    value: attributes[attrLeft] ? attributes[attrLeft] : '',
-    min: allowNegatives ? undefined : 0
+    value: attributes[attrLeft] ? attributes[attrLeft] : 0,
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues(0);
+        } else {
+          changeLeftValue(0);
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
   }), /*#__PURE__*/React.createElement(Tooltip, {
     text: !!attributes[attrSyncUnits] ? __('Unsync', 'post-type-archive-mapping') : __('Sync', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(Button, {

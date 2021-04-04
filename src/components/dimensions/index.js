@@ -267,8 +267,22 @@ const DimensionsControl = ( props ) => {
 							__( '%s Top', 'post-type-archive-mapping' ),
 							label
 						) }
-						value={ attributes[ attrTop ] ? attributes[ attrTop ] : '' }
+						value={ attributes[ attrTop ] ? attributes[ attrTop ] : 0 }
 						min={ allowNegatives ? undefined : 0 }
+						onBlur={ () => {
+							if ( '' === attributes[ attrTop ] ) {
+								// If we have no value and a default exists, set to 0 to prevent default from coming back.
+								if ( props.attributes[ props.attrSyncUnits ] ) {
+									changeAllValues( 0 );
+								} else {
+									changeTopValue( 0 );
+								}
+							}
+						} }
+						onClick={ ( e ) => {
+							// Make sure onBlur fires in Firefox.
+							e.currentTarget.focus();
+						} }
 					/>
 					<input
 						className="components-ptam-dimensions-control__number"
@@ -280,8 +294,22 @@ const DimensionsControl = ( props ) => {
 							__( '%s Right', 'post-type-archive-mapping' ),
 							label
 						) }
-						value={ attributes[ attrRight ] ? attributes[ attrRight ] : '' }
+						value={ attributes[ attrRight ] ? attributes[ attrRight ] : 0 }
 						min={ allowNegatives ? undefined : 0 }
+						onBlur={ () => {
+							if ( '' === attributes[ attrTop ] ) {
+								// If we have no value and a default exists, set to 0 to prevent default from coming back.
+								if ( props.attributes[ props.attrSyncUnits ] ) {
+									changeAllValues( 0 );
+								} else {
+									changeRightValue( 0 );
+								}
+							}
+						} }
+						onClick={ ( e ) => {
+							// Make sure onBlur fires in Firefox.
+							e.currentTarget.focus();
+						} }
 					/>
 					<input
 						className="components-ptam-dimensions-control__number"
@@ -293,8 +321,22 @@ const DimensionsControl = ( props ) => {
 							__( '%s Bottom', 'post-type-archive-mapping' ),
 							label
 						) }
-						value={ attributes[ attrBottom ] ? attributes[ attrBottom ] : '' }
+						value={ attributes[ attrBottom ] ? attributes[ attrBottom ] : 0 }
 						min={ allowNegatives ? undefined : 0 }
+						onBlur={ () => {
+							if ( '' === attributes[ attrTop ] ) {
+								// If we have no value and a default exists, set to 0 to prevent default from coming back.
+								if ( props.attributes[ props.attrSyncUnits ] ) {
+									changeAllValues( 0 );
+								} else {
+									changeBottomValue( 0 );
+								}
+							}
+						} }
+						onClick={ ( e ) => {
+							// Make sure onBlur fires in Firefox.
+							e.currentTarget.focus();
+						} }
 					/>
 					<input
 						className="components-ptam-dimensions-control__number"
@@ -306,8 +348,22 @@ const DimensionsControl = ( props ) => {
 							__( '%s Left', 'post-type-archive-mapping' ),
 							label
 						) }
-						value={ attributes[ attrLeft ] ? attributes[ attrLeft ] : '' }
+						value={ attributes[ attrLeft ] ? attributes[ attrLeft ] : 0 }
 						min={ allowNegatives ? undefined : 0 }
+						onBlur={ () => {
+							if ( '' === attributes[ attrTop ] ) {
+								// If we have no value and a default exists, set to 0 to prevent default from coming back.
+								if ( props.attributes[ props.attrSyncUnits ] ) {
+									changeAllValues( 0 );
+								} else {
+									changeLeftValue( 0 );
+								}
+							}
+						} }
+						onClick={ ( e ) => {
+							// Make sure onBlur fires in Firefox.
+							e.currentTarget.focus();
+						} }
 					/>
 					<Tooltip
 						text={
