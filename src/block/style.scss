@@ -689,7 +689,8 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	}
 }
 
-.ptam-component-color-picker {
+.ptam-component-color-picker,
+.ptam-component-gradient-picker {
 	& > .components-base-control:first-child {
 		margin-bottom: 0;
 	}
@@ -764,4 +765,22 @@ body.has-blocks .fl-post-content .ptam-pagination {
 .ptam-color-picker-area {
 	width: 28px;
 	height: 28px;
+}
+
+/* Gradients Component (forked from @GenerateBlocks) */
+.ptam-component-gradient-picker {
+	.components-popover__content {
+		width: 350px;
+		padding: 15px;
+	}
+	.components-base-control__label {
+		display: block;
+		margin-bottom: 20px;
+	}
+}
+.ptam-component-gradient-picker-wrapper button.components-color-palette__item.components-circular-option-picker__option {
+	box-shadow: none;
+	&:hover {
+		box-shadow: none !important;
+	}
 }

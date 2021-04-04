@@ -6,6 +6,7 @@ import axios from 'axios';
 import { SearchListControl } from '@woocommerce/components/build/search-list-control';
 import DimensionsControl from '../../components/dimensions';
 import PTAMColorPicker from '../../components/color-picker';
+import PTAMGradientPicker from '../../components/gradient-picker';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import { ListIcon, GridIcon, FullIcon, ColumnsIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon } from './icons';
@@ -295,6 +296,11 @@ const PTAMHierarchy = ( props ) => {
 				label="Hi there"
 				alpha={true}
 				isGradient={false}
+			/>
+			<PTAMGradientPicker
+				onChange={ (value) => { console.log( value ); } }
+				label="test"
+				value="linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
 			/>
 		</PanelBody>
 	);

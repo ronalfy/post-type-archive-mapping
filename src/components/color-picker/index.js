@@ -1,14 +1,11 @@
 /**
- * Color and Gradient Picker.
+ * Color Picker.
  *
  * Credit: Forked from @post-type-archive-mapping
  */
 
 import classnames from 'classnames';
 import hexToRgba from 'hex-to-rgba';
-
-// Import CSS
-import './editor.scss';
 
 const { useState } = wp.element;
 

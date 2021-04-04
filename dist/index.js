@@ -18051,11 +18051,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _woocommerce_components_build_search_list_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/components/build/search-list-control */ "./node_modules/@woocommerce/components/build/search-list-control/index.js");
 /* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
 /* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -18077,6 +18078,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -18194,17 +18196,17 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["GridIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["GridIcon"], null);
 
       case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["FullIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FullIcon"], null);
 
       case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["ColumnsIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ColumnsIcon"], null);
 
       case 'list':
       default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["ListIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ListIcon"], null);
     }
   };
   /**
@@ -18404,6 +18406,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     label: "Hi there",
     alpha: true,
     isGradient: false
+  }), /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onChange: function onChange(value) {
+      console.log(value);
+    },
+    label: "test",
+    value: "linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
   }));
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
@@ -18426,7 +18434,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18468,7 +18476,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["ListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ListIcon"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
     isActive: 'list' === view,
     onClick: function onClick() {
@@ -18477,7 +18485,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["GridIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["GridIcon"], null),
     title: __('View as a Grid', 'post-type-archive-mapping'),
     isActive: 'grid' === view,
     onClick: function onClick() {
@@ -18486,7 +18494,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["ColumnsIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ColumnsIcon"], null),
     title: __('View as Columns', 'post-type-archive-mapping'),
     isActive: 'columns' === view,
     onClick: function onClick() {
@@ -18495,7 +18503,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["FullIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FullIcon"], null),
     title: __('View as Full Content', 'post-type-archive-mapping'),
     isActive: 'full' === view,
     onClick: function onClick() {
@@ -18506,7 +18514,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }]]; // Toolbar option group for the main layout settings.
 
   var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["UnorderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["UnorderedListIcon"], null),
     title: __('Unordered List', 'post-type-archive-mapping'),
     isActive: 'ul' === listStyle,
     onClick: function onClick() {
@@ -18515,7 +18523,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["OrderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["OrderedListIcon"], null),
     title: __('Numbered List', 'post-type-archive-mapping'),
     isActive: 'ol' === listStyle,
     onClick: function onClick() {
@@ -18524,7 +18532,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_7__["FormatTextLeftIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FormatTextLeftIcon"], null),
     title: __('No List', 'post-type-archive-mapping'),
     isActive: 'none' === listStyle,
     onClick: function onClick() {
@@ -18595,7 +18603,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         fill: '#662583',
         opacity: 0.8
       }
-    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], {
       cssClass: "ptam-term-grid-loading-animation"
     })))));
   }
@@ -20118,20 +20126,6 @@ var Loading = function Loading(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/color-picker/editor.scss":
-/*!*************************************************!*\
-  !*** ./src/components/color-picker/editor.scss ***!
-  \*************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/color-picker/index.js":
 /*!**********************************************!*\
   !*** ./src/components/color-picker/index.js ***!
@@ -20145,7 +20139,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
 /* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/components/color-picker/editor.scss");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -20159,12 +20152,10 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /**
- * Color and Gradient Picker.
+ * Color Picker.
  *
  * Credit: Forked from @post-type-archive-mapping
  */
-
- // Import CSS
 
 
 var useState = wp.element.useState;
@@ -20714,6 +20705,123 @@ var DimensionsControl = function DimensionsControl(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DimensionsControl);
+
+/***/ }),
+
+/***/ "./src/components/gradient-picker/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/gradient-picker/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * Color and Gradient Picker.
+ *
+ * Credit: Forked from @post-type-archive-mapping
+ */
+
+var useState = wp.element.useState;
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    Tooltip = _wp$components.Tooltip,
+    BaseControl = _wp$components.BaseControl,
+    Popover = _wp$components.Popover;
+var __experimentalGradientPickerControl = wp.blockEditor.__experimentalGradientPickerControl;
+
+var PTAMGradientPicker = function PTAMGradientPicker(props) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isVisible = _useState2[0],
+      setIsVisible = _useState2[1];
+
+  var value = props.value,
+      _onChange = props.onChange,
+      label = props.label;
+  /**
+   * Toggle whether the color popup is showing.
+   */
+
+  var toggleVisible = function toggleVisible() {
+    setIsVisible(true);
+  };
+  /**
+   * Close color popup if visible.
+   */
+
+
+  var toggleClose = function toggleClose() {
+    if (isVisible) {
+      setIsVisible(false);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-color-picker-wrapper ptam-component-gradient-picker-wrapper"
+  }, !!label && /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-picker-area"
+  }, !isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleVisible,
+    "aria-label": __('Gradient Color Picker', 'post-type-archive-mapping'),
+    style: {
+      'background-image': value ? value : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleClose,
+    "aria-label": __('Custom color picker', 'post-type-archive-mapping'),
+    style: {
+      'background-image': value ? value : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement(Popover, {
+    position: "top left",
+    className: "ptam-component-gradient-picker",
+    onClose: toggleClose
+  }, /*#__PURE__*/React.createElement(BaseControl, null, __experimentalGradientPickerControl && /*#__PURE__*/React.createElement(__experimentalGradientPickerControl, {
+    label: __('Choose a Background Gradient', 'post-type-archive-mapping'),
+    value: value,
+    onChange: function onChange(gradientvalue) {
+      _onChange(gradientvalue);
+    }
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PTAMGradientPicker);
 
 /***/ }),
 
