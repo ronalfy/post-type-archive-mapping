@@ -7,6 +7,7 @@ import { SearchListControl } from '@woocommerce/components/build/search-list-con
 import DimensionsControl from '../../components/dimensions';
 import PTAMColorPicker from '../../components/color-picker';
 import PTAMGradientPicker from '../../components/gradient-picker';
+import UnitPicker from '../../components/unit-picker';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import {
@@ -62,6 +63,8 @@ const PTAMHierarchy = ( props ) => {
 		postsPerPage,
 		wpmlLanguage,
 		listStyle,
+		disableStyles,
+		pagination,
 		gridPaddingTop,
 		gridPaddingRight,
 		gridPaddingBottom,
@@ -75,6 +78,8 @@ const PTAMHierarchy = ( props ) => {
 		gridBackgroundGradientHover,
 		gridBackgroundColor,
 		gridBackgroundColorHover,
+		gridMinHeight,
+		gridMinHeightUnit,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -350,6 +355,32 @@ const PTAMHierarchy = ( props ) => {
 
 	const gridOptions = (
 		<Fragment>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Container', 'post-type-archive-mapping' ) }
+			>
+				<UnitPicker
+					label={ __( 'Minimum Height', 'post-type-archive-mapping' ) }
+					value={ gridMinHeightUnit }
+					units={ [ 'px', 'em', 'vh' ] }
+					onClick={ ( value ) => {
+						setAttributes( {
+							gridMinHeightUnit: value,
+						} );
+					} }
+				/>
+
+				<TextControl
+					type={ 'number' }
+					value={ gridMinHeight ? gridMinHeight : '' }
+					onChange={ ( value ) => {
+						setAttributes( {
+							gridMinHeight: parseFloat( value ),
+						} );
+					} }
+				/>
+
+			</PanelBody>
 			<PanelBody
 				initialOpen={ false }
 				title={ __( 'Background', 'post-type-archive-mapping' ) }
@@ -632,6 +663,24 @@ const PTAMHierarchy = ( props ) => {
 					} }
 					min={ 1 }
 					max={ 100 }
+				/>
+				<ToggleControl
+					label={ __( 'Enable Pagination', 'post-type-archive-mapping' ) }
+					checked={ pagination }
+					onChange={ ( value ) => {
+						setAttributes( {
+							pagination: value,
+						} );
+					} }
+				/>
+				<ToggleControl
+					label={ __( 'Disable Styles', 'post-type-archive-mapping' ) }
+					checked={ disableStyles }
+					onChange={ ( value ) => {
+						setAttributes( {
+							disableStyles: value,
+						} );
+					} }
 				/>
 			</PanelBody>
 			{ 'grid' === view && <>{ gridOptions }</> }

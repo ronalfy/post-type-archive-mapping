@@ -18052,11 +18052,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
 /* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
 /* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -18078,6 +18079,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -18132,6 +18134,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       postsPerPage = attributes.postsPerPage,
       wpmlLanguage = attributes.wpmlLanguage,
       listStyle = attributes.listStyle,
+      disableStyles = attributes.disableStyles,
+      pagination = attributes.pagination,
       gridPaddingTop = attributes.gridPaddingTop,
       gridPaddingRight = attributes.gridPaddingRight,
       gridPaddingBottom = attributes.gridPaddingBottom,
@@ -18144,7 +18148,9 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridBackgroundGradient = attributes.gridBackgroundGradient,
       gridBackgroundGradientHover = attributes.gridBackgroundGradientHover,
       gridBackgroundColor = attributes.gridBackgroundColor,
-      gridBackgroundColorHover = attributes.gridBackgroundColorHover; // Retrieve WPML languages.
+      gridBackgroundColorHover = attributes.gridBackgroundColorHover,
+      gridMinHeight = attributes.gridMinHeight,
+      gridMinHeightUnit = attributes.gridMinHeightUnit; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18210,17 +18216,17 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["GridIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["GridIcon"], null);
 
       case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FullIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["FullIcon"], null);
 
       case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ColumnsIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["ColumnsIcon"], null);
 
       case 'list':
       default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ListIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["ListIcon"], null);
     }
   };
   /**
@@ -18463,6 +18469,26 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }];
   var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
+    title: __('Container', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnit,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnit: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeight ? gridMinHeight : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeight: parseFloat(value)
+      });
+    }
+  })), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
     title: __('Background', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Background Type', 'post-type-archive-mapping'),
@@ -18634,7 +18660,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_10__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18673,10 +18699,26 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     },
     min: 1,
     max: 100
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Enable Pagination', 'post-type-archive-mapping'),
+    checked: pagination,
+    onChange: function onChange(value) {
+      setAttributes({
+        pagination: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Disable Styles', 'post-type-archive-mapping'),
+    checked: disableStyles,
+    onChange: function onChange(value) {
+      setAttributes({
+        disableStyles: value
+      });
+    }
   })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["ListIcon"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
     isActive: 'list' === view,
     onClick: function onClick() {
@@ -18685,7 +18727,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["GridIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["GridIcon"], null),
     title: __('View as a Grid', 'post-type-archive-mapping'),
     isActive: 'grid' === view,
     onClick: function onClick() {
@@ -18694,7 +18736,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["ColumnsIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["ColumnsIcon"], null),
     title: __('View as Columns', 'post-type-archive-mapping'),
     isActive: 'columns' === view,
     onClick: function onClick() {
@@ -18703,7 +18745,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FullIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["FullIcon"], null),
     title: __('View as Full Content', 'post-type-archive-mapping'),
     isActive: 'full' === view,
     onClick: function onClick() {
@@ -18714,7 +18756,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }]]; // Toolbar option group for the main layout settings.
 
   var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["UnorderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["UnorderedListIcon"], null),
     title: __('Unordered List', 'post-type-archive-mapping'),
     isActive: 'ul' === listStyle,
     onClick: function onClick() {
@@ -18723,7 +18765,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["OrderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["OrderedListIcon"], null),
     title: __('Numbered List', 'post-type-archive-mapping'),
     isActive: 'ol' === listStyle,
     onClick: function onClick() {
@@ -18732,7 +18774,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_8__["FormatTextLeftIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__["FormatTextLeftIcon"], null),
     title: __('No List', 'post-type-archive-mapping'),
     isActive: 'none' === listStyle,
     onClick: function onClick() {
@@ -18803,7 +18845,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         fill: '#662583',
         opacity: 0.8
       }
-    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
       cssClass: "ptam-term-grid-loading-animation"
     })))));
   }

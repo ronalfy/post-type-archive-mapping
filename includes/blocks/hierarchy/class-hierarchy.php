@@ -413,6 +413,14 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => 'ul', /* ul, ol, none */
 					),
+					'disableStyles' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
+					'pagination' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
 					'gridPaddingTop' => array(
 						'type' => 'integer',
 						'default' => 20,
@@ -465,6 +473,14 @@ class Hierarchy {
 						'type'    => 'object',
 						'default' => '',
 					),
+					'gridMinHeight' => array(
+						'type' => 'integer',
+						'default' => 450,
+					),
+					'gridMinHeightUnit' => array(
+						'type' => 'string',
+						'default' => 'px',
+					)
 
 				),
 				'render_callback' => array( $this, 'output' ),
