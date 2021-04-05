@@ -475,7 +475,7 @@ class Hierarchy {
 					),
 					'gridMinHeight' => array(
 						'type' => 'integer',
-						'default' => 450,
+						'default' => 300,
 					),
 					'gridMinHeightUnit' => array(
 						'type' => 'string',

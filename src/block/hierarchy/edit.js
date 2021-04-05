@@ -3,13 +3,16 @@
  */
 import classnames from 'classnames';
 import axios from 'axios';
-import { SearchListControl } from '@woocommerce/components/build/search-list-control';
 import DimensionsControl from '../../components/dimensions';
 import PTAMColorPicker from '../../components/color-picker';
 import PTAMGradientPicker from '../../components/gradient-picker';
 import UnitPicker from '../../components/unit-picker';
 import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
+import CSSBuilder from '../../utilities/css-builder';
+import valueWithUnit from '../../utilities/value-with-unit';
+import shorthandCSS from '../../utilities/shorthand-css';
+
 import {
 	ListIcon,
 	GridIcon,
@@ -35,15 +38,12 @@ const {
 	ToggleControl,
 	Button,
 	ToolbarGroup,
-	PanelRow,
 	TabPanel,
 } = wp.components;
 
 const {
-	__experimentalGradientPickerControl,
 	MediaUpload,
 	InspectorControls,
-	PanelColorSettings,
 	BlockControls,
 } = wp.blockEditor;
 
@@ -239,12 +239,25 @@ const PTAMHierarchy = ( props ) => {
 	 * @return {JSX} Grid HTML.
 	 */
 	const outputGridHtml = () => {
+		return (
+			<div className="ptam-hierarchical-grid-items">
+				{ outputGridItemsHtml() }
+			</div>
+		);
+	};
+
+	/**
+	 * Output Grid item HTML.
+	 *
+	 * @return {JSX} Grid item HTML.
+	 */
+	const outputGridItemsHtml = () => {
 		return Object.keys( posts ).map( ( item, i ) => (
 			<article
 				key={ i }
 				className="ptam-hierarchical-grid-item"
 				style={ {
-					backgroundImage: `url(${ posts[ i ].featured_image_src })`,
+					backgroundImage: 'featured_image' === gridBackgroundType ? `url(${ posts[ i ].featured_image_src })` : false,
 				} }
 			>
 				<div className="ptam-hierarchical-grid-item-content">
@@ -252,7 +265,7 @@ const PTAMHierarchy = ( props ) => {
 				</div>
 			</article>
 		) );
-	};
+	}
 
 	/**
 	 * Return posts in a list format.
@@ -836,10 +849,55 @@ const PTAMHierarchy = ( props ) => {
 			</Fragment>
 		);
 	}
+
+	// Begin building CSS.
+	const builder = new CSSBuilder( `ptam-hierarchy-wrapper-${ uniqueId }` );
+	builder.addCSS(
+		'.ptam-hierarchical-grid-items',
+		`
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 20px;
+		row-gap: 20px;
+		background-repeat: no-repeat;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item',
+		`
+		min-height: ${ valueWithUnit( gridMinHeight, gridMinHeightUnit ) };
+		`
+	);
+	if ( 'featured_image' === gridBackgroundType ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			`
+		);
+	} else if ( 'gradient' === gridBackgroundType ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			background: ${ gridBackgroundGradient };
+			`
+		);
+	} else {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			background: ${ gridBackgroundColor };
+			`
+		);
+	}
+
 	return (
 		<>
 			{ inspectorControls }
 			{ toolbar }
+			{ builder.printCSS() }
 			<div className={ wrapperClass }>{ getPostHtml() }</div>
 		</>
 	);
