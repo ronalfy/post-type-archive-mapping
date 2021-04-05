@@ -480,6 +480,10 @@ class Hierarchy {
 					'gridMinHeightUnit' => array(
 						'type' => 'string',
 						'default' => 'px',
+					),
+					'gridNumberColumns' => array(
+						'type' => 'integer',
+						'default' => 2,
 					)
 
 				),

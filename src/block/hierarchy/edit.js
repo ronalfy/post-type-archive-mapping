@@ -11,7 +11,6 @@ import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import CSSBuilder from '../../utilities/css-builder';
 import valueWithUnit from '../../utilities/value-with-unit';
-import shorthandCSS from '../../utilities/shorthand-css';
 
 import {
 	ListIcon,
@@ -41,11 +40,7 @@ const {
 	TabPanel,
 } = wp.components;
 
-const {
-	MediaUpload,
-	InspectorControls,
-	BlockControls,
-} = wp.blockEditor;
+const { MediaUpload, InspectorControls, BlockControls } = wp.blockEditor;
 
 const PTAMHierarchy = ( props ) => {
 	// Shortcuts.
@@ -80,6 +75,7 @@ const PTAMHierarchy = ( props ) => {
 		gridBackgroundColorHover,
 		gridMinHeight,
 		gridMinHeightUnit,
+		gridNumberColumns,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -115,7 +111,16 @@ const PTAMHierarchy = ( props ) => {
 	// Retrieve the latest posts.
 	useEffect( () => {
 		getPosts( {} );
-	}, [ postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize ] );
+	}, [
+		postType,
+		hierarchy,
+		parentItem,
+		order,
+		orderBy,
+		numItems,
+		gridFallbackImg,
+		gridImageTypeSize,
+	] );
 
 	/**
 	 *
@@ -239,8 +244,12 @@ const PTAMHierarchy = ( props ) => {
 	 * @return {JSX} Grid HTML.
 	 */
 	const outputGridHtml = () => {
+		const classes = classnames(
+			'ptam-hierarchical-grid-items',
+			`ptam-hierarchical-grid-columns-${ parseInt( gridNumberColumns ) }`,
+		);
 		return (
-			<div className="ptam-hierarchical-grid-items">
+			<div className={ classes }>
 				{ outputGridItemsHtml() }
 			</div>
 		);
@@ -257,7 +266,10 @@ const PTAMHierarchy = ( props ) => {
 				key={ i }
 				className="ptam-hierarchical-grid-item"
 				style={ {
-					backgroundImage: 'featured_image' === gridBackgroundType ? `url(${ posts[ i ].featured_image_src })` : false,
+					backgroundImage:
+						'featured_image' === gridBackgroundType
+							? `url(${ posts[ i ].featured_image_src })`
+							: false,
 				} }
 			>
 				<div className="ptam-hierarchical-grid-item-content">
@@ -265,7 +277,7 @@ const PTAMHierarchy = ( props ) => {
 				</div>
 			</article>
 		) );
-	}
+	};
 
 	/**
 	 * Return posts in a list format.
@@ -392,7 +404,13 @@ const PTAMHierarchy = ( props ) => {
 						} );
 					} }
 				/>
-
+				<RangeControl
+					label={ __( 'Number of Columns', 'post-type-archive-mapping' ) }
+					value={ gridNumberColumns }
+					onChange={ ( value ) => setAttributes( { gridNumberColumns: value } ) }
+					min={ 1 }
+					max={ 4 }
+				/>
 			</PanelBody>
 			<PanelBody
 				initialOpen={ false }
@@ -409,7 +427,8 @@ const PTAMHierarchy = ( props ) => {
 					} }
 				/>
 				{ 'gradient' === gridBackgroundType && (
-					<TabPanel className="layout-tab-panel ptam-control-tabs"
+					<TabPanel
+						className="layout-tab-panel ptam-control-tabs"
 						activeClass="active-tab"
 						tabs={ [
 							{
@@ -422,44 +441,48 @@ const PTAMHierarchy = ( props ) => {
 								title: __( 'Hover', 'post-type-archive-mapping' ),
 								className: 'grid-background-gradient-hover',
 							},
-						] }>
-						{
-							( tab ) => {
-								const isNormal = tab.name === 'grid-background-gradient';
+						] }
+					>
+						{ ( tab ) => {
+							const isNormal = tab.name === 'grid-background-gradient';
 
-								return (
-									<div>
-										{ isNormal ? (
-											<PTAMGradientPicker
-												onChange={ ( value ) => {
-													setAttributes( {
-														gridBackgroundGradient: value,
-													} );
-												} }
-												label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
-												value={ gridBackgroundGradient }
-											/>
-
-										) : (
-
-											<PTAMGradientPicker
-												onChange={ ( value ) => {
-													setAttributes( {
-														gridBackgroundGradientHover: value,
-													} );
-												} }
-												label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
-												value={ gridBackgroundGradientHover }
-											/>
-										) }
-									</div>
-								);
-							}
-						}
+							return (
+								<div>
+									{ isNormal ? (
+										<PTAMGradientPicker
+											onChange={ ( value ) => {
+												setAttributes( {
+													gridBackgroundGradient: value,
+												} );
+											} }
+											label={ __(
+												'Background Gradient',
+												'post-type-archive-mapping'
+											) }
+											value={ gridBackgroundGradient }
+										/>
+									) : (
+										<PTAMGradientPicker
+											onChange={ ( value ) => {
+												setAttributes( {
+													gridBackgroundGradientHover: value,
+												} );
+											} }
+											label={ __(
+												'Background Gradient',
+												'post-type-archive-mapping'
+											) }
+											value={ gridBackgroundGradientHover }
+										/>
+									) }
+								</div>
+							);
+						} }
 					</TabPanel>
 				) }
 				{ 'color' === gridBackgroundType && (
-					<TabPanel className="layout-tab-panel ptam-control-tabs"
+					<TabPanel
+						className="layout-tab-panel ptam-control-tabs"
 						activeClass="active-tab"
 						tabs={ [
 							{
@@ -472,46 +495,47 @@ const PTAMHierarchy = ( props ) => {
 								title: __( 'Hover', 'post-type-archive-mapping' ),
 								className: 'grid-background-color-hover',
 							},
-						] }>
-						{
-							( tab ) => {
-								const isNormal = tab.name === 'grid-background-color';
+						] }
+					>
+						{ ( tab ) => {
+							const isNormal = tab.name === 'grid-background-color';
 
-								return (
-									<div>
-										{ isNormal ? (
-											<PTAMColorPicker
-												value={ gridBackgroundColor }
-												valueOpacity={ 1 }
-												onChange={ ( value ) => {
-													setAttributes( { gridBackgroundColor: value } );
-												} }
-												// eslint-disable-next-line no-unused-vars
-												onOpacityChange={ ( value ) => {
-												} }
-												label={ __( 'Background Color', 'post-type-archive-mapping' ) }
-												alpha={ false }
-											/>
-
-										) : (
-
-											<PTAMColorPicker
-												value={ gridBackgroundColorHover }
-												valueOpacity={ 1 }
-												onChange={ ( value ) => {
-													setAttributes( { gridBackgroundColorHover: value } );
-												} }
-												// eslint-disable-next-line no-unused-vars
-												onOpacityChange={ ( value ) => {
-												} }
-												label={ __( 'Background Color', 'post-type-archive-mapping' ) }
-												alpha={ false }
-											/>
-										) }
-									</div>
-								);
-							}
-						}
+							return (
+								<div>
+									{ isNormal ? (
+										<PTAMColorPicker
+											value={ gridBackgroundColor }
+											valueOpacity={ 1 }
+											onChange={ ( value ) => {
+												setAttributes( { gridBackgroundColor: value } );
+											} }
+											// eslint-disable-next-line no-unused-vars
+											onOpacityChange={ ( value ) => {} }
+											label={ __(
+												'Background Color',
+												'post-type-archive-mapping'
+											) }
+											alpha={ false }
+										/>
+									) : (
+										<PTAMColorPicker
+											value={ gridBackgroundColorHover }
+											valueOpacity={ 1 }
+											onChange={ ( value ) => {
+												setAttributes( { gridBackgroundColorHover: value } );
+											} }
+											// eslint-disable-next-line no-unused-vars
+											onOpacityChange={ ( value ) => {} }
+											label={ __(
+												'Background Color',
+												'post-type-archive-mapping'
+											) }
+											alpha={ false }
+										/>
+									) }
+								</div>
+							);
+						} }
 					</TabPanel>
 				) }
 
@@ -586,26 +610,6 @@ const PTAMHierarchy = ( props ) => {
 					attrUnit="gridPaddingUnit"
 					attrSyncUnits="gridPaddingUnitsSync"
 					units={ [ 'px', 'em', 'rem' ] }
-				/>
-				<PTAMColorPicker
-					value="#FFFFFF"
-					valueOpacity={ 1 }
-					onChange={ ( value ) => {
-						console.log( value );
-					} }
-					onOpacityChange={ ( value ) => {
-						console.log( value );
-					} }
-					label="Hi there"
-					alpha={ true }
-					isGradient={ false }
-				/>
-				<PTAMGradientPicker
-					onChange={ ( value ) => {
-						console.log( value );
-					} }
-					label="test"
-					value="linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)"
 				/>
 			</PanelBody>
 		</Fragment>
@@ -860,11 +864,15 @@ const PTAMHierarchy = ( props ) => {
 		column-gap: 20px;
 		row-gap: 20px;
 		background-repeat: no-repeat;
+		word-break: break-all;
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',
 		`
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		min-height: ${ valueWithUnit( gridMinHeight, gridMinHeightUnit ) };
 		`
 	);
@@ -888,7 +896,7 @@ const PTAMHierarchy = ( props ) => {
 		builder.addCSS(
 			'.ptam-hierarchical-grid-item',
 			`
-			background: ${ gridBackgroundColor };
+			background: ${ hexToRgba( gridBackgroundColor, 1 ) };
 			`
 		);
 	}
