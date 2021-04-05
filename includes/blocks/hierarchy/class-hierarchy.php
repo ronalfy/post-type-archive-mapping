@@ -449,9 +449,17 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => '',
 					),
+					'gridBackgroundGradientHover' => array(
+						'type' => 'string',
+						'default' => '',
+					),
 					'gridBackgroundColor' => array(
 						'type' => 'string',
 						'default' => '#000000',
+					),
+					'gridBackgroundColorHover' => array(
+						'type' => 'string',
+						'default' => '',
 					),
 					'gridFallbackImg'                        => array(
 						'type'    => 'object',

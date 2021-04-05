@@ -18108,7 +18108,8 @@ var _wp$components = wp.components,
     ToggleControl = _wp$components.ToggleControl,
     Button = _wp$components.Button,
     ToolbarGroup = _wp$components.ToolbarGroup,
-    PanelRow = _wp$components.PanelRow;
+    PanelRow = _wp$components.PanelRow,
+    TabPanel = _wp$components.TabPanel;
 var _wp$blockEditor = wp.blockEditor,
     __experimentalGradientPickerControl = _wp$blockEditor.__experimentalGradientPickerControl,
     MediaUpload = _wp$blockEditor.MediaUpload,
@@ -18141,7 +18142,9 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridFallbackImg = attributes.gridFallbackImg,
       gridImageTypeSize = attributes.gridImageTypeSize,
       gridBackgroundGradient = attributes.gridBackgroundGradient,
-      gridBackgroundColor = attributes.gridBackgroundColor; // Retrieve WPML languages.
+      gridBackgroundGradientHover = attributes.gridBackgroundGradientHover,
+      gridBackgroundColor = attributes.gridBackgroundColor,
+      gridBackgroundColorHover = attributes.gridBackgroundColorHover; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18470,26 +18473,76 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         gridBackgroundType: value
       });
     }
-  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    onChange: function onChange(value) {
-      setAttributes({
-        gridBackgroundGradient: value
-      });
-    },
-    label: __('Background Gradient', 'post-type-archive-mapping'),
-    value: gridBackgroundGradient
-  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    value: gridBackgroundColor,
-    valueOpacity: 1,
-    onChange: function onChange(value) {
-      setAttributes({
-        gridBackgroundColor: value
-      });
-    } // eslint-disable-next-line no-unused-vars
-    ,
-    onOpacityChange: function onOpacityChange(value) {},
-    label: __('Background Color', 'post-type-archive-mapping'),
-    alpha: false
+  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-gradient',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient'
+    }, {
+      name: 'grid-background-gradient-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-gradient';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradient: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradient
+    }) : /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradientHover: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradientHover
+    }));
+  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-color'
+    }, {
+      name: 'grid-background-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: gridBackgroundColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: gridBackgroundColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
   }), 'featured_image' === gridBackgroundType && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
     onSelect: function onSelect(imageObject) {
       props.setAttributes({

@@ -35,6 +35,7 @@ const {
 	Button,
 	ToolbarGroup,
 	PanelRow,
+	TabPanel,
 } = wp.components;
 
 const {
@@ -71,7 +72,9 @@ const PTAMHierarchy = ( props ) => {
 		gridFallbackImg,
 		gridImageTypeSize,
 		gridBackgroundGradient,
+		gridBackgroundGradientHover,
 		gridBackgroundColor,
+		gridBackgroundColorHover,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -362,29 +365,110 @@ const PTAMHierarchy = ( props ) => {
 					} }
 				/>
 				{ 'gradient' === gridBackgroundType && (
-					<PTAMGradientPicker
-						onChange={ ( value ) => {
-							setAttributes( {
-								gridBackgroundGradient: value,
-							} );
-						} }
-						label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
-						value={ gridBackgroundGradient }
-					/>
+					<TabPanel className="layout-tab-panel ptam-control-tabs"
+						activeClass="active-tab"
+						tabs={ [
+							{
+								name: 'grid-background-gradient',
+								title: __( 'Normal', 'post-type-archive-mapping' ),
+								className: 'grid-background-gradient',
+							},
+							{
+								name: 'grid-background-gradient-hover',
+								title: __( 'Hover', 'post-type-archive-mapping' ),
+								className: 'grid-background-gradient-hover',
+							},
+						] }>
+						{
+							( tab ) => {
+								const isNormal = tab.name === 'grid-background-gradient';
+
+								return (
+									<div>
+										{ isNormal ? (
+											<PTAMGradientPicker
+												onChange={ ( value ) => {
+													setAttributes( {
+														gridBackgroundGradient: value,
+													} );
+												} }
+												label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
+												value={ gridBackgroundGradient }
+											/>
+
+										) : (
+
+											<PTAMGradientPicker
+												onChange={ ( value ) => {
+													setAttributes( {
+														gridBackgroundGradientHover: value,
+													} );
+												} }
+												label={ __( 'Background Gradient', 'post-type-archive-mapping' ) }
+												value={ gridBackgroundGradientHover }
+											/>
+										) }
+									</div>
+								);
+							}
+						}
+					</TabPanel>
 				) }
 				{ 'color' === gridBackgroundType && (
-					<PTAMColorPicker
-						value={ gridBackgroundColor }
-						valueOpacity={ 1 }
-						onChange={ ( value ) => {
-							setAttributes( { gridBackgroundColor: value } );
-						} }
-						// eslint-disable-next-line no-unused-vars
-						onOpacityChange={ ( value ) => {
-						} }
-						label={ __( 'Background Color', 'post-type-archive-mapping' ) }
-						alpha={ false }
-					/>
+					<TabPanel className="layout-tab-panel ptam-control-tabs"
+						activeClass="active-tab"
+						tabs={ [
+							{
+								name: 'grid-background-color',
+								title: __( 'Normal', 'post-type-archive-mapping' ),
+								className: 'grid-background-color',
+							},
+							{
+								name: 'grid-background-color-hover',
+								title: __( 'Hover', 'post-type-archive-mapping' ),
+								className: 'grid-background-color-hover',
+							},
+						] }>
+						{
+							( tab ) => {
+								const isNormal = tab.name === 'grid-background-color';
+
+								return (
+									<div>
+										{ isNormal ? (
+											<PTAMColorPicker
+												value={ gridBackgroundColor }
+												valueOpacity={ 1 }
+												onChange={ ( value ) => {
+													setAttributes( { gridBackgroundColor: value } );
+												} }
+												// eslint-disable-next-line no-unused-vars
+												onOpacityChange={ ( value ) => {
+												} }
+												label={ __( 'Background Color', 'post-type-archive-mapping' ) }
+												alpha={ false }
+											/>
+
+										) : (
+
+											<PTAMColorPicker
+												value={ gridBackgroundColorHover }
+												valueOpacity={ 1 }
+												onChange={ ( value ) => {
+													setAttributes( { gridBackgroundColorHover: value } );
+												} }
+												// eslint-disable-next-line no-unused-vars
+												onOpacityChange={ ( value ) => {
+												} }
+												label={ __( 'Background Color', 'post-type-archive-mapping' ) }
+												alpha={ false }
+											/>
+										) }
+									</div>
+								);
+							}
+						}
+					</TabPanel>
 				) }
 
 				{ 'featured_image' === gridBackgroundType && (
