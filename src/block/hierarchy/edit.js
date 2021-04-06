@@ -12,6 +12,7 @@ import Loading from '../../components/Loading';
 import hexToRgba from 'hex-to-rgba';
 import CSSBuilder from '../../utilities/css-builder';
 import valueWithUnit from '../../utilities/value-with-unit';
+import shorthandCSS from '../../utilities/shorthand-css';
 
 import {
 	ListIcon,
@@ -1029,6 +1030,38 @@ const PTAMHierarchy = ( props ) => {
 				`
 			);
 		}
+	}
+	console.log( props );
+	// Grid Border.
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item',
+		`
+		border-radius: ${ shorthandCSS( gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit ) };
+		`
+	);
+	if ( '' !== gridBorderColor ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			border-color: ${ hexToRgba( gridBorderColor, 1 ) };
+			`
+		);
+		if ( '' !== gridBorderColorHover ) {
+			builder.addCSS(
+				'.ptam-hierarchical-grid-item:hover',
+				`
+				border-color: ${ hexToRgba( gridBorderColorHover, 1 ) };
+				`
+			);
+		}
+	}
+	if ( 0 < gridBorderWidth ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			border: ${ valueWithUnit( gridBorderWidth, 'px' ) } solid ${ hexToRgba( gridBorderColor, 1 ) };
+			`
+		);
 	}
 
 	return (

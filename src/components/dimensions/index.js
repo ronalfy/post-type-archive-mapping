@@ -115,11 +115,11 @@ const DimensionsControl = ( props ) => {
 
 		// If negatives are allowed, return number.
 		if ( allowNegatives ) {
-			return `${ number }`;
+			return number;
 		}
 
 		// Return absolute value of number.
-		return `${ Math.abs( number ) }`;
+		return Math.abs( number );
 	};
 
 	/**
