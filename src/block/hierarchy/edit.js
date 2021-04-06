@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * External dependencies
  */
@@ -22,10 +23,12 @@ import {
 	UnorderedListIcon,
 } from './icons';
 import HierarchicalItems from '../../components/hierarchical-items';
+// eslint-disable-next-line no-unused-vars
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { Fragment, useState, useEffect } = wp.element;
 
+// eslint-disable-next-line no-unused-vars
 const { __, _n, _x } = wp.i18n;
 
 const {
@@ -35,7 +38,6 @@ const {
 	SelectControl,
 	TextControl,
 	ToggleControl,
-	Button,
 	ToolbarGroup,
 	TabPanel,
 } = wp.components;
@@ -60,11 +62,17 @@ const PTAMHierarchy = ( props ) => {
 		listStyle,
 		disableStyles,
 		pagination,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingTop,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingRight,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingBottom,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingLeft,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingUnit,
+		// eslint-disable-next-line no-unused-vars
 		gridPaddingUnitsSync,
 		gridBackgroundType,
 		gridFallbackImg,
@@ -76,6 +84,21 @@ const PTAMHierarchy = ( props ) => {
 		gridMinHeight,
 		gridMinHeightUnit,
 		gridNumberColumns,
+		gridBorderWidth,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusTopleft,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusTopRight,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusBottomLeft,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusBottomRight,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusUnitsSync,
+		// eslint-disable-next-line no-unused-vars
+		gridBorderRadiusUnit,
+		gridBorderColor,
+		gridBorderColorHover,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -95,8 +118,11 @@ const PTAMHierarchy = ( props ) => {
 	} );
 	const [ numItems, setNumItems ] = useState( postsPerPage );
 	const [ posts, setPosts ] = useState( {} );
-	// eslint-disable-next-line no-undef
-	const [ imageSizes, setImageSizes ] = useState( ptam_globals.image_sizes );
+	const [
+		imageSizes,
+		// eslint-disable-next-line no-unused-vars
+		setImageSizes,
+	] = useState( ptam_globals.image_sizes );
 
 	useEffect( () => {
 		// Get unique ID for the block. Props @generateblocks.
@@ -381,7 +407,7 @@ const PTAMHierarchy = ( props ) => {
 	const gridOptions = (
 		<Fragment>
 			<PanelBody
-				initialOpen={ false }
+				initialOpen={ true }
 				title={ __( 'Container', 'post-type-archive-mapping' ) }
 			>
 				<UnitPicker
@@ -413,7 +439,7 @@ const PTAMHierarchy = ( props ) => {
 				/>
 			</PanelBody>
 			<PanelBody
-				initialOpen={ false }
+				initialOpen={ true }
 				title={ __( 'Background', 'post-type-archive-mapping' ) }
 			>
 				<SelectControl
@@ -594,6 +620,91 @@ const PTAMHierarchy = ( props ) => {
 						/>
 					</Fragment>
 				) }
+			</PanelBody>
+			<PanelBody
+				title={ __( 'Border', 'post-type-archive-mapping' ) }
+				initialOpen={ true }
+			>
+				<RangeControl
+					label={ __( 'Border Width', 'post-type-archive-mapping' ) }
+					value={ gridBorderWidth }
+					onChange={ ( value ) => setAttributes( { gridBorderWidth: value } ) }
+					min={ 0 }
+					max={ 100 }
+				/>
+				<DimensionsControl
+					label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					allowNegatives={ false }
+					attrTop="gridBorderRadiusTopleft"
+					attrRight="gridBorderRadiusTopRight"
+					attrBottom="gridBorderRadiusBottomLeft"
+					attrLeft="gridBorderRadiusBottomRight"
+					attrUnit="gridBorderRadiusUnit"
+					attrSyncUnits="gridBorderRadiusUnitsSync"
+					labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+					labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+					labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+					labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
+					units={ [ 'px', 'em', 'rem' ] }
+				/>
+				<TabPanel
+					className="layout-tab-panel ptam-control-tabs"
+					activeClass="active-tab"
+					tabs={ [
+						{
+							name: 'grid-border-color',
+							title: __( 'Normal', 'post-type-archive-mapping' ),
+							className: 'grid-border-color',
+						},
+						{
+							name: 'grid-border-color-hover',
+							title: __( 'Hover', 'post-type-archive-mapping' ),
+							className: 'grid-border-color-hover',
+						},
+					] }
+				>
+					{ ( tab ) => {
+						const isNormal = tab.name === 'grid-border-color';
+
+						return (
+							<div>
+								{ isNormal ? (
+									<PTAMColorPicker
+										value={ gridBorderColor }
+										valueOpacity={ 1 }
+										onChange={ ( value ) => {
+											setAttributes( { gridBorderColor: value } );
+										} }
+										// eslint-disable-next-line no-unused-vars
+										onOpacityChange={ ( value ) => {} }
+										label={ __(
+											'Border Color',
+											'post-type-archive-mapping'
+										) }
+										alpha={ false }
+									/>
+								) : (
+									<PTAMColorPicker
+										value={ gridBorderColorHover }
+										valueOpacity={ 1 }
+										onChange={ ( value ) => {
+											setAttributes( { gridBorderColorHover: value } );
+										} }
+										// eslint-disable-next-line no-unused-vars
+										onOpacityChange={ ( value ) => {} }
+										label={ __(
+											'Border Color',
+											'post-type-archive-mapping'
+										) }
+										alpha={ false }
+									/>
+								) }
+							</div>
+						);
+					} }
+				</TabPanel>
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Padding', 'post-type-archive-mapping' ) }
@@ -856,6 +967,7 @@ const PTAMHierarchy = ( props ) => {
 
 	// Begin building CSS.
 	const builder = new CSSBuilder( `ptam-hierarchy-wrapper-${ uniqueId }` );
+	// Grid CSS.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-items',
 		`
@@ -867,6 +979,7 @@ const PTAMHierarchy = ( props ) => {
 		word-break: break-all;
 		`
 	);
+	// Grid Item Flex goodness.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',
 		`
@@ -876,6 +989,7 @@ const PTAMHierarchy = ( props ) => {
 		min-height: ${ valueWithUnit( gridMinHeight, gridMinHeightUnit ) };
 		`
 	);
+	// Grid background image styles.
 	if ( 'featured_image' === gridBackgroundType ) {
 		builder.addCSS(
 			'.ptam-hierarchical-grid-item',
@@ -892,6 +1006,14 @@ const PTAMHierarchy = ( props ) => {
 			background: ${ gridBackgroundGradient };
 			`
 		);
+		if ( '' !== gridBackgroundGradientHover ) {
+			builder.addCSS(
+				'.ptam-hierarchical-grid-item:hover',
+				`
+				background: ${ gridBackgroundGradientHover };
+				`
+			);
+		}
 	} else {
 		builder.addCSS(
 			'.ptam-hierarchical-grid-item',
@@ -899,6 +1021,14 @@ const PTAMHierarchy = ( props ) => {
 			background: ${ hexToRgba( gridBackgroundColor, 1 ) };
 			`
 		);
+		if ( '' !== gridBackgroundColorHover ) {
+			builder.addCSS(
+				'.ptam-hierarchical-grid-item:hover',
+				`
+				background: ${ hexToRgba( gridBackgroundColorHover, 1 ) };
+				`
+			);
+		}
 	}
 
 	return (

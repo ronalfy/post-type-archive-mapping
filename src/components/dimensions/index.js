@@ -119,7 +119,7 @@ const DimensionsControl = ( props ) => {
 		}
 
 		// Return absolute value of number.
-		return `${ Math.abs( number ) } `;
+		return `${ Math.abs( number ) }`;
 	};
 
 	/**

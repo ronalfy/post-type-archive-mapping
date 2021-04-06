@@ -484,8 +484,43 @@ class Hierarchy {
 					'gridNumberColumns' => array(
 						'type' => 'integer',
 						'default' => 2,
-					)
-
+					),
+					'gridBorderWidth' => array(
+						'type' => 'integer',
+						'default' => 0,
+					),
+					'gridBorderRadiusTopleft' => array(
+						'type' => 'integer',
+						'default' => 0,
+					),
+					'gridBorderRadiusTopRight' => array(
+						'type' => 'integer',
+						'default' => 0,
+					),
+					'gridBorderRadiusBottomLeft' => array(
+						'type' => 'integer',
+						'default' => 0,
+					),
+					'gridBorderRadiusBottomRight' => array(
+						'type' => 'integer',
+						'default' => 0,
+					),
+					'gridBorderRadiusUnitsSync' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+					'gridBorderRadiusUnit' => array(
+						'type' => 'string',
+						'default' => 'px',
+					),
+					'gridBorderColor' => array(
+						'type' => 'string',
+						'default' => '',
+					),
+					'gridBorderColorHover' => array(
+						'type' => 'string',
+						'default' => '',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

@@ -814,3 +814,8 @@ body.has-blocks .fl-post-content .ptam-pagination {
 .block-editor-block-inspector .ptam-responsive-tabs + .components-panel__body {
 	border-top: 0;
 }
+
+/* Hierarchical Grid Items */
+.ptam-hierarchical-grid-item {
+	transition: all ease-in-out 0.5s;
+}
