@@ -18562,7 +18562,38 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }, {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
-  }]; // Image Sizes.
+  }];
+  var gridTitleFontParamsDesktop = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSize,
+    fontSizeUnit: gridTitleFontSizeUnit,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacing,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeight,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsTablet = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeTablet,
+    fontSizeUnit: gridTitleFontSizeUnitTablet,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingTablet,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightTablet,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsMobile = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeMobile,
+    fontSizeUnit: gridTitleFontSizeUnitMobile,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingMobile,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightMobile,
+    lineHeightUnit: gridTitleLineHeightUnit
+  }; // Image Sizes.
 
   var imageSizeOptions = [];
 

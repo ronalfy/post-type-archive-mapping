@@ -454,6 +454,38 @@ const PTAMHierarchy = ( props ) => {
 		{ value: 'rand', label: __( 'Random', 'post-type-archive-mapping' ) },
 	];
 
+	const gridTitleFontParamsDesktop = {
+		fontFamily: gridTitleFontFamily,
+		fontSize: gridTitleFontSize,
+		fontSizeUnit: gridTitleFontSizeUnit,
+		fontWeight: gridTitleFontWeight,
+		letterSpacing: gridTitleLetterSpacing,
+		letterSpacingUnit: gridTitleLetterSpacingUnit,
+		textTransform: gridTitleTextTransform,
+		lineHeight: gridTitleLineHeight,
+		lineHeightUnit: gridTitleLineHeightUnit,
+	};
+	const gridTitleFontParamsTablet = {
+		fontFamily: gridTitleFontFamily,
+		fontSize: gridTitleFontSizeTablet,
+		fontSizeUnit: gridTitleFontSizeUnitTablet,
+		fontWeight: gridTitleFontWeight,
+		letterSpacing: gridTitleLetterSpacingTablet,
+		textTransform: gridTitleTextTransform,
+		lineHeight: gridTitleLineHeightTablet,
+		lineHeightUnit: gridTitleLineHeightUnit,
+	};
+	const gridTitleFontParamsMobile = {
+		fontFamily: gridTitleFontFamily,
+		fontSize: gridTitleFontSizeMobile,
+		fontSizeUnit: gridTitleFontSizeUnitMobile,
+		fontWeight: gridTitleFontWeight,
+		letterSpacing: gridTitleLetterSpacingMobile,
+		textTransform: gridTitleTextTransform,
+		lineHeight: gridTitleLineHeightMobile,
+		lineHeightUnit: gridTitleLineHeightUnit,
+	};
+
 	// Image Sizes.
 	const imageSizeOptions = [];
 	for ( const imageKey in imageSizes ) {
