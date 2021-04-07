@@ -815,6 +815,38 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	border-top: 0;
 }
 
+/* Normal|Hover tabs - Forked from @GenerateBlocks */
+.ptam-control-tabs .components-tab-panel__tabs {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #e8eaeb;
+}
+
+.ptam-control-tabs .components-tab-panel__tabs button {
+	padding: 8px;
+	height: auto;
+	margin: 0;
+	margin-bottom: -1px;
+	cursor: pointer;
+	border: none;
+	border: 0;
+	border-radius: 0;
+	outline-offset: -1px;
+	flex: 1;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 400;
+
+	&.active-tab {
+		position: relative;
+		z-index: 1;
+		background: #585aa8 !important;
+		color: #fff !important;
+		box-shadow: 0 0 0 !important;
+	}
+}
+
 /* Hierarchical Grid Items */
 .ptam-hierarchical-grid-item {
 	transition: all ease-in-out 0.5s;
