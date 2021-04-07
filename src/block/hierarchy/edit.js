@@ -69,18 +69,27 @@ const PTAMHierarchy = ( props ) => {
 		listStyle,
 		disableStyles,
 		pagination,
-		// eslint-disable-next-line no-unused-vars
 		gridPaddingTop,
-		// eslint-disable-next-line no-unused-vars
 		gridPaddingRight,
-		// eslint-disable-next-line no-unused-vars
 		gridPaddingBottom,
-		// eslint-disable-next-line no-unused-vars
 		gridPaddingLeft,
-		// eslint-disable-next-line no-unused-vars
 		gridPaddingUnit,
 		// eslint-disable-next-line no-unused-vars
 		gridPaddingUnitsSync,
+		gridPaddingTopTablet,
+		gridPaddingRightTablet,
+		gridPaddingBottomTablet,
+		gridPaddingLeftTablet,
+		gridPaddingUnitTablet,
+		// eslint-disable-next-line no-unused-vars
+		gridPaddingUnitsSyncTablet,
+		gridPaddingTopMobile,
+		gridPaddingRightMobile,
+		gridPaddingBottomMobile,
+		gridPaddingLeftMobile,
+		gridPaddingUnitMobile,
+		// eslint-disable-next-line no-unused-vars
+		gridPaddingUnitsSyncMobile,
 		gridBackgroundType,
 		gridFallbackImg,
 		gridImageTypeSize,
@@ -1323,6 +1332,22 @@ const PTAMHierarchy = ( props ) => {
 		padding: ${ shorthandCSS( gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit ) };
 		`
 	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			padding: ${ shorthandCSS( gridPaddingTopTablet, gridPaddingRightTablet, gridPaddingBottomTablet, gridPaddingLeftTablet, gridPaddingUnitTablet ) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			padding: ${ shorthandCSS( gridPaddingTopMobile, gridPaddingRightMobile, gridPaddingBottomMobile, gridPaddingLeftMobile, gridPaddingUnitMobile ) };
+			`
+		);
+	}
 	// Grid Border.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',

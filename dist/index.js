@@ -18165,6 +18165,18 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridPaddingLeft = attributes.gridPaddingLeft,
       gridPaddingUnit = attributes.gridPaddingUnit,
       gridPaddingUnitsSync = attributes.gridPaddingUnitsSync,
+      gridPaddingTopTablet = attributes.gridPaddingTopTablet,
+      gridPaddingRightTablet = attributes.gridPaddingRightTablet,
+      gridPaddingBottomTablet = attributes.gridPaddingBottomTablet,
+      gridPaddingLeftTablet = attributes.gridPaddingLeftTablet,
+      gridPaddingUnitTablet = attributes.gridPaddingUnitTablet,
+      gridPaddingUnitsSyncTablet = attributes.gridPaddingUnitsSyncTablet,
+      gridPaddingTopMobile = attributes.gridPaddingTopMobile,
+      gridPaddingRightMobile = attributes.gridPaddingRightMobile,
+      gridPaddingBottomMobile = attributes.gridPaddingBottomMobile,
+      gridPaddingLeftMobile = attributes.gridPaddingLeftMobile,
+      gridPaddingUnitMobile = attributes.gridPaddingUnitMobile,
+      gridPaddingUnitsSyncMobile = attributes.gridPaddingUnitsSyncMobile,
       gridBackgroundType = attributes.gridBackgroundType,
       gridFallbackImg = attributes.gridFallbackImg,
       gridImageTypeSize = attributes.gridImageTypeSize,
@@ -19164,7 +19176,16 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   } // Grid Padding.
 
 
-  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t")); // Grid Border.
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopTablet, gridPaddingRightTablet, gridPaddingBottomTablet, gridPaddingLeftTablet, gridPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopMobile, gridPaddingRightMobile, gridPaddingBottomMobile, gridPaddingLeftMobile, gridPaddingUnitMobile), ";\n\t\t\t"));
+  } // Grid Border.
+
 
   builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
 
