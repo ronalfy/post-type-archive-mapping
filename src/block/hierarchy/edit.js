@@ -25,6 +25,7 @@ import {
 	UnorderedListIcon,
 } from './icons';
 import HierarchicalItems from '../../components/hierarchical-items';
+import TypographyControls from '../../components/typography';
 // eslint-disable-next-line no-unused-vars
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
@@ -971,6 +972,15 @@ const PTAMHierarchy = ( props ) => {
 									);
 								} }
 							</TabPanel>
+							<TypographyControls
+								options={ gridTitleFontParamsDesktop }
+								showFontFamily={ true }
+								showFontSize={ true }
+								showFontWeight={ true }
+								showTextTransform={ true }
+								showLineHeight={ true }
+								showLetterSpacing={ true }
+							/>
 						</>
 					}
 				</>
