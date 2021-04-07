@@ -127,6 +127,26 @@ const PTAMHierarchy = ( props ) => {
 		gridOverlayBackgroundColorHover,
 		// eslint-disable-next-line no-unused-vars
 		gridOverlayBackgroundColorHoverOpacity,
+		gridShowTitle,
+		gridTitleColor,
+		gridTitleColorHover,
+		gridTitleFontFamily,
+		gridTitleFontSizeUnit,
+		gridTitleFontSizeUnitTablet,
+		gridTitleFontSizeUnitMobile,
+		gridTitleFontSize,
+		gridTitleFontSizeTablet,
+		gridTitleFontSizeMobile,
+		gridTitleFontWeight,
+		gridTitleLetterSpacing,
+		gridTitleLetterSpacingTablet,
+		gridTitleLetterSpacingMobile,
+		gridTitleLetterSpacingUnit,
+		gridTitleTextTransform,
+		gridTitleLineHeight,
+		gridTitleLineHeightTablet,
+		gridTitleLineHeightMobile,
+		gridTitleLineHeightUnit,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -844,6 +864,84 @@ const PTAMHierarchy = ( props ) => {
 						/>
 					</Fragment>
 				) }
+			</PanelBody>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Title', 'post-type-archive-mapping' ) }
+			>
+				<>
+					<ToggleControl
+						label={ __( 'Show Title', 'post-type-archive-mapping' ) }
+						checked={ gridShowTitle }
+						onChange={ ( value ) => {
+							setAttributes( {
+								gridShowTitle: value,
+							} );
+						} }
+					/>
+					{ gridShowTitle &&
+						<>
+							<TabPanel
+								className="layout-tab-panel ptam-control-tabs"
+								activeClass="active-tab"
+								tabs={ [
+									{
+										name: 'grid-title-color',
+										title: __( 'Normal', 'post-type-archive-mapping' ),
+										className: 'grid-title-color',
+									},
+									{
+										name: 'grid-title-color-hover',
+										title: __( 'Hover', 'post-type-archive-mapping' ),
+										className: 'grid-title-color-hover',
+									},
+								] }
+							>
+								{ ( tab ) => {
+									const isNormal = tab.name === 'grid-title-color';
+
+									return (
+										<div>
+											{ isNormal ? (
+												<PTAMColorPicker
+													value={ gridTitleColor }
+													valueOpacity={ 1 }
+													onChange={ ( value ) => {
+														setAttributes( { gridTitleColor: value } );
+													} }
+													// eslint-disable-next-line no-unused-vars
+													onOpacityChange={ ( value ) => {
+													} }
+													label={ __(
+														'Title Color',
+														'post-type-archive-mapping'
+													) }
+													alpha={ false }
+												/>
+											) : (
+												<PTAMColorPicker
+													value={ gridTitleColorHover }
+													valueOpacity={ 1 }
+													onChange={ ( value ) => {
+														setAttributes( { gridTitleColorHover: value } );
+													} }
+													// eslint-disable-next-line no-unused-vars
+													onOpacityChange={ ( value ) => {
+													} }
+													label={ __(
+														'Title Color',
+														'post-type-archive-mapping'
+													) }
+													alpha={ false }
+												/>
+											) }
+										</div>
+									);
+								} }
+							</TabPanel>
+						</>
+					}
+				</>
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Border', 'post-type-archive-mapping' ) }

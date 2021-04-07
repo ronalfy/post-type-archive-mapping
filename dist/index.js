@@ -18204,7 +18204,27 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridOverlayBackgroundColor = attributes.gridOverlayBackgroundColor,
       gridOverlayBackgroundColorOpacity = attributes.gridOverlayBackgroundColorOpacity,
       gridOverlayBackgroundColorHover = attributes.gridOverlayBackgroundColorHover,
-      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity; // Retrieve WPML languages.
+      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity,
+      gridShowTitle = attributes.gridShowTitle,
+      gridTitleColor = attributes.gridTitleColor,
+      gridTitleColorHover = attributes.gridTitleColorHover,
+      gridTitleFontFamily = attributes.gridTitleFontFamily,
+      gridTitleFontSizeUnit = attributes.gridTitleFontSizeUnit,
+      gridTitleFontSizeUnitTablet = attributes.gridTitleFontSizeUnitTablet,
+      gridTitleFontSizeUnitMobile = attributes.gridTitleFontSizeUnitMobile,
+      gridTitleFontSize = attributes.gridTitleFontSize,
+      gridTitleFontSizeTablet = attributes.gridTitleFontSizeTablet,
+      gridTitleFontSizeMobile = attributes.gridTitleFontSizeMobile,
+      gridTitleFontWeight = attributes.gridTitleFontWeight,
+      gridTitleLetterSpacing = attributes.gridTitleLetterSpacing,
+      gridTitleLetterSpacingTablet = attributes.gridTitleLetterSpacingTablet,
+      gridTitleLetterSpacingMobile = attributes.gridTitleLetterSpacingMobile,
+      gridTitleLetterSpacingUnit = attributes.gridTitleLetterSpacingUnit,
+      gridTitleTextTransform = attributes.gridTitleTextTransform,
+      gridTitleLineHeight = attributes.gridTitleLineHeight,
+      gridTitleLineHeightTablet = attributes.gridTitleLineHeightTablet,
+      gridTitleLineHeightMobile = attributes.gridTitleLineHeightMobile,
+      gridTitleLineHeightUnit = attributes.gridTitleLineHeightUnit; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18841,6 +18861,56 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       })));
     }
   }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Title', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Title', 'post-type-archive-mapping'),
+    checked: gridShowTitle,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridShowTitle: value
+      });
+    }
+  }), gridShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-title-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-title-color'
+    }, {
+      name: 'grid-title-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-title-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-title-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  })))), /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Border', 'post-type-archive-mapping'),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(TabPanel, {

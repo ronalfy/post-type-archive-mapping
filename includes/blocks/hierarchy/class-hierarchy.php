@@ -449,51 +449,51 @@ class Hierarchy {
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'gridPaddingTopTablet'                    => array(
+					'gridPaddingTopTablet'              => array(
 						'type'    => 'integer',
 						'default' => 15,
 					),
-					'gridPaddingRightTablet'                  => array(
+					'gridPaddingRightTablet'            => array(
 						'type'    => 'integer',
 						'default' => 15,
 					),
-					'gridPaddingBottomTablet'                 => array(
+					'gridPaddingBottomTablet'           => array(
 						'type'    => 'integer',
 						'default' => 15,
 					),
-					'gridPaddingLeftTablet'                   => array(
+					'gridPaddingLeftTablet'             => array(
 						'type'    => 'integer',
 						'default' => 15,
 					),
-					'gridPaddingUnitTablet'                   => array(
+					'gridPaddingUnitTablet'             => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'gridPaddingUnitsSyncTablet'              => array(
+					'gridPaddingUnitsSyncTablet'        => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'gridPaddingTopMobile'                    => array(
+					'gridPaddingTopMobile'              => array(
 						'type'    => 'integer',
 						'default' => 10,
 					),
-					'gridPaddingRightMobile'                  => array(
+					'gridPaddingRightMobile'            => array(
 						'type'    => 'integer',
 						'default' => 10,
 					),
-					'gridPaddingBottomMobile'                 => array(
+					'gridPaddingBottomMobile'           => array(
 						'type'    => 'integer',
 						'default' => 10,
 					),
-					'gridPaddingLeftMobile'                   => array(
+					'gridPaddingLeftMobile'             => array(
 						'type'    => 'integer',
 						'default' => 10,
 					),
-					'gridPaddingUnitMobile'                   => array(
+					'gridPaddingUnitMobile'             => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'gridPaddingUnitsSyncMobile'              => array(
+					'gridPaddingUnitsSyncMobile'        => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
@@ -608,6 +608,86 @@ class Hierarchy {
 					'gridOverlayBackgroundColorHoverOpacity' => array(
 						'type'    => 'string',
 						'default' => '0.4',
+					),
+					'gridShowTitle'                     => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'gridTitleColor'                    => array(
+						'type'    => 'string',
+						'default' => '#DDDDDD',
+					),
+					'gridTitleColorHover'               => array(
+						'type'    => 'string',
+						'default' => '#FFFFFF',
+					),
+					'gridTitleFontFamily'               => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'gridTitleFontSizeUnit'             => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridTitleFontSizeUnitTablet'       => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridTitleFontSizeUnitMobile'       => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridTitleFontSize'                 => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'gridTitleFontSizeTablet'           => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'gridTitleFontSizeMobile'           => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'gridTitleFontWeight'               => array(
+						'type'    => 'string',
+						'default' => 400.,
+					),
+					'gridTitleLetterSpacing'            => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'gridTitleLetterSpacingTablet'      => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'gridTitleLetterSpacingMobile'      => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'gridTitleLetterSpacingUnit'        => array(
+						'type'    => 'string',
+						'default' => 'em',
+					),
+					'gridTitleTextTransform'            => array(
+						'type'    => 'string',
+						'default' => 'none',
+					),
+					'gridTitleLineHeight'               => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'gridTitleLineHeightTablet'         => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'gridTitleLineHeightMobile'         => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'gridTitleLineHeightUnit'           => array(
+						'type'    => 'string',
+						'default' => 'em',
 					),
 				),
 				'render_callback' => array( $this, 'output' ),
