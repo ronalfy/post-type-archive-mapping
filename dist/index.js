@@ -18069,9 +18069,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
 /* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
 /* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -18094,6 +18097,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -18132,6 +18136,10 @@ var _wp$blockEditor = wp.blockEditor,
     MediaUpload = _wp$blockEditor.MediaUpload,
     InspectorControls = _wp$blockEditor.InspectorControls,
     BlockControls = _wp$blockEditor.BlockControls;
+var _wp$data = wp.data,
+    withSelect = _wp$data.withSelect,
+    withDispatch = _wp$data.withDispatch;
+var compose = wp.compose.compose;
 
 var PTAMHierarchy = function PTAMHierarchy(props) {
   // Shortcuts.
@@ -18224,6 +18232,11 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       // eslint-disable-next-line no-unused-vars
   setImageSizes = _useState12[1];
 
+  var _useState13 = useState('Desktop'),
+      _useState14 = _slicedToArray(_useState13, 2),
+      deviceType = _useState14[0],
+      setDeviceType = _useState14[1];
+
   useEffect(function () {
     // Get unique ID for the block. Props @generateblocks.
     var id = props.clientId.substr(2, 9).replace('-', '');
@@ -18246,17 +18259,17 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   var selectedView = function selectedView() {
     switch (view) {
       case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["GridIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null);
 
       case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["FullIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null);
 
       case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["ColumnsIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null);
 
       case 'list':
       default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["ListIcon"], null);
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null);
     }
   };
   /**
@@ -18436,6 +18449,31 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         }
       }, posts[i].post_title));
     });
+  };
+  /**
+   * Get the current device type (mobile|desktop|tablet).
+   *
+   * @return {string} Current device.
+   */
+
+
+  var getDeviceType = function getDeviceType() {
+    return props.deviceType ? props.deviceType : deviceType;
+  };
+  /**
+   * Change the device type.
+   *
+   * @param {string} device The device to change to.
+   */
+
+
+  var changeDeviceType = function changeDeviceType(device) {
+    if (props.deviceType) {
+      props.setDeviceType(device);
+      setDeviceType(device);
+    } else {
+      setDeviceType(device);
+    }
   }; // Hierarchical Post Types.
 
 
@@ -18510,7 +18548,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     value: 'color',
     label: __('Color', 'post-type-archive-mapping')
   }];
-  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+    selectedDevice: getDeviceType(),
+    onClick: function onClick(device) {
+      changeDeviceType(device);
+    }
+  })), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Container', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -18815,7 +18858,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -18875,7 +18918,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }))); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["ListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null),
     title: __('View as a List', 'post-type-archive-mapping'),
     isActive: 'list' === view,
     onClick: function onClick() {
@@ -18884,7 +18927,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["GridIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null),
     title: __('View as a Grid', 'post-type-archive-mapping'),
     isActive: 'grid' === view,
     onClick: function onClick() {
@@ -18893,7 +18936,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["ColumnsIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null),
     title: __('View as Columns', 'post-type-archive-mapping'),
     isActive: 'columns' === view,
     onClick: function onClick() {
@@ -18902,7 +18945,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["FullIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null),
     title: __('View as Full Content', 'post-type-archive-mapping'),
     isActive: 'full' === view,
     onClick: function onClick() {
@@ -18913,7 +18956,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }]]; // Toolbar option group for the main layout settings.
 
   var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["UnorderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["UnorderedListIcon"], null),
     title: __('Unordered List', 'post-type-archive-mapping'),
     isActive: 'ul' === listStyle,
     onClick: function onClick() {
@@ -18922,7 +18965,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["OrderedListIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["OrderedListIcon"], null),
     title: __('Numbered List', 'post-type-archive-mapping'),
     isActive: 'ol' === listStyle,
     onClick: function onClick() {
@@ -18931,7 +18974,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       });
     }
   }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["FormatTextLeftIcon"], null),
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FormatTextLeftIcon"], null),
     title: __('No List', 'post-type-archive-mapping'),
     isActive: 'none' === listStyle,
     onClick: function onClick() {
@@ -19062,7 +19105,33 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   }, getPostHtml()));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (PTAMHierarchy);
+/* harmony default export */ __webpack_exports__["default"] = (compose([withDispatch(function (dispatch) {
+  return {
+    setDeviceType: function setDeviceType(type) {
+      var _dispatch = dispatch('core/edit-post'),
+          setPreviewDeviceType = _dispatch.__experimentalSetPreviewDeviceType;
+
+      if (!setPreviewDeviceType) {
+        return;
+      }
+
+      setPreviewDeviceType(type);
+    }
+  };
+}), withSelect(function (select) {
+  var _select = select('core/edit-post'),
+      getPreviewDeviceType = _select.__experimentalGetPreviewDeviceType;
+
+  if (!getPreviewDeviceType) {
+    return {
+      deviceType: null
+    };
+  }
+
+  return {
+    deviceType: getPreviewDeviceType()
+  };
+})])(PTAMHierarchy));
 
 /***/ }),
 
@@ -21423,6 +21492,56 @@ var HierarchicalItems = function HierarchicalItems(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HierarchicalItems);
+
+/***/ }),
+
+/***/ "./src/components/responsive-tabs/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/responsive-tabs/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Responsive Tabs (forked from @GenerateBlocks).
+ */
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    Tooltip = _wp$components.Tooltip,
+    Button = _wp$components.Button;
+
+var ResponsiveTabs = function ResponsiveTabs(props) {
+  var _onClick = props.onClick,
+      selectedDevice = props.selectedDevice;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-responsive-tabs"
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for all devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Desktop' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Desktop');
+    }
+  }, __('Desktop', 'post-type-archive-mapping'))), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for tablet devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Tablet' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Tablet');
+    }
+  }, __('Tablet', 'post-type-archive-mapping'))), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for mobile devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Mobile' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Mobile');
+    }
+  }, __('Mobile', 'post-type-archive-mapping')))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ResponsiveTabs);
 
 /***/ }),
 

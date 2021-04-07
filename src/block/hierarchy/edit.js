@@ -13,6 +13,7 @@ import hexToRgba from 'hex-to-rgba';
 import CSSBuilder from '../../utilities/css-builder';
 import valueWithUnit from '../../utilities/value-with-unit';
 import shorthandCSS from '../../utilities/shorthand-css';
+import ResponsiveTabs from '../../components/responsive-tabs';
 
 import {
 	ListIcon,
@@ -44,6 +45,9 @@ const {
 } = wp.components;
 
 const { MediaUpload, InspectorControls, BlockControls } = wp.blockEditor;
+
+const { withSelect, withDispatch } = wp.data;
+const { compose } = wp.compose;
 
 const PTAMHierarchy = ( props ) => {
 	// Shortcuts.
@@ -134,6 +138,7 @@ const PTAMHierarchy = ( props ) => {
 		// eslint-disable-next-line no-unused-vars
 		setImageSizes,
 	] = useState( ptam_globals.image_sizes );
+	const [ deviceType, setDeviceType ] = useState( 'Desktop' );
 
 	useEffect( () => {
 		// Get unique ID for the block. Props @generateblocks.
@@ -337,6 +342,29 @@ const PTAMHierarchy = ( props ) => {
 		) );
 	};
 
+	/**
+	 * Get the current device type (mobile|desktop|tablet).
+	 *
+	 * @return {string} Current device.
+	 */
+	const getDeviceType = () => {
+		return props.deviceType ? props.deviceType : deviceType;
+	};
+
+	/**
+	 * Change the device type.
+	 *
+	 * @param {string} device The device to change to.
+	 */
+	const changeDeviceType = ( device ) => {
+		if ( props.deviceType ) {
+			props.setDeviceType( device );
+			setDeviceType( device );
+		} else {
+			setDeviceType( device );
+		}
+	};
+
 	// Hierarchical Post Types.
 	const postTypeOptions = [];
 	// eslint-disable-next-line no-undef
@@ -417,6 +445,12 @@ const PTAMHierarchy = ( props ) => {
 
 	const gridOptions = (
 		<Fragment>
+			<ResponsiveTabs { ...props }
+				selectedDevice={ getDeviceType() }
+				onClick={ ( device ) => {
+					changeDeviceType( device );
+				} }
+			/>
 			<PanelBody
 				initialOpen={ false }
 				title={ __( 'Container', 'post-type-archive-mapping' ) }
@@ -1209,4 +1243,34 @@ const PTAMHierarchy = ( props ) => {
 		</>
 	);
 };
-export default PTAMHierarchy;
+
+export default compose( [
+	withDispatch( ( dispatch ) => ( {
+		setDeviceType( type ) {
+			const {
+				__experimentalSetPreviewDeviceType: setPreviewDeviceType,
+			} = dispatch( 'core/edit-post' );
+
+			if ( ! setPreviewDeviceType ) {
+				return;
+			}
+
+			setPreviewDeviceType( type );
+		},
+	} ) ),
+	withSelect( ( select ) => {
+		const {
+			__experimentalGetPreviewDeviceType: getPreviewDeviceType,
+		} = select( 'core/edit-post' );
+
+		if ( ! getPreviewDeviceType ) {
+			return {
+				deviceType: null,
+			};
+		}
+
+		return {
+			deviceType: getPreviewDeviceType(),
+		};
+	} ),
+] )( PTAMHierarchy );
