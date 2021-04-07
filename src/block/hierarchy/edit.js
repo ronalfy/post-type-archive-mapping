@@ -89,7 +89,11 @@ const PTAMHierarchy = ( props ) => {
 		gridBackgroundColor,
 		gridBackgroundColorHover,
 		gridMinHeight,
+		gridMinHeightTablet,
+		gridMinHeightMobile,
 		gridMinHeightUnit,
+		gridMinHeightUnitTablet,
+		gridMinHeightUnitMobile,
 		gridNumberColumns,
 		gridBorderWidth,
 		// eslint-disable-next-line no-unused-vars
@@ -455,45 +459,122 @@ const PTAMHierarchy = ( props ) => {
 				initialOpen={ false }
 				title={ __( 'Container', 'post-type-archive-mapping' ) }
 			>
-				<UnitPicker
-					label={ __( 'Minimum Height', 'post-type-archive-mapping' ) }
-					value={ gridMinHeightUnit }
-					units={ [ 'px', 'em', 'vh' ] }
-					onClick={ ( value ) => {
-						setAttributes( {
-							gridMinHeightUnit: value,
-						} );
-					} }
-				/>
+				{
+					'Desktop' === getDeviceType() &&
+						<>
+							<UnitPicker
+								label={ __( 'Minimum Height', 'post-type-archive-mapping' ) }
+								value={ gridMinHeightUnit }
+								units={ [ 'px', 'em', 'vh' ] }
+								onClick={ ( value ) => {
+									setAttributes( {
+										gridMinHeightUnit: value,
+									} );
+								} }
+							/>
 
-				<TextControl
-					type={ 'number' }
-					value={ gridMinHeight ? gridMinHeight : '' }
-					onChange={ ( value ) => {
-						setAttributes( {
-							gridMinHeight: parseFloat( value ),
-						} );
-					} }
-				/>
-				<RangeControl
-					label={ __( 'Number of Columns', 'post-type-archive-mapping' ) }
-					value={ gridNumberColumns }
-					onChange={ ( value ) => setAttributes( { gridNumberColumns: value } ) }
-					min={ 1 }
-					max={ 4 }
-				/>
-				<DimensionsControl
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					allowNegatives={ false }
-					attrTop="gridPaddingTop"
-					attrRight="gridPaddingRight"
-					attrBottom="gridPaddingBottom"
-					attrLeft="gridPaddingLeft"
-					attrUnit="gridPaddingUnit"
-					attrSyncUnits="gridPaddingUnitsSync"
-					units={ [ 'px', 'em', 'rem' ] }
-				/>
+							<TextControl
+								type={ 'number' }
+								value={ gridMinHeight ? gridMinHeight : '' }
+								onChange={ ( value ) => {
+									setAttributes( {
+										gridMinHeight: parseFloat( value ),
+									} );
+								} }
+							/>
+							<RangeControl
+								label={ __( 'Number of Columns', 'post-type-archive-mapping' ) }
+								value={ gridNumberColumns }
+								onChange={ ( value ) => setAttributes( { gridNumberColumns: value } ) }
+								min={ 1 }
+								max={ 4 }
+							/>
+							<DimensionsControl
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								allowNegatives={ false }
+								attrTop="gridPaddingTop"
+								attrRight="gridPaddingRight"
+								attrBottom="gridPaddingBottom"
+								attrLeft="gridPaddingLeft"
+								attrUnit="gridPaddingUnit"
+								attrSyncUnits="gridPaddingUnitsSync"
+								units={ [ 'px', 'em', 'rem' ] }
+							/>
+						</>
+				}
+				{ 'Tablet' === getDeviceType() &&
+					<>
+						<UnitPicker
+							label={ __( 'Minimum Height', 'post-type-archive-mapping' ) }
+							value={ gridMinHeightUnitTablet }
+							units={ [ 'px', 'em', 'vh' ] }
+							onClick={ ( value ) => {
+								setAttributes( {
+									gridMinHeightUnitTablet: value,
+								} );
+							} }
+						/>
+
+						<TextControl
+							type={ 'number' }
+							value={ gridMinHeightTablet ? gridMinHeightTablet : '' }
+							onChange={ ( value ) => {
+								setAttributes( {
+									gridMinHeightTablet: parseFloat( value ),
+								} );
+							} }
+						/>
+						<DimensionsControl
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="gridPaddingTopTablet"
+							attrRight="gridPaddingRightTablet"
+							attrBottom="gridPaddingBottomTablet"
+							attrLeft="gridPaddingLeftTablet"
+							attrUnit="gridPaddingUnitTablet"
+							attrSyncUnits="gridPaddingUnitsSyncTablet"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+					</>
+				}
+				{ 'Mobile' === getDeviceType() &&
+					<>
+						<UnitPicker
+							label={ __( 'Minimum Height', 'post-type-archive-mapping' ) }
+							value={ gridMinHeightUnitMobile }
+							units={ [ 'px', 'em', 'vh' ] }
+							onClick={ ( value ) => {
+								setAttributes( {
+									gridMinHeightUnitMobile: value,
+								} );
+							} }
+						/>
+
+						<TextControl
+							type={ 'number' }
+							value={ gridMinHeightMobile ? gridMinHeightMobile : '' }
+							onChange={ ( value ) => {
+								setAttributes( {
+									gridMinHeightMobile: parseFloat( value ),
+								} );
+							} }
+						/>
+						<DimensionsControl
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="gridPaddingTopMobile"
+							attrRight="gridPaddingRightMobile"
+							attrBottom="gridPaddingBottomMobile"
+							attrLeft="gridPaddingLeftMobile"
+							attrUnit="gridPaddingUnitMobile"
+							attrSyncUnits="gridPaddingUnitsSyncMobile"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+					</>
+				}
 			</PanelBody>
 			<PanelBody
 				initialOpen={ false }
@@ -1124,6 +1205,22 @@ const PTAMHierarchy = ( props ) => {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		`
 	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2',
+			`
+			grid-template-columns: 1fr 1fr;
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2',
+			`
+			grid-template-columns: 1fr;
+			`
+		);
+	}
 
 	// Grid Item Flex goodness.
 	builder.addCSS(
@@ -1132,9 +1229,26 @@ const PTAMHierarchy = ( props ) => {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-align: center;
 		min-height: ${ valueWithUnit( gridMinHeight, gridMinHeightUnit ) };
 		`
 	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			min-height: ${ valueWithUnit( gridMinHeightTablet, gridMinHeightUnitTablet ) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item',
+			`
+			min-height: ${ valueWithUnit( gridMinHeightMobile, gridMinHeightUnitMobile ) };
+			`
+		);
+	}
 	// Grid background image styles.
 	if ( 'featured_image' === gridBackgroundType ) {
 		builder.addCSS(
@@ -1202,6 +1316,13 @@ const PTAMHierarchy = ( props ) => {
 			);
 		}
 	}
+	// Grid Padding.
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item',
+		`
+		padding: ${ shorthandCSS( gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit ) };
+		`
+	);
 	// Grid Border.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',

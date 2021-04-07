@@ -18173,7 +18173,11 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridBackgroundColor = attributes.gridBackgroundColor,
       gridBackgroundColorHover = attributes.gridBackgroundColorHover,
       gridMinHeight = attributes.gridMinHeight,
+      gridMinHeightTablet = attributes.gridMinHeightTablet,
+      gridMinHeightMobile = attributes.gridMinHeightMobile,
       gridMinHeightUnit = attributes.gridMinHeightUnit,
+      gridMinHeightUnitTablet = attributes.gridMinHeightUnitTablet,
+      gridMinHeightUnitMobile = attributes.gridMinHeightUnitMobile,
       gridNumberColumns = attributes.gridNumberColumns,
       gridBorderWidth = attributes.gridBorderWidth,
       gridBorderRadiusTopleft = attributes.gridBorderRadiusTopleft,
@@ -18556,7 +18560,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   })), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Container', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     label: __('Minimum Height', 'post-type-archive-mapping'),
     value: gridMinHeightUnit,
     units: ['px', 'em', 'vh'],
@@ -18594,7 +18598,63 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     attrUnit: "gridPaddingUnit",
     attrSyncUnits: "gridPaddingUnitsSync",
     units: ['px', 'em', 'rem']
-  })), /*#__PURE__*/React.createElement(PanelBody, {
+  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitTablet,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitTablet: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightTablet ? gridMinHeightTablet : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightTablet: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopTablet",
+    attrRight: "gridPaddingRightTablet",
+    attrBottom: "gridPaddingBottomTablet",
+    attrLeft: "gridPaddingLeftTablet",
+    attrUnit: "gridPaddingUnitTablet",
+    attrSyncUnits: "gridPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitMobile,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitMobile: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightMobile ? gridMinHeightMobile : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightMobile: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopMobile",
+    attrRight: "gridPaddingRightMobile",
+    attrBottom: "gridPaddingBottomMobile",
+    attrLeft: "gridPaddingLeftMobile",
+    attrUnit: "gridPaddingUnitMobile",
+    attrSyncUnits: "gridPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Background', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(SelectControl, {
@@ -19057,9 +19117,27 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
   builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
   builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\tgrid-template-columns: 1fr 1fr;\n\t\t");
   builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3', "\n\t\tgrid-template-columns: 1fr 1fr 1fr;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t"); // Grid Item Flex goodness.
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t");
 
-  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\t")); // Grid background image styles.
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr 1fr;\n\t\t\t");
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr;\n\t\t\t");
+  } // Grid Item Flex goodness.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\ttext-align: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightTablet, gridMinHeightUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightMobile, gridMinHeightUnitMobile), ";\n\t\t\t"));
+  } // Grid background image styles.
+
 
   if ('featured_image' === gridBackgroundType) {
     builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tz-index: 1;\n\t\t\tposition: relative;\n\t\t\toverflow: hidden;\n\t\t\t");
@@ -19083,8 +19161,10 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     if ('' !== gridBackgroundColorHover) {
       builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColorHover, 1), ";\n\t\t\t\t"));
     }
-  } // Grid Border.
+  } // Grid Padding.
 
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t")); // Grid Border.
 
   builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
 

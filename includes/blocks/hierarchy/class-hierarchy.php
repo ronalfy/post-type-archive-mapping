@@ -373,176 +373,240 @@ class Hierarchy {
 			'ptam/hierarchy',
 			array(
 				'attributes'      => array(
-					'uniqueId'   => array(
+					'uniqueId'                          => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'align' => array(
-						'type' => 'string',
+					'align'                             => array(
+						'type'    => 'string',
 						'default' => 'full',
 					),
-					'view'       => array(
+					'view'                              => array(
 						'type'    => 'string',
 						'default' => 'list',
 					),
-					'postType'   => array(
+					'postType'                          => array(
 						'type'    => 'string',
 						'default' => 'page',
 					),
-					'hierarchy'  => array(
+					'hierarchy'                         => array(
 						'type'    => 'string',
 						'default' => 'parents', // parents or children.
 					),
-					'parentItem' => array(
+					'parentItem'                        => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'order'      => array(
+					'order'                             => array(
 						'type'    => 'string',
 						'default' => 'ASC',
 					),
-					'orderBy'    => array(
+					'orderBy'                           => array(
 						'type'    => 'string',
 						'default' => 'title',
 					),
-					'postsPerPage' => array(
-						'type' => 'integer',
+					'postsPerPage'                      => array(
+						'type'    => 'integer',
 						'default' => 20,
 					),
-					'wpmlLanguage'         => array(
+					'wpmlLanguage'                      => array(
 						'type'    => 'string',
 						'default' => 'en',
 					),
-					'listStyle' => array(
-						'type' => 'string',
+					'listStyle'                         => array(
+						'type'    => 'string',
 						'default' => 'ul', /* ul, ol, none */
 					),
-					'disableStyles' => array(
-						'type' => 'boolean',
+					'disableStyles'                     => array(
+						'type'    => 'boolean',
 						'default' => false,
 					),
-					'pagination' => array(
-						'type' => 'boolean',
+					'pagination'                        => array(
+						'type'    => 'boolean',
 						'default' => false,
 					),
-					'gridPaddingTop' => array(
-						'type' => 'integer',
+					'gridPaddingTop'                    => array(
+						'type'    => 'integer',
 						'default' => 20,
 					),
-					'gridPaddingRight' => array(
-						'type' => 'integer',
+					'gridPaddingRight'                  => array(
+						'type'    => 'integer',
 						'default' => 20,
 					),
-					'gridPaddingBottom' => array(
-						'type' => 'integer',
+					'gridPaddingBottom'                 => array(
+						'type'    => 'integer',
 						'default' => 20,
 					),
-					'gridPaddingLeft' => array(
-						'type' => 'integer',
+					'gridPaddingLeft'                   => array(
+						'type'    => 'integer',
 						'default' => 20,
 					),
-					'gridPaddingUnit' => array(
-						'type' => 'string',
+					'gridPaddingUnit'                   => array(
+						'type'    => 'string',
 						'default' => 'px',
 					),
-					'gridPaddingUnitsSync' => array(
-						'type' => 'boolean',
+					'gridPaddingUnitsSync'              => array(
+						'type'    => 'boolean',
 						'default' => true,
 					),
-					'gridBackgroundType' => array(
-						'type' => 'string',
+					'gridPaddingTopTablet'                    => array(
+						'type'    => 'integer',
+						'default' => 15,
+					),
+					'gridPaddingRightTablet'                  => array(
+						'type'    => 'integer',
+						'default' => 15,
+					),
+					'gridPaddingBottomTablet'                 => array(
+						'type'    => 'integer',
+						'default' => 15,
+					),
+					'gridPaddingLeftTablet'                   => array(
+						'type'    => 'integer',
+						'default' => 15,
+					),
+					'gridPaddingUnitTablet'                   => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridPaddingUnitsSyncTablet'              => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'gridPaddingTopMobile'                    => array(
+						'type'    => 'integer',
+						'default' => 10,
+					),
+					'gridPaddingRightMobile'                  => array(
+						'type'    => 'integer',
+						'default' => 10,
+					),
+					'gridPaddingBottomMobile'                 => array(
+						'type'    => 'integer',
+						'default' => 10,
+					),
+					'gridPaddingLeftMobile'                   => array(
+						'type'    => 'integer',
+						'default' => 10,
+					),
+					'gridPaddingUnitMobile'                   => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridPaddingUnitsSyncMobile'              => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'gridBackgroundType'                => array(
+						'type'    => 'string',
 						'default' => 'featured_image', /* featured_image, gradient, color */
 					),
-					'gridImageTypeSize' => array(
-						'type' => 'string',
+					'gridImageTypeSize'                 => array(
+						'type'    => 'string',
 						'default' => 'large',
 					),
-					'gridBackgroundGradient' => array(
-						'type' => 'string',
+					'gridBackgroundGradient'            => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'gridBackgroundGradientHover' => array(
-						'type' => 'string',
+					'gridBackgroundGradientHover'       => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'gridBackgroundColor' => array(
-						'type' => 'string',
+					'gridBackgroundColor'               => array(
+						'type'    => 'string',
 						'default' => '#000000',
 					),
-					'gridBackgroundColorHover' => array(
-						'type' => 'string',
+					'gridBackgroundColorHover'          => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'gridFallbackImg'                        => array(
+					'gridFallbackImg'                   => array(
 						'type'    => 'object',
 						'default' => '',
 					),
-					'gridMinHeight' => array(
-						'type' => 'integer',
+					'gridMinHeight'                     => array(
+						'type'    => 'integer',
 						'default' => 300,
 					),
-					'gridMinHeightUnit' => array(
-						'type' => 'string',
+					'gridMinHeightTablet'               => array(
+						'type'    => 'integer',
+						'default' => 300,
+					),
+					'gridMinHeightMobile'               => array(
+						'type'    => 'integer',
+						'default' => 300,
+					),
+					'gridMinHeightUnit'                 => array(
+						'type'    => 'string',
 						'default' => 'px',
 					),
-					'gridNumberColumns' => array(
-						'type' => 'integer',
+					'gridMinHeightUnitTablet'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridMinHeightUnitMobile'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'gridNumberColumns'                 => array(
+						'type'    => 'integer',
 						'default' => 2,
 					),
-					'gridBorderWidth' => array(
-						'type' => 'integer',
+					'gridBorderWidth'                   => array(
+						'type'    => 'integer',
 						'default' => 0,
 					),
-					'gridBorderRadiusTopleft' => array(
-						'type' => 'integer',
+					'gridBorderRadiusTopleft'           => array(
+						'type'    => 'integer',
 						'default' => 0,
 					),
-					'gridBorderRadiusTopRight' => array(
-						'type' => 'integer',
+					'gridBorderRadiusTopRight'          => array(
+						'type'    => 'integer',
 						'default' => 0,
 					),
-					'gridBorderRadiusBottomLeft' => array(
-						'type' => 'integer',
+					'gridBorderRadiusBottomLeft'        => array(
+						'type'    => 'integer',
 						'default' => 0,
 					),
-					'gridBorderRadiusBottomRight' => array(
-						'type' => 'integer',
+					'gridBorderRadiusBottomRight'       => array(
+						'type'    => 'integer',
 						'default' => 0,
 					),
-					'gridBorderRadiusUnitsSync' => array(
-						'type' => 'boolean',
+					'gridBorderRadiusUnitsSync'         => array(
+						'type'    => 'boolean',
 						'default' => true,
 					),
-					'gridBorderRadiusUnit' => array(
-						'type' => 'string',
+					'gridBorderRadiusUnit'              => array(
+						'type'    => 'string',
 						'default' => 'px',
 					),
-					'gridBorderColor' => array(
-						'type' => 'string',
+					'gridBorderColor'                   => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'gridBorderColorHover' => array(
-						'type' => 'string',
+					'gridBorderColorHover'              => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'gridOverlay' => array(
-						'type' => 'boolean',
+					'gridOverlay'                       => array(
+						'type'    => 'boolean',
 						'default' => true,
 					),
-					'gridOverlayBackgroundColor' => array(
-						'type' => 'string',
+					'gridOverlayBackgroundColor'        => array(
+						'type'    => 'string',
 						'default' => '#000000',
 					),
 					'gridOverlayBackgroundColorOpacity' => array(
-						'type' => 'string',
+						'type'    => 'string',
 						'default' => '0.6',
 					),
-					'gridOverlayBackgroundColorHover' => array(
-						'type' => 'string',
+					'gridOverlayBackgroundColorHover'   => array(
+						'type'    => 'string',
 						'default' => '#000000',
 					),
 					'gridOverlayBackgroundColorHoverOpacity' => array(
-						'type' => 'string',
+						'type'    => 'string',
 						'default' => '0.4',
 					),
 				),
