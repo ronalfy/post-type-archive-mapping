@@ -18163,7 +18163,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       gridBorderRadiusUnitsSync = attributes.gridBorderRadiusUnitsSync,
       gridBorderRadiusUnit = attributes.gridBorderRadiusUnit,
       gridBorderColor = attributes.gridBorderColor,
-      gridBorderColorHover = attributes.gridBorderColorHover; // Retrieve WPML languages.
+      gridBorderColorHover = attributes.gridBorderColorHover,
+      gridOverlay = attributes.gridOverlay,
+      gridOverlayBackgroundColor = attributes.gridOverlayBackgroundColor,
+      gridOverlayBackgroundColorOpacity = attributes.gridOverlayBackgroundColorOpacity,
+      gridOverlayBackgroundColorHover = attributes.gridOverlayBackgroundColorHover,
+      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18494,7 +18499,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     label: __('Color', 'post-type-archive-mapping')
   }];
   var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: true,
+    initialOpen: false,
     title: __('Container', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     label: __('Minimum Height', 'post-type-archive-mapping'),
@@ -18523,8 +18528,19 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     },
     min: 1,
     max: 4
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTop",
+    attrRight: "gridPaddingRight",
+    attrBottom: "gridPaddingBottom",
+    attrLeft: "gridPaddingLeft",
+    attrUnit: "gridPaddingUnit",
+    attrSyncUnits: "gridPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
   })), /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: true,
+    initialOpen: false,
     title: __('Background', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Background Type', 'post-type-archive-mapping'),
@@ -18631,47 +18647,76 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
             gridFallbackImg: ''
           });
         }
-      }, __('Reset Image', 'post-type-archive-mapping')))));
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Featured Image Size', 'post-type-archive-mapping'),
-    options: imageSizeOptions,
-    value: gridImageTypeSize,
-    onChange: function onChange(value) {
-      setAttributes({
-        gridImageTypeSize: value
-      });
+      }, __('Reset Image', 'post-type-archive-mapping')))), /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Featured Image Size', 'post-type-archive-mapping'),
+        options: imageSizeOptions,
+        value: gridImageTypeSize,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridImageTypeSize: value
+          });
+        }
+      }), /*#__PURE__*/React.createElement(ToggleControl, {
+        label: __('Enable Overlay', 'post-type-archive-mapping'),
+        checked: gridOverlay,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridOverlay: value
+          });
+        }
+      }), gridOverlay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+        className: "layout-tab-panel ptam-control-tabs",
+        activeClass: "active-tab",
+        tabs: [{
+          name: 'grid-overlay-color',
+          title: __('Normal', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color'
+        }, {
+          name: 'grid-overlay-color-hover',
+          title: __('Hover', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color-hover'
+        }]
+      }, function (tab) {
+        var isNormal = tab.name === 'grid-overlay-color';
+        return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColor,
+          valueOpacity: gridOverlayBackgroundColorOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColor: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColorHover,
+          valueOpacity: gridOverlayBackgroundColorHoverOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHover: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHoverOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }));
+      })));
     }
   }))), /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Border', 'post-type-archive-mapping'),
-    initialOpen: true
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    label: __('Border Width', 'post-type-archive-mapping'),
-    value: gridBorderWidth,
-    onChange: function onChange(value) {
-      return setAttributes({
-        gridBorderWidth: value
-      });
-    },
-    min: 0,
-    max: 100
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __('Border Radius', 'post-type-archive-mapping'),
-    attributes: attributes,
-    setAttributes: setAttributes,
-    allowNegatives: false,
-    attrTop: "gridBorderRadiusTopleft",
-    attrRight: "gridBorderRadiusTopRight",
-    attrBottom: "gridBorderRadiusBottomLeft",
-    attrLeft: "gridBorderRadiusBottomRight",
-    attrUnit: "gridBorderRadiusUnit",
-    attrSyncUnits: "gridBorderRadiusUnitsSync",
-    labelTop: __('T-Left', 'post-type-archive-mapping'),
-    labelRight: __('T-Right', 'post-type-archive-mapping'),
-    labelBottom: __('B-Right', 'post-type-archive-mapping'),
-    labelLeft: __('B-Left', 'post-type-archive-mapping'),
-    units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(TabPanel, {
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(TabPanel, {
     className: "layout-tab-panel ptam-control-tabs",
     activeClass: "active-tab",
     tabs: [{
@@ -18710,19 +18755,31 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       label: __('Border Color', 'post-type-archive-mapping'),
       alpha: false
     }));
-  })), /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Padding', 'post-type-archive-mapping'),
-    initialOpen: true
-  }, /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Border Width', 'post-type-archive-mapping'),
+    value: gridBorderWidth,
+    onChange: function onChange(value) {
+      return setAttributes({
+        gridBorderWidth: value
+      });
+    },
+    min: 0,
+    max: 100
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: __('Border Radius', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
-    attrTop: "gridPaddingTop",
-    attrRight: "gridPaddingRight",
-    attrBottom: "gridPaddingBottom",
-    attrLeft: "gridPaddingLeft",
-    attrUnit: "gridPaddingUnit",
-    attrSyncUnits: "gridPaddingUnitsSync",
+    attrTop: "gridBorderRadiusTopleft",
+    attrRight: "gridBorderRadiusTopRight",
+    attrBottom: "gridBorderRadiusBottomLeft",
+    attrLeft: "gridBorderRadiusBottomRight",
+    attrUnit: "gridBorderRadiusUnit",
+    attrSyncUnits: "gridBorderRadiusUnitsSync",
+    labelTop: __('T-Left', 'post-type-archive-mapping'),
+    labelRight: __('T-Right', 'post-type-archive-mapping'),
+    labelBottom: __('B-Right', 'post-type-archive-mapping'),
+    labelLeft: __('B-Left', 'post-type-archive-mapping'),
     units: ['px', 'em', 'rem']
   })));
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
@@ -18793,7 +18850,9 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         pagination: value
       });
     }
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
+  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Style Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Disable Styles', 'post-type-archive-mapping'),
     checked: disableStyles,
     onChange: function onChange(value) {
@@ -18801,7 +18860,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
         disableStyles: value
       });
     }
-  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)); // Toolbar option group for the main layout settings.
+  }))); // Toolbar option group for the main layout settings.
 
   var viewOptions = [[{
     icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_11__["ListIcon"], null),
@@ -18939,12 +18998,24 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
 
   var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
 
-  builder.addCSS('.ptam-hierarchical-grid-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\tword-break: break-all;\n\t\t"); // Grid Item Flex goodness.
+  builder.addCSS('.ptam-hierarchical-grid-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\tword-break: break-all;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\tgrid-template-columns: 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3', "\n\t\tgrid-template-columns: 1fr 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t"); // Grid Item Flex goodness.
 
   builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\t")); // Grid background image styles.
 
   if ('featured_image' === gridBackgroundType) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\t");
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tz-index: 1;\n\t\t\tposition: relative;\n\t\t\toverflow: hidden;\n\t\t\t");
+
+    if (true === gridOverlay) {
+      builder.addCSS('.ptam-hierarchical-grid-item:after', "\n\t\t\t\tposition: absolute;\n\t\t\t\tcontent: '';\n\t\t\t\twidth: 100%;\n\t\t\t\theight: 100%;\n\t\t\t\ttop: 0;\n\t\t\t\tleft: 0;\n\t\t\t\tz-index: 2;\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColor, gridOverlayBackgroundColorOpacity), ";\n\t\t\t\t"));
+
+      if ('' !== gridOverlayBackgroundColorHover) {
+        builder.addCSS('.ptam-hierarchical-grid-item:hover:after', "\n\t\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColorHover, gridOverlayBackgroundColorHoverOpacity), ";\n\t\t\t\t\t"));
+      }
+    }
   } else if ('gradient' === gridBackgroundType) {
     builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(gridBackgroundGradient, ";\n\t\t\t"));
 
@@ -18957,9 +19028,8 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     if ('' !== gridBackgroundColorHover) {
       builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColorHover, 1), ";\n\t\t\t\t"));
     }
-  }
+  } // Grid Border.
 
-  console.log(props); // Grid Border.
 
   builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
 

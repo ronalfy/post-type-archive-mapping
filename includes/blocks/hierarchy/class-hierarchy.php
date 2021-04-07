@@ -521,6 +521,26 @@ class Hierarchy {
 						'type' => 'string',
 						'default' => '',
 					),
+					'gridOverlay' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+					'gridOverlayBackgroundColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'gridOverlayBackgroundColorOpacity' => array(
+						'type' => 'string',
+						'default' => '0.6',
+					),
+					'gridOverlayBackgroundColorHover' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'gridOverlayBackgroundColorHoverOpacity' => array(
+						'type' => 'string',
+						'default' => '0.4',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

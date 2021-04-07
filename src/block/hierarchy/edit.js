@@ -100,6 +100,14 @@ const PTAMHierarchy = ( props ) => {
 		gridBorderRadiusUnit,
 		gridBorderColor,
 		gridBorderColorHover,
+		gridOverlay,
+		gridOverlayBackgroundColor,
+		// eslint-disable-next-line no-unused-vars
+		gridOverlayBackgroundColorOpacity,
+		// eslint-disable-next-line no-unused-vars
+		gridOverlayBackgroundColorHover,
+		// eslint-disable-next-line no-unused-vars
+		gridOverlayBackgroundColorHoverOpacity,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -408,7 +416,7 @@ const PTAMHierarchy = ( props ) => {
 	const gridOptions = (
 		<Fragment>
 			<PanelBody
-				initialOpen={ true }
+				initialOpen={ false }
 				title={ __( 'Container', 'post-type-archive-mapping' ) }
 			>
 				<UnitPicker
@@ -438,9 +446,21 @@ const PTAMHierarchy = ( props ) => {
 					min={ 1 }
 					max={ 4 }
 				/>
+				<DimensionsControl
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					allowNegatives={ false }
+					attrTop="gridPaddingTop"
+					attrRight="gridPaddingRight"
+					attrBottom="gridPaddingBottom"
+					attrLeft="gridPaddingLeft"
+					attrUnit="gridPaddingUnit"
+					attrSyncUnits="gridPaddingUnitsSync"
+					units={ [ 'px', 'em', 'rem' ] }
+				/>
 			</PanelBody>
 			<PanelBody
-				initialOpen={ true }
+				initialOpen={ false }
 				title={ __( 'Background', 'post-type-archive-mapping' ) }
 			>
 				<SelectControl
@@ -608,48 +628,101 @@ const PTAMHierarchy = ( props ) => {
 											</div>
 										</Fragment>
 									) }
+									<SelectControl
+										label={ __( 'Featured Image Size', 'post-type-archive-mapping' ) }
+										options={ imageSizeOptions }
+										value={ gridImageTypeSize }
+										onChange={ ( value ) => {
+											setAttributes( { gridImageTypeSize: value } );
+										} }
+									/>
+									<ToggleControl
+										label={ __( 'Enable Overlay', 'post-type-archive-mapping' ) }
+										checked={ gridOverlay }
+										onChange={ ( value ) => {
+											setAttributes( {
+												gridOverlay: value,
+											} );
+										} }
+									/>
+									{ gridOverlay &&
+										<>
+											<TabPanel
+												className="layout-tab-panel ptam-control-tabs"
+												activeClass="active-tab"
+												tabs={ [
+													{
+														name: 'grid-overlay-color',
+														title: __( 'Normal', 'post-type-archive-mapping' ),
+														className: 'grid-overlay-color',
+													},
+													{
+														name: 'grid-overlay-color-hover',
+														title: __( 'Hover', 'post-type-archive-mapping' ),
+														className: 'grid-overlay-color-hover',
+													},
+												] }
+											>
+												{ ( tab ) => {
+													const isNormal = tab.name === 'grid-overlay-color';
+
+													return (
+														<div>
+															{ isNormal ? (
+																<PTAMColorPicker
+																	value={ gridOverlayBackgroundColor }
+																	valueOpacity={ gridOverlayBackgroundColorOpacity }
+																	onChange={ ( value ) => {
+																		setAttributes( { gridOverlayBackgroundColor: value } );
+																	} }
+																	// eslint-disable-next-line no-unused-vars
+																	onOpacityChange={ ( value ) => {
+																		setAttributes( {
+																			gridOverlayBackgroundColorOpacity: value,
+																		} );
+																	} }
+																	label={ __(
+																		'Overlay Color',
+																		'post-type-archive-mapping'
+																	) }
+																	alpha={ true }
+																/>
+															) : (
+																<PTAMColorPicker
+																	value={ gridOverlayBackgroundColorHover }
+																	valueOpacity={ gridOverlayBackgroundColorHoverOpacity }
+																	onChange={ ( value ) => {
+																		setAttributes( { gridOverlayBackgroundColorHover: value } );
+																	} }
+																	// eslint-disable-next-line no-unused-vars
+																	onOpacityChange={ ( value ) => {
+																		setAttributes( {
+																			gridOverlayBackgroundColorHoverOpacity: value,
+																		} );
+																	} }
+																	label={ __(
+																		'Overlay Color',
+																		'post-type-archive-mapping'
+																	) }
+																	alpha={ true }
+																/>
+															) }
+														</div>
+													);
+												} }
+											</TabPanel>
+										</>
+									}
 								</Fragment>
 							) }
-						/>
-						<SelectControl
-							label={ __( 'Featured Image Size', 'post-type-archive-mapping' ) }
-							options={ imageSizeOptions }
-							value={ gridImageTypeSize }
-							onChange={ ( value ) => {
-								setAttributes( { gridImageTypeSize: value } );
-							} }
 						/>
 					</Fragment>
 				) }
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Border', 'post-type-archive-mapping' ) }
-				initialOpen={ true }
+				initialOpen={ false }
 			>
-				<RangeControl
-					label={ __( 'Border Width', 'post-type-archive-mapping' ) }
-					value={ gridBorderWidth }
-					onChange={ ( value ) => setAttributes( { gridBorderWidth: value } ) }
-					min={ 0 }
-					max={ 100 }
-				/>
-				<DimensionsControl
-					label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					allowNegatives={ false }
-					attrTop="gridBorderRadiusTopleft"
-					attrRight="gridBorderRadiusTopRight"
-					attrBottom="gridBorderRadiusBottomLeft"
-					attrLeft="gridBorderRadiusBottomRight"
-					attrUnit="gridBorderRadiusUnit"
-					attrSyncUnits="gridBorderRadiusUnitsSync"
-					labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
-					labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
-					labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
-					labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
-					units={ [ 'px', 'em', 'rem' ] }
-				/>
 				<TabPanel
 					className="layout-tab-panel ptam-control-tabs"
 					activeClass="active-tab"
@@ -706,21 +779,28 @@ const PTAMHierarchy = ( props ) => {
 						);
 					} }
 				</TabPanel>
-			</PanelBody>
-			<PanelBody
-				title={ __( 'Padding', 'post-type-archive-mapping' ) }
-				initialOpen={ true }
-			>
+				<RangeControl
+					label={ __( 'Border Width', 'post-type-archive-mapping' ) }
+					value={ gridBorderWidth }
+					onChange={ ( value ) => setAttributes( { gridBorderWidth: value } ) }
+					min={ 0 }
+					max={ 100 }
+				/>
 				<DimensionsControl
+					label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					allowNegatives={ false }
-					attrTop="gridPaddingTop"
-					attrRight="gridPaddingRight"
-					attrBottom="gridPaddingBottom"
-					attrLeft="gridPaddingLeft"
-					attrUnit="gridPaddingUnit"
-					attrSyncUnits="gridPaddingUnitsSync"
+					attrTop="gridBorderRadiusTopleft"
+					attrRight="gridBorderRadiusTopRight"
+					attrBottom="gridBorderRadiusBottomLeft"
+					attrLeft="gridBorderRadiusBottomRight"
+					attrUnit="gridBorderRadiusUnit"
+					attrSyncUnits="gridBorderRadiusUnitsSync"
+					labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+					labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+					labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+					labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
 					units={ [ 'px', 'em', 'rem' ] }
 				/>
 			</PanelBody>
@@ -802,6 +882,11 @@ const PTAMHierarchy = ( props ) => {
 						} );
 					} }
 				/>
+			</PanelBody>
+			{ 'grid' === view && <>{ gridOptions }</> }
+			<PanelBody
+				title={ __('Style Options', 'post-type-archive-mapping' ) }
+			>
 				<ToggleControl
 					label={ __( 'Disable Styles', 'post-type-archive-mapping' ) }
 					checked={ disableStyles }
@@ -812,7 +897,6 @@ const PTAMHierarchy = ( props ) => {
 					} }
 				/>
 			</PanelBody>
-			{ 'grid' === view && <>{ gridOptions }</> }
 		</InspectorControls>
 	);
 
@@ -980,6 +1064,32 @@ const PTAMHierarchy = ( props ) => {
 		word-break: break-all;
 		`
 	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1',
+		`
+		grid-template-columns: 1fr;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2',
+		`
+		grid-template-columns: 1fr 1fr;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3',
+		`
+		grid-template-columns: 1fr 1fr 1fr;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4',
+		`
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		`
+	);
+
+
 	// Grid Item Flex goodness.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',
@@ -998,8 +1108,34 @@ const PTAMHierarchy = ( props ) => {
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center center;
+			z-index: 1;
+			position: relative;
+			overflow: hidden;
 			`
 		);
+		if ( true === gridOverlay ) {
+			builder.addCSS(
+				'.ptam-hierarchical-grid-item:after',
+				`
+				position: absolute;
+				content: '';
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				z-index: 2;
+				background: ${ hexToRgba( gridOverlayBackgroundColor, gridOverlayBackgroundColorOpacity ) };
+				`
+			);
+			if ( '' !== gridOverlayBackgroundColorHover ) {
+				builder.addCSS(
+					'.ptam-hierarchical-grid-item:hover:after',
+					`
+					background: ${ hexToRgba( gridOverlayBackgroundColorHover, gridOverlayBackgroundColorHoverOpacity ) };
+					`
+				);
+			}
+		}
 	} else if ( 'gradient' === gridBackgroundType ) {
 		builder.addCSS(
 			'.ptam-hierarchical-grid-item',
@@ -1031,7 +1167,6 @@ const PTAMHierarchy = ( props ) => {
 			);
 		}
 	}
-	console.log( props );
 	// Grid Border.
 	builder.addCSS(
 		'.ptam-hierarchical-grid-item',
