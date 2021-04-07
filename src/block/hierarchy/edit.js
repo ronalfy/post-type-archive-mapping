@@ -52,6 +52,8 @@ const PTAMHierarchy = ( props ) => {
 	// Get attributes from props.
 	const {
 		uniqueId,
+		// eslint-disable-next-line no-unused-vars
+		align,
 		view,
 		postType,
 		hierarchy,
@@ -557,7 +559,7 @@ const PTAMHierarchy = ( props ) => {
 												setAttributes( { gridBackgroundColor: value } );
 											} }
 											// eslint-disable-next-line no-unused-vars
-											onOpacityChange={ ( value ) => {} }
+											onOpacityChange={ ( value ) => { } }
 											label={ __(
 												'Background Color',
 												'post-type-archive-mapping'
@@ -572,7 +574,7 @@ const PTAMHierarchy = ( props ) => {
 												setAttributes( { gridBackgroundColorHover: value } );
 											} }
 											// eslint-disable-next-line no-unused-vars
-											onOpacityChange={ ( value ) => {} }
+											onOpacityChange={ ( value ) => { } }
 											label={ __(
 												'Background Color',
 												'post-type-archive-mapping'
@@ -752,7 +754,7 @@ const PTAMHierarchy = ( props ) => {
 											setAttributes( { gridBorderColor: value } );
 										} }
 										// eslint-disable-next-line no-unused-vars
-										onOpacityChange={ ( value ) => {} }
+										onOpacityChange={ ( value ) => { } }
 										label={ __(
 											'Border Color',
 											'post-type-archive-mapping'
@@ -767,7 +769,7 @@ const PTAMHierarchy = ( props ) => {
 											setAttributes( { gridBorderColorHover: value } );
 										} }
 										// eslint-disable-next-line no-unused-vars
-										onOpacityChange={ ( value ) => {} }
+										onOpacityChange={ ( value ) => { } }
 										label={ __(
 											'Border Color',
 											'post-type-archive-mapping'
@@ -885,7 +887,7 @@ const PTAMHierarchy = ( props ) => {
 			</PanelBody>
 			{ 'grid' === view && <>{ gridOptions }</> }
 			<PanelBody
-				title={ __('Style Options', 'post-type-archive-mapping' ) }
+				title={ __( 'Style Options', 'post-type-archive-mapping' ) }
 			>
 				<ToggleControl
 					label={ __( 'Disable Styles', 'post-type-archive-mapping' ) }
@@ -1088,7 +1090,6 @@ const PTAMHierarchy = ( props ) => {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		`
 	);
-
 
 	// Grid Item Flex goodness.
 	builder.addCSS(

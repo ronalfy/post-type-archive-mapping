@@ -10,6 +10,9 @@ import edit from './edit';
 
 export const name = 'ptam/hierarchy';
 
+// Register alignments
+const validAlignments = [ 'left', 'center', 'right', 'wide', 'full' ];
+
 /**
  * Register Basic Block.
  *
@@ -51,6 +54,12 @@ registerBlockType( 'ptam/hierarchy', {
 			</g>
 		</svg>
 	),
+	getEditWrapperProps( attributes ) {
+		const { align } = attributes;
+		if ( -1 !== validAlignments.indexOf( align ) ) {
+			return { 'data-align': align };
+		}
+	},
 	category: 'ptam-custom-query-blocks', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	description: __(
 		'Display items in a hierarchy of children/parent items with ease regardless of post type.',

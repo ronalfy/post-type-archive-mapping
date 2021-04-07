@@ -17974,7 +17974,9 @@ var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType
 // Import JS
 
 
-var name = 'ptam/hierarchy';
+var name = 'ptam/hierarchy'; // Register alignments
+
+var validAlignments = ['left', 'center', 'right', 'wide', 'full'];
 /**
  * Register Basic Block.
  *
@@ -18013,6 +18015,15 @@ registerBlockType('ptam/hierarchy', {
     fill: "#585aa8",
     d: "M128 352H32a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zM384 0H256a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h128a32 32 0 0 0 32-32V32a32 32 0 0 0-32-32zm224 352h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zm-240 0h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32z"
   }))),
+  getEditWrapperProps: function getEditWrapperProps(attributes) {
+    var align = attributes.align;
+
+    if (-1 !== validAlignments.indexOf(align)) {
+      return {
+        'data-align': align
+      };
+    }
+  },
   category: 'ptam-custom-query-blocks',
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   description: __('Display items in a hierarchy of children/parent items with ease regardless of post type.', 'post-type-archive-mapping'),
@@ -18128,6 +18139,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       setAttributes = props.setAttributes; // Get attributes from props.
 
   var uniqueId = attributes.uniqueId,
+      align = attributes.align,
       view = attributes.view,
       postType = attributes.postType,
       hierarchy = attributes.hierarchy,

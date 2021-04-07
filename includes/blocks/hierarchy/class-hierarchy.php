@@ -377,6 +377,10 @@ class Hierarchy {
 						'type'    => 'string',
 						'default' => '',
 					),
+					'align' => array(
+						'type' => 'string',
+						'default' => 'full',
+					),
 					'view'       => array(
 						'type'    => 'string',
 						'default' => 'list',
