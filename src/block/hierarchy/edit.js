@@ -1533,6 +1533,33 @@ const PTAMHierarchy = ( props ) => {
 			`
 		);
 	}
+	// Grid Title.
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item-content',
+		`
+		position: relative;
+		z-index: 3;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item-content h2',
+		`
+		color: ${ hexToRgba( gridTitleColor, 1 ) };
+		font-family: ${ gridTitleFontFamily ? gridTitleFontFamily : 'inherit' };
+		font-size: ${ valueWithUnit( gridTitleFontSize, gridTitleFontSizeUnit ) };
+		font-weight: ${ gridTitleFontWeight };
+		letter-spacing: ${ valueWithUnit( gridTitleLetterSpacing, gridTitleLetterSpacingUnit ) };
+		line-height: ${ valueWithUnit( gridTitleLineHeight, gridTitleLineHeightUnit ) }
+		text-transform: ${ gridTitleTextTransform }
+		z-index: 3;
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-grid-item:hover h2',
+		`
+		color: ${ hexToRgba( gridTitleColorHover, 1 ) };
+		`
+	);
 
 	return (
 		<>

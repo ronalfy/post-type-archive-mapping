@@ -19324,8 +19324,12 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
 
   if (0 < gridBorderWidth) {
     builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
-  }
+  } // Grid Title.
 
+
+  builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), "\n\t\ttext-transform: ").concat(gridTitleTextTransform, "\n\t\tz-index: 3;\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
     className: wrapperClass
   }, getPostHtml()));
