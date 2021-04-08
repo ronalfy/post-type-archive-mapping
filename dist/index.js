@@ -18944,6 +18944,7 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
       alpha: false
     }));
   }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
     options: gridTitleFontParamsDesktop,
     showFontFamily: true,
     showFontSize: true,
@@ -25514,6 +25515,7 @@ var fonts = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _GoogleFonts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoogleFonts */ "./src/components/typography/GoogleFonts.js");
 /* harmony import */ var _unit_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -25533,6 +25535,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  */
 
 
+
 /**
  * WordPress dependencies
  */
@@ -25543,7 +25546,9 @@ var _wp$components = wp.components,
     BaseControl = _wp$components.BaseControl,
     SelectControl = _wp$components.SelectControl,
     TextControl = _wp$components.TextControl,
-    ComboboxControl = _wp$components.ComboboxControl;
+    ComboboxControl = _wp$components.ComboboxControl,
+    Tooltip = _wp$components.Tooltip,
+    Popover = _wp$components.Popover;
 
 var TypographyControls = function TypographyControls(props) {
   // eslint-disable-next-line no-unused-vars
@@ -25552,8 +25557,15 @@ var TypographyControls = function TypographyControls(props) {
       filteredItems = _useState2[0],
       setFilteredItems = _useState2[1];
 
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isVisible = _useState4[0],
+      setIsVisible = _useState4[1];
+
   var _props$options = props.options,
       options = _props$options === void 0 ? {} : _props$options,
+      _props$label = props.label,
+      label = _props$label === void 0 ? __('Typography Options', 'post-type-archive-mapping') : _props$label,
       _props$showFontFamily = props.showFontFamily,
       showFontFamily = _props$showFontFamily === void 0 ? false : _props$showFontFamily,
       _props$showFontSize = props.showFontSize,
@@ -25631,9 +25643,57 @@ var TypographyControls = function TypographyControls(props) {
     var fontObject = Object.assign(options, object);
     props.onChange(fontObject);
   };
+  /**
+   * Toggle whether the color popup is showing.
+   */
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __('Title Typography')
+
+  var toggleVisible = function toggleVisible() {
+    setIsVisible(true);
+  };
+  /**
+   * Close color popup if visible.
+   */
+
+
+  var toggleClose = function toggleClose() {
+    if (isVisible) {
+      setIsVisible(false);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !isVisible && /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-typography-picker-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-typography-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-typography__item components-typography-option-picker__option",
+    onClick: function onClick() {
+      toggleVisible();
+    },
+    "aria-label": __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-typography-picker-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-typography-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-typography__item components-typography-option-picker__option",
+    onClick: function onClick() {
+      toggleClose();
+    },
+    "aria-label": __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(Popover, {
+    position: "top left",
+    className: "ptam-component-color-picker",
+    onClose: toggleClose
   }, /*#__PURE__*/React.createElement("div", {
     className: 'components-gblocks-typography-weight-transform'
   }, showFontWeight && 'fontWeight' in options && /*#__PURE__*/React.createElement(SelectControl, {

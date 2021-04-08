@@ -973,6 +973,7 @@ const PTAMHierarchy = ( props ) => {
 								} }
 							</TabPanel>
 							<TypographyControls
+								label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
 								options={ gridTitleFontParamsDesktop }
 								showFontFamily={ true }
 								showFontSize={ true }

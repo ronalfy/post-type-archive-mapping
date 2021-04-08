@@ -847,6 +847,29 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	}
 }
 
+/* Typography Component Controls */
+.ptam-component-typography-picker-wrapper > div {
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.ptam-typography-component-label {
+	&~button {
+		cursor: pointer;
+		svg {
+			width: 24px;
+			height: 24px;
+			color: darken( #585aa8, 15%);
+
+			&:hover {
+				color: #585aa8;
+			}
+		}
+	}
+}
+
+
 /* Hierarchical Grid Items */
 .ptam-hierarchical-grid-item {
 	transition: all ease-in-out 0.5s;
