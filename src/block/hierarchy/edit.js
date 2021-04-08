@@ -23,7 +23,7 @@ import {
 	FormatTextLeftIcon,
 	OrderedListIcon,
 	UnorderedListIcon,
-} from './icons';
+} from '../../icons';
 import HierarchicalItems from '../../components/hierarchical-items';
 import TypographyControls from '../../components/typography';
 // eslint-disable-next-line no-unused-vars
@@ -980,6 +980,19 @@ const PTAMHierarchy = ( props ) => {
 								showTextTransform={ true }
 								showLineHeight={ true }
 								showLetterSpacing={ true }
+								onChange={ ( fontObject ) => {
+									setAttributes( {
+										gridTitleFontFamily: fontObject.fontFamily,
+										gridTitleFontSize: fontObject.fontSize,
+										gridTitleFontSizeUnit: fontObject.fontSizeUnit,
+										gridTitleFontWeight: fontObject.fontWeight,
+										gridTitleLetterSpacing: fontObject.letterSpacing,
+										gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+										gridTitleLineHeight: fontObject.lineHeight,
+										gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+										gridTitleTextTransform: fontObject.textTransform,
+									})
+								} }
 							/>
 						</>
 					}

@@ -34,7 +34,6 @@ const TypographyControls = ( props ) => {
 		fontOptions.push( { value: fontKey, label: ptam_globals.fonts[ fontKey ] } );
 	}
 	Object.keys( googleFonts )
-		.slice( 0, 20 )
 		.forEach( ( k ) => {
 			fontOptions.push( { value: k, label: k } );
 		} );
@@ -66,6 +65,9 @@ const TypographyControls = ( props ) => {
 
 	return (
 		<>
+			<BaseControl
+				label={__('Title Typography')}
+			>
 			<div className={ 'components-gblocks-typography-weight-transform' }>
 				{ showFontWeight && ( 'fontWeight' in options ) && (
 					<SelectControl
@@ -207,6 +209,7 @@ const TypographyControls = ( props ) => {
 					</div>
 				</BaseControl>
 			) }
+			</BaseControl>
 		</>
 	);
 };

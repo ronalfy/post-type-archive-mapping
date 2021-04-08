@@ -18070,7 +18070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
 /* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
 /* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icons */ "./src/block/hierarchy/icons/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
 /* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -18950,7 +18950,20 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     showFontWeight: true,
     showTextTransform: true,
     showLineHeight: true,
-    showLetterSpacing: true
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSize: fontObject.fontSize,
+        gridTitleFontSizeUnit: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacing: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeight: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
   })))), /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Border', 'post-type-archive-mapping'),
     initialOpen: false
@@ -19344,240 +19357,6 @@ var PTAMHierarchy = function PTAMHierarchy(props) {
     deviceType: getPreviewDeviceType()
   };
 })])(PTAMHierarchy));
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/columns-icon.js":
-/*!***************************************************!*\
-  !*** ./src/block/hierarchy/icons/columns-icon.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var ColumnsIcon = function ColumnsIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ColumnsIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/format-text-left-icon.js":
-/*!************************************************************!*\
-  !*** ./src/block/hierarchy/icons/format-text-left-icon.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var FormatTextLeftIcon = function FormatTextLeftIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (FormatTextLeftIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/full-icon.js":
-/*!************************************************!*\
-  !*** ./src/block/hierarchy/icons/full-icon.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var FullIcon = function FullIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0V0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (FullIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/grid-icon.js":
-/*!************************************************!*\
-  !*** ./src/block/hierarchy/icons/grid-icon.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var GridIcon = function GridIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("g", {
-    fillRule: "evenodd"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (GridIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/index.js":
-/*!********************************************!*\
-  !*** ./src/block/hierarchy/icons/index.js ***!
-  \********************************************/
-/*! exports provided: ColumnsIcon, FullIcon, GridIcon, ListIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _columns_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns-icon */ "./src/block/hierarchy/icons/columns-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColumnsIcon", function() { return _columns_icon__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./full-icon */ "./src/block/hierarchy/icons/full-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FullIcon", function() { return _full_icon__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-/* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./grid-icon */ "./src/block/hierarchy/icons/grid-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GridIcon", function() { return _grid_icon__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _list_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list-icon */ "./src/block/hierarchy/icons/list-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIcon", function() { return _list_icon__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-/* harmony import */ var _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./format-text-left-icon */ "./src/block/hierarchy/icons/format-text-left-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormatTextLeftIcon", function() { return _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
-/* harmony import */ var _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ordered-list-icon */ "./src/block/hierarchy/icons/ordered-list-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListIcon", function() { return _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
-/* harmony import */ var _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unordered-list-icon */ "./src/block/hierarchy/icons/unordered-list-icon.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UnorderedListIcon", function() { return _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__["default"]; });
-
-/**
- * Icons from Material UI Icons: https://fonts.google.com/icons?selected=Material+Icons
- */
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/list-icon.js":
-/*!************************************************!*\
-  !*** ./src/block/hierarchy/icons/list-icon.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var ListIcon = function ListIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (ListIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/ordered-list-icon.js":
-/*!********************************************************!*\
-  !*** ./src/block/hierarchy/icons/ordered-list-icon.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var OrderedListIcon = function OrderedListIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (OrderedListIcon);
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/icons/unordered-list-icon.js":
-/*!**********************************************************!*\
-  !*** ./src/block/hierarchy/icons/unordered-list-icon.js ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var UnorderedListIcon = function UnorderedListIcon() {
-  return /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "24px",
-    viewBox: "0 0 24 24",
-    width: "24px"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M0 0h24v24H0V0z",
-    fill: "none"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (UnorderedListIcon);
 
 /***/ }),
 
@@ -25797,7 +25576,7 @@ var TypographyControls = function TypographyControls(props) {
     });
   }
 
-  Object.keys(_GoogleFonts__WEBPACK_IMPORTED_MODULE_0__["default"]).slice(0, 20).forEach(function (k) {
+  Object.keys(_GoogleFonts__WEBPACK_IMPORTED_MODULE_0__["default"]).forEach(function (k) {
     fontOptions.push({
       value: k,
       label: k
@@ -25853,7 +25632,9 @@ var TypographyControls = function TypographyControls(props) {
     props.onChange(fontObject);
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
+    label: __('Title Typography')
+  }, /*#__PURE__*/React.createElement("div", {
     className: 'components-gblocks-typography-weight-transform'
   }, showFontWeight && 'fontWeight' in options && /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Weight', 'post-type-archive-mapping'),
@@ -25957,7 +25738,7 @@ var TypographyControls = function TypographyControls(props) {
     min: -1,
     step: 0.01,
     autoComplete: "off"
-  }))));
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TypographyControls);
@@ -26062,6 +25843,281 @@ var UnitChooser = function UnitChooser(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (UnitChooser);
+
+/***/ }),
+
+/***/ "./src/icons/columns-icon.js":
+/*!***********************************!*\
+  !*** ./src/icons/columns-icon.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ColumnsIcon = function ColumnsIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ColumnsIcon);
+
+/***/ }),
+
+/***/ "./src/icons/format-text-left-icon.js":
+/*!********************************************!*\
+  !*** ./src/icons/format-text-left-icon.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FormatTextLeftIcon = function FormatTextLeftIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormatTextLeftIcon);
+
+/***/ }),
+
+/***/ "./src/icons/full-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/full-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FullIcon = function FullIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FullIcon);
+
+/***/ }),
+
+/***/ "./src/icons/grid-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/grid-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var GridIcon = function GridIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("g", {
+    fillRule: "evenodd"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GridIcon);
+
+/***/ }),
+
+/***/ "./src/icons/index.js":
+/*!****************************!*\
+  !*** ./src/icons/index.js ***!
+  \****************************/
+/*! exports provided: ColumnsIcon, FullIcon, GridIcon, ListIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon, TypographyIcon */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _columns_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns-icon */ "./src/icons/columns-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColumnsIcon", function() { return _columns_icon__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./full-icon */ "./src/icons/full-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FullIcon", function() { return _full_icon__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./grid-icon */ "./src/icons/grid-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GridIcon", function() { return _grid_icon__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _list_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list-icon */ "./src/icons/list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIcon", function() { return _list_icon__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./format-text-left-icon */ "./src/icons/format-text-left-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormatTextLeftIcon", function() { return _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ordered-list-icon */ "./src/icons/ordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListIcon", function() { return _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unordered-list-icon */ "./src/icons/unordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UnorderedListIcon", function() { return _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _typography_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./typography-icon */ "./src/icons/typography-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TypographyIcon", function() { return _typography_icon__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/**
+ * Icons from Material UI Icons: https://fonts.google.com/icons?selected=Material+Icons
+ */
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/icons/list-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/list-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ListIcon = function ListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ListIcon);
+
+/***/ }),
+
+/***/ "./src/icons/ordered-list-icon.js":
+/*!****************************************!*\
+  !*** ./src/icons/ordered-list-icon.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var OrderedListIcon = function OrderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (OrderedListIcon);
+
+/***/ }),
+
+/***/ "./src/icons/typography-icon.js":
+/*!**************************************!*\
+  !*** ./src/icons/typography-icon.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var TypographyIcon = function TypographyIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "font",
+    className: "svg-inline--fa fa-font fa-w-14",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M432 416H304a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-288 0H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M147.72 352h152.56l23.31 64h85L277.87 53.69C273.81 41.72 260.22 32 247.59 32h-47.18c-12.63 0-26.22 9.72-30.29 21.69L39.41 416h85zM224 142.52L271.16 272h-94.32z"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TypographyIcon);
+
+/***/ }),
+
+/***/ "./src/icons/unordered-list-icon.js":
+/*!******************************************!*\
+  !*** ./src/icons/unordered-list-icon.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var UnorderedListIcon = function UnorderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UnorderedListIcon);
 
 /***/ }),
 

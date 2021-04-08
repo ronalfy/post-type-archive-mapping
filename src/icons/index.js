@@ -9,3 +9,4 @@ export { default as ListIcon } from './list-icon';
 export { default as FormatTextLeftIcon } from './format-text-left-icon';
 export { default as OrderedListIcon } from './ordered-list-icon';
 export { default as UnorderedListIcon } from './unordered-list-icon';
+export { default as TypographyIcon } from './typography-icon';
