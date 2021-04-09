@@ -15031,9 +15031,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
 /* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
 /* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
-/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -15072,7 +15071,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
  // eslint-disable-next-line no-unused-vars
 
 var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
@@ -15093,12 +15091,10 @@ var _wp$components = wp.components,
     SelectControl = _wp$components.SelectControl,
     TextControl = _wp$components.TextControl,
     ToggleControl = _wp$components.ToggleControl,
-    ToolbarGroup = _wp$components.ToolbarGroup,
     TabPanel = _wp$components.TabPanel;
 var _wp$blockEditor = wp.blockEditor,
     MediaUpload = _wp$blockEditor.MediaUpload,
-    InspectorControls = _wp$blockEditor.InspectorControls,
-    BlockControls = _wp$blockEditor.BlockControls;
+    InspectorControls = _wp$blockEditor.InspectorControls;
 var _wp$data = wp.data,
     withSelect = _wp$data.withSelect,
     withDispatch = _wp$data.withDispatch;
@@ -15119,7 +15115,6 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
       orderBy = attributes.orderBy,
       postsPerPage = attributes.postsPerPage,
       wpmlLanguage = attributes.wpmlLanguage,
-      listStyle = attributes.listStyle,
       disableStyles = attributes.disableStyles,
       pagination = attributes.pagination,
       gridPaddingTop = attributes.gridPaddingTop,
@@ -15251,32 +15246,10 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     getPosts({});
   }, [postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize]);
   /**
-   *
-   * @return {JSX} Current selected view.
-   */
-
-  var selectedView = function selectedView() {
-    switch (view) {
-      case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null);
-
-      case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null);
-
-      case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null);
-
-      case 'list':
-      default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null);
-    }
-  };
-  /**
    * Set a timer for number of items and expire after one second of inactivity.
    *
    * @param {number} value Number of items to display.
    */
-
 
   var itemNumberRender = function itemNumberRender(value) {
     if (itemNumberTimer) {
@@ -15375,18 +15348,6 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     }
 
     switch (view) {
-      case 'list':
-        if ('ul' === listStyle) {
-          return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
-        } else if ('ol' === listStyle) {
-          return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
-        } else {
-          return /*#__PURE__*/React.createElement("div", null, "test");
-        } // eslint-disable-next-line no-unreachable
-
-
-        break;
-
       case 'grid':
         return /*#__PURE__*/React.createElement(React.Fragment, null, outputGridHtml()); // eslint-disable-next-line no-unreachable
 
@@ -15426,27 +15387,6 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
       }, /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-grid-item-content"
       }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
-    });
-  };
-  /**
-   * Return posts in a list format.
-   *
-   * @return {JSX} List view HTML.
-   */
-
-
-  var outputListHtml = function outputListHtml() {
-    return Object.keys(posts).map(function (item, i) {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i,
-        className: "ptam-hierarchical-post-item"
-      }, /*#__PURE__*/React.createElement("a", {
-        className: "ptam-hierarchical-post-item-link",
-        href: posts[i].link,
-        onClick: function onClick(e) {
-          e.preventDefault();
-        }
-      }, posts[i].post_title));
     });
   };
   /**
@@ -15904,7 +15844,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
       label: __('Title Color', 'post-type-archive-mapping'),
       alpha: false
     }));
-  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
     label: __('Title Typography', 'post-type-archive-mapping'),
     options: gridTitleFontParamsDesktop,
     showFontFamily: true,
@@ -16016,7 +15956,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -16073,83 +16013,6 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
         disableStyles: value
       });
     }
-  }))); // Toolbar option group for the main layout settings.
-
-  var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null),
-    title: __('View as a List', 'post-type-archive-mapping'),
-    isActive: 'list' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'list'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null),
-    title: __('View as a Grid', 'post-type-archive-mapping'),
-    isActive: 'grid' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'grid'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null),
-    title: __('View as Columns', 'post-type-archive-mapping'),
-    isActive: 'columns' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'columns'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null),
-    title: __('View as Full Content', 'post-type-archive-mapping'),
-    isActive: 'full' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'full'
-      });
-    }
-  }]]; // Toolbar option group for the main layout settings.
-
-  var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["UnorderedListIcon"], null),
-    title: __('Unordered List', 'post-type-archive-mapping'),
-    isActive: 'ul' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'ul'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["OrderedListIcon"], null),
-    title: __('Numbered List', 'post-type-archive-mapping'),
-    isActive: 'ol' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'ol'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FormatTextLeftIcon"], null),
-    title: __('No List', 'post-type-archive-mapping'),
-    isActive: 'none' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'none'
-      });
-    }
-  }]];
-  var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    isCollapsed: true,
-    icon: selectedView(),
-    label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
-    controls: viewOptions
-  })), 'list' === view && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    isCollapsed: false,
-    label: __('Change the list appearance.', 'post-type-archive-mapping'),
-    controls: listStyleOptions
   })));
   /**
    * Wrapper class for styling.
@@ -16160,9 +16023,9 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
   }, "ptam-hierarchy-wrapper-".concat(uniqueId), true));
 
   if (loading) {
-    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
       className: "ptam-term-grid-loading"
-    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), ' ', __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading...', 'post-type-archive-mapping')))));
+    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), ' ', __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading…', 'post-type-archive-mapping')))));
   } // Begin building CSS.
 
 
@@ -16248,7 +16111,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
   builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
   builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(gridTitleTextTransform, ";\n\t\tz-index: 3;\n\t\t"));
   builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
     className: wrapperClass
   }, getPostHtml()));
 };

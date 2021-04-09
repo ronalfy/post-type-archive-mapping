@@ -383,7 +383,7 @@ class Hierarchy {
 					),
 					'view'                              => array(
 						'type'    => 'string',
-						'default' => 'list',
+						'default' => 'grid',
 					),
 					'postType'                          => array(
 						'type'    => 'string',

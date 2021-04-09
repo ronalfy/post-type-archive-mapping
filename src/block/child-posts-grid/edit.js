@@ -14,16 +14,6 @@ import CSSBuilder from '../../utilities/css-builder';
 import valueWithUnit from '../../utilities/value-with-unit';
 import shorthandCSS from '../../utilities/shorthand-css';
 import ResponsiveTabs from '../../components/responsive-tabs';
-
-import {
-	ListIcon,
-	GridIcon,
-	FullIcon,
-	ColumnsIcon,
-	FormatTextLeftIcon,
-	OrderedListIcon,
-	UnorderedListIcon,
-} from '../../icons';
 import HierarchicalItems from '../../components/hierarchical-items';
 import TypographyControls from '../../components/typography';
 // eslint-disable-next-line no-unused-vars
@@ -41,11 +31,10 @@ const {
 	SelectControl,
 	TextControl,
 	ToggleControl,
-	ToolbarGroup,
 	TabPanel,
 } = wp.components;
 
-const { MediaUpload, InspectorControls, BlockControls } = wp.blockEditor;
+const { MediaUpload, InspectorControls } = wp.blockEditor;
 
 const { withSelect, withDispatch } = wp.data;
 const { compose } = wp.compose;
@@ -67,7 +56,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		orderBy,
 		postsPerPage,
 		wpmlLanguage,
-		listStyle,
 		disableStyles,
 		pagination,
 		gridPaddingTop,
@@ -199,24 +187,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 	] );
 
 	/**
-	 *
-	 * @return {JSX} Current selected view.
-	 */
-	const selectedView = () => {
-		switch ( view ) {
-			case 'grid':
-				return <GridIcon />;
-			case 'full':
-				return <FullIcon />;
-			case 'columns':
-				return <ColumnsIcon />;
-			case 'list':
-			default:
-				return <ListIcon />;
-		}
-	};
-
-	/**
 	 * Set a timer for number of items and expire after one second of inactivity.
 	 *
 	 * @param {number} value Number of items to display.
@@ -295,17 +265,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 			);
 		}
 		switch ( view ) {
-			case 'list':
-				if ( 'ul' === listStyle ) {
-					return <ul>{ outputListHtml() }</ul>;
-				} else if ( 'ol' === listStyle ) {
-					return <ol>{ outputListHtml() }</ol>;
-					// eslint-disable-next-line no-else-return
-				} else {
-					return <div>test</div>;
-				}
-				// eslint-disable-next-line no-unreachable
-				break;
 			case 'grid':
 				return <>{ outputGridHtml() }</>;
 				// eslint-disable-next-line no-unreachable
@@ -352,27 +311,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 					<h2>{ posts[ i ].post_title }</h2>
 				</div>
 			</article>
-		) );
-	};
-
-	/**
-	 * Return posts in a list format.
-	 *
-	 * @return {JSX} List view HTML.
-	 */
-	const outputListHtml = () => {
-		return Object.keys( posts ).map( ( item, i ) => (
-			<li key={ i } className="ptam-hierarchical-post-item">
-				<a
-					className="ptam-hierarchical-post-item-link"
-					href={ posts[ i ].link }
-					onClick={ ( e ) => {
-						e.preventDefault();
-					} }
-				>
-					{ posts[ i ].post_title }
-				</a>
-			</li>
 		) );
 	};
 
@@ -992,7 +930,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 										gridTitleLineHeight: fontObject.lineHeight,
 										gridTitleLineHeightUnit: fontObject.lineHeightUnit,
 										gridTitleTextTransform: fontObject.textTransform,
-									})
+									} );
 								} }
 							/>
 						</>
@@ -1180,98 +1118,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		</InspectorControls>
 	);
 
-	// Toolbar option group for the main layout settings.
-	const viewOptions = [
-		[
-			{
-				icon: <ListIcon />,
-				title: __( 'View as a List', 'post-type-archive-mapping' ),
-				isActive: 'list' === view,
-				onClick: () => setAttributes( { view: 'list' } ),
-			},
-		],
-		[
-			{
-				icon: <GridIcon />,
-				title: __( 'View as a Grid', 'post-type-archive-mapping' ),
-				isActive: 'grid' === view,
-				onClick: () => setAttributes( { view: 'grid' } ),
-			},
-		],
-		[
-			{
-				icon: <ColumnsIcon />,
-				title: __( 'View as Columns', 'post-type-archive-mapping' ),
-				isActive: 'columns' === view,
-				onClick: () => setAttributes( { view: 'columns' } ),
-			},
-		],
-		[
-			{
-				icon: <FullIcon />,
-				title: __( 'View as Full Content', 'post-type-archive-mapping' ),
-				isActive: 'full' === view,
-				onClick: () => setAttributes( { view: 'full' } ),
-			},
-		],
-	];
-
-	// Toolbar option group for the main layout settings.
-	const listStyleOptions = [
-		[
-			{
-				icon: <UnorderedListIcon />,
-				title: __( 'Unordered List', 'post-type-archive-mapping' ),
-				isActive: 'ul' === listStyle,
-				onClick: () => setAttributes( { listStyle: 'ul' } ),
-			},
-		],
-		[
-			{
-				icon: <OrderedListIcon />,
-				title: __( 'Numbered List', 'post-type-archive-mapping' ),
-				isActive: 'ol' === listStyle,
-				onClick: () => setAttributes( { listStyle: 'ol' } ),
-			},
-		],
-		[
-			{
-				icon: <FormatTextLeftIcon />,
-				title: __( 'No List', 'post-type-archive-mapping' ),
-				isActive: 'none' === listStyle,
-				onClick: () => setAttributes( { listStyle: 'none' } ),
-			},
-		],
-	];
-
-	const toolbar = (
-		<BlockControls>
-			<>
-				<ToolbarGroup
-					isCollapsed={ true }
-					icon={ selectedView() }
-					label={ __(
-						'Change the layout of the hierarchy.',
-						'post-type-archive-mapping'
-					) }
-					controls={ viewOptions }
-				/>
-			</>
-			{ 'list' === view && (
-				<>
-					<ToolbarGroup
-						isCollapsed={ false }
-						label={ __(
-							'Change the list appearance.',
-							'post-type-archive-mapping'
-						) }
-						controls={ listStyleOptions }
-					/>
-				</>
-			) }
-		</BlockControls>
-	);
-
 	/**
 	 * Wrapper class for styling.
 	 */
@@ -1284,7 +1130,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		return (
 			<Fragment>
 				{ inspectorControls }
-				{ toolbar }
 				<Placeholder>
 					<div className="ptam-term-grid-loading">
 						<h1>
@@ -1292,7 +1137,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 							{ ' ' }
 							{ __( 'Child Posts Grid', 'post-type-archive-mapping' ) }
 						</h1>
-						<h2>{__('Loading...', 'post-type-archive-mapping' )}</h2>
+						<h2>{ __( 'Loading…', 'post-type-archive-mapping' ) }</h2>
 					</div>
 				</Placeholder>
 			</Fragment>
@@ -1535,7 +1380,6 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 	return (
 		<>
 			{ inspectorControls }
-			{ toolbar }
 			{ builder.printCSS() }
 			<div className={ wrapperClass }>{ getPostHtml() }</div>
 		</>
