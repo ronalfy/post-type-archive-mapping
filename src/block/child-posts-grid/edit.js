@@ -16,8 +16,6 @@ import shorthandCSS from '../../utilities/shorthand-css';
 import ResponsiveTabs from '../../components/responsive-tabs';
 import HierarchicalItems from '../../components/hierarchical-items';
 import TypographyControls from '../../components/typography';
-// eslint-disable-next-line no-unused-vars
-const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { Fragment, useState, useEffect } = wp.element;
 
@@ -1446,7 +1444,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		builder.addCSS(
 			'.ptam-hierarchical-grid-item-content h2',
 			`
-			font-size: ${ valueWithUnit( gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile) };
+			font-size: ${ valueWithUnit( gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile ) };
 			letter-spacing: ${ valueWithUnit( gridTitleLetterSpacingMobile, gridTitleLetterSpacingUnit ) };
 			line-height: ${ valueWithUnit( gridTitleLineHeightMobile, gridTitleLineHeightUnit ) };
 			`

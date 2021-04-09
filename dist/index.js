@@ -15071,9 +15071,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // eslint-disable-next-line no-unused-vars
-
-var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
 
 var _wp$element = wp.element,
     Fragment = _wp$element.Fragment,
