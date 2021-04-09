@@ -15093,7 +15093,8 @@ var _wp$components = wp.components,
     TabPanel = _wp$components.TabPanel;
 var _wp$blockEditor = wp.blockEditor,
     MediaUpload = _wp$blockEditor.MediaUpload,
-    InspectorControls = _wp$blockEditor.InspectorControls;
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    InspectorAdvancedControls = _wp$blockEditor.InspectorAdvancedControls;
 var _wp$data = wp.data,
     withSelect = _wp$data.withSelect,
     withDispatch = _wp$data.withDispatch;
@@ -15980,7 +15981,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     labelLeft: __('B-Left', 'post-type-archive-mapping'),
     units: ['px', 'em', 'rem']
   })));
-  var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(SelectControl, {
@@ -16048,9 +16049,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
         pagination: value
       });
     }
-  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions), /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Style Options', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(ToggleControl, {
+  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)), /*#__PURE__*/React.createElement(InspectorAdvancedControls, null, /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Disable Styles', 'post-type-archive-mapping'),
     checked: disableStyles,
     onChange: function onChange(value) {

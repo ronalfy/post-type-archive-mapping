@@ -33,7 +33,7 @@ const {
 	TabPanel,
 } = wp.components;
 
-const { MediaUpload, InspectorControls } = wp.blockEditor;
+const { MediaUpload, InspectorControls, InspectorAdvancedControls } = wp.blockEditor;
 
 const { withSelect, withDispatch } = wp.data;
 const { compose } = wp.compose;
@@ -1081,85 +1081,85 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 	);
 
 	const inspectorControls = (
-		<InspectorControls>
-			<PanelBody
-				title={ __( 'Query', 'post-type-archive-mapping' ) }
-				initialOpen={ false }
-			>
-				<SelectControl
-					label={ __( 'Post Type', 'post-type-archive-mapping' ) }
-					options={ postTypeOptions }
-					value={ postType }
-					onChange={ ( value ) => {
-						setAttributes( {
-							postType: value,
-						} );
-					} }
-				/>
-				<SelectControl
-					label={ __( 'Hierarchy', 'post-type-archive-mapping' ) }
-					options={ hierarchyOptions }
-					value={ hierarchy }
-					onChange={ ( value ) => {
-						setAttributes( {
-							hierarchy: value,
-						} );
-					} }
-				/>
-				{ 'children' === hierarchy && (
-					<HierarchicalItems
-						label={ __( 'Select a Parent Item', 'post-type-archive-mapping' ) }
-						postType={ postType }
-						selectedItem={ parentItem }
-						onChange={ ( parent ) => {
+		<>
+			<InspectorControls>
+				<PanelBody
+					title={ __( 'Query', 'post-type-archive-mapping' ) }
+					initialOpen={ false }
+				>
+					<SelectControl
+						label={ __( 'Post Type', 'post-type-archive-mapping' ) }
+						options={ postTypeOptions }
+						value={ postType }
+						onChange={ ( value ) => {
 							setAttributes( {
-								parentItem: parent,
+								postType: value,
 							} );
 						} }
-						loadingText={ __( 'Retrieving items…', 'post-type-archive-mapping' ) }
 					/>
-				) }
-				<SelectControl
-					label={ __( 'Order', 'post-type-archive-mapping' ) }
-					options={ orderOptions }
-					value={ order }
-					onChange={ ( value ) => {
-						setAttributes( { order: value } );
-					} }
-				/>
-				{ getLanguages() }
-				<SelectControl
-					label={ __( 'Order By', 'post-type-archive-mapping' ) }
-					options={ orderByOptions }
-					value={ orderBy }
-					onChange={ ( value ) => {
-						setAttributes( { orderBy: value } );
-					} }
-				/>
-				<RangeControl
-					label={ __( 'Number of Items', 'post-type-archive-mapping' ) }
-					value={ postsPerPage }
-					onChange={ ( value ) => {
-						setAttributes( { postsPerPage: value } );
-						itemNumberRender( value );
-					} }
-					min={ 1 }
-					max={ 100 }
-				/>
-				<ToggleControl
-					label={ __( 'Enable Pagination', 'post-type-archive-mapping' ) }
-					checked={ pagination }
-					onChange={ ( value ) => {
-						setAttributes( {
-							pagination: value,
-						} );
-					} }
-				/>
-			</PanelBody>
-			{ 'grid' === view && <>{ gridOptions }</> }
-			<PanelBody
-				title={ __( 'Style Options', 'post-type-archive-mapping' ) }
-			>
+					<SelectControl
+						label={ __( 'Hierarchy', 'post-type-archive-mapping' ) }
+						options={ hierarchyOptions }
+						value={ hierarchy }
+						onChange={ ( value ) => {
+							setAttributes( {
+								hierarchy: value,
+							} );
+						} }
+					/>
+					{ 'children' === hierarchy && (
+						<HierarchicalItems
+							label={ __( 'Select a Parent Item', 'post-type-archive-mapping' ) }
+							postType={ postType }
+							selectedItem={ parentItem }
+							onChange={ ( parent ) => {
+								setAttributes( {
+									parentItem: parent,
+								} );
+							} }
+							loadingText={ __( 'Retrieving items…', 'post-type-archive-mapping' ) }
+						/>
+					) }
+					<SelectControl
+						label={ __( 'Order', 'post-type-archive-mapping' ) }
+						options={ orderOptions }
+						value={ order }
+						onChange={ ( value ) => {
+							setAttributes( { order: value } );
+						} }
+					/>
+					{ getLanguages() }
+					<SelectControl
+						label={ __( 'Order By', 'post-type-archive-mapping' ) }
+						options={ orderByOptions }
+						value={ orderBy }
+						onChange={ ( value ) => {
+							setAttributes( { orderBy: value } );
+						} }
+					/>
+					<RangeControl
+						label={ __( 'Number of Items', 'post-type-archive-mapping' ) }
+						value={ postsPerPage }
+						onChange={ ( value ) => {
+							setAttributes( { postsPerPage: value } );
+							itemNumberRender( value );
+						} }
+						min={ 1 }
+						max={ 100 }
+					/>
+					<ToggleControl
+						label={ __( 'Enable Pagination', 'post-type-archive-mapping' ) }
+						checked={ pagination }
+						onChange={ ( value ) => {
+							setAttributes( {
+								pagination: value,
+							} );
+						} }
+					/>
+				</PanelBody>
+				{ 'grid' === view && <>{ gridOptions }</> }
+			</InspectorControls>
+			<InspectorAdvancedControls>
 				<ToggleControl
 					label={ __( 'Disable Styles', 'post-type-archive-mapping' ) }
 					checked={ disableStyles }
@@ -1169,8 +1169,8 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 						} );
 					} }
 				/>
-			</PanelBody>
-		</InspectorControls>
+			</InspectorAdvancedControls>
+		</>
 	);
 
 	/**
