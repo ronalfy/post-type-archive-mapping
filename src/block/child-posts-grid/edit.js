@@ -410,6 +410,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		fontSizeUnit: gridTitleFontSizeUnitTablet,
 		fontWeight: gridTitleFontWeight,
 		letterSpacing: gridTitleLetterSpacingTablet,
+		letterSpacingUnit: gridTitleLetterSpacingUnit,
 		textTransform: gridTitleTextTransform,
 		lineHeight: gridTitleLineHeightTablet,
 		lineHeightUnit: gridTitleLineHeightUnit,
@@ -420,6 +421,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		fontSizeUnit: gridTitleFontSizeUnitMobile,
 		fontWeight: gridTitleFontWeight,
 		letterSpacing: gridTitleLetterSpacingMobile,
+		letterSpacingUnit: gridTitleLetterSpacingUnit,
 		textTransform: gridTitleTextTransform,
 		lineHeight: gridTitleLineHeightMobile,
 		lineHeightUnit: gridTitleLineHeightUnit,
@@ -910,29 +912,81 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 									);
 								} }
 							</TabPanel>
-							<TypographyControls
-								label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
-								options={ gridTitleFontParamsDesktop }
-								showFontFamily={ true }
-								showFontSize={ true }
-								showFontWeight={ true }
-								showTextTransform={ true }
-								showLineHeight={ true }
-								showLetterSpacing={ true }
-								onChange={ ( fontObject ) => {
-									setAttributes( {
-										gridTitleFontFamily: fontObject.fontFamily,
-										gridTitleFontSize: fontObject.fontSize,
-										gridTitleFontSizeUnit: fontObject.fontSizeUnit,
-										gridTitleFontWeight: fontObject.fontWeight,
-										gridTitleLetterSpacing: fontObject.letterSpacing,
-										gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
-										gridTitleLineHeight: fontObject.lineHeight,
-										gridTitleLineHeightUnit: fontObject.lineHeightUnit,
-										gridTitleTextTransform: fontObject.textTransform,
-									} );
-								} }
-							/>
+							{ 'Desktop' === getDeviceType() &&
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ gridTitleFontParamsDesktop }
+									showFontFamily={ true }
+									showFontSize={ true }
+									showFontWeight={ true }
+									showTextTransform={ true }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											gridTitleFontFamily: fontObject.fontFamily,
+											gridTitleFontSize: fontObject.fontSize,
+											gridTitleFontSizeUnit: fontObject.fontSizeUnit,
+											gridTitleFontWeight: fontObject.fontWeight,
+											gridTitleLetterSpacing: fontObject.letterSpacing,
+											gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											gridTitleLineHeight: fontObject.lineHeight,
+											gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+											gridTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+							}
+							{ 'Tablet' === getDeviceType() &&
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ gridTitleFontParamsTablet }
+									showFontFamily={ false }
+									showFontSize={ true }
+									showFontWeight={ false }
+									showTextTransform={ false }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											gridTitleFontFamily: fontObject.fontFamily,
+											gridTitleFontSizeTablet: fontObject.fontSize,
+											gridTitleFontSizeUnitTablet: fontObject.fontSizeUnit,
+											gridTitleFontWeight: fontObject.fontWeight,
+											gridTitleLetterSpacingTablet: fontObject.letterSpacing,
+											gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											gridTitleLineHeightTablet: fontObject.lineHeight,
+											gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+											gridTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+							}
+							{ 'Mobile' === getDeviceType() &&
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ gridTitleFontParamsMobile }
+									showFontFamily={ false }
+									showFontSize={ true }
+									showFontWeight={ false }
+									showTextTransform={ false }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											gridTitleFontFamily: fontObject.fontFamily,
+											gridTitleFontSizeMobile: fontObject.fontSize,
+											gridTitleFontSizeUnitMobile: fontObject.fontSizeUnit,
+											gridTitleFontWeight: fontObject.fontWeight,
+											gridTitleLetterSpacingMobile: fontObject.letterSpacing,
+											gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											gridTitleLineHeightMobile: fontObject.lineHeight,
+											gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+											gridTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+							}
 						</>
 					}
 				</>

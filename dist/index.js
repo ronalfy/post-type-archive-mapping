@@ -15483,6 +15483,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     fontSizeUnit: gridTitleFontSizeUnitTablet,
     fontWeight: gridTitleFontWeight,
     letterSpacing: gridTitleLetterSpacingTablet,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
     textTransform: gridTitleTextTransform,
     lineHeight: gridTitleLineHeightTablet,
     lineHeightUnit: gridTitleLineHeightUnit
@@ -15493,6 +15494,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     fontSizeUnit: gridTitleFontSizeUnitMobile,
     fontWeight: gridTitleFontWeight,
     letterSpacing: gridTitleLetterSpacingMobile,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
     textTransform: gridTitleTextTransform,
     lineHeight: gridTitleLineHeightMobile,
     lineHeightUnit: gridTitleLineHeightUnit
@@ -15844,7 +15846,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
       label: __('Title Color', 'post-type-archive-mapping'),
       alpha: false
     }));
-  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
     label: __('Title Typography', 'post-type-archive-mapping'),
     options: gridTitleFontParamsDesktop,
     showFontFamily: true,
@@ -15862,6 +15864,50 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
         gridTitleLetterSpacing: fontObject.letterSpacing,
         gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
         gridTitleLineHeight: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  }), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsTablet,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSizeTablet: fontObject.fontSize,
+        gridTitleFontSizeUnitTablet: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacingTablet: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeightTablet: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  }), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsMobile,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSizeMobile: fontObject.fontSize,
+        gridTitleFontSizeUnitMobile: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacingMobile: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeightMobile: fontObject.lineHeight,
         gridTitleLineHeightUnit: fontObject.lineHeightUnit,
         gridTitleTextTransform: fontObject.textTransform
       });
