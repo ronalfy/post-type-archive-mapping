@@ -871,6 +871,7 @@ body.has-blocks .fl-post-content .ptam-pagination {
 
 
 /* Hierarchical Grid Items */
-.ptam-hierarchical-grid-item {
+.ptam-hierarchical-grid-item,
+.ptam-hierarchical-grid-item * {
 	transition: all ease-in-out 0.5s;
 }

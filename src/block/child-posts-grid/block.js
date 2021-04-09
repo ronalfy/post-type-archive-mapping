@@ -1,5 +1,5 @@
 /**
- * Hierarchy block.
+ * Child Posts Grid block.
  */
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
@@ -8,7 +8,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 // Import JS
 import edit from './edit';
 
-export const name = 'ptam/hierarchy';
+export const name = 'ptam/child-posts-grid';
 
 // Register alignments
 const validAlignments = [ 'left', 'center', 'right', 'wide', 'full' ];
@@ -25,9 +25,9 @@ const validAlignments = [ 'left', 'center', 'right', 'wide', 'full' ];
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'ptam/hierarchy', {
+registerBlockType( 'ptam/child-posts-grid', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Hierarchy', 'post-type-archive-mapping' ), // Block title.
+	title: __( 'Child Posts Grid', 'post-type-archive-mapping' ), // Block title.
 	icon: (
 		<svg
 			aria-hidden="true"
@@ -62,7 +62,7 @@ registerBlockType( 'ptam/hierarchy', {
 	},
 	category: 'ptam-custom-query-blocks', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	description: __(
-		'Display items in a hierarchy of children/parent items with ease regardless of post type.',
+		'Displays hierarchical items in a beautiful grid.',
 		'post-type-archive-mapping'
 	),
 	keywords: [

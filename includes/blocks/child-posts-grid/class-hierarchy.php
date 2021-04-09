@@ -5,12 +5,12 @@
  * @package PTAM
  */
 
-namespace PTAM\Includes\Blocks\Hierarchy;
+namespace PTAM\Includes\Blocks\Child_Posts_Grid;
 
 use PTAM\Includes\Functions as Functions;
 
 /**
- * Child Parent Hierarchy Block.
+ * Child Parent Hierarchy Grid Block.
  */
 class Hierarchy {
 
@@ -370,7 +370,7 @@ class Hierarchy {
 		}
 
 		register_block_type(
-			'ptam/hierarchy',
+			'ptam/child-posts-grid',
 			array(
 				'attributes'      => array(
 					'uniqueId'                          => array(

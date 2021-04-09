@@ -14915,6 +14915,1374 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/block/child-posts-grid/block.js":
+/*!*********************************************!*\
+  !*** ./src/block/child-posts-grid/block.js ***!
+  \*********************************************/
+/*! exports provided: name */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/block/child-posts-grid/edit.js");
+/**
+ * Child Posts Grid block.
+ */
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+// Import JS
+
+
+var name = 'ptam/child-posts-grid'; // Register alignments
+
+var validAlignments = ['left', 'center', 'right', 'wide', 'full'];
+/**
+ * Register Basic Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made available as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('ptam/child-posts-grid', {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: __('Child Posts Grid', 'post-type-archive-mapping'),
+  // Block title.
+  icon: /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "sitemap",
+    className: "svg-inline--fa fa-sitemap fa-w-20",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "#585aa8",
+    d: "M104 320H56v-57.59A38.45 38.45 0 0 1 94.41 224H296v-64h48v64h201.59A38.46 38.46 0 0 1 584 262.41V320h-48v-48H344v48h-48v-48H104z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "#585aa8",
+    d: "M128 352H32a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zM384 0H256a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h128a32 32 0 0 0 32-32V32a32 32 0 0 0-32-32zm224 352h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zm-240 0h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32z"
+  }))),
+  getEditWrapperProps: function getEditWrapperProps(attributes) {
+    var align = attributes.align;
+
+    if (-1 !== validAlignments.indexOf(align)) {
+      return {
+        'data-align': align
+      };
+    }
+  },
+  category: 'ptam-custom-query-blocks',
+  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  description: __('Displays hierarchical items in a beautiful grid.', 'post-type-archive-mapping'),
+  keywords: [__('children', 'post-type-archive-mapping'), __('post', 'poost-type-archive-mapping'), __('parent', 'post-type-archive-mapping'), __('hierarchy', 'post-type-archive-mapping')],
+  supports: {
+    anchor: true,
+    html: false
+  },
+  example: {
+    attributes: {
+      preview: true
+    }
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  // Render via PHP
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/block/child-posts-grid/edit.js":
+/*!********************************************!*\
+  !*** ./src/block/child-posts-grid/edit.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
+/* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
+/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
+/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
+/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
+/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
+/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/* eslint-disable no-undef */
+
+/**
+ * External dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // eslint-disable-next-line no-unused-vars
+
+var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
+
+var _wp$element = wp.element,
+    Fragment = _wp$element.Fragment,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect; // eslint-disable-next-line no-unused-vars
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _n = _wp$i18n._n,
+    _x = _wp$i18n._x;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    Placeholder = _wp$components.Placeholder,
+    RangeControl = _wp$components.RangeControl,
+    SelectControl = _wp$components.SelectControl,
+    TextControl = _wp$components.TextControl,
+    ToggleControl = _wp$components.ToggleControl,
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    TabPanel = _wp$components.TabPanel;
+var _wp$blockEditor = wp.blockEditor,
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    BlockControls = _wp$blockEditor.BlockControls;
+var _wp$data = wp.data,
+    withSelect = _wp$data.withSelect,
+    withDispatch = _wp$data.withDispatch;
+var compose = wp.compose.compose;
+
+var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
+  // Shortcuts.
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes; // Get attributes from props.
+
+  var uniqueId = attributes.uniqueId,
+      align = attributes.align,
+      view = attributes.view,
+      postType = attributes.postType,
+      hierarchy = attributes.hierarchy,
+      parentItem = attributes.parentItem,
+      order = attributes.order,
+      orderBy = attributes.orderBy,
+      postsPerPage = attributes.postsPerPage,
+      wpmlLanguage = attributes.wpmlLanguage,
+      listStyle = attributes.listStyle,
+      disableStyles = attributes.disableStyles,
+      pagination = attributes.pagination,
+      gridPaddingTop = attributes.gridPaddingTop,
+      gridPaddingRight = attributes.gridPaddingRight,
+      gridPaddingBottom = attributes.gridPaddingBottom,
+      gridPaddingLeft = attributes.gridPaddingLeft,
+      gridPaddingUnit = attributes.gridPaddingUnit,
+      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync,
+      gridPaddingTopTablet = attributes.gridPaddingTopTablet,
+      gridPaddingRightTablet = attributes.gridPaddingRightTablet,
+      gridPaddingBottomTablet = attributes.gridPaddingBottomTablet,
+      gridPaddingLeftTablet = attributes.gridPaddingLeftTablet,
+      gridPaddingUnitTablet = attributes.gridPaddingUnitTablet,
+      gridPaddingUnitsSyncTablet = attributes.gridPaddingUnitsSyncTablet,
+      gridPaddingTopMobile = attributes.gridPaddingTopMobile,
+      gridPaddingRightMobile = attributes.gridPaddingRightMobile,
+      gridPaddingBottomMobile = attributes.gridPaddingBottomMobile,
+      gridPaddingLeftMobile = attributes.gridPaddingLeftMobile,
+      gridPaddingUnitMobile = attributes.gridPaddingUnitMobile,
+      gridPaddingUnitsSyncMobile = attributes.gridPaddingUnitsSyncMobile,
+      gridBackgroundType = attributes.gridBackgroundType,
+      gridFallbackImg = attributes.gridFallbackImg,
+      gridImageTypeSize = attributes.gridImageTypeSize,
+      gridBackgroundGradient = attributes.gridBackgroundGradient,
+      gridBackgroundGradientHover = attributes.gridBackgroundGradientHover,
+      gridBackgroundColor = attributes.gridBackgroundColor,
+      gridBackgroundColorHover = attributes.gridBackgroundColorHover,
+      gridMinHeight = attributes.gridMinHeight,
+      gridMinHeightTablet = attributes.gridMinHeightTablet,
+      gridMinHeightMobile = attributes.gridMinHeightMobile,
+      gridMinHeightUnit = attributes.gridMinHeightUnit,
+      gridMinHeightUnitTablet = attributes.gridMinHeightUnitTablet,
+      gridMinHeightUnitMobile = attributes.gridMinHeightUnitMobile,
+      gridNumberColumns = attributes.gridNumberColumns,
+      gridBorderWidth = attributes.gridBorderWidth,
+      gridBorderRadiusTopleft = attributes.gridBorderRadiusTopleft,
+      gridBorderRadiusTopRight = attributes.gridBorderRadiusTopRight,
+      gridBorderRadiusBottomLeft = attributes.gridBorderRadiusBottomLeft,
+      gridBorderRadiusBottomRight = attributes.gridBorderRadiusBottomRight,
+      gridBorderRadiusUnitsSync = attributes.gridBorderRadiusUnitsSync,
+      gridBorderRadiusUnit = attributes.gridBorderRadiusUnit,
+      gridBorderColor = attributes.gridBorderColor,
+      gridBorderColorHover = attributes.gridBorderColorHover,
+      gridOverlay = attributes.gridOverlay,
+      gridOverlayBackgroundColor = attributes.gridOverlayBackgroundColor,
+      gridOverlayBackgroundColorOpacity = attributes.gridOverlayBackgroundColorOpacity,
+      gridOverlayBackgroundColorHover = attributes.gridOverlayBackgroundColorHover,
+      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity,
+      gridShowTitle = attributes.gridShowTitle,
+      gridTitleColor = attributes.gridTitleColor,
+      gridTitleColorHover = attributes.gridTitleColorHover,
+      gridTitleFontFamily = attributes.gridTitleFontFamily,
+      gridTitleFontSizeUnit = attributes.gridTitleFontSizeUnit,
+      gridTitleFontSizeUnitTablet = attributes.gridTitleFontSizeUnitTablet,
+      gridTitleFontSizeUnitMobile = attributes.gridTitleFontSizeUnitMobile,
+      gridTitleFontSize = attributes.gridTitleFontSize,
+      gridTitleFontSizeTablet = attributes.gridTitleFontSizeTablet,
+      gridTitleFontSizeMobile = attributes.gridTitleFontSizeMobile,
+      gridTitleFontWeight = attributes.gridTitleFontWeight,
+      gridTitleLetterSpacing = attributes.gridTitleLetterSpacing,
+      gridTitleLetterSpacingTablet = attributes.gridTitleLetterSpacingTablet,
+      gridTitleLetterSpacingMobile = attributes.gridTitleLetterSpacingMobile,
+      gridTitleLetterSpacingUnit = attributes.gridTitleLetterSpacingUnit,
+      gridTitleTextTransform = attributes.gridTitleTextTransform,
+      gridTitleLineHeight = attributes.gridTitleLineHeight,
+      gridTitleLineHeightTablet = attributes.gridTitleLineHeightTablet,
+      gridTitleLineHeightMobile = attributes.gridTitleLineHeightMobile,
+      gridTitleLineHeightUnit = attributes.gridTitleLineHeightUnit; // Retrieve WPML languages.
+  // eslint-disable-next-line no-undef
+
+  var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
+
+  var wpmlLanguages = ptam_globals.wpml_languages;
+
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      itemNumberTimer = _useState4[0],
+      setItemNumberTimer = _useState4[1]; // eslint-disable-next-line no-unused-vars
+
+
+  var _useState5 = useState({
+    headers: {
+      // eslint-disable-next-line no-undef
+      'X-WP-Nonce': ptam_globals.rest_nonce
+    }
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      config = _useState6[0],
+      setConfig = _useState6[1];
+
+  var _useState7 = useState(postsPerPage),
+      _useState8 = _slicedToArray(_useState7, 2),
+      numItems = _useState8[0],
+      setNumItems = _useState8[1];
+
+  var _useState9 = useState({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      posts = _useState10[0],
+      setPosts = _useState10[1];
+
+  var _useState11 = useState(ptam_globals.image_sizes),
+      _useState12 = _slicedToArray(_useState11, 2),
+      imageSizes = _useState12[0],
+      // eslint-disable-next-line no-unused-vars
+  setImageSizes = _useState12[1];
+
+  var _useState13 = useState('Desktop'),
+      _useState14 = _slicedToArray(_useState13, 2),
+      deviceType = _useState14[0],
+      setDeviceType = _useState14[1];
+
+  useEffect(function () {
+    // Get unique ID for the block. Props @generateblocks.
+    var id = props.clientId.substr(2, 9).replace('-', '');
+
+    if (!attributes.uniqueId) {
+      setAttributes({
+        uniqueId: id
+      });
+    }
+  }, []); // Retrieve the latest posts.
+
+  useEffect(function () {
+    getPosts({});
+  }, [postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize]);
+  /**
+   *
+   * @return {JSX} Current selected view.
+   */
+
+  var selectedView = function selectedView() {
+    switch (view) {
+      case 'grid':
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null);
+
+      case 'full':
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null);
+
+      case 'columns':
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null);
+
+      case 'list':
+      default:
+        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null);
+    }
+  };
+  /**
+   * Set a timer for number of items and expire after one second of inactivity.
+   *
+   * @param {number} value Number of items to display.
+   */
+
+
+  var itemNumberRender = function itemNumberRender(value) {
+    if (itemNumberTimer) {
+      clearTimeout(itemNumberTimer);
+    }
+
+    setItemNumberTimer(setTimeout(function () {
+      setNumItems(value);
+    }, 1000));
+  };
+  /**
+   * Output JSX for WPML languages.
+   *
+   * @param {string} selectedLanguage The language selected.
+   * @return {JSX} Select box with languages.
+   */
+
+
+  var getLanguages = function getLanguages(selectedLanguage) {
+    if (wpmlInstalled) {
+      return /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Language', 'post-type-archive-mapping'),
+        options: wpmlLanguages,
+        value: selectedLanguage,
+        onChange: function onChange(value) {
+          setAttributes({
+            wpmlLanguage: value
+          });
+        }
+      });
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  };
+  /**
+   * Retrieve the items via REST API.
+   */
+
+
+  var getPosts = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var result;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(true);
+              _context.prev = 1;
+              _context.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post( // eslint-disable-next-line no-undef
+              ptam_globals.rest_url + "ptam/v2/get_hierarchical_posts", {
+                post_type: postType,
+                order: order,
+                orderby: orderBy,
+                posts_per_page: postsPerPage,
+                image_size: 'medium',
+                language: wpmlLanguage,
+                post_parent: parentItem,
+                hierarchy: hierarchy,
+                default_image: gridFallbackImg
+              }, config);
+
+            case 4:
+              result = _context.sent;
+              setPosts(result.data);
+              setLoading(false);
+              _context.next = 11;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function getPosts() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  /**
+   * Retrieve post HTML based on view.
+   *
+   * @return {JSX} List|Grid|Column HTML.
+   */
+
+
+  var getPostHtml = function getPostHtml() {
+    if (Object.keys(posts).length === 0) {
+      return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
+    }
+
+    switch (view) {
+      case 'list':
+        if ('ul' === listStyle) {
+          return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
+        } else if ('ol' === listStyle) {
+          return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
+        } else {
+          return /*#__PURE__*/React.createElement("div", null, "test");
+        } // eslint-disable-next-line no-unreachable
+
+
+        break;
+
+      case 'grid':
+        return /*#__PURE__*/React.createElement(React.Fragment, null, outputGridHtml()); // eslint-disable-next-line no-unreachable
+
+        break;
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  };
+  /**
+   * Output Grid HTML.
+   *
+   * @return {JSX} Grid HTML.
+   */
+
+
+  var outputGridHtml = function outputGridHtml() {
+    var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('ptam-hierarchical-grid-items', "ptam-hierarchical-grid-columns-".concat(parseInt(gridNumberColumns)));
+    return /*#__PURE__*/React.createElement("div", {
+      className: classes
+    }, outputGridItemsHtml());
+  };
+  /**
+   * Output Grid item HTML.
+   *
+   * @return {JSX} Grid item HTML.
+   */
+
+
+  var outputGridItemsHtml = function outputGridItemsHtml() {
+    return Object.keys(posts).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("article", {
+        key: i,
+        className: "ptam-hierarchical-grid-item",
+        style: {
+          backgroundImage: 'featured_image' === gridBackgroundType ? "url(".concat(posts[i].featured_image_src, ")") : false
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-grid-item-content"
+      }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
+    });
+  };
+  /**
+   * Return posts in a list format.
+   *
+   * @return {JSX} List view HTML.
+   */
+
+
+  var outputListHtml = function outputListHtml() {
+    return Object.keys(posts).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i,
+        className: "ptam-hierarchical-post-item"
+      }, /*#__PURE__*/React.createElement("a", {
+        className: "ptam-hierarchical-post-item-link",
+        href: posts[i].link,
+        onClick: function onClick(e) {
+          e.preventDefault();
+        }
+      }, posts[i].post_title));
+    });
+  };
+  /**
+   * Get the current device type (mobile|desktop|tablet).
+   *
+   * @return {string} Current device.
+   */
+
+
+  var getDeviceType = function getDeviceType() {
+    return props.deviceType ? props.deviceType : deviceType;
+  };
+  /**
+   * Change the device type.
+   *
+   * @param {string} device The device to change to.
+   */
+
+
+  var changeDeviceType = function changeDeviceType(device) {
+    if (props.deviceType) {
+      props.setDeviceType(device);
+      setDeviceType(device);
+    } else {
+      setDeviceType(device);
+    }
+  }; // Hierarchical Post Types.
+
+
+  var postTypeOptions = []; // eslint-disable-next-line no-undef
+
+  for (var postTypeKey in ptam_globals.post_types_hierarchical) {
+    postTypeOptions.push({
+      value: postTypeKey,
+      // eslint-disable-next-line no-undef
+      label: ptam_globals.post_types_hierarchical[postTypeKey]
+    });
+  }
+
+  var hierarchyOptions = [{
+    value: 'parents',
+    label: __('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
+  }, {
+    value: 'children',
+    label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
+  }]; // Order Params.
+
+  var orderOptions = [{
+    value: 'ASC',
+    label: __('ASC', 'post-type-archive-mapping')
+  }, {
+    value: 'DESC',
+    label: __('DESC', 'post-type-archive-mapping')
+  }];
+  var orderByOptions = [{
+    value: 'ID',
+    label: __('ID', 'post-type-archive-mapping')
+  }, {
+    value: 'menu_order',
+    label: __('Menu Order', 'post-type-archive-mapping')
+  }, {
+    value: 'author',
+    label: __('Post Author', 'post-type-archive-mapping')
+  }, {
+    value: 'date',
+    label: __('Date', 'post-type-archive-mapping')
+  }, {
+    value: 'modified',
+    label: __('Date Modified', 'post-type-archive-mapping')
+  }, {
+    value: 'name',
+    label: __('Post Slug', 'post-type-archive-mapping')
+  }, {
+    value: 'title',
+    label: __('Title', 'post-type-archive-mapping')
+  }, {
+    value: 'rand',
+    label: __('Random', 'post-type-archive-mapping')
+  }];
+  var gridTitleFontParamsDesktop = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSize,
+    fontSizeUnit: gridTitleFontSizeUnit,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacing,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeight,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsTablet = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeTablet,
+    fontSizeUnit: gridTitleFontSizeUnitTablet,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingTablet,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightTablet,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsMobile = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeMobile,
+    fontSizeUnit: gridTitleFontSizeUnitMobile,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingMobile,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightMobile,
+    lineHeightUnit: gridTitleLineHeightUnit
+  }; // Image Sizes.
+
+  var imageSizeOptions = [];
+
+  for (var imageKey in imageSizes) {
+    imageSizeOptions.push({
+      value: imageKey,
+      label: imageKey
+    });
+  } // Background Options.
+
+
+  var gridBackgroundChoices = [{
+    value: 'featured_image',
+    label: __('Featured Image', 'post-type-archive-mapping')
+  }, {
+    value: 'gradient',
+    label: __('Gradient', 'post-type-archive-mapping')
+  }, {
+    value: 'color',
+    label: __('Color', 'post-type-archive-mapping')
+  }];
+  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+    selectedDevice: getDeviceType(),
+    onClick: function onClick(device) {
+      changeDeviceType(device);
+    }
+  })), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Container', 'post-type-archive-mapping')
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnit,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnit: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeight ? gridMinHeight : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeight: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Number of Columns', 'post-type-archive-mapping'),
+    value: gridNumberColumns,
+    onChange: function onChange(value) {
+      return setAttributes({
+        gridNumberColumns: value
+      });
+    },
+    min: 1,
+    max: 4
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTop",
+    attrRight: "gridPaddingRight",
+    attrBottom: "gridPaddingBottom",
+    attrLeft: "gridPaddingLeft",
+    attrUnit: "gridPaddingUnit",
+    attrSyncUnits: "gridPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitTablet,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitTablet: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightTablet ? gridMinHeightTablet : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightTablet: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopTablet",
+    attrRight: "gridPaddingRightTablet",
+    attrBottom: "gridPaddingBottomTablet",
+    attrLeft: "gridPaddingLeftTablet",
+    attrUnit: "gridPaddingUnitTablet",
+    attrSyncUnits: "gridPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitMobile,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitMobile: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightMobile ? gridMinHeightMobile : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightMobile: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopMobile",
+    attrRight: "gridPaddingRightMobile",
+    attrBottom: "gridPaddingBottomMobile",
+    attrLeft: "gridPaddingLeftMobile",
+    attrUnit: "gridPaddingUnitMobile",
+    attrSyncUnits: "gridPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Background', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Background Type', 'post-type-archive-mapping'),
+    options: gridBackgroundChoices,
+    value: gridBackgroundType,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridBackgroundType: value
+      });
+    }
+  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-gradient',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient'
+    }, {
+      name: 'grid-background-gradient-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-gradient';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradient: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradient
+    }) : /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradientHover: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradientHover
+    }));
+  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-color'
+    }, {
+      name: 'grid-background-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBackgroundColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBackgroundColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), 'featured_image' === gridBackgroundType && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(imageObject) {
+      props.setAttributes({
+        gridFallbackImg: imageObject
+      });
+    },
+    type: "image",
+    value: gridFallbackImg.url,
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-upload components-button is-button is-secondary",
+        onClick: open
+      }, __('Fallback Featured Image', 'post-type-archive-mapping')), gridFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: gridFallbackImg.url,
+        alt: __('Featured Image', 'post-type-archive-mapping'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
+        ,
+        onClick: function onClick(event) {
+          setAttributes({
+            gridFallbackImg: ''
+          });
+        }
+      }, __('Reset Image', 'post-type-archive-mapping')))), /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Featured Image Size', 'post-type-archive-mapping'),
+        options: imageSizeOptions,
+        value: gridImageTypeSize,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridImageTypeSize: value
+          });
+        }
+      }), /*#__PURE__*/React.createElement(ToggleControl, {
+        label: __('Enable Overlay', 'post-type-archive-mapping'),
+        checked: gridOverlay,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridOverlay: value
+          });
+        }
+      }), gridOverlay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+        className: "layout-tab-panel ptam-control-tabs",
+        activeClass: "active-tab",
+        tabs: [{
+          name: 'grid-overlay-color',
+          title: __('Normal', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color'
+        }, {
+          name: 'grid-overlay-color-hover',
+          title: __('Hover', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color-hover'
+        }]
+      }, function (tab) {
+        var isNormal = tab.name === 'grid-overlay-color';
+        return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColor,
+          valueOpacity: gridOverlayBackgroundColorOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColor: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColorHover,
+          valueOpacity: gridOverlayBackgroundColorHoverOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHover: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHoverOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }));
+      })));
+    }
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Title', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Title', 'post-type-archive-mapping'),
+    checked: gridShowTitle,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridShowTitle: value
+      });
+    }
+  }), gridShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-title-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-title-color'
+    }, {
+      name: 'grid-title-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-title-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-title-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsDesktop,
+    showFontFamily: true,
+    showFontSize: true,
+    showFontWeight: true,
+    showTextTransform: true,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSize: fontObject.fontSize,
+        gridTitleFontSizeUnit: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacing: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeight: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  })))), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Border', 'post-type-archive-mapping'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-border-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-border-color'
+    }, {
+      name: 'grid-border-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-border-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-border-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBorderColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBorderColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Border Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBorderColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBorderColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Border Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Border Width', 'post-type-archive-mapping'),
+    value: gridBorderWidth,
+    onChange: function onChange(value) {
+      return setAttributes({
+        gridBorderWidth: value
+      });
+    },
+    min: 0,
+    max: 100
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: __('Border Radius', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridBorderRadiusTopleft",
+    attrRight: "gridBorderRadiusTopRight",
+    attrBottom: "gridBorderRadiusBottomLeft",
+    attrLeft: "gridBorderRadiusBottomRight",
+    attrUnit: "gridBorderRadiusUnit",
+    attrSyncUnits: "gridBorderRadiusUnitsSync",
+    labelTop: __('T-Left', 'post-type-archive-mapping'),
+    labelRight: __('T-Right', 'post-type-archive-mapping'),
+    labelBottom: __('B-Right', 'post-type-archive-mapping'),
+    labelLeft: __('B-Left', 'post-type-archive-mapping'),
+    units: ['px', 'em', 'rem']
+  })));
+  var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Query', 'post-type-archive-mapping'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Post Type', 'post-type-archive-mapping'),
+    options: postTypeOptions,
+    value: postType,
+    onChange: function onChange(value) {
+      setAttributes({
+        postType: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Hierarchy', 'post-type-archive-mapping'),
+    options: hierarchyOptions,
+    value: hierarchy,
+    onChange: function onChange(value) {
+      setAttributes({
+        hierarchy: value
+      });
+    }
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Select a Parent Item', 'post-type-archive-mapping'),
+    postType: postType,
+    selectedItem: parentItem,
+    onChange: function onChange(parent) {
+      setAttributes({
+        parentItem: parent
+      });
+    },
+    loadingText: __('Retrieving items…', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order', 'post-type-archive-mapping'),
+    options: orderOptions,
+    value: order,
+    onChange: function onChange(value) {
+      setAttributes({
+        order: value
+      });
+    }
+  }), getLanguages(), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order By', 'post-type-archive-mapping'),
+    options: orderByOptions,
+    value: orderBy,
+    onChange: function onChange(value) {
+      setAttributes({
+        orderBy: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Number of Items', 'post-type-archive-mapping'),
+    value: postsPerPage,
+    onChange: function onChange(value) {
+      setAttributes({
+        postsPerPage: value
+      });
+      itemNumberRender(value);
+    },
+    min: 1,
+    max: 100
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Enable Pagination', 'post-type-archive-mapping'),
+    checked: pagination,
+    onChange: function onChange(value) {
+      setAttributes({
+        pagination: value
+      });
+    }
+  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Style Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Disable Styles', 'post-type-archive-mapping'),
+    checked: disableStyles,
+    onChange: function onChange(value) {
+      setAttributes({
+        disableStyles: value
+      });
+    }
+  }))); // Toolbar option group for the main layout settings.
+
+  var viewOptions = [[{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null),
+    title: __('View as a List', 'post-type-archive-mapping'),
+    isActive: 'list' === view,
+    onClick: function onClick() {
+      return setAttributes({
+        view: 'list'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null),
+    title: __('View as a Grid', 'post-type-archive-mapping'),
+    isActive: 'grid' === view,
+    onClick: function onClick() {
+      return setAttributes({
+        view: 'grid'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null),
+    title: __('View as Columns', 'post-type-archive-mapping'),
+    isActive: 'columns' === view,
+    onClick: function onClick() {
+      return setAttributes({
+        view: 'columns'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null),
+    title: __('View as Full Content', 'post-type-archive-mapping'),
+    isActive: 'full' === view,
+    onClick: function onClick() {
+      return setAttributes({
+        view: 'full'
+      });
+    }
+  }]]; // Toolbar option group for the main layout settings.
+
+  var listStyleOptions = [[{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["UnorderedListIcon"], null),
+    title: __('Unordered List', 'post-type-archive-mapping'),
+    isActive: 'ul' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'ul'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["OrderedListIcon"], null),
+    title: __('Numbered List', 'post-type-archive-mapping'),
+    isActive: 'ol' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'ol'
+      });
+    }
+  }], [{
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FormatTextLeftIcon"], null),
+    title: __('No List', 'post-type-archive-mapping'),
+    isActive: 'none' === listStyle,
+    onClick: function onClick() {
+      return setAttributes({
+        listStyle: 'none'
+      });
+    }
+  }]];
+  var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+    isCollapsed: true,
+    icon: selectedView(),
+    label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
+    controls: viewOptions
+  })), 'list' === view && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+    isCollapsed: false,
+    label: __('Change the list appearance.', 'post-type-archive-mapping'),
+    controls: listStyleOptions
+  })));
+  /**
+   * Wrapper class for styling.
+   */
+
+  var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_0___default()(_defineProperty({
+    'ptam-hierarchy-wrapper': true
+  }, "ptam-hierarchy-wrapper-".concat(uniqueId), true));
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
+      className: "ptam-term-grid-loading"
+    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), ' ', __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading...', 'post-type-archive-mapping')))));
+  } // Begin building CSS.
+
+
+  var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
+
+  builder.addCSS('.ptam-hierarchical-grid-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\tword-break: break-all;\n\t\ttransition: all ease-in-out 0.5s;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\tgrid-template-columns: 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3', "\n\t\tgrid-template-columns: 1fr 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t");
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr 1fr !important;\n\t\t\t");
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr !important;\n\t\t\t");
+  } // Grid Item Flex goodness.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\ttext-align: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\ttransition: all ease-in-out 0.5s;\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightTablet, gridMinHeightUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightMobile, gridMinHeightUnitMobile), ";\n\t\t\t"));
+  } // Grid background image styles.
+
+
+  if ('featured_image' === gridBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tz-index: 1;\n\t\t\tposition: relative;\n\t\t\toverflow: hidden;\n\t\t\t");
+
+    if (true === gridOverlay) {
+      builder.addCSS('.ptam-hierarchical-grid-item:after', "\n\t\t\t\tposition: absolute;\n\t\t\t\tcontent: '';\n\t\t\t\twidth: 100%;\n\t\t\t\theight: 100%;\n\t\t\t\ttop: 0;\n\t\t\t\tleft: 0;\n\t\t\t\tz-index: 2;\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColor, gridOverlayBackgroundColorOpacity), ";\n\t\t\t\t"));
+
+      if ('' !== gridOverlayBackgroundColorHover) {
+        builder.addCSS('.ptam-hierarchical-grid-item:hover:after', "\n\t\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColorHover, gridOverlayBackgroundColorHoverOpacity), ";\n\t\t\t\t\t"));
+      }
+    }
+  } else if ('gradient' === gridBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(gridBackgroundGradient, ";\n\t\t\t"));
+
+    if ('' !== gridBackgroundGradientHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(gridBackgroundGradientHover, ";\n\t\t\t\t"));
+    }
+  } else {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColor, 1), ";\n\t\t\t"));
+
+    if ('' !== gridBackgroundColorHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColorHover, 1), ";\n\t\t\t\t"));
+    }
+  } // Grid Padding.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopTablet, gridPaddingRightTablet, gridPaddingBottomTablet, gridPaddingLeftTablet, gridPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopMobile, gridPaddingRightMobile, gridPaddingBottomMobile, gridPaddingLeftMobile, gridPaddingUnitMobile), ";\n\t\t\t"));
+  } // Grid Border.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
+
+  if ('' !== gridBorderColor) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
+
+    if ('' !== gridBorderColorHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColorHover, 1), ";\n\t\t\t\t"));
+    }
+  }
+
+  if (0 < gridBorderWidth) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
+  } // Grid Title.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(gridTitleTextTransform, ";\n\t\tz-index: 3;\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
+    className: wrapperClass
+  }, getPostHtml()));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (compose([withDispatch(function (dispatch) {
+  return {
+    setDeviceType: function setDeviceType(type) {
+      var _dispatch = dispatch('core/edit-post'),
+          setPreviewDeviceType = _dispatch.__experimentalSetPreviewDeviceType;
+
+      if (!setPreviewDeviceType) {
+        return;
+      }
+
+      setPreviewDeviceType(type);
+    }
+  };
+}), withSelect(function (select) {
+  var _select = select('core/edit-post'),
+      getPreviewDeviceType = _select.__experimentalGetPreviewDeviceType;
+
+  if (!getPreviewDeviceType) {
+    return {
+      deviceType: null
+    };
+  }
+
+  return {
+    deviceType: getPreviewDeviceType()
+  };
+})])(PTAMHierarchyChildPostsGrid));
+
+/***/ }),
+
 /***/ "./src/block/custom-post-one/block.js":
 /*!********************************************!*\
   !*** ./src/block/custom-post-one/block.js ***!
@@ -17954,1417 +19322,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 /***/ }),
 
-/***/ "./src/block/hierarchy/block.js":
-/*!**************************************!*\
-  !*** ./src/block/hierarchy/block.js ***!
-  \**************************************/
-/*! exports provided: name */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/block/hierarchy/edit.js");
-/**
- * Hierarchy block.
- */
-var __ = wp.i18n.__; // Import __() from wp.i18n
-
-var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-// Import JS
-
-
-var name = 'ptam/hierarchy'; // Register alignments
-
-var validAlignments = ['left', 'center', 'right', 'wide', 'full'];
-/**
- * Register Basic Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior. Once registered, the block is made available as an option to any
- * editor interface where blocks are implemented.
- *
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
-
-registerBlockType('ptam/hierarchy', {
-  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __('Hierarchy', 'post-type-archive-mapping'),
-  // Block title.
-  icon: /*#__PURE__*/React.createElement("svg", {
-    "aria-hidden": "true",
-    focusable: "false",
-    "data-prefix": "fad",
-    "data-icon": "sitemap",
-    className: "svg-inline--fa fa-sitemap fa-w-20",
-    role: "img",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 640 512"
-  }, /*#__PURE__*/React.createElement("g", {
-    className: "fa-group"
-  }, /*#__PURE__*/React.createElement("path", {
-    className: "fa-secondary",
-    fill: "#585aa8",
-    d: "M104 320H56v-57.59A38.45 38.45 0 0 1 94.41 224H296v-64h48v64h201.59A38.46 38.46 0 0 1 584 262.41V320h-48v-48H344v48h-48v-48H104z",
-    opacity: "0.4"
-  }), /*#__PURE__*/React.createElement("path", {
-    className: "fa-primary",
-    fill: "#585aa8",
-    d: "M128 352H32a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zM384 0H256a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h128a32 32 0 0 0 32-32V32a32 32 0 0 0-32-32zm224 352h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zm-240 0h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32z"
-  }))),
-  getEditWrapperProps: function getEditWrapperProps(attributes) {
-    var align = attributes.align;
-
-    if (-1 !== validAlignments.indexOf(align)) {
-      return {
-        'data-align': align
-      };
-    }
-  },
-  category: 'ptam-custom-query-blocks',
-  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
-  description: __('Display items in a hierarchy of children/parent items with ease regardless of post type.', 'post-type-archive-mapping'),
-  keywords: [__('children', 'post-type-archive-mapping'), __('post', 'poost-type-archive-mapping'), __('parent', 'post-type-archive-mapping'), __('hierarchy', 'post-type-archive-mapping')],
-  supports: {
-    anchor: true,
-    html: false
-  },
-  example: {
-    attributes: {
-      preview: true
-    }
-  },
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
-  // Render via PHP
-  save: function save() {
-    return null;
-  }
-});
-
-/***/ }),
-
-/***/ "./src/block/hierarchy/edit.js":
-/*!*************************************!*\
-  !*** ./src/block/hierarchy/edit.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
-/* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
-/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
-/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
-/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
-/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
-/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
-/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-/* eslint-disable no-undef */
-
-/**
- * External dependencies
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // eslint-disable-next-line no-unused-vars
-
-var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
-
-var _wp$element = wp.element,
-    Fragment = _wp$element.Fragment,
-    useState = _wp$element.useState,
-    useEffect = _wp$element.useEffect; // eslint-disable-next-line no-unused-vars
-
-var _wp$i18n = wp.i18n,
-    __ = _wp$i18n.__,
-    _n = _wp$i18n._n,
-    _x = _wp$i18n._x;
-var _wp$components = wp.components,
-    PanelBody = _wp$components.PanelBody,
-    Placeholder = _wp$components.Placeholder,
-    RangeControl = _wp$components.RangeControl,
-    SelectControl = _wp$components.SelectControl,
-    TextControl = _wp$components.TextControl,
-    ToggleControl = _wp$components.ToggleControl,
-    ToolbarGroup = _wp$components.ToolbarGroup,
-    TabPanel = _wp$components.TabPanel;
-var _wp$blockEditor = wp.blockEditor,
-    MediaUpload = _wp$blockEditor.MediaUpload,
-    InspectorControls = _wp$blockEditor.InspectorControls,
-    BlockControls = _wp$blockEditor.BlockControls;
-var _wp$data = wp.data,
-    withSelect = _wp$data.withSelect,
-    withDispatch = _wp$data.withDispatch;
-var compose = wp.compose.compose;
-
-var PTAMHierarchy = function PTAMHierarchy(props) {
-  // Shortcuts.
-  var attributes = props.attributes,
-      setAttributes = props.setAttributes; // Get attributes from props.
-
-  var uniqueId = attributes.uniqueId,
-      align = attributes.align,
-      view = attributes.view,
-      postType = attributes.postType,
-      hierarchy = attributes.hierarchy,
-      parentItem = attributes.parentItem,
-      order = attributes.order,
-      orderBy = attributes.orderBy,
-      postsPerPage = attributes.postsPerPage,
-      wpmlLanguage = attributes.wpmlLanguage,
-      listStyle = attributes.listStyle,
-      disableStyles = attributes.disableStyles,
-      pagination = attributes.pagination,
-      gridPaddingTop = attributes.gridPaddingTop,
-      gridPaddingRight = attributes.gridPaddingRight,
-      gridPaddingBottom = attributes.gridPaddingBottom,
-      gridPaddingLeft = attributes.gridPaddingLeft,
-      gridPaddingUnit = attributes.gridPaddingUnit,
-      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync,
-      gridPaddingTopTablet = attributes.gridPaddingTopTablet,
-      gridPaddingRightTablet = attributes.gridPaddingRightTablet,
-      gridPaddingBottomTablet = attributes.gridPaddingBottomTablet,
-      gridPaddingLeftTablet = attributes.gridPaddingLeftTablet,
-      gridPaddingUnitTablet = attributes.gridPaddingUnitTablet,
-      gridPaddingUnitsSyncTablet = attributes.gridPaddingUnitsSyncTablet,
-      gridPaddingTopMobile = attributes.gridPaddingTopMobile,
-      gridPaddingRightMobile = attributes.gridPaddingRightMobile,
-      gridPaddingBottomMobile = attributes.gridPaddingBottomMobile,
-      gridPaddingLeftMobile = attributes.gridPaddingLeftMobile,
-      gridPaddingUnitMobile = attributes.gridPaddingUnitMobile,
-      gridPaddingUnitsSyncMobile = attributes.gridPaddingUnitsSyncMobile,
-      gridBackgroundType = attributes.gridBackgroundType,
-      gridFallbackImg = attributes.gridFallbackImg,
-      gridImageTypeSize = attributes.gridImageTypeSize,
-      gridBackgroundGradient = attributes.gridBackgroundGradient,
-      gridBackgroundGradientHover = attributes.gridBackgroundGradientHover,
-      gridBackgroundColor = attributes.gridBackgroundColor,
-      gridBackgroundColorHover = attributes.gridBackgroundColorHover,
-      gridMinHeight = attributes.gridMinHeight,
-      gridMinHeightTablet = attributes.gridMinHeightTablet,
-      gridMinHeightMobile = attributes.gridMinHeightMobile,
-      gridMinHeightUnit = attributes.gridMinHeightUnit,
-      gridMinHeightUnitTablet = attributes.gridMinHeightUnitTablet,
-      gridMinHeightUnitMobile = attributes.gridMinHeightUnitMobile,
-      gridNumberColumns = attributes.gridNumberColumns,
-      gridBorderWidth = attributes.gridBorderWidth,
-      gridBorderRadiusTopleft = attributes.gridBorderRadiusTopleft,
-      gridBorderRadiusTopRight = attributes.gridBorderRadiusTopRight,
-      gridBorderRadiusBottomLeft = attributes.gridBorderRadiusBottomLeft,
-      gridBorderRadiusBottomRight = attributes.gridBorderRadiusBottomRight,
-      gridBorderRadiusUnitsSync = attributes.gridBorderRadiusUnitsSync,
-      gridBorderRadiusUnit = attributes.gridBorderRadiusUnit,
-      gridBorderColor = attributes.gridBorderColor,
-      gridBorderColorHover = attributes.gridBorderColorHover,
-      gridOverlay = attributes.gridOverlay,
-      gridOverlayBackgroundColor = attributes.gridOverlayBackgroundColor,
-      gridOverlayBackgroundColorOpacity = attributes.gridOverlayBackgroundColorOpacity,
-      gridOverlayBackgroundColorHover = attributes.gridOverlayBackgroundColorHover,
-      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity,
-      gridShowTitle = attributes.gridShowTitle,
-      gridTitleColor = attributes.gridTitleColor,
-      gridTitleColorHover = attributes.gridTitleColorHover,
-      gridTitleFontFamily = attributes.gridTitleFontFamily,
-      gridTitleFontSizeUnit = attributes.gridTitleFontSizeUnit,
-      gridTitleFontSizeUnitTablet = attributes.gridTitleFontSizeUnitTablet,
-      gridTitleFontSizeUnitMobile = attributes.gridTitleFontSizeUnitMobile,
-      gridTitleFontSize = attributes.gridTitleFontSize,
-      gridTitleFontSizeTablet = attributes.gridTitleFontSizeTablet,
-      gridTitleFontSizeMobile = attributes.gridTitleFontSizeMobile,
-      gridTitleFontWeight = attributes.gridTitleFontWeight,
-      gridTitleLetterSpacing = attributes.gridTitleLetterSpacing,
-      gridTitleLetterSpacingTablet = attributes.gridTitleLetterSpacingTablet,
-      gridTitleLetterSpacingMobile = attributes.gridTitleLetterSpacingMobile,
-      gridTitleLetterSpacingUnit = attributes.gridTitleLetterSpacingUnit,
-      gridTitleTextTransform = attributes.gridTitleTextTransform,
-      gridTitleLineHeight = attributes.gridTitleLineHeight,
-      gridTitleLineHeightTablet = attributes.gridTitleLineHeightTablet,
-      gridTitleLineHeightMobile = attributes.gridTitleLineHeightMobile,
-      gridTitleLineHeightUnit = attributes.gridTitleLineHeightUnit; // Retrieve WPML languages.
-  // eslint-disable-next-line no-undef
-
-  var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
-
-  var wpmlLanguages = ptam_globals.wpml_languages;
-
-  var _useState = useState(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
-
-  var _useState3 = useState(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      itemNumberTimer = _useState4[0],
-      setItemNumberTimer = _useState4[1]; // eslint-disable-next-line no-unused-vars
-
-
-  var _useState5 = useState({
-    headers: {
-      // eslint-disable-next-line no-undef
-      'X-WP-Nonce': ptam_globals.rest_nonce
-    }
-  }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      config = _useState6[0],
-      setConfig = _useState6[1];
-
-  var _useState7 = useState(postsPerPage),
-      _useState8 = _slicedToArray(_useState7, 2),
-      numItems = _useState8[0],
-      setNumItems = _useState8[1];
-
-  var _useState9 = useState({}),
-      _useState10 = _slicedToArray(_useState9, 2),
-      posts = _useState10[0],
-      setPosts = _useState10[1];
-
-  var _useState11 = useState(ptam_globals.image_sizes),
-      _useState12 = _slicedToArray(_useState11, 2),
-      imageSizes = _useState12[0],
-      // eslint-disable-next-line no-unused-vars
-  setImageSizes = _useState12[1];
-
-  var _useState13 = useState('Desktop'),
-      _useState14 = _slicedToArray(_useState13, 2),
-      deviceType = _useState14[0],
-      setDeviceType = _useState14[1];
-
-  useEffect(function () {
-    // Get unique ID for the block. Props @generateblocks.
-    var id = props.clientId.substr(2, 9).replace('-', '');
-
-    if (!attributes.uniqueId) {
-      setAttributes({
-        uniqueId: id
-      });
-    }
-  }, []); // Retrieve the latest posts.
-
-  useEffect(function () {
-    getPosts({});
-  }, [postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize]);
-  /**
-   *
-   * @return {JSX} Current selected view.
-   */
-
-  var selectedView = function selectedView() {
-    switch (view) {
-      case 'grid':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null);
-
-      case 'full':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null);
-
-      case 'columns':
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null);
-
-      case 'list':
-      default:
-        return /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null);
-    }
-  };
-  /**
-   * Set a timer for number of items and expire after one second of inactivity.
-   *
-   * @param {number} value Number of items to display.
-   */
-
-
-  var itemNumberRender = function itemNumberRender(value) {
-    if (itemNumberTimer) {
-      clearTimeout(itemNumberTimer);
-    }
-
-    setItemNumberTimer(setTimeout(function () {
-      setNumItems(value);
-    }, 1000));
-  };
-  /**
-   * Output JSX for WPML languages.
-   *
-   * @param {string} selectedLanguage The language selected.
-   * @return {JSX} Select box with languages.
-   */
-
-
-  var getLanguages = function getLanguages(selectedLanguage) {
-    if (wpmlInstalled) {
-      return /*#__PURE__*/React.createElement(SelectControl, {
-        label: __('Language', 'post-type-archive-mapping'),
-        options: wpmlLanguages,
-        value: selectedLanguage,
-        onChange: function onChange(value) {
-          setAttributes({
-            wpmlLanguage: value
-          });
-        }
-      });
-    }
-
-    return /*#__PURE__*/React.createElement(React.Fragment, null);
-  };
-  /**
-   * Retrieve the items via REST API.
-   */
-
-
-  var getPosts = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var result;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              setLoading(true);
-              _context.prev = 1;
-              _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post( // eslint-disable-next-line no-undef
-              ptam_globals.rest_url + "ptam/v2/get_hierarchical_posts", {
-                post_type: postType,
-                order: order,
-                orderby: orderBy,
-                posts_per_page: postsPerPage,
-                image_size: 'medium',
-                language: wpmlLanguage,
-                post_parent: parentItem,
-                hierarchy: hierarchy,
-                default_image: gridFallbackImg
-              }, config);
-
-            case 4:
-              result = _context.sent;
-              setPosts(result.data);
-              setLoading(false);
-              _context.next = 11;
-              break;
-
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context["catch"](1);
-
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[1, 9]]);
-    }));
-
-    return function getPosts() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  /**
-   * Retrieve post HTML based on view.
-   *
-   * @return {JSX} List|Grid|Column HTML.
-   */
-
-
-  var getPostHtml = function getPostHtml() {
-    if (Object.keys(posts).length === 0) {
-      return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
-    }
-
-    switch (view) {
-      case 'list':
-        if ('ul' === listStyle) {
-          return /*#__PURE__*/React.createElement("ul", null, outputListHtml());
-        } else if ('ol' === listStyle) {
-          return /*#__PURE__*/React.createElement("ol", null, outputListHtml()); // eslint-disable-next-line no-else-return
-        } else {
-          return /*#__PURE__*/React.createElement("div", null, "test");
-        } // eslint-disable-next-line no-unreachable
-
-
-        break;
-
-      case 'grid':
-        return /*#__PURE__*/React.createElement(React.Fragment, null, outputGridHtml()); // eslint-disable-next-line no-unreachable
-
-        break;
-    }
-
-    return /*#__PURE__*/React.createElement(React.Fragment, null);
-  };
-  /**
-   * Output Grid HTML.
-   *
-   * @return {JSX} Grid HTML.
-   */
-
-
-  var outputGridHtml = function outputGridHtml() {
-    var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('ptam-hierarchical-grid-items', "ptam-hierarchical-grid-columns-".concat(parseInt(gridNumberColumns)));
-    return /*#__PURE__*/React.createElement("div", {
-      className: classes
-    }, outputGridItemsHtml());
-  };
-  /**
-   * Output Grid item HTML.
-   *
-   * @return {JSX} Grid item HTML.
-   */
-
-
-  var outputGridItemsHtml = function outputGridItemsHtml() {
-    return Object.keys(posts).map(function (item, i) {
-      return /*#__PURE__*/React.createElement("article", {
-        key: i,
-        className: "ptam-hierarchical-grid-item",
-        style: {
-          backgroundImage: 'featured_image' === gridBackgroundType ? "url(".concat(posts[i].featured_image_src, ")") : false
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "ptam-hierarchical-grid-item-content"
-      }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
-    });
-  };
-  /**
-   * Return posts in a list format.
-   *
-   * @return {JSX} List view HTML.
-   */
-
-
-  var outputListHtml = function outputListHtml() {
-    return Object.keys(posts).map(function (item, i) {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i,
-        className: "ptam-hierarchical-post-item"
-      }, /*#__PURE__*/React.createElement("a", {
-        className: "ptam-hierarchical-post-item-link",
-        href: posts[i].link,
-        onClick: function onClick(e) {
-          e.preventDefault();
-        }
-      }, posts[i].post_title));
-    });
-  };
-  /**
-   * Get the current device type (mobile|desktop|tablet).
-   *
-   * @return {string} Current device.
-   */
-
-
-  var getDeviceType = function getDeviceType() {
-    return props.deviceType ? props.deviceType : deviceType;
-  };
-  /**
-   * Change the device type.
-   *
-   * @param {string} device The device to change to.
-   */
-
-
-  var changeDeviceType = function changeDeviceType(device) {
-    if (props.deviceType) {
-      props.setDeviceType(device);
-      setDeviceType(device);
-    } else {
-      setDeviceType(device);
-    }
-  }; // Hierarchical Post Types.
-
-
-  var postTypeOptions = []; // eslint-disable-next-line no-undef
-
-  for (var postTypeKey in ptam_globals.post_types_hierarchical) {
-    postTypeOptions.push({
-      value: postTypeKey,
-      // eslint-disable-next-line no-undef
-      label: ptam_globals.post_types_hierarchical[postTypeKey]
-    });
-  }
-
-  var hierarchyOptions = [{
-    value: 'parents',
-    label: __('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
-  }, {
-    value: 'children',
-    label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
-  }]; // Order Params.
-
-  var orderOptions = [{
-    value: 'ASC',
-    label: __('ASC', 'post-type-archive-mapping')
-  }, {
-    value: 'DESC',
-    label: __('DESC', 'post-type-archive-mapping')
-  }];
-  var orderByOptions = [{
-    value: 'ID',
-    label: __('ID', 'post-type-archive-mapping')
-  }, {
-    value: 'menu_order',
-    label: __('Menu Order', 'post-type-archive-mapping')
-  }, {
-    value: 'author',
-    label: __('Post Author', 'post-type-archive-mapping')
-  }, {
-    value: 'date',
-    label: __('Date', 'post-type-archive-mapping')
-  }, {
-    value: 'modified',
-    label: __('Date Modified', 'post-type-archive-mapping')
-  }, {
-    value: 'name',
-    label: __('Post Slug', 'post-type-archive-mapping')
-  }, {
-    value: 'title',
-    label: __('Title', 'post-type-archive-mapping')
-  }, {
-    value: 'rand',
-    label: __('Random', 'post-type-archive-mapping')
-  }];
-  var gridTitleFontParamsDesktop = {
-    fontFamily: gridTitleFontFamily,
-    fontSize: gridTitleFontSize,
-    fontSizeUnit: gridTitleFontSizeUnit,
-    fontWeight: gridTitleFontWeight,
-    letterSpacing: gridTitleLetterSpacing,
-    letterSpacingUnit: gridTitleLetterSpacingUnit,
-    textTransform: gridTitleTextTransform,
-    lineHeight: gridTitleLineHeight,
-    lineHeightUnit: gridTitleLineHeightUnit
-  };
-  var gridTitleFontParamsTablet = {
-    fontFamily: gridTitleFontFamily,
-    fontSize: gridTitleFontSizeTablet,
-    fontSizeUnit: gridTitleFontSizeUnitTablet,
-    fontWeight: gridTitleFontWeight,
-    letterSpacing: gridTitleLetterSpacingTablet,
-    textTransform: gridTitleTextTransform,
-    lineHeight: gridTitleLineHeightTablet,
-    lineHeightUnit: gridTitleLineHeightUnit
-  };
-  var gridTitleFontParamsMobile = {
-    fontFamily: gridTitleFontFamily,
-    fontSize: gridTitleFontSizeMobile,
-    fontSizeUnit: gridTitleFontSizeUnitMobile,
-    fontWeight: gridTitleFontWeight,
-    letterSpacing: gridTitleLetterSpacingMobile,
-    textTransform: gridTitleTextTransform,
-    lineHeight: gridTitleLineHeightMobile,
-    lineHeightUnit: gridTitleLineHeightUnit
-  }; // Image Sizes.
-
-  var imageSizeOptions = [];
-
-  for (var imageKey in imageSizes) {
-    imageSizeOptions.push({
-      value: imageKey,
-      label: imageKey
-    });
-  } // Background Options.
-
-
-  var gridBackgroundChoices = [{
-    value: 'featured_image',
-    label: __('Featured Image', 'post-type-archive-mapping')
-  }, {
-    value: 'gradient',
-    label: __('Gradient', 'post-type-archive-mapping')
-  }, {
-    value: 'color',
-    label: __('Color', 'post-type-archive-mapping')
-  }];
-  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
-    selectedDevice: getDeviceType(),
-    onClick: function onClick(device) {
-      changeDeviceType(device);
-    }
-  })), /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: false,
-    title: __('Container', 'post-type-archive-mapping')
-  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    label: __('Minimum Height', 'post-type-archive-mapping'),
-    value: gridMinHeightUnit,
-    units: ['px', 'em', 'vh'],
-    onClick: function onClick(value) {
-      setAttributes({
-        gridMinHeightUnit: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    type: 'number',
-    value: gridMinHeight ? gridMinHeight : '',
-    onChange: function onChange(value) {
-      setAttributes({
-        gridMinHeight: parseFloat(value)
-      });
-    }
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __('Number of Columns', 'post-type-archive-mapping'),
-    value: gridNumberColumns,
-    onChange: function onChange(value) {
-      return setAttributes({
-        gridNumberColumns: value
-      });
-    },
-    min: 1,
-    max: 4
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    attributes: attributes,
-    setAttributes: setAttributes,
-    allowNegatives: false,
-    attrTop: "gridPaddingTop",
-    attrRight: "gridPaddingRight",
-    attrBottom: "gridPaddingBottom",
-    attrLeft: "gridPaddingLeft",
-    attrUnit: "gridPaddingUnit",
-    attrSyncUnits: "gridPaddingUnitsSync",
-    units: ['px', 'em', 'rem']
-  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    label: __('Minimum Height', 'post-type-archive-mapping'),
-    value: gridMinHeightUnitTablet,
-    units: ['px', 'em', 'vh'],
-    onClick: function onClick(value) {
-      setAttributes({
-        gridMinHeightUnitTablet: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    type: 'number',
-    value: gridMinHeightTablet ? gridMinHeightTablet : '',
-    onChange: function onChange(value) {
-      setAttributes({
-        gridMinHeightTablet: parseFloat(value)
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    attributes: attributes,
-    setAttributes: setAttributes,
-    allowNegatives: false,
-    attrTop: "gridPaddingTopTablet",
-    attrRight: "gridPaddingRightTablet",
-    attrBottom: "gridPaddingBottomTablet",
-    attrLeft: "gridPaddingLeftTablet",
-    attrUnit: "gridPaddingUnitTablet",
-    attrSyncUnits: "gridPaddingUnitsSyncTablet",
-    units: ['px', 'em', 'rem']
-  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    label: __('Minimum Height', 'post-type-archive-mapping'),
-    value: gridMinHeightUnitMobile,
-    units: ['px', 'em', 'vh'],
-    onClick: function onClick(value) {
-      setAttributes({
-        gridMinHeightUnitMobile: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    type: 'number',
-    value: gridMinHeightMobile ? gridMinHeightMobile : '',
-    onChange: function onChange(value) {
-      setAttributes({
-        gridMinHeightMobile: parseFloat(value)
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    attributes: attributes,
-    setAttributes: setAttributes,
-    allowNegatives: false,
-    attrTop: "gridPaddingTopMobile",
-    attrRight: "gridPaddingRightMobile",
-    attrBottom: "gridPaddingBottomMobile",
-    attrLeft: "gridPaddingLeftMobile",
-    attrUnit: "gridPaddingUnitMobile",
-    attrSyncUnits: "gridPaddingUnitsSyncMobile",
-    units: ['px', 'em', 'rem']
-  }))), /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: false,
-    title: __('Background', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Background Type', 'post-type-archive-mapping'),
-    options: gridBackgroundChoices,
-    value: gridBackgroundType,
-    onChange: function onChange(value) {
-      setAttributes({
-        gridBackgroundType: value
-      });
-    }
-  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
-    className: "layout-tab-panel ptam-control-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: 'grid-background-gradient',
-      title: __('Normal', 'post-type-archive-mapping'),
-      className: 'grid-background-gradient'
-    }, {
-      name: 'grid-background-gradient-hover',
-      title: __('Hover', 'post-type-archive-mapping'),
-      className: 'grid-background-gradient-hover'
-    }]
-  }, function (tab) {
-    var isNormal = tab.name === 'grid-background-gradient';
-    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBackgroundGradient: value
-        });
-      },
-      label: __('Background Gradient', 'post-type-archive-mapping'),
-      value: gridBackgroundGradient
-    }) : /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBackgroundGradientHover: value
-        });
-      },
-      label: __('Background Gradient', 'post-type-archive-mapping'),
-      value: gridBackgroundGradientHover
-    }));
-  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
-    className: "layout-tab-panel ptam-control-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: 'grid-background-color',
-      title: __('Normal', 'post-type-archive-mapping'),
-      className: 'grid-background-color'
-    }, {
-      name: 'grid-background-color-hover',
-      title: __('Hover', 'post-type-archive-mapping'),
-      className: 'grid-background-color-hover'
-    }]
-  }, function (tab) {
-    var isNormal = tab.name === 'grid-background-color';
-    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridBackgroundColor,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBackgroundColor: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Background Color', 'post-type-archive-mapping'),
-      alpha: false
-    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridBackgroundColorHover,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBackgroundColorHover: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Background Color', 'post-type-archive-mapping'),
-      alpha: false
-    }));
-  }), 'featured_image' === gridBackgroundType && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(imageObject) {
-      props.setAttributes({
-        gridFallbackImg: imageObject
-      });
-    },
-    type: "image",
-    value: gridFallbackImg.url,
-    render: function render(_ref2) {
-      var open = _ref2.open;
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-upload components-button is-button is-secondary",
-        onClick: open
-      }, __('Fallback Featured Image', 'post-type-archive-mapping')), gridFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
-        src: gridFallbackImg.url,
-        alt: __('Featured Image', 'post-type-archive-mapping'),
-        width: "250",
-        height: "250"
-      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
-        ,
-        onClick: function onClick(event) {
-          setAttributes({
-            gridFallbackImg: ''
-          });
-        }
-      }, __('Reset Image', 'post-type-archive-mapping')))), /*#__PURE__*/React.createElement(SelectControl, {
-        label: __('Featured Image Size', 'post-type-archive-mapping'),
-        options: imageSizeOptions,
-        value: gridImageTypeSize,
-        onChange: function onChange(value) {
-          setAttributes({
-            gridImageTypeSize: value
-          });
-        }
-      }), /*#__PURE__*/React.createElement(ToggleControl, {
-        label: __('Enable Overlay', 'post-type-archive-mapping'),
-        checked: gridOverlay,
-        onChange: function onChange(value) {
-          setAttributes({
-            gridOverlay: value
-          });
-        }
-      }), gridOverlay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
-        className: "layout-tab-panel ptam-control-tabs",
-        activeClass: "active-tab",
-        tabs: [{
-          name: 'grid-overlay-color',
-          title: __('Normal', 'post-type-archive-mapping'),
-          className: 'grid-overlay-color'
-        }, {
-          name: 'grid-overlay-color-hover',
-          title: __('Hover', 'post-type-archive-mapping'),
-          className: 'grid-overlay-color-hover'
-        }]
-      }, function (tab) {
-        var isNormal = tab.name === 'grid-overlay-color';
-        return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          value: gridOverlayBackgroundColor,
-          valueOpacity: gridOverlayBackgroundColorOpacity,
-          onChange: function onChange(value) {
-            setAttributes({
-              gridOverlayBackgroundColor: value
-            });
-          } // eslint-disable-next-line no-unused-vars
-          ,
-          onOpacityChange: function onOpacityChange(value) {
-            setAttributes({
-              gridOverlayBackgroundColorOpacity: value
-            });
-          },
-          label: __('Overlay Color', 'post-type-archive-mapping'),
-          alpha: true
-        }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          value: gridOverlayBackgroundColorHover,
-          valueOpacity: gridOverlayBackgroundColorHoverOpacity,
-          onChange: function onChange(value) {
-            setAttributes({
-              gridOverlayBackgroundColorHover: value
-            });
-          } // eslint-disable-next-line no-unused-vars
-          ,
-          onOpacityChange: function onOpacityChange(value) {
-            setAttributes({
-              gridOverlayBackgroundColorHoverOpacity: value
-            });
-          },
-          label: __('Overlay Color', 'post-type-archive-mapping'),
-          alpha: true
-        }));
-      })));
-    }
-  }))), /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: false,
-    title: __('Title', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Show Title', 'post-type-archive-mapping'),
-    checked: gridShowTitle,
-    onChange: function onChange(value) {
-      setAttributes({
-        gridShowTitle: value
-      });
-    }
-  }), gridShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
-    className: "layout-tab-panel ptam-control-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: 'grid-title-color',
-      title: __('Normal', 'post-type-archive-mapping'),
-      className: 'grid-title-color'
-    }, {
-      name: 'grid-title-color-hover',
-      title: __('Hover', 'post-type-archive-mapping'),
-      className: 'grid-title-color-hover'
-    }]
-  }, function (tab) {
-    var isNormal = tab.name === 'grid-title-color';
-    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridTitleColor,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridTitleColor: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Title Color', 'post-type-archive-mapping'),
-      alpha: false
-    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridTitleColorHover,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridTitleColorHover: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Title Color', 'post-type-archive-mapping'),
-      alpha: false
-    }));
-  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    label: __('Title Typography', 'post-type-archive-mapping'),
-    options: gridTitleFontParamsDesktop,
-    showFontFamily: true,
-    showFontSize: true,
-    showFontWeight: true,
-    showTextTransform: true,
-    showLineHeight: true,
-    showLetterSpacing: true,
-    onChange: function onChange(fontObject) {
-      setAttributes({
-        gridTitleFontFamily: fontObject.fontFamily,
-        gridTitleFontSize: fontObject.fontSize,
-        gridTitleFontSizeUnit: fontObject.fontSizeUnit,
-        gridTitleFontWeight: fontObject.fontWeight,
-        gridTitleLetterSpacing: fontObject.letterSpacing,
-        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
-        gridTitleLineHeight: fontObject.lineHeight,
-        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
-        gridTitleTextTransform: fontObject.textTransform
-      });
-    }
-  })))), /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Border', 'post-type-archive-mapping'),
-    initialOpen: false
-  }, /*#__PURE__*/React.createElement(TabPanel, {
-    className: "layout-tab-panel ptam-control-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: 'grid-border-color',
-      title: __('Normal', 'post-type-archive-mapping'),
-      className: 'grid-border-color'
-    }, {
-      name: 'grid-border-color-hover',
-      title: __('Hover', 'post-type-archive-mapping'),
-      className: 'grid-border-color-hover'
-    }]
-  }, function (tab) {
-    var isNormal = tab.name === 'grid-border-color';
-    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridBorderColor,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBorderColor: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Border Color', 'post-type-archive-mapping'),
-      alpha: false
-    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      value: gridBorderColorHover,
-      valueOpacity: 1,
-      onChange: function onChange(value) {
-        setAttributes({
-          gridBorderColorHover: value
-        });
-      } // eslint-disable-next-line no-unused-vars
-      ,
-      onOpacityChange: function onOpacityChange(value) {},
-      label: __('Border Color', 'post-type-archive-mapping'),
-      alpha: false
-    }));
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __('Border Width', 'post-type-archive-mapping'),
-    value: gridBorderWidth,
-    onChange: function onChange(value) {
-      return setAttributes({
-        gridBorderWidth: value
-      });
-    },
-    min: 0,
-    max: 100
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __('Border Radius', 'post-type-archive-mapping'),
-    attributes: attributes,
-    setAttributes: setAttributes,
-    allowNegatives: false,
-    attrTop: "gridBorderRadiusTopleft",
-    attrRight: "gridBorderRadiusTopRight",
-    attrBottom: "gridBorderRadiusBottomLeft",
-    attrLeft: "gridBorderRadiusBottomRight",
-    attrUnit: "gridBorderRadiusUnit",
-    attrSyncUnits: "gridBorderRadiusUnitsSync",
-    labelTop: __('T-Left', 'post-type-archive-mapping'),
-    labelRight: __('T-Right', 'post-type-archive-mapping'),
-    labelBottom: __('B-Right', 'post-type-archive-mapping'),
-    labelLeft: __('B-Left', 'post-type-archive-mapping'),
-    units: ['px', 'em', 'rem']
-  })));
-  var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Query', 'post-type-archive-mapping'),
-    initialOpen: false
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Post Type', 'post-type-archive-mapping'),
-    options: postTypeOptions,
-    value: postType,
-    onChange: function onChange(value) {
-      setAttributes({
-        postType: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Hierarchy', 'post-type-archive-mapping'),
-    options: hierarchyOptions,
-    value: hierarchy,
-    onChange: function onChange(value) {
-      setAttributes({
-        hierarchy: value
-      });
-    }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    label: __('Select a Parent Item', 'post-type-archive-mapping'),
-    postType: postType,
-    selectedItem: parentItem,
-    onChange: function onChange(parent) {
-      setAttributes({
-        parentItem: parent
-      });
-    },
-    loadingText: __('Retrieving items…', 'post-type-archive-mapping')
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Order', 'post-type-archive-mapping'),
-    options: orderOptions,
-    value: order,
-    onChange: function onChange(value) {
-      setAttributes({
-        order: value
-      });
-    }
-  }), getLanguages(), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Order By', 'post-type-archive-mapping'),
-    options: orderByOptions,
-    value: orderBy,
-    onChange: function onChange(value) {
-      setAttributes({
-        orderBy: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __('Number of Items', 'post-type-archive-mapping'),
-    value: postsPerPage,
-    onChange: function onChange(value) {
-      setAttributes({
-        postsPerPage: value
-      });
-      itemNumberRender(value);
-    },
-    min: 1,
-    max: 100
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Enable Pagination', 'post-type-archive-mapping'),
-    checked: pagination,
-    onChange: function onChange(value) {
-      setAttributes({
-        pagination: value
-      });
-    }
-  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions), /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Style Options', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Disable Styles', 'post-type-archive-mapping'),
-    checked: disableStyles,
-    onChange: function onChange(value) {
-      setAttributes({
-        disableStyles: value
-      });
-    }
-  }))); // Toolbar option group for the main layout settings.
-
-  var viewOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ListIcon"], null),
-    title: __('View as a List', 'post-type-archive-mapping'),
-    isActive: 'list' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'list'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["GridIcon"], null),
-    title: __('View as a Grid', 'post-type-archive-mapping'),
-    isActive: 'grid' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'grid'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["ColumnsIcon"], null),
-    title: __('View as Columns', 'post-type-archive-mapping'),
-    isActive: 'columns' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'columns'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FullIcon"], null),
-    title: __('View as Full Content', 'post-type-archive-mapping'),
-    isActive: 'full' === view,
-    onClick: function onClick() {
-      return setAttributes({
-        view: 'full'
-      });
-    }
-  }]]; // Toolbar option group for the main layout settings.
-
-  var listStyleOptions = [[{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["UnorderedListIcon"], null),
-    title: __('Unordered List', 'post-type-archive-mapping'),
-    isActive: 'ul' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'ul'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["OrderedListIcon"], null),
-    title: __('Numbered List', 'post-type-archive-mapping'),
-    isActive: 'ol' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'ol'
-      });
-    }
-  }], [{
-    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_12__["FormatTextLeftIcon"], null),
-    title: __('No List', 'post-type-archive-mapping'),
-    isActive: 'none' === listStyle,
-    onClick: function onClick() {
-      return setAttributes({
-        listStyle: 'none'
-      });
-    }
-  }]];
-  var toolbar = /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    isCollapsed: true,
-    icon: selectedView(),
-    label: __('Change the layout of the hierarchy.', 'post-type-archive-mapping'),
-    controls: viewOptions
-  })), 'list' === view && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    isCollapsed: false,
-    label: __('Change the list appearance.', 'post-type-archive-mapping'),
-    controls: listStyleOptions
-  })));
-  /**
-   * Wrapper class for styling.
-   */
-
-  var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_0___default()(_defineProperty({
-    'ptam-hierarchy-wrapper': true
-  }, "ptam-hierarchy-wrapper-".concat(uniqueId), true));
-
-  if (loading) {
-    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, toolbar, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
-      className: "ptam-term-grid-loading"
-    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      viewBox: "0 0 315.23 341.25",
-      width: "42",
-      height: "42"
-    }, /*#__PURE__*/React.createElement("polygon", {
-      points: "315.23 204.75 315.23 68.25 197.02 0 197.02 136.5 315.23 204.75",
-      style: {
-        fill: '#ffdd01',
-        opacity: 0.8
-      }
-    }), /*#__PURE__*/React.createElement("polygon", {
-      points: "0 204.75 0 68.25 118.21 0 118.21 136.5 0 204.75",
-      style: {
-        fill: '#2e3192',
-        opacity: 0.8
-      }
-    }), /*#__PURE__*/React.createElement("polygon", {
-      points: "157.62 159.25 275.83 91 157.62 22.75 39.4 91 157.62 159.25",
-      style: {
-        fill: '#86cedc',
-        opacity: 0.8
-      }
-    }), /*#__PURE__*/React.createElement("polygon", {
-      points: "157.62 341.25 275.83 273 157.62 204.75 39.4 273 157.62 341.25",
-      style: {
-        fill: '#f07f3b',
-        opacity: 0.8
-      }
-    }), /*#__PURE__*/React.createElement("polygon", {
-      points: "177.32 170.62 295.53 102.37 295.53 238.87 177.32 307.12 177.32 170.62",
-      style: {
-        fill: '#c10a26',
-        opacity: 0.8
-      }
-    }), /*#__PURE__*/React.createElement("polygon", {
-      points: "137.91 170.62 19.7 102.37 19.7 238.87 137.91 307.12 137.91 170.62",
-      style: {
-        fill: '#662583',
-        opacity: 0.8
-      }
-    })), ' ', __('Hierarchical Items', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      cssClass: "ptam-term-grid-loading-animation"
-    })))));
-  } // Begin building CSS.
-
-
-  var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
-
-  builder.addCSS('.ptam-hierarchical-grid-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\tword-break: break-all;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\tgrid-template-columns: 1fr 1fr;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3', "\n\t\tgrid-template-columns: 1fr 1fr 1fr;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t");
-
-  if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr 1fr;\n\t\t\t");
-  }
-
-  if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr;\n\t\t\t");
-  } // Grid Item Flex goodness.
-
-
-  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\ttext-align: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\t"));
-
-  if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightTablet, gridMinHeightUnitTablet), ";\n\t\t\t"));
-  }
-
-  if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightMobile, gridMinHeightUnitMobile), ";\n\t\t\t"));
-  } // Grid background image styles.
-
-
-  if ('featured_image' === gridBackgroundType) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tz-index: 1;\n\t\t\tposition: relative;\n\t\t\toverflow: hidden;\n\t\t\t");
-
-    if (true === gridOverlay) {
-      builder.addCSS('.ptam-hierarchical-grid-item:after', "\n\t\t\t\tposition: absolute;\n\t\t\t\tcontent: '';\n\t\t\t\twidth: 100%;\n\t\t\t\theight: 100%;\n\t\t\t\ttop: 0;\n\t\t\t\tleft: 0;\n\t\t\t\tz-index: 2;\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColor, gridOverlayBackgroundColorOpacity), ";\n\t\t\t\t"));
-
-      if ('' !== gridOverlayBackgroundColorHover) {
-        builder.addCSS('.ptam-hierarchical-grid-item:hover:after', "\n\t\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColorHover, gridOverlayBackgroundColorHoverOpacity), ";\n\t\t\t\t\t"));
-      }
-    }
-  } else if ('gradient' === gridBackgroundType) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(gridBackgroundGradient, ";\n\t\t\t"));
-
-    if ('' !== gridBackgroundGradientHover) {
-      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(gridBackgroundGradientHover, ";\n\t\t\t\t"));
-    }
-  } else {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColor, 1), ";\n\t\t\t"));
-
-    if ('' !== gridBackgroundColorHover) {
-      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColorHover, 1), ";\n\t\t\t\t"));
-    }
-  } // Grid Padding.
-
-
-  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t"));
-
-  if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopTablet, gridPaddingRightTablet, gridPaddingBottomTablet, gridPaddingLeftTablet, gridPaddingUnitTablet), ";\n\t\t\t"));
-  }
-
-  if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopMobile, gridPaddingRightMobile, gridPaddingBottomMobile, gridPaddingLeftMobile, gridPaddingUnitMobile), ";\n\t\t\t"));
-  } // Grid Border.
-
-
-  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
-
-  if ('' !== gridBorderColor) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
-
-    if ('' !== gridBorderColorHover) {
-      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColorHover, 1), ";\n\t\t\t\t"));
-    }
-  }
-
-  if (0 < gridBorderWidth) {
-    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
-  } // Grid Title.
-
-
-  builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
-  builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), "\n\t\ttext-transform: ").concat(gridTitleTextTransform, "\n\t\tz-index: 3;\n\t\t"));
-  builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, toolbar, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
-    className: wrapperClass
-  }, getPostHtml()));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (compose([withDispatch(function (dispatch) {
-  return {
-    setDeviceType: function setDeviceType(type) {
-      var _dispatch = dispatch('core/edit-post'),
-          setPreviewDeviceType = _dispatch.__experimentalSetPreviewDeviceType;
-
-      if (!setPreviewDeviceType) {
-        return;
-      }
-
-      setPreviewDeviceType(type);
-    }
-  };
-}), withSelect(function (select) {
-  var _select = select('core/edit-post'),
-      getPreviewDeviceType = _select.__experimentalGetPreviewDeviceType;
-
-  if (!getPreviewDeviceType) {
-    return {
-      deviceType: null
-    };
-  }
-
-  return {
-    deviceType: getPreviewDeviceType()
-  };
-})])(PTAMHierarchy));
-
-/***/ }),
-
 /***/ "./src/block/term-grid/block.js":
 /*!**************************************!*\
   !*** ./src/block/term-grid/block.js ***!
@@ -20554,86 +20511,52 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+// eslint-disable-next-line no-unused-vars
 var Loading = function Loading(_ref) {
   var _ref$cssClass = _ref.cssClass,
       cssClass = _ref$cssClass === void 0 ? 'ptam-loading' : _ref$cssClass;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cssClass
-  }, /*#__PURE__*/React.createElement("svg", {
+  return /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    version: "1.0",
-    width: "64px",
-    height: "64px",
-    viewBox: "0 0 128 128"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "0",
-    y: "0",
-    width: "100%",
-    height: "100%",
-    fill: "rgba(0,0,0,0)"
-  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#000000",
-    fillOpacity: "1"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#555555",
-    fillOpacity: "0.67",
-    transform: "rotate(45,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#949494",
-    fillOpacity: "0.42",
-    transform: "rotate(90,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#cccccc",
-    fillOpacity: "0.2",
-    transform: "rotate(135,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(180,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(225,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(270,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(315,64,64)"
-  }), /*#__PURE__*/React.createElement("animateTransform", {
-    attributeName: "transform",
-    type: "rotate",
-    values: "0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64",
-    calcMode: "discrete",
-    dur: "720ms",
-    repeatCount: "indefinite"
-  }))));
+    viewBox: "0 0 315.23 341.25",
+    width: "42",
+    height: "42"
+  }, /*#__PURE__*/React.createElement("polygon", {
+    points: "315.23 204.75 315.23 68.25 197.02 0 197.02 136.5 315.23 204.75",
+    style: {
+      fill: '#ffdd01',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "0 204.75 0 68.25 118.21 0 118.21 136.5 0 204.75",
+    style: {
+      fill: '#2e3192',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "157.62 159.25 275.83 91 157.62 22.75 39.4 91 157.62 159.25",
+    style: {
+      fill: '#86cedc',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "157.62 341.25 275.83 273 157.62 204.75 39.4 273 157.62 341.25",
+    style: {
+      fill: '#f07f3b',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "177.32 170.62 295.53 102.37 295.53 238.87 177.32 307.12 177.32 170.62",
+    style: {
+      fill: '#c10a26',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "137.91 170.62 19.7 102.37 19.7 238.87 137.91 307.12 137.91 170.62",
+    style: {
+      fill: '#662583',
+      opacity: 0.8
+    }
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loading);
@@ -26197,7 +26120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_custom_post_one_block_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block/custom-post-one/block.js */ "./src/block/custom-post-one/block.js");
 /* harmony import */ var _block_term_grid_block_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block/term-grid/block.js */ "./src/block/term-grid/block.js");
 /* harmony import */ var _block_featured_posts_block_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block/featured-posts/block.js */ "./src/block/featured-posts/block.js");
-/* harmony import */ var _block_hierarchy_block_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block/hierarchy/block.js */ "./src/block/hierarchy/block.js");
+/* harmony import */ var _block_child_posts_grid_block_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block/child-posts-grid/block.js */ "./src/block/child-posts-grid/block.js");
 /**
  * Gutenberg Blocks
  *
