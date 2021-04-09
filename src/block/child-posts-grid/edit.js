@@ -238,7 +238,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 					order,
 					orderby: orderBy,
 					posts_per_page: postsPerPage,
-					image_size: 'medium',
+					image_size: gridImageTypeSize,
 					language: wpmlLanguage,
 					post_parent: parentItem,
 					hierarchy,
@@ -307,9 +307,11 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 							: false,
 				} }
 			>
-				<div className="ptam-hierarchical-grid-item-content">
-					<h2>{ posts[ i ].post_title }</h2>
-				</div>
+				{ gridShowTitle &&
+					<div className="ptam-hierarchical-grid-item-content">
+						<h2>{ posts[ i ].post_title }</h2>
+					</div>
+				}
 			</article>
 		) );
 	};
@@ -1430,6 +1432,26 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		color: ${ hexToRgba( gridTitleColorHover, 1 ) };
 		`
 	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item-content h2',
+			`
+			font-size: ${ valueWithUnit( gridTitleFontSizeTablet, gridTitleFontSizeUnitTablet ) };
+			letter-spacing: ${ valueWithUnit( gridTitleLetterSpacingTablet, gridTitleLetterSpacingUnit ) };
+			line-height: ${ valueWithUnit( gridTitleLineHeightTablet, gridTitleLineHeightUnit ) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-grid-item-content h2',
+			`
+			font-size: ${ valueWithUnit( gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile) };
+			letter-spacing: ${ valueWithUnit( gridTitleLetterSpacingMobile, gridTitleLetterSpacingUnit ) };
+			line-height: ${ valueWithUnit( gridTitleLineHeightMobile, gridTitleLineHeightUnit ) };
+			`
+		);
+	}
 
 	return (
 		<>

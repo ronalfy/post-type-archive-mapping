@@ -15305,7 +15305,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
                 order: order,
                 orderby: orderBy,
                 posts_per_page: postsPerPage,
-                image_size: 'medium',
+                image_size: gridImageTypeSize,
                 language: wpmlLanguage,
                 post_parent: parentItem,
                 hierarchy: hierarchy,
@@ -15384,7 +15384,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
         style: {
           backgroundImage: 'featured_image' === gridBackgroundType ? "url(".concat(posts[i].featured_image_src, ")") : false
         }
-      }, /*#__PURE__*/React.createElement("div", {
+      }, gridShowTitle && /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-grid-item-content"
       }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
     });
@@ -16157,6 +16157,15 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
   builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
   builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(gridTitleTextTransform, ";\n\t\tz-index: 3;\n\t\t"));
   builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSizeTablet, gridTitleFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacingTablet, gridTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeightTablet, gridTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacingMobile, gridTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeightMobile, gridTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, builder.printCSS(), /*#__PURE__*/React.createElement("div", {
     className: wrapperClass
   }, getPostHtml()));
