@@ -16,6 +16,7 @@ import shorthandCSS from '../../utilities/shorthand-css';
 import ResponsiveTabs from '../../components/responsive-tabs';
 import HierarchicalItems from '../../components/hierarchical-items';
 import TypographyControls from '../../components/typography';
+import GoogleFonts from '../../components/typography/GoogleFonts';
 
 const { Fragment, useState, useEffect } = wp.element;
 
@@ -1455,6 +1456,12 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 		<>
 			{ inspectorControls }
 			{ builder.printCSS() }
+			{ gridTitleFontFamily && ( gridTitleFontFamily in GoogleFonts ) &&
+				<link
+					rel="stylesheet"
+					href={ `https://fonts.googleapis.com/css?family=${ gridTitleFontFamily.replace( / /g, '+' ) }` }
+				/>
+			}
 			<div className={ wrapperClass }>{ getPostHtml() }</div>
 		</>
 	);
