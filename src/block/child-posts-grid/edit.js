@@ -1455,7 +1455,7 @@ const PTAMHierarchyChildPostsGrid = ( props ) => {
 	return (
 		<>
 			{ inspectorControls }
-			{ builder.printCSS() }
+			{ ! disableStyles ? builder.printCSS() : '' }
 			{ gridTitleFontFamily && ( gridTitleFontFamily in GoogleFonts ) &&
 				<link
 					rel="stylesheet"

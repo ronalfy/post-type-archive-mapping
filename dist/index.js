@@ -16164,7 +16164,7 @@ var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
     builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacingMobile, gridTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeightMobile, gridTitleLineHeightUnit), ";\n\t\t\t"));
   }
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, builder.printCSS(), gridTitleFontFamily && gridTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__["default"] && /*#__PURE__*/React.createElement("link", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', gridTitleFontFamily && gridTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(gridTitleFontFamily.replace(/ /g, '+'))
   }), /*#__PURE__*/React.createElement("div", {
