@@ -139,7 +139,7 @@ const TypographyControls = ( props ) => {
 					className="ptam-component-color-picker"
 					onClose={ toggleClose }
 				>
-					<div className={ 'components-gblocks-typography-weight-transform' }>
+					<div className={ 'components-ptam-typography-weight-transform' }>
 						{ showFontWeight && 'fontWeight' in options && (
 							<SelectControl
 								label={ __( 'Weight', 'post-type-archive-mapping' ) }
@@ -170,7 +170,7 @@ const TypographyControls = ( props ) => {
 					</div>
 
 					{ showFontFamily && 'fontFamily' in options && (
-						<BaseControl className={ 'gblocks-font-family-shortcuts' }>
+						<BaseControl className={ 'ptam-font-family-shortcuts' }>
 							<ComboboxControl
 								label={ __( 'Font Family', 'post-type-archive-mapping' ) }
 								value={ options.fontFamily }
@@ -208,7 +208,7 @@ const TypographyControls = ( props ) => {
 								} }
 							/>
 
-							<div className="components-gblocks-typography-control__inputs">
+							<div className="components-ptam-typography-control__inputs">
 								<TextControl
 									type={ 'number' }
 									value={ options.fontSize }
@@ -239,7 +239,7 @@ const TypographyControls = ( props ) => {
 								} }
 							/>
 
-							<div className="components-gblocks-typography-control__inputs">
+							<div className="components-ptam-typography-control__inputs">
 								<TextControl
 									type={ 'number' }
 									value={ options.lineHeight }
@@ -269,7 +269,7 @@ const TypographyControls = ( props ) => {
 								} }
 							/>
 
-							<div className="components-gblocks-typography-control__inputs">
+							<div className="components-ptam-typography-control__inputs">
 								<TextControl
 									type={ 'number' }
 									value={ options.letterSpacing }

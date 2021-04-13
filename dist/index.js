@@ -25541,7 +25541,7 @@ var TypographyControls = function TypographyControls(props) {
     className: "ptam-component-color-picker",
     onClose: toggleClose
   }, /*#__PURE__*/React.createElement("div", {
-    className: 'components-gblocks-typography-weight-transform'
+    className: 'components-ptam-typography-weight-transform'
   }, showFontWeight && 'fontWeight' in options && /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Weight', 'post-type-archive-mapping'),
     value: options.fontWeight,
@@ -25563,7 +25563,7 @@ var TypographyControls = function TypographyControls(props) {
     },
     className: "components-base-control"
   })), showFontFamily && 'fontFamily' in options && /*#__PURE__*/React.createElement(BaseControl, {
-    className: 'gblocks-font-family-shortcuts'
+    className: 'ptam-font-family-shortcuts'
   }, /*#__PURE__*/React.createElement(ComboboxControl, {
     label: __('Font Family', 'post-type-archive-mapping'),
     value: options.fontFamily,
@@ -25590,7 +25590,7 @@ var TypographyControls = function TypographyControls(props) {
       });
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "components-gblocks-typography-control__inputs"
+    className: "components-ptam-typography-control__inputs"
   }, /*#__PURE__*/React.createElement(TextControl, {
     type: 'number',
     value: options.fontSize,
@@ -25611,7 +25611,7 @@ var TypographyControls = function TypographyControls(props) {
       });
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "components-gblocks-typography-control__inputs"
+    className: "components-ptam-typography-control__inputs"
   }, /*#__PURE__*/React.createElement(TextControl, {
     type: 'number',
     value: options.lineHeight,
@@ -25631,7 +25631,7 @@ var TypographyControls = function TypographyControls(props) {
       return false;
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "components-gblocks-typography-control__inputs"
+    className: "components-ptam-typography-control__inputs"
   }, /*#__PURE__*/React.createElement(TextControl, {
     type: 'number',
     value: options.letterSpacing,
