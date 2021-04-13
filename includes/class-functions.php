@@ -558,6 +558,107 @@ class Functions {
 	}
 
 	/**
+	 * Add hierarchical items to an output array.
+	 *
+	 * @param WP_Post $item_object  Post object to add to array.
+	 * @param array   $child_items  All of the child items.
+	 * @param int     $depth        The depth of the child.
+	 * @param array   $output_array Output array passed by reference.
+	 */
+	private static function add_hierarchical_item_to_array( $item_object, $child_items, $depth = 0, &$output_array = array() ) {
+		if ( ! $item_object ) {
+			return;
+		}
+
+		$id = isset( $item_object->ID ) ? $item_object->ID : 0;
+
+		// Perform string identation (e.g., ---- Item Title ).
+		$identation = '';
+		for ( $i = 0; $i < $depth; $i++ ) {
+			$identation .= '--';
+		}
+		$item_title = sprintf(
+			'%s %s',
+			$identation,
+			$item_object->post_title
+		);
+
+		// Add item to the output.
+		$output_array[] = array(
+			'id'    => $id,
+			'title' => $item_title,
+		);
+
+		// Gather all child items.
+		if ( isset( $child_items[ $id ] ) ) {
+			$depth++;
+			foreach ( $child_items[ $id ] as $child ) {
+				self::add_hierarchical_item_to_array( $child, $child_items, $depth, $output_array );
+			}
+			unset( $child_items[ $id ] );
+		}
+	}
+
+	/**
+	 * Retrieve a formatted array of parent/child items based on post type.
+	 *
+	 * Assumes a max of 500 items. Use ptam_hierarchical_items_args filter for more items.
+	 *
+	 * @param string $post_type The post type to retrieve items for.
+	 *
+	 * @return bool|array false if nothing found, array on success.
+	 */
+	public static function get_hierarchical_items_from_post_type( $post_type = 'page' ) {
+
+		// Retrieve a hierarchical sorted array for a post type.
+		$args = array(
+			'sort_order'   => 'ASC',
+			'sort_column'  => 'post_name',
+			'hierarchical' => true,
+			'number'       => 500,
+			'post_status'  => 'publish',
+			'post_type'    => $post_type,
+		);
+		/**
+		 * Filter the post query args.
+		 *
+		 * @since 6.0.0
+		 *
+		 * @param array Array of arguments.
+		 */
+		$args  = apply_filters(
+			'ptam_hierarchical_items_args',
+			$args
+		);
+		$items = get_pages( $args );
+
+		// Return false if no items found.
+		if ( ! $items ) {
+			return false;
+		}
+
+		// Separate the children from parents.
+		$top_level_items   = array();
+		$child_level_items = array();
+		foreach ( $items as $item ) {
+			if ( 0 === $item->post_parent ) {
+				$top_level_items[ $item->ID ] = $item;
+			} else {
+				$child_level_items[ $item->post_parent ][] = $item;
+			}
+		}
+
+		$output_array = array(); // Main output to return.
+
+		// Loop over top items and dive into recursion.
+		foreach ( $top_level_items as $top_level_item ) {
+			self::add_hierarchical_item_to_array( $top_level_item, $child_level_items, 0, $output_array );
+		}
+
+		return $output_array;
+	}
+
+	/**
 	 * Gets the highest priority for a filter.
 	 *
 	 * @param int $subtract The amount to subtract from the high priority.

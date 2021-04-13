@@ -82,6 +82,7 @@ class Settings extends Tabs {
 				}
 				// Get options and defaults.
 				$options = Options::get_options( true );
+
 				?>
 				<form action="<?php echo esc_url( Functions::get_settings_url( $this->tab ) ); ?>" method="POST">
 					<?php wp_nonce_field( 'save_ptam_' . $this->tab ); ?>
@@ -117,6 +118,22 @@ class Settings extends Tabs {
 									<input type="hidden" name="options[disable_image_sizes]" value="off" />
 									<input id="ptam-disable-image-sizes" type="checkbox" value="on" name="options[disable_image_sizes]" <?php checked( 'on', $options['disable_image_sizes'] ); ?> /> <label for="ptam-disable-image-sizes"><?php esc_html_e( 'Disable Image Sizes', 'post-type-archive-mapping' ); ?></label>
 									<p class="description"><?php esc_html_e( 'This plugin creates additional image sizes which can be seen in the "Featured Image Size" drop down when using the blocks this plugin provides. Disabling image sizes prevents the plugin from creating these each time you upload an image.', 'post-type-archive-mapping' ); ?></p>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><?php esc_html_e( 'Enable Excerpts', 'post-type-archive-mapping' ); ?></th>
+								<td>
+									<input type="hidden" name="options[enable_excerpts]" value="off" />
+									<input id="ptam-enable-excerpts" type="checkbox" value="on" name="options[enable_excerpts]" <?php checked( 'on', $options['enable_excerpts'] ); ?> /> <label for="ptam-enable-excerpts"><?php esc_html_e( 'Enable Excerpts for All Post Types', 'post-type-archive-mapping' ); ?></label>
+									<p class="description"><?php esc_html_e( 'Some post types do not support excerpts such as pages. Select this option to enable excerpts across all post types.', 'post-type-archive-mapping' ); ?></p>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><?php esc_html_e( 'Enable Featured Images', 'post-type-archive-mapping' ); ?></th>
+								<td>
+									<input type="hidden" name="options[enable_featured_images]" value="off" />
+									<input id="ptam-enable-featured-images" type="checkbox" value="on" name="options[enable_featured_images]" <?php checked( 'on', $options['enable_featured_images'] ); ?> /> <label for="ptam-enable-featured-images"><?php esc_html_e( 'Enable Featured Images for All Post Types', 'post-type-archive-mapping' ); ?></label>
+									<p class="description"><?php esc_html_e( 'Some post types do not support featured images. Select this option to enable featured images across all post types.', 'post-type-archive-mapping' ); ?></p>
 								</td>
 							</tr>
 							<?php

@@ -33,6 +33,12 @@ const PTAM_Featured_Posts = ( props ) => {
 	const [ termList, setTermList ] = useState( [] );
 	const [ itemNumberTimer, setItemNumberTimer ] = useState( 0 );
 	const [ latestPosts, setLatestPosts ] = useState( {} );
+	const [ config, setConfig ] = useState( {
+		headers: {
+			// eslint-disable-next-line no-undef
+			'X-WP-Nonce': ptam_globals.rest_nonce,
+		},
+	} );
 
 	useEffect(() => {
 		setLoading( true );
@@ -50,7 +56,7 @@ const PTAM_Featured_Posts = ( props ) => {
 	/**
 	 *
 	 * @param {string} excerpt The excerpt to parse down.
-	 * @return React HTML.
+	 * @return {JSX} React HTML.
 	 */
 	const excerptParse = ( excerpt ) => {
 		const htmlToReactParser = new HtmlToReactParser();
@@ -73,7 +79,8 @@ const PTAM_Featured_Posts = ( props ) => {
 				{
 					taxonomy,
 					post_type: postType,
-				}
+				},
+				config
 			);
 			if ( Object.keys( result.data ).length > 0 ) {
 				termListArr.push( {
@@ -119,12 +126,12 @@ const PTAM_Featured_Posts = ( props ) => {
 					taxonomy,
 					term,
 					posts_per_page: postsToShow,
-					image_size: imageCrop,
 					avatar_size: avatarSize,
 					image_type: imageType,
 					image_size: imageTypeSize,
 					default_image: fallbackImg,
-				}
+				},
+				config
 			);
 			setLatestPosts( result.data.posts );
 			setLoading( false );
@@ -187,7 +194,7 @@ const PTAM_Featured_Posts = ( props ) => {
 			image_type: props.attributes.imageType,
 			image_size: props.attributes.imageTypeSize,
 			default_image: props.attributes.fallbackImg,
-		} );
+		}, config );
 	};
 
 	// Retrieve a list of terms by taxonomy and post type.
@@ -195,14 +202,14 @@ const PTAM_Featured_Posts = ( props ) => {
 		return axios.post( ptam_globals.rest_url + `ptam/v2/get_terms`, {
 			taxonomy: props.attributes.taxonomy,
 			post_type: props.attributes.postType,
-		} );
+		}, config );
 	};
 
 	// Retrieve a list of all taxonomies by post type.
 	const getTaxonomies = () => {
 		return axios.post( ptam_globals.rest_url + `ptam/v2/get_taxonomies`, {
 			post_type: props.attributes.postType,
-		} );
+		}, config );
 	};
 
 	const getPostHtml = () => {

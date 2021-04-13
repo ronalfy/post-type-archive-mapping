@@ -14915,6 +14915,1293 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/block/child-posts-grid/block.js":
+/*!*********************************************!*\
+  !*** ./src/block/child-posts-grid/block.js ***!
+  \*********************************************/
+/*! exports provided: name */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/block/child-posts-grid/edit.js");
+/**
+ * Child Posts Grid block.
+ */
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+// Import JS
+
+
+var name = 'ptam/child-posts-grid'; // Register alignments
+
+var validAlignments = ['left', 'center', 'right', 'wide', 'full'];
+/**
+ * Register Basic Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made available as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('ptam/child-posts-grid', {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: __('Child Posts Grid', 'post-type-archive-mapping'),
+  // Block title.
+  icon: /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "sitemap",
+    className: "svg-inline--fa fa-sitemap fa-w-20",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "#585aa8",
+    d: "M104 320H56v-57.59A38.45 38.45 0 0 1 94.41 224H296v-64h48v64h201.59A38.46 38.46 0 0 1 584 262.41V320h-48v-48H344v48h-48v-48H104z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "#585aa8",
+    d: "M128 352H32a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zM384 0H256a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h128a32 32 0 0 0 32-32V32a32 32 0 0 0-32-32zm224 352h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32zm-240 0h-96a32 32 0 0 0-32 32v96a32 32 0 0 0 32 32h96a32 32 0 0 0 32-32v-96a32 32 0 0 0-32-32z"
+  }))),
+  getEditWrapperProps: function getEditWrapperProps(attributes) {
+    var align = attributes.align;
+
+    if (-1 !== validAlignments.indexOf(align)) {
+      return {
+        'data-align': align
+      };
+    }
+  },
+  category: 'ptam-custom-query-blocks',
+  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  description: __('Displays hierarchical items in a beautiful grid.', 'post-type-archive-mapping'),
+  keywords: [__('children', 'post-type-archive-mapping'), __('post', 'poost-type-archive-mapping'), __('parent', 'post-type-archive-mapping'), __('hierarchy', 'post-type-archive-mapping')],
+  supports: {
+    anchor: true,
+    html: false
+  },
+  example: {
+    attributes: {
+      preview: true
+    }
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  // Render via PHP
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/block/child-posts-grid/edit.js":
+/*!********************************************!*\
+  !*** ./src/block/child-posts-grid/edit.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
+/* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
+/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
+/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
+/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
+/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
+/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+/* harmony import */ var _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography/GoogleFonts */ "./src/components/typography/GoogleFonts.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/* eslint-disable no-undef */
+
+/**
+ * External dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wp$element = wp.element,
+    Fragment = _wp$element.Fragment,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect; // eslint-disable-next-line no-unused-vars
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _n = _wp$i18n._n,
+    _x = _wp$i18n._x;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    Placeholder = _wp$components.Placeholder,
+    RangeControl = _wp$components.RangeControl,
+    SelectControl = _wp$components.SelectControl,
+    TextControl = _wp$components.TextControl,
+    ToggleControl = _wp$components.ToggleControl,
+    TabPanel = _wp$components.TabPanel;
+var _wp$blockEditor = wp.blockEditor,
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    InspectorAdvancedControls = _wp$blockEditor.InspectorAdvancedControls;
+var _wp$data = wp.data,
+    withSelect = _wp$data.withSelect,
+    withDispatch = _wp$data.withDispatch;
+var compose = wp.compose.compose;
+
+var PTAMHierarchyChildPostsGrid = function PTAMHierarchyChildPostsGrid(props) {
+  // Shortcuts.
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes; // Get attributes from props.
+
+  var uniqueId = attributes.uniqueId,
+      align = attributes.align,
+      view = attributes.view,
+      postType = attributes.postType,
+      hierarchy = attributes.hierarchy,
+      parentItem = attributes.parentItem,
+      order = attributes.order,
+      orderBy = attributes.orderBy,
+      postsPerPage = attributes.postsPerPage,
+      wpmlLanguage = attributes.wpmlLanguage,
+      disableStyles = attributes.disableStyles,
+      pagination = attributes.pagination,
+      gridPaddingTop = attributes.gridPaddingTop,
+      gridPaddingRight = attributes.gridPaddingRight,
+      gridPaddingBottom = attributes.gridPaddingBottom,
+      gridPaddingLeft = attributes.gridPaddingLeft,
+      gridPaddingUnit = attributes.gridPaddingUnit,
+      gridPaddingUnitsSync = attributes.gridPaddingUnitsSync,
+      gridPaddingTopTablet = attributes.gridPaddingTopTablet,
+      gridPaddingRightTablet = attributes.gridPaddingRightTablet,
+      gridPaddingBottomTablet = attributes.gridPaddingBottomTablet,
+      gridPaddingLeftTablet = attributes.gridPaddingLeftTablet,
+      gridPaddingUnitTablet = attributes.gridPaddingUnitTablet,
+      gridPaddingUnitsSyncTablet = attributes.gridPaddingUnitsSyncTablet,
+      gridPaddingTopMobile = attributes.gridPaddingTopMobile,
+      gridPaddingRightMobile = attributes.gridPaddingRightMobile,
+      gridPaddingBottomMobile = attributes.gridPaddingBottomMobile,
+      gridPaddingLeftMobile = attributes.gridPaddingLeftMobile,
+      gridPaddingUnitMobile = attributes.gridPaddingUnitMobile,
+      gridPaddingUnitsSyncMobile = attributes.gridPaddingUnitsSyncMobile,
+      gridBackgroundType = attributes.gridBackgroundType,
+      gridFallbackImg = attributes.gridFallbackImg,
+      gridImageTypeSize = attributes.gridImageTypeSize,
+      gridBackgroundGradient = attributes.gridBackgroundGradient,
+      gridBackgroundGradientHover = attributes.gridBackgroundGradientHover,
+      gridBackgroundColor = attributes.gridBackgroundColor,
+      gridBackgroundColorHover = attributes.gridBackgroundColorHover,
+      gridMinHeight = attributes.gridMinHeight,
+      gridMinHeightTablet = attributes.gridMinHeightTablet,
+      gridMinHeightMobile = attributes.gridMinHeightMobile,
+      gridMinHeightUnit = attributes.gridMinHeightUnit,
+      gridMinHeightUnitTablet = attributes.gridMinHeightUnitTablet,
+      gridMinHeightUnitMobile = attributes.gridMinHeightUnitMobile,
+      gridNumberColumns = attributes.gridNumberColumns,
+      gridBorderWidth = attributes.gridBorderWidth,
+      gridBorderRadiusTopleft = attributes.gridBorderRadiusTopleft,
+      gridBorderRadiusTopRight = attributes.gridBorderRadiusTopRight,
+      gridBorderRadiusBottomLeft = attributes.gridBorderRadiusBottomLeft,
+      gridBorderRadiusBottomRight = attributes.gridBorderRadiusBottomRight,
+      gridBorderRadiusUnitsSync = attributes.gridBorderRadiusUnitsSync,
+      gridBorderRadiusUnit = attributes.gridBorderRadiusUnit,
+      gridBorderColor = attributes.gridBorderColor,
+      gridBorderColorHover = attributes.gridBorderColorHover,
+      gridOverlay = attributes.gridOverlay,
+      gridOverlayBackgroundColor = attributes.gridOverlayBackgroundColor,
+      gridOverlayBackgroundColorOpacity = attributes.gridOverlayBackgroundColorOpacity,
+      gridOverlayBackgroundColorHover = attributes.gridOverlayBackgroundColorHover,
+      gridOverlayBackgroundColorHoverOpacity = attributes.gridOverlayBackgroundColorHoverOpacity,
+      gridShowTitle = attributes.gridShowTitle,
+      gridTitleColor = attributes.gridTitleColor,
+      gridTitleColorHover = attributes.gridTitleColorHover,
+      gridTitleFontFamily = attributes.gridTitleFontFamily,
+      gridTitleFontSizeUnit = attributes.gridTitleFontSizeUnit,
+      gridTitleFontSizeUnitTablet = attributes.gridTitleFontSizeUnitTablet,
+      gridTitleFontSizeUnitMobile = attributes.gridTitleFontSizeUnitMobile,
+      gridTitleFontSize = attributes.gridTitleFontSize,
+      gridTitleFontSizeTablet = attributes.gridTitleFontSizeTablet,
+      gridTitleFontSizeMobile = attributes.gridTitleFontSizeMobile,
+      gridTitleFontWeight = attributes.gridTitleFontWeight,
+      gridTitleLetterSpacing = attributes.gridTitleLetterSpacing,
+      gridTitleLetterSpacingTablet = attributes.gridTitleLetterSpacingTablet,
+      gridTitleLetterSpacingMobile = attributes.gridTitleLetterSpacingMobile,
+      gridTitleLetterSpacingUnit = attributes.gridTitleLetterSpacingUnit,
+      gridTitleTextTransform = attributes.gridTitleTextTransform,
+      gridTitleLineHeight = attributes.gridTitleLineHeight,
+      gridTitleLineHeightTablet = attributes.gridTitleLineHeightTablet,
+      gridTitleLineHeightMobile = attributes.gridTitleLineHeightMobile,
+      gridTitleLineHeightUnit = attributes.gridTitleLineHeightUnit; // Retrieve WPML languages.
+  // eslint-disable-next-line no-undef
+
+  var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
+
+  var wpmlLanguages = ptam_globals.wpml_languages;
+
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      itemNumberTimer = _useState4[0],
+      setItemNumberTimer = _useState4[1]; // eslint-disable-next-line no-unused-vars
+
+
+  var _useState5 = useState({
+    headers: {
+      // eslint-disable-next-line no-undef
+      'X-WP-Nonce': ptam_globals.rest_nonce
+    }
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      config = _useState6[0],
+      setConfig = _useState6[1];
+
+  var _useState7 = useState(postsPerPage),
+      _useState8 = _slicedToArray(_useState7, 2),
+      numItems = _useState8[0],
+      setNumItems = _useState8[1];
+
+  var _useState9 = useState({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      posts = _useState10[0],
+      setPosts = _useState10[1];
+
+  var _useState11 = useState(ptam_globals.image_sizes),
+      _useState12 = _slicedToArray(_useState11, 2),
+      imageSizes = _useState12[0],
+      // eslint-disable-next-line no-unused-vars
+  setImageSizes = _useState12[1];
+
+  var _useState13 = useState('Desktop'),
+      _useState14 = _slicedToArray(_useState13, 2),
+      deviceType = _useState14[0],
+      setDeviceType = _useState14[1];
+
+  useEffect(function () {
+    // Get unique ID for the block. Props @generateblocks.
+    var id = props.clientId.substr(2, 9).replace('-', '');
+
+    if (!attributes.uniqueId) {
+      setAttributes({
+        uniqueId: id
+      });
+    }
+  }, []); // Retrieve the latest posts.
+
+  useEffect(function () {
+    getPosts({});
+  }, [postType, hierarchy, parentItem, order, orderBy, numItems, gridFallbackImg, gridImageTypeSize]);
+  /**
+   * Set a timer for number of items and expire after one second of inactivity.
+   *
+   * @param {number} value Number of items to display.
+   */
+
+  var itemNumberRender = function itemNumberRender(value) {
+    if (itemNumberTimer) {
+      clearTimeout(itemNumberTimer);
+    }
+
+    setItemNumberTimer(setTimeout(function () {
+      setNumItems(value);
+    }, 1000));
+  };
+  /**
+   * Output JSX for WPML languages.
+   *
+   * @param {string} selectedLanguage The language selected.
+   * @return {JSX} Select box with languages.
+   */
+
+
+  var getLanguages = function getLanguages(selectedLanguage) {
+    if (wpmlInstalled) {
+      return /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Language', 'post-type-archive-mapping'),
+        options: wpmlLanguages,
+        value: selectedLanguage,
+        onChange: function onChange(value) {
+          setAttributes({
+            wpmlLanguage: value
+          });
+        }
+      });
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  };
+  /**
+   * Retrieve the items via REST API.
+   */
+
+
+  var getPosts = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var result;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(true);
+              _context.prev = 1;
+              _context.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post( // eslint-disable-next-line no-undef
+              ptam_globals.rest_url + "ptam/v2/get_hierarchical_posts", {
+                post_type: postType,
+                order: order,
+                orderby: orderBy,
+                posts_per_page: postsPerPage,
+                image_size: gridImageTypeSize,
+                language: wpmlLanguage,
+                post_parent: parentItem,
+                hierarchy: hierarchy,
+                default_image: gridFallbackImg
+              }, config);
+
+            case 4:
+              result = _context.sent;
+              setPosts(result.data);
+              setLoading(false);
+              _context.next = 11;
+              break;
+
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](1);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[1, 9]]);
+    }));
+
+    return function getPosts() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  /**
+   * Retrieve post HTML based on view.
+   *
+   * @return {JSX} List|Grid|Column HTML.
+   */
+
+
+  var getPostHtml = function getPostHtml() {
+    if (Object.keys(posts).length === 0) {
+      return /*#__PURE__*/React.createElement("h2", null, __('No items could be found.', 'post-type-archive-mapping'));
+    }
+
+    switch (view) {
+      case 'grid':
+        return /*#__PURE__*/React.createElement(React.Fragment, null, outputGridHtml()); // eslint-disable-next-line no-unreachable
+
+        break;
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
+  };
+  /**
+   * Output Grid HTML.
+   *
+   * @return {JSX} Grid HTML.
+   */
+
+
+  var outputGridHtml = function outputGridHtml() {
+    var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('ptam-hierarchical-grid-items', "ptam-hierarchical-grid-columns-".concat(parseInt(gridNumberColumns)));
+    return /*#__PURE__*/React.createElement("div", {
+      className: classes
+    }, outputGridItemsHtml());
+  };
+  /**
+   * Output Grid item HTML.
+   *
+   * @return {JSX} Grid item HTML.
+   */
+
+
+  var outputGridItemsHtml = function outputGridItemsHtml() {
+    return Object.keys(posts).map(function (item, i) {
+      return /*#__PURE__*/React.createElement("article", {
+        key: i,
+        className: "ptam-hierarchical-grid-item",
+        style: {
+          backgroundImage: 'featured_image' === gridBackgroundType ? "url(".concat(posts[i].featured_image_src, ")") : false
+        }
+      }, gridShowTitle && /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-grid-item-content"
+      }, /*#__PURE__*/React.createElement("h2", null, posts[i].post_title)));
+    });
+  };
+  /**
+   * Get the current device type (mobile|desktop|tablet).
+   *
+   * @return {string} Current device.
+   */
+
+
+  var getDeviceType = function getDeviceType() {
+    return props.deviceType ? props.deviceType : deviceType;
+  };
+  /**
+   * Change the device type.
+   *
+   * @param {string} device The device to change to.
+   */
+
+
+  var changeDeviceType = function changeDeviceType(device) {
+    if (props.deviceType) {
+      props.setDeviceType(device);
+      setDeviceType(device);
+    } else {
+      setDeviceType(device);
+    }
+  }; // Hierarchical Post Types.
+
+
+  var postTypeOptions = []; // eslint-disable-next-line no-undef
+
+  for (var postTypeKey in ptam_globals.post_types_hierarchical) {
+    postTypeOptions.push({
+      value: postTypeKey,
+      // eslint-disable-next-line no-undef
+      label: ptam_globals.post_types_hierarchical[postTypeKey]
+    });
+  }
+
+  var hierarchyOptions = [{
+    value: 'parents',
+    label: __('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
+  }, {
+    value: 'children',
+    label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
+  }]; // Order Params.
+
+  var orderOptions = [{
+    value: 'ASC',
+    label: __('ASC', 'post-type-archive-mapping')
+  }, {
+    value: 'DESC',
+    label: __('DESC', 'post-type-archive-mapping')
+  }];
+  var orderByOptions = [{
+    value: 'ID',
+    label: __('ID', 'post-type-archive-mapping')
+  }, {
+    value: 'menu_order',
+    label: __('Menu Order', 'post-type-archive-mapping')
+  }, {
+    value: 'author',
+    label: __('Post Author', 'post-type-archive-mapping')
+  }, {
+    value: 'date',
+    label: __('Date', 'post-type-archive-mapping')
+  }, {
+    value: 'modified',
+    label: __('Date Modified', 'post-type-archive-mapping')
+  }, {
+    value: 'name',
+    label: __('Post Slug', 'post-type-archive-mapping')
+  }, {
+    value: 'title',
+    label: __('Title', 'post-type-archive-mapping')
+  }, {
+    value: 'rand',
+    label: __('Random', 'post-type-archive-mapping')
+  }];
+  var gridTitleFontParamsDesktop = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSize,
+    fontSizeUnit: gridTitleFontSizeUnit,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacing,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeight,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsTablet = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeTablet,
+    fontSizeUnit: gridTitleFontSizeUnitTablet,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingTablet,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightTablet,
+    lineHeightUnit: gridTitleLineHeightUnit
+  };
+  var gridTitleFontParamsMobile = {
+    fontFamily: gridTitleFontFamily,
+    fontSize: gridTitleFontSizeMobile,
+    fontSizeUnit: gridTitleFontSizeUnitMobile,
+    fontWeight: gridTitleFontWeight,
+    letterSpacing: gridTitleLetterSpacingMobile,
+    letterSpacingUnit: gridTitleLetterSpacingUnit,
+    textTransform: gridTitleTextTransform,
+    lineHeight: gridTitleLineHeightMobile,
+    lineHeightUnit: gridTitleLineHeightUnit
+  }; // Image Sizes.
+
+  var imageSizeOptions = [];
+
+  for (var imageKey in imageSizes) {
+    imageSizeOptions.push({
+      value: imageKey,
+      label: imageKey
+    });
+  } // Background Options.
+
+
+  var gridBackgroundChoices = [{
+    value: 'featured_image',
+    label: __('Featured Image', 'post-type-archive-mapping')
+  }, {
+    value: 'gradient',
+    label: __('Gradient', 'post-type-archive-mapping')
+  }, {
+    value: 'color',
+    label: __('Color', 'post-type-archive-mapping')
+  }];
+  var gridOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+    selectedDevice: getDeviceType(),
+    onClick: function onClick(device) {
+      changeDeviceType(device);
+    }
+  })), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Container', 'post-type-archive-mapping')
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnit,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnit: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeight ? gridMinHeight : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeight: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Number of Columns', 'post-type-archive-mapping'),
+    value: gridNumberColumns,
+    onChange: function onChange(value) {
+      return setAttributes({
+        gridNumberColumns: value
+      });
+    },
+    min: 1,
+    max: 4
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTop",
+    attrRight: "gridPaddingRight",
+    attrBottom: "gridPaddingBottom",
+    attrLeft: "gridPaddingLeft",
+    attrUnit: "gridPaddingUnit",
+    attrSyncUnits: "gridPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitTablet,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitTablet: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightTablet ? gridMinHeightTablet : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightTablet: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopTablet",
+    attrRight: "gridPaddingRightTablet",
+    attrBottom: "gridPaddingBottomTablet",
+    attrLeft: "gridPaddingLeftTablet",
+    attrUnit: "gridPaddingUnitTablet",
+    attrSyncUnits: "gridPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: __('Minimum Height', 'post-type-archive-mapping'),
+    value: gridMinHeightUnitMobile,
+    units: ['px', 'em', 'vh'],
+    onClick: function onClick(value) {
+      setAttributes({
+        gridMinHeightUnitMobile: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: gridMinHeightMobile ? gridMinHeightMobile : '',
+    onChange: function onChange(value) {
+      setAttributes({
+        gridMinHeightMobile: parseFloat(value)
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridPaddingTopMobile",
+    attrRight: "gridPaddingRightMobile",
+    attrBottom: "gridPaddingBottomMobile",
+    attrLeft: "gridPaddingLeftMobile",
+    attrUnit: "gridPaddingUnitMobile",
+    attrSyncUnits: "gridPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Background', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Background Type', 'post-type-archive-mapping'),
+    options: gridBackgroundChoices,
+    value: gridBackgroundType,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridBackgroundType: value
+      });
+    }
+  }), 'gradient' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-gradient',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient'
+    }, {
+      name: 'grid-background-gradient-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-gradient-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-gradient';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradient: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradient
+    }) : /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundGradientHover: value
+        });
+      },
+      label: __('Background Gradient', 'post-type-archive-mapping'),
+      value: gridBackgroundGradientHover
+    }));
+  }), 'color' === gridBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-background-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-background-color'
+    }, {
+      name: 'grid-background-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-background-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-background-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBackgroundColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBackgroundColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBackgroundColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), 'featured_image' === gridBackgroundType && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(imageObject) {
+      props.setAttributes({
+        gridFallbackImg: imageObject
+      });
+    },
+    type: "image",
+    value: gridFallbackImg.url,
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-upload components-button is-button is-secondary",
+        onClick: open
+      }, __('Fallback Featured Image', 'post-type-archive-mapping')), gridFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: gridFallbackImg.url,
+        alt: __('Featured Image', 'post-type-archive-mapping'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
+        ,
+        onClick: function onClick(event) {
+          setAttributes({
+            gridFallbackImg: ''
+          });
+        }
+      }, __('Reset Image', 'post-type-archive-mapping')))), /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Featured Image Size', 'post-type-archive-mapping'),
+        options: imageSizeOptions,
+        value: gridImageTypeSize,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridImageTypeSize: value
+          });
+        }
+      }), /*#__PURE__*/React.createElement(ToggleControl, {
+        label: __('Enable Overlay', 'post-type-archive-mapping'),
+        checked: gridOverlay,
+        onChange: function onChange(value) {
+          setAttributes({
+            gridOverlay: value
+          });
+        }
+      }), gridOverlay && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+        className: "layout-tab-panel ptam-control-tabs",
+        activeClass: "active-tab",
+        tabs: [{
+          name: 'grid-overlay-color',
+          title: __('Normal', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color'
+        }, {
+          name: 'grid-overlay-color-hover',
+          title: __('Hover', 'post-type-archive-mapping'),
+          className: 'grid-overlay-color-hover'
+        }]
+      }, function (tab) {
+        var isNormal = tab.name === 'grid-overlay-color';
+        return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColor,
+          valueOpacity: gridOverlayBackgroundColorOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColor: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: gridOverlayBackgroundColorHover,
+          valueOpacity: gridOverlayBackgroundColorHoverOpacity,
+          onChange: function onChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHover: value
+            });
+          } // eslint-disable-next-line no-unused-vars
+          ,
+          onOpacityChange: function onOpacityChange(value) {
+            setAttributes({
+              gridOverlayBackgroundColorHoverOpacity: value
+            });
+          },
+          label: __('Overlay Color', 'post-type-archive-mapping'),
+          alpha: true
+        }));
+      })));
+    }
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Title', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Title', 'post-type-archive-mapping'),
+    checked: gridShowTitle,
+    onChange: function onChange(value) {
+      setAttributes({
+        gridShowTitle: value
+      });
+    }
+  }), gridShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-title-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-title-color'
+    }, {
+      name: 'grid-title-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-title-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-title-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridTitleColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridTitleColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Title Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsDesktop,
+    showFontFamily: true,
+    showFontSize: true,
+    showFontWeight: true,
+    showTextTransform: true,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSize: fontObject.fontSize,
+        gridTitleFontSizeUnit: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacing: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeight: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  }), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsTablet,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSizeTablet: fontObject.fontSize,
+        gridTitleFontSizeUnitTablet: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacingTablet: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeightTablet: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  }), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: __('Title Typography', 'post-type-archive-mapping'),
+    options: gridTitleFontParamsMobile,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        gridTitleFontFamily: fontObject.fontFamily,
+        gridTitleFontSizeMobile: fontObject.fontSize,
+        gridTitleFontSizeUnitMobile: fontObject.fontSizeUnit,
+        gridTitleFontWeight: fontObject.fontWeight,
+        gridTitleLetterSpacingMobile: fontObject.letterSpacing,
+        gridTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+        gridTitleLineHeightMobile: fontObject.lineHeight,
+        gridTitleLineHeightUnit: fontObject.lineHeightUnit,
+        gridTitleTextTransform: fontObject.textTransform
+      });
+    }
+  })))), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Border', 'post-type-archive-mapping'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'grid-border-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'grid-border-color'
+    }, {
+      name: 'grid-border-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'grid-border-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'grid-border-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBorderColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBorderColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Border Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      value: gridBorderColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          gridBorderColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Border Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Border Width', 'post-type-archive-mapping'),
+    value: gridBorderWidth,
+    onChange: function onChange(value) {
+      return setAttributes({
+        gridBorderWidth: value
+      });
+    },
+    min: 0,
+    max: 100
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    label: __('Border Radius', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "gridBorderRadiusTopleft",
+    attrRight: "gridBorderRadiusTopRight",
+    attrBottom: "gridBorderRadiusBottomLeft",
+    attrLeft: "gridBorderRadiusBottomRight",
+    attrUnit: "gridBorderRadiusUnit",
+    attrSyncUnits: "gridBorderRadiusUnitsSync",
+    labelTop: __('T-Left', 'post-type-archive-mapping'),
+    labelRight: __('T-Right', 'post-type-archive-mapping'),
+    labelBottom: __('B-Right', 'post-type-archive-mapping'),
+    labelLeft: __('B-Left', 'post-type-archive-mapping'),
+    units: ['px', 'em', 'rem']
+  })));
+  var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Query', 'post-type-archive-mapping'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Post Type', 'post-type-archive-mapping'),
+    options: postTypeOptions,
+    value: postType,
+    onChange: function onChange(value) {
+      setAttributes({
+        postType: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Hierarchy', 'post-type-archive-mapping'),
+    options: hierarchyOptions,
+    value: hierarchy,
+    onChange: function onChange(value) {
+      setAttributes({
+        hierarchy: value
+      });
+    }
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    label: __('Select a Parent Item', 'post-type-archive-mapping'),
+    postType: postType,
+    selectedItem: parentItem,
+    onChange: function onChange(parent) {
+      setAttributes({
+        parentItem: parent
+      });
+    },
+    loadingText: __('Retrieving items…', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order', 'post-type-archive-mapping'),
+    options: orderOptions,
+    value: order,
+    onChange: function onChange(value) {
+      setAttributes({
+        order: value
+      });
+    }
+  }), getLanguages(), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Order By', 'post-type-archive-mapping'),
+    options: orderByOptions,
+    value: orderBy,
+    onChange: function onChange(value) {
+      setAttributes({
+        orderBy: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(RangeControl, {
+    label: __('Number of Items', 'post-type-archive-mapping'),
+    value: postsPerPage,
+    onChange: function onChange(value) {
+      setAttributes({
+        postsPerPage: value
+      });
+      itemNumberRender(value);
+    },
+    min: 1,
+    max: 100
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Enable Pagination', 'post-type-archive-mapping'),
+    checked: pagination,
+    onChange: function onChange(value) {
+      setAttributes({
+        pagination: value
+      });
+    }
+  })), 'grid' === view && /*#__PURE__*/React.createElement(React.Fragment, null, gridOptions)), /*#__PURE__*/React.createElement(InspectorAdvancedControls, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Disable Styles', 'post-type-archive-mapping'),
+    checked: disableStyles,
+    onChange: function onChange(value) {
+      setAttributes({
+        disableStyles: value
+      });
+    }
+  })));
+  /**
+   * Wrapper class for styling.
+   */
+
+  var wrapperClass = classnames__WEBPACK_IMPORTED_MODULE_0___default()(_defineProperty({
+    'ptam-hierarchy-wrapper': true
+  }, "ptam-hierarchy-wrapper-".concat(uniqueId), true));
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
+      className: "ptam-term-grid-loading"
+    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), ' ', __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading…', 'post-type-archive-mapping')))));
+  } // Begin building CSS.
+
+
+  var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
+
+  builder.addCSS('.ptam-hierarchical-grid-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\tword-break: break-all;\n\t\ttransition: all ease-in-out 0.5s;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\tgrid-template-columns: 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3', "\n\t\tgrid-template-columns: 1fr 1fr 1fr;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4', "\n\t\tgrid-template-columns: 1fr 1fr 1fr 1fr;\n\t\t");
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr 1fr !important;\n\t\t\t");
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-4, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-3, .ptam-hierarchical-grid-items.ptam-hierarchical-grid-columns-2', "\n\t\t\tgrid-template-columns: 1fr !important;\n\t\t\t");
+  } // Grid Item Flex goodness.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\ttext-align: center;\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeight, gridMinHeightUnit), ";\n\t\ttransition: all ease-in-out 0.5s;\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightTablet, gridMinHeightUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridMinHeightMobile, gridMinHeightUnitMobile), ";\n\t\t\t"));
+  } // Grid background image styles.
+
+
+  if ('featured_image' === gridBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tz-index: 1;\n\t\t\tposition: relative;\n\t\t\toverflow: hidden;\n\t\t\t");
+
+    if (true === gridOverlay) {
+      builder.addCSS('.ptam-hierarchical-grid-item:after', "\n\t\t\t\tposition: absolute;\n\t\t\t\tcontent: '';\n\t\t\t\twidth: 100%;\n\t\t\t\theight: 100%;\n\t\t\t\ttop: 0;\n\t\t\t\tleft: 0;\n\t\t\t\tz-index: 2;\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColor, gridOverlayBackgroundColorOpacity), ";\n\t\t\t\t"));
+
+      if ('' !== gridOverlayBackgroundColorHover) {
+        builder.addCSS('.ptam-hierarchical-grid-item:hover:after', "\n\t\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridOverlayBackgroundColorHover, gridOverlayBackgroundColorHoverOpacity), ";\n\t\t\t\t\t"));
+      }
+    }
+  } else if ('gradient' === gridBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(gridBackgroundGradient, ";\n\t\t\t"));
+
+    if ('' !== gridBackgroundGradientHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(gridBackgroundGradientHover, ";\n\t\t\t\t"));
+    }
+  } else {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColor, 1), ";\n\t\t\t"));
+
+    if ('' !== gridBackgroundColorHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBackgroundColorHover, 1), ";\n\t\t\t\t"));
+    }
+  } // Grid Padding.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTop, gridPaddingRight, gridPaddingBottom, gridPaddingLeft, gridPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopTablet, gridPaddingRightTablet, gridPaddingBottomTablet, gridPaddingLeftTablet, gridPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridPaddingTopMobile, gridPaddingRightMobile, gridPaddingBottomMobile, gridPaddingLeftMobile, gridPaddingUnitMobile), ";\n\t\t\t"));
+  } // Grid Border.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(gridBorderRadiusTopleft, gridBorderRadiusTopRight, gridBorderRadiusBottomRight, gridBorderRadiusBottomLeft, gridBorderRadiusUnit), ";\n\t\t"));
+
+  if ('' !== gridBorderColor) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
+
+    if ('' !== gridBorderColorHover) {
+      builder.addCSS('.ptam-hierarchical-grid-item:hover', "\n\t\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColorHover, 1), ";\n\t\t\t\t"));
+    }
+  }
+
+  if (0 < gridBorderWidth) {
+    builder.addCSS('.ptam-hierarchical-grid-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridBorderColor, 1), ";\n\t\t\t"));
+  } // Grid Title.
+
+
+  builder.addCSS('.ptam-hierarchical-grid-item-content', "\n\t\tposition: relative;\n\t\tz-index: 3;\n\t\t");
+  builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColor, 1), ";\n\t\tfont-family: ").concat(gridTitleFontFamily ? gridTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSize, gridTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(gridTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacing, gridTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeight, gridTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(gridTitleTextTransform, ";\n\t\tz-index: 3;\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-grid-item:hover h2', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(gridTitleColorHover, 1), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSizeTablet, gridTitleFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacingTablet, gridTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeightTablet, gridTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-grid-item-content h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleFontSizeMobile, gridTitleFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLetterSpacingMobile, gridTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(gridTitleLineHeightMobile, gridTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', gridTitleFontFamily && gridTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__["default"] && /*#__PURE__*/React.createElement("link", {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css?family=".concat(gridTitleFontFamily.replace(/ /g, '+'))
+  }), /*#__PURE__*/React.createElement("div", {
+    className: wrapperClass
+  }, getPostHtml()));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (compose([withDispatch(function (dispatch) {
+  return {
+    setDeviceType: function setDeviceType(type) {
+      var _dispatch = dispatch('core/edit-post'),
+          setPreviewDeviceType = _dispatch.__experimentalSetPreviewDeviceType;
+
+      if (!setPreviewDeviceType) {
+        return;
+      }
+
+      setPreviewDeviceType(type);
+    }
+  };
+}), withSelect(function (select) {
+  var _select = select('core/edit-post'),
+      getPreviewDeviceType = _select.__experimentalGetPreviewDeviceType;
+
+  if (!getPreviewDeviceType) {
+    return {
+      deviceType: null
+    };
+  }
+
+  return {
+    deviceType: getPreviewDeviceType()
+  };
+})])(PTAMHierarchyChildPostsGrid));
+
+/***/ }),
+
 /***/ "./src/block/custom-post-one/block.js":
 /*!********************************************!*\
   !*** ./src/block/custom-post-one/block.js ***!
@@ -15178,7 +16465,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = _this$props$attribute2.linkColor,
           fallbackImg = _this$props$attribute2.fallbackImg,
           wpmlLanguage = _this$props$attribute2.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post = {
         post_type: postType,
@@ -15189,7 +16482,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         posts_per_page: postsToShow,
         image_type: imageCrop,
         avatar_size: avatarSize
-      }, _defineProperty(_axios$post, "image_type", imageType), _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "link_color", linkColor), _defineProperty(_axios$post, "default_image", fallbackImg), _defineProperty(_axios$post, "language", wpmlLanguage), _axios$post)).then(function (response) {
+      }, _defineProperty(_axios$post, "image_type", imageType), _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "link_color", linkColor), _defineProperty(_axios$post, "default_image", fallbackImg), _defineProperty(_axios$post, "language", wpmlLanguage), _axios$post), config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
 
@@ -15220,7 +16513,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = _this$props$attribute3.linkColor,
           fallbackImg = _this$props$attribute3.fallbackImg,
           wpmlLanguage = _this$props$attribute3.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", {
         post_type: postType,
@@ -15236,7 +16535,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         link_color: linkColor,
         default_image: fallbackImg,
         language: wpmlLanguage
-      }).then(function (response) {
+      }, config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
 
@@ -15285,7 +16584,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
             linkColor = _classRef$props$attri.linkColor,
             fallbackImg = _classRef$props$attri.fallbackImg,
             wpmlLanguage = _classRef$props$attri.wpmlLanguage;
-        linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+        linkColor = linkColor.replace('#', '');
+        var config = {
+          headers: {
+            // eslint-disable-next-line no-undef
+            'X-WP-Nonce': ptam_globals.rest_nonce
+          }
+        }; // Get Latest Posts and Chain Promises
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post2 = {
           post_type: postType,
@@ -15296,7 +16601,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           posts_per_page: postsToShow,
           image_type: imageCrop,
           avatar_size: value
-        }, _defineProperty(_axios$post2, "image_type", imageType), _defineProperty(_axios$post2, "image_size", imageTypeSize), _defineProperty(_axios$post2, "link_color", linkColor), _defineProperty(_axios$post2, "default_image", fallbackImg), _defineProperty(_axios$post2, "language", wpmlLanguage), _axios$post2)).then(function (response) {
+        }, _defineProperty(_axios$post2, "image_type", imageType), _defineProperty(_axios$post2, "image_size", imageTypeSize), _defineProperty(_axios$post2, "link_color", linkColor), _defineProperty(_axios$post2, "default_image", fallbackImg), _defineProperty(_axios$post2, "language", wpmlLanguage), _axios$post2), config).then(function (response) {
           latestPosts = response.data.posts;
           imageSizes = response.data.image_sizes;
           classRef.setState({
@@ -15338,7 +16643,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
             linkColor = _classRef$props$attri2.linkColor,
             fallbackImg = _classRef$props$attri2.fallbackImg,
             wpmlLanguage = _classRef$props$attri2.wpmlLanguage;
-        linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+        linkColor = linkColor.replace('#', '');
+        var config = {
+          headers: {
+            // eslint-disable-next-line no-undef
+            'X-WP-Nonce': ptam_globals.rest_nonce
+          }
+        }; // Get Latest Posts and Chain Promises
 
         axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_images", (_axios$post3 = {
           post_type: postType,
@@ -15349,7 +16660,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           posts_per_page: postsToShow,
           image_type: imageCrop,
           avatar_size: avatarSize
-        }, _defineProperty(_axios$post3, "image_type", imageType), _defineProperty(_axios$post3, "image_size", imageTypeSize), _defineProperty(_axios$post3, "link_color", linkColor), _defineProperty(_axios$post3, "default_image", fallbackImg), _defineProperty(_axios$post3, "language", wpmlLanguage), _axios$post3)).then(function (response) {
+        }, _defineProperty(_axios$post3, "image_type", imageType), _defineProperty(_axios$post3, "image_size", imageTypeSize), _defineProperty(_axios$post3, "link_color", linkColor), _defineProperty(_axios$post3, "default_image", fallbackImg), _defineProperty(_axios$post3, "language", wpmlLanguage), _axios$post3), config).then(function (response) {
           latestPosts = response.data.posts;
           imageSizes = response.data.image_sizes;
           classRef.setState({
@@ -15468,6 +16779,12 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           fallbackImg = props.fallbackImg,
           wpmlLanguage = props.wpmlLanguage;
       linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post4 = {
         post_type: postType,
         order: order,
@@ -15478,7 +16795,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         image_size: imageCrop,
         avatar_size: avatarSize,
         image_type: imageType
-      }, _defineProperty(_axios$post4, "image_size", imageTypeSize), _defineProperty(_axios$post4, "link_color", linkColor), _defineProperty(_axios$post4, "default_image", fallbackImg), _defineProperty(_axios$post4, "language", wpmlLanguage), _axios$post4)).then(function (response) {
+      }, _defineProperty(_axios$post4, "image_size", imageTypeSize), _defineProperty(_axios$post4, "link_color", linkColor), _defineProperty(_axios$post4, "default_image", fallbackImg), _defineProperty(_axios$post4, "language", wpmlLanguage), _axios$post4), config).then(function (response) {
         // Now Set State
         _this2.setState({
           loading: false,
@@ -15500,10 +16817,16 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
       var props = jQuery.extend({}, this.props.attributes, object);
       var postType = props.postType,
           taxonomy = props.taxonomy;
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
         taxonomy: taxonomy,
         post_type: postType
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           termsList.push({
             value: 0,
@@ -15555,7 +16878,13 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           linkColor = props.linkColor,
           fallbackImg = props.fallbackImg,
           wpmlLanguage = props.wpmlLanguage;
-      linkColor = linkColor.replace('#', ''); // Get Latest Posts and Chain Promises
+      linkColor = linkColor.replace('#', '');
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      }; // Get Latest Posts and Chain Promises
 
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post5 = {
         post_type: postType,
@@ -15567,7 +16896,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
         image_size: imageCrop,
         avatar_size: avatarSize,
         image_type: imageType
-      }, _defineProperty(_axios$post5, "image_size", imageTypeSize), _defineProperty(_axios$post5, "link_color", linkColor), _defineProperty(_axios$post5, "default_image", fallbackImg), _defineProperty(_axios$post5, "language", wpmlLanguage), _axios$post5)).then(function (response) {
+      }, _defineProperty(_axios$post5, "image_size", imageTypeSize), _defineProperty(_axios$post5, "link_color", linkColor), _defineProperty(_axios$post5, "default_image", fallbackImg), _defineProperty(_axios$post5, "language", wpmlLanguage), _axios$post5), config).then(function (response) {
         latestPosts = response.data.posts;
         imageSizes = response.data.image_sizes;
         userTaxonomies = response.data.taxonomies;
@@ -15586,7 +16915,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
           axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
             taxonomy: taxonomy,
             post_type: postType
-          }).then(function (response) {
+          }, config).then(function (response) {
             if (Object.keys(response.data).length > 0) {
               termsList.push({
                 value: 0,
@@ -15603,7 +16932,7 @@ var PTAM_Custom_Posts = /*#__PURE__*/function (_Component) {
 
             axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
               post_type: postType
-            }).then(function (response) {
+            }, config).then(function (response) {
               if (Object.keys(response.data).length > 0) {
                 taxonomyList.push({
                   value: 'none',
@@ -16853,6 +18182,16 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       latestPosts = _useState12[0],
       setLatestPosts = _useState12[1];
 
+  var _useState13 = useState({
+    headers: {
+      // eslint-disable-next-line no-undef
+      'X-WP-Nonce': ptam_globals.rest_nonce
+    }
+  }),
+      _useState14 = _slicedToArray(_useState13, 2),
+      config = _useState14[0],
+      setConfig = _useState14[1];
+
   useEffect(function () {
     setLoading(true);
     getLatestData({}); // Get unique ID for the block. Props @generateblocks.
@@ -16868,7 +18207,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
   /**
    *
    * @param {string} excerpt The excerpt to parse down.
-   * @return React HTML.
+   * @return {JSX} React HTML.
    */
 
   var excerptParse = function excerptParse(excerpt) {
@@ -16902,7 +18241,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
                 taxonomy: taxonomy,
                 post_type: postType
-              });
+              }, config);
 
             case 6:
               result = _context.sent;
@@ -16960,7 +18299,6 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
           postsToShow,
           imageCrop,
           fallbackImg,
-          _axios$post,
           result,
           _args2 = arguments;
 
@@ -16973,17 +18311,18 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
               setLoading(true);
               _context2.prev = 3;
               _context2.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", (_axios$post = {
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_posts", {
                 post_type: postType,
                 order: order,
                 orderby: orderBy,
                 taxonomy: taxonomy,
                 term: term,
                 posts_per_page: postsToShow,
-                image_size: imageCrop,
                 avatar_size: avatarSize,
-                image_type: imageType
-              }, _defineProperty(_axios$post, "image_size", imageTypeSize), _defineProperty(_axios$post, "default_image", fallbackImg), _axios$post));
+                image_type: imageType,
+                image_size: imageTypeSize,
+                default_image: fallbackImg
+              }, config);
 
             case 6:
               result = _context2.sent;
@@ -17092,9 +18431,9 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
 
 
   var getFeaturedPosts = function getFeaturedPosts() {
-    var _axios$post2;
+    var _axios$post;
 
-    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post2 = {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_featured_posts", (_axios$post = {
       post_type: props.attributes.postType,
       order: props.attributes.order,
       orderby: props.attributes.orderBy,
@@ -17104,7 +18443,7 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
       image_size: props.attributes.imageCrop,
       avatar_size: props.attributes.avatarSize,
       image_type: props.attributes.imageType
-    }, _defineProperty(_axios$post2, "image_size", props.attributes.imageTypeSize), _defineProperty(_axios$post2, "default_image", props.attributes.fallbackImg), _axios$post2));
+    }, _defineProperty(_axios$post, "image_size", props.attributes.imageTypeSize), _defineProperty(_axios$post, "default_image", props.attributes.fallbackImg), _axios$post), config);
   }; // Retrieve a list of terms by taxonomy and post type.
 
 
@@ -17112,14 +18451,14 @@ var PTAM_Featured_Posts = function PTAM_Featured_Posts(props) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_terms", {
       taxonomy: props.attributes.taxonomy,
       post_type: props.attributes.postType
-    });
+    }, config);
   }; // Retrieve a list of all taxonomies by post type.
 
 
   var getTaxonomies = function getTaxonomies() {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(ptam_globals.rest_url + "ptam/v2/get_taxonomies", {
       post_type: props.attributes.postType
-    });
+    }, config);
   };
 
   var getPostHtml = function getPostHtml() {
@@ -18087,9 +19426,15 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         loading: true
       });
 
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_tax_terms", {
         taxonomy: taxonomy
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           termsList.push({
             id: 0,
@@ -18143,6 +19488,12 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         termLoading: true
       });
 
+      var config = {
+        headers: {
+          // eslint-disable-next-line no-undef
+          'X-WP-Nonce': ptam_globals.rest_nonce
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(ptam_globals.rest_url + "ptam/v2/get_tax_term_data", {
         terms: termsToRetrieve,
         termsExclude: termsToExclude,
@@ -18152,7 +19503,7 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
         backgroundImageSource: backgroundImageSource,
         backgroundImageFallback: backgroundImageFallback,
         backgroundImageMeta: backgroundImageMeta
-      }).then(function (response) {
+      }, config).then(function (response) {
         if (Object.keys(response.data).length > 0) {
           _this.setState({
             termsToDisplay: response.data.term_data
@@ -19079,89 +20430,5600 @@ var PTAM_Term_Grid = /*#__PURE__*/function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+// eslint-disable-next-line no-unused-vars
 var Loading = function Loading(_ref) {
   var _ref$cssClass = _ref.cssClass,
       cssClass = _ref$cssClass === void 0 ? 'ptam-loading' : _ref$cssClass;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cssClass
-  }, /*#__PURE__*/React.createElement("svg", {
+  return /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    version: "1.0",
-    width: "64px",
-    height: "64px",
-    viewBox: "0 0 128 128"
-  }, /*#__PURE__*/React.createElement("rect", {
-    x: "0",
-    y: "0",
-    width: "100%",
-    height: "100%",
-    fill: "rgba(0,0,0,0)"
-  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#000000",
-    fillOpacity: "1"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#555555",
-    fillOpacity: "0.67",
-    transform: "rotate(45,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#949494",
-    fillOpacity: "0.42",
-    transform: "rotate(90,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#cccccc",
-    fillOpacity: "0.2",
-    transform: "rotate(135,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(180,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(225,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(270,64,64)"
-  }), /*#__PURE__*/React.createElement("circle", {
-    cx: "16",
-    cy: "64",
-    r: "16",
-    fill: "#e1e1e1",
-    fillOpacity: "0.12",
-    transform: "rotate(315,64,64)"
-  }), /*#__PURE__*/React.createElement("animateTransform", {
-    attributeName: "transform",
-    type: "rotate",
-    values: "0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64",
-    calcMode: "discrete",
-    dur: "720ms",
-    repeatCount: "indefinite"
-  }))));
+    viewBox: "0 0 315.23 341.25",
+    width: "42",
+    height: "42"
+  }, /*#__PURE__*/React.createElement("polygon", {
+    points: "315.23 204.75 315.23 68.25 197.02 0 197.02 136.5 315.23 204.75",
+    style: {
+      fill: '#ffdd01',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "0 204.75 0 68.25 118.21 0 118.21 136.5 0 204.75",
+    style: {
+      fill: '#2e3192',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "157.62 159.25 275.83 91 157.62 22.75 39.4 91 157.62 159.25",
+    style: {
+      fill: '#86cedc',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "157.62 341.25 275.83 273 157.62 204.75 39.4 273 157.62 341.25",
+    style: {
+      fill: '#f07f3b',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "177.32 170.62 295.53 102.37 295.53 238.87 177.32 307.12 177.32 170.62",
+    style: {
+      fill: '#c10a26',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("polygon", {
+    points: "137.91 170.62 19.7 102.37 19.7 238.87 137.91 307.12 137.91 170.62",
+    style: {
+      fill: '#662583',
+      opacity: 0.8
+    }
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loading);
+
+/***/ }),
+
+/***/ "./src/components/color-picker/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/color-picker/index.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * Color Picker.
+ *
+ * Credit: Forked from @post-type-archive-mapping
+ */
+
+
+var useState = wp.element.useState;
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    Tooltip = _wp$components.Tooltip,
+    BaseControl = _wp$components.BaseControl,
+    ColorPicker = _wp$components.ColorPicker,
+    RangeControl = _wp$components.RangeControl,
+    Popover = _wp$components.Popover,
+    Button = _wp$components.Button;
+var ColorPalette = wp.blockEditor.ColorPalette;
+
+var PTAMColorPicker = function PTAMColorPicker(props) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      colorKey = _useState2[0],
+      setColorKey = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isVisible = _useState4[0],
+      setIsVisible = _useState4[1];
+
+  var value = props.value,
+      _onChange = props.onChange,
+      onOpacityChange = props.onOpacityChange,
+      label = props.label,
+      _props$alpha = props.alpha,
+      alpha = _props$alpha === void 0 ? false : _props$alpha,
+      valueOpacity = props.valueOpacity;
+  var opacityIcon = /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "tint",
+    className: "svg-inline--fa fa-tint fa-w-11",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 352 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M205.22 22.09c-7.94-28.78-49.44-30.12-58.44 0C100 179.85 0 222.72 0 333.91 0 432.35 78.72 512 176 512s176-79.65 176-178.09c0-111.75-99.79-153.34-146.78-311.82zM176 448A112.14 112.14 0 0 1 64 336a16 16 0 0 1 32 0 80.09 80.09 0 0 0 80 80 16 16 0 0 1 0 32z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M176 448A112.14 112.14 0 0 1 64 336a16 16 0 0 1 32 0 80.09 80.09 0 0 0 80 80 16 16 0 0 1 0 32z"
+  })));
+  /**
+   * Toggle whether the color popup is showing.
+   */
+
+  var toggleVisible = function toggleVisible() {
+    setIsVisible(true);
+  };
+  /**
+   * Close color popup if visible.
+   */
+
+
+  var toggleClose = function toggleClose() {
+    if (isVisible) {
+      setIsVisible(false);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-color-picker-wrapper"
+  }, !!label && /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-picker-area"
+  }, !isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleVisible,
+    "aria-label": __('Custom color picker', 'post-type-archive-mapping'),
+    style: {
+      color: value ? hex_to_rgba__WEBPACK_IMPORTED_MODULE_1___default()(value, valueOpacity) : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleClose,
+    "aria-label": __('Custom color picker', 'post-type-archive-mapping'),
+    style: {
+      color: value ? hex_to_rgba__WEBPACK_IMPORTED_MODULE_1___default()(value, valueOpacity) : 'transparent'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement(Popover, {
+    position: "top left",
+    className: "ptam-component-color-picker",
+    onClose: toggleClose
+  }, /*#__PURE__*/React.createElement(BaseControl, {
+    key: colorKey
+  }, /*#__PURE__*/React.createElement(ColorPicker, {
+    key: colorKey,
+    color: value ? value : '',
+    onChangeComplete: function onChangeComplete(color) {
+      _onChange(color.hex);
+    },
+    disableAlpha: true
+  })), alpha && /*#__PURE__*/React.createElement("div", {
+    className: "ptam-component-color-opacity"
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Opacity', 'post-type-archive-mapping')
+  }, opacityIcon), /*#__PURE__*/React.createElement(RangeControl, {
+    value: valueOpacity ? valueOpacity : 0,
+    onChange: function onChange(opacityValue) {
+      return onOpacityChange(opacityValue);
+    },
+    min: 0,
+    max: 1,
+    step: 0.01,
+    initialPosition: 1
+  })), /*#__PURE__*/React.createElement(Button, {
+    isSmall: true,
+    isSecondary: true,
+    className: "components-color-clear-color",
+    onClick: function onClick() {
+      _onChange('');
+
+      onOpacityChange(1);
+      setColorKey(false);
+    }
+  }, __('Clear Color', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-color-picker-palette"
+  }, /*#__PURE__*/React.createElement(ColorPalette, {
+    value: value,
+    onChange: function onChange(color) {
+      _onChange(color);
+
+      setColorKey(color);
+    },
+    disableCustomColors: true,
+    clearable: false
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PTAMColorPicker);
+
+/***/ }),
+
+/***/ "./src/components/dimensions/editor.scss":
+/*!***********************************************!*\
+  !*** ./src/components/dimensions/editor.scss ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/dimensions/index.js":
+/*!********************************************!*\
+  !*** ./src/components/dimensions/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.scss */ "./src/components/dimensions/editor.scss");
+/* harmony import */ var _unit_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-picker */ "./src/components/unit-picker/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * Dimensions Component.
+ * Credit: Forked from @GenerateBlocks
+ */
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    sprintf = _wp$i18n.sprintf;
+var Fragment = wp.element.Fragment;
+var _wp$components = wp.components,
+    Button = _wp$components.Button,
+    Tooltip = _wp$components.Tooltip;
+
+var DimensionsControl = function DimensionsControl(props) {
+  var attributes = props.attributes,
+      setAttributes = props.setAttributes,
+      _props$label = props.label,
+      label = _props$label === void 0 ? __('Padding', 'post-type-archive-mapping') : _props$label,
+      allowNegatives = props.allowNegatives,
+      attrTop = props.attrTop,
+      attrRight = props.attrRight,
+      attrBottom = props.attrBottom,
+      attrLeft = props.attrLeft,
+      attrSyncUnits = props.attrSyncUnits,
+      attrUnit = props.attrUnit,
+      _props$labelTop = props.labelTop,
+      labelTop = _props$labelTop === void 0 ? __('Top', 'post-type-archive-mapping') : _props$labelTop,
+      _props$labelRight = props.labelRight,
+      labelRight = _props$labelRight === void 0 ? __('Right', 'post-type-archive-mapping') : _props$labelRight,
+      _props$labelBottom = props.labelBottom,
+      labelBottom = _props$labelBottom === void 0 ? __('Bottom', 'post-type-archive-mapping') : _props$labelBottom,
+      _props$labelLeft = props.labelLeft,
+      labelLeft = _props$labelLeft === void 0 ? __('Left', 'post-type-archive-mapping') : _props$labelLeft,
+      units = props.units;
+  /**
+   * Change the top value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+  var changeTopValue = function changeTopValue(value) {
+    setAttributes(_defineProperty({}, props['attrTop'], value));
+  };
+  /**
+   * Change the right value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeRightValue = function changeRightValue(value) {
+    setAttributes(_defineProperty({}, props['attrRight'], value));
+  };
+  /**
+   * Change the bottom value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeBottomValue = function changeBottomValue(value) {
+    setAttributes(_defineProperty({}, props['attrBottom'], value));
+  };
+  /**
+   * Change the left value in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeLeftValue = function changeLeftValue(value) {
+    setAttributes(_defineProperty({}, props['attrLeft'], value));
+  };
+  /**
+   * Change the all values in parent.
+   *
+   * @param {number} value Value to change to.
+   */
+
+
+  var changeAllValues = function changeAllValues(value) {
+    var _setAttributes5;
+
+    setAttributes((_setAttributes5 = {}, _defineProperty(_setAttributes5, props['attrTop'], value), _defineProperty(_setAttributes5, props['attrRight'], value), _defineProperty(_setAttributes5, props['attrBottom'], value), _defineProperty(_setAttributes5, props['attrLeft'], value), _setAttributes5));
+  };
+  /**
+   * Ensures a number is positive if allowNegatives is false.
+   *
+   * @param {number} number Number to sanitize.
+   * @return {number} Sanitized number.
+   */
+
+
+  var sanitizeNumber = function sanitizeNumber(number) {
+    // Ensure number isn't empty.
+    if ('' === number) {
+      number = 0;
+    } // If negatives are allowed, return number.
+
+
+    if (allowNegatives) {
+      return number;
+    } // Return absolute value of number.
+
+
+    return Math.abs(number);
+  };
+  /**
+   * Event for when the top value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeTopValue = function onChangeTopValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeTopValue(newValue);
+    }
+  };
+  /**
+   * Event for when the Right value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeRightValue = function onChangeRightValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeRightValue(newValue);
+    }
+  };
+  /**
+   * Event for when the bottom value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeBottomValue = function onChangeBottomValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeBottomValue(newValue);
+    }
+  };
+  /**
+   * Event for when the Left value has been changed.
+   *
+   * @param {Object} event Change event object.
+   */
+
+
+  var onChangeLeftValue = function onChangeLeftValue(event) {
+    var newValue = sanitizeNumber(event.target.value);
+
+    if (attributes[attrSyncUnits]) {
+      changeAllValues(newValue);
+    } else {
+      changeLeftValue(newValue);
+    }
+  };
+  /**
+   * When the sync value is selected, sync all values to the maximum number.
+   */
+
+
+  var syncUnits = function syncUnits() {
+    var numbers = [attributes[attrTop], attributes[attrRight], attributes[attrBottom], attributes[attrLeft]];
+    var syncValue = Math.max.apply(null, numbers);
+    setAttributes(_defineProperty({}, props['attrSyncUnits'], !attributes[attrSyncUnits]));
+    changeAllValues(syncValue.toString());
+  };
+  /**
+   * Change the units.
+   *
+   * @param {string} value Unit changing (px, em, rem, vh).
+   */
+
+
+  var onChangeUnits = function onChangeUnits(value) {
+    setAttributes(_defineProperty({}, props['attrUnit'], value)); // eslint-disable-line dot-notation
+  };
+
+  var syncIcon = /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "sync",
+    className: "svg-inline--fa fa-sync fa-w-16",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 512 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M0 500V299.67a12 12 0 0 1 12-12h200.33a12 12 0 0 1 12 12v47.41a12 12 0 0 1-12.57 12l-101.87-4.88a176.07 176.07 0 0 0 317.25-56.94 12 12 0 0 1 11.67-9.26h49.09a12 12 0 0 1 11.8 14.18C478.07 417.08 377.19 504 256 504a247.43 247.43 0 0 1-188.76-87.17l4.13 82.57a12 12 0 0 1-12 12.6H12a12 12 0 0 1-12-12z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M12.3 209.82C33.93 94.92 134.81 8 256 8a247.4 247.4 0 0 1 188.9 87.34l-4-82.77A12 12 0 0 1 452.92 0h47.41a12 12 0 0 1 12 12v200.33a12 12 0 0 1-12 12H300a12 12 0 0 1-12-12v-47.41a12 12 0 0 1 12.57-12l101.53 4.88a176.07 176.07 0 0 0-317.24 56.94A12 12 0 0 1 73.19 224H24.1a12 12 0 0 1-11.8-14.18z"
+  })));
+  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "components-base-control components-ptam-dimensions-control"
+  }, /*#__PURE__*/React.createElement(_unit_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: label,
+    value: 'undefined' !== typeof attributes[attrUnit] ? attributes[attrUnit] : 'px',
+    units: units,
+    onClick: function onClick(value) {
+      if ('undefined' !== typeof attributes[attrUnit]) {
+        onChangeUnits(value);
+      } else {
+        return false;
+      }
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-dimensions-control__inputs"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeTopValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Top', 'post-type-archive-mapping'), label),
+    value: attributes[attrTop] ? attributes[attrTop] : '',
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues('');
+        } else {
+          changeTopValue('');
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeRightValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Right', 'post-type-archive-mapping'), label),
+    value: attributes[attrRight] ? attributes[attrRight] : '',
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues('');
+        } else {
+          changeRightValue('');
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeBottomValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Bottom', 'post-type-archive-mapping'), label),
+    value: attributes[attrBottom] ? attributes[attrBottom] : '',
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues('');
+        } else {
+          changeBottomValue('');
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
+  }), /*#__PURE__*/React.createElement("input", {
+    className: "components-ptam-dimensions-control__number",
+    placeholder: "0",
+    type: "number",
+    onChange: onChangeLeftValue,
+    "aria-label": sprintf(
+    /* translators: Dimension label (padding, margin, border) */
+    __('%s Left', 'post-type-archive-mapping'), label),
+    value: attributes[attrLeft] ? attributes[attrLeft] : '',
+    min: allowNegatives ? undefined : 0,
+    onBlur: function onBlur() {
+      if ('' === attributes[attrTop]) {
+        // If we have no value and a default exists, set to 0 to prevent default from coming back.
+        if (props.attributes[props.attrSyncUnits]) {
+          changeAllValues('');
+        } else {
+          changeLeftValue('');
+        }
+      }
+    },
+    onClick: function onClick(e) {
+      // Make sure onBlur fires in Firefox.
+      e.currentTarget.focus();
+    }
+  }), /*#__PURE__*/React.createElement(Tooltip, {
+    text: !!attributes[attrSyncUnits] ? __('Unsync', 'post-type-archive-mapping') : __('Sync', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    className: "components-ptam-dimensions-control_sync",
+    "aria-label": __('Sync Units', 'generateblocks'),
+    isPrimary: attributes[attrSyncUnits] ? attributes[attrSyncUnits] : false,
+    "aria-pressed": attributes[attrSyncUnits] ? attributes[attrSyncUnits] : false // eslint-disable-next-line no-unused-vars
+    ,
+    onClick: function onClick(value) {
+      return syncUnits();
+    },
+    isSmall: true
+  }, syncIcon))), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-dimensions-control__input-labels"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelTop), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelRight), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelBottom), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }, labelLeft), /*#__PURE__*/React.createElement("span", {
+    className: "components-ptam-dimensions-control__number-label"
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DimensionsControl);
+
+/***/ }),
+
+/***/ "./src/components/gradient-picker/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/gradient-picker/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * Color and Gradient Picker.
+ *
+ * Credit: Forked from @post-type-archive-mapping
+ */
+
+var useState = wp.element.useState;
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    Tooltip = _wp$components.Tooltip,
+    BaseControl = _wp$components.BaseControl,
+    Popover = _wp$components.Popover;
+var __experimentalGradientPickerControl = wp.blockEditor.__experimentalGradientPickerControl;
+
+var PTAMGradientPicker = function PTAMGradientPicker(props) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isVisible = _useState2[0],
+      setIsVisible = _useState2[1];
+
+  var value = props.value,
+      _onChange = props.onChange,
+      label = props.label;
+  /**
+   * Toggle whether the color popup is showing.
+   */
+
+  var toggleVisible = function toggleVisible() {
+    setIsVisible(true);
+  };
+  /**
+   * Close color popup if visible.
+   */
+
+
+  var toggleClose = function toggleClose() {
+    if (isVisible) {
+      setIsVisible(false);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-color-picker-wrapper ptam-component-gradient-picker-wrapper"
+  }, !!label && /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("div", {
+    className: "ptam-color-picker-area"
+  }, !isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleVisible,
+    "aria-label": __('Gradient Color Picker', 'post-type-archive-mapping'),
+    style: {
+      backgroundImage: value ? value : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('components-color-palette__item-wrapper components-circular-option-picker__option-wrapper', value ? '' : 'components-color-palette__custom-color')
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Choose Color', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-color-palette__item components-circular-option-picker__option",
+    onClick: toggleClose,
+    "aria-label": __('Custom color picker', 'post-type-archive-mapping'),
+    style: {
+      backgroundImage: value ? value : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "components-color-palette__custom-color-gradient"
+  })))), isVisible && /*#__PURE__*/React.createElement(Popover, {
+    position: "top left",
+    className: "ptam-component-gradient-picker",
+    onClose: toggleClose
+  }, /*#__PURE__*/React.createElement(BaseControl, null, __experimentalGradientPickerControl && /*#__PURE__*/React.createElement(__experimentalGradientPickerControl, {
+    label: __('Choose a Background Gradient', 'post-type-archive-mapping'),
+    value: value,
+    onChange: function onChange(gradientvalue) {
+      _onChange(gradientvalue);
+    }
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PTAMGradientPicker);
+
+/***/ }),
+
+/***/ "./src/components/hierarchical-items/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/hierarchical-items/index.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var ComboboxControl = wp.components.ComboboxControl;
+var _wp$element = wp.element,
+    useState = _wp$element.useState,
+    useEffect = _wp$element.useEffect;
+/**
+ * Output hierarchical items in a combobox.
+ *
+ * @param {Object} props The post type to retrieve hierarchical items for.
+ *
+ * @return {JSX} Combobox for the hierarchical items.
+ */
+
+var HierarchicalItems = function HierarchicalItems(props) {
+  var label = props.label,
+      selectedItem = props.selectedItem,
+      postType = props.postType,
+      loadingText = props.loadingText;
+
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      loading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = useState([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      items = _useState4[0],
+      setItems = _useState4[1]; // eslint-disable-next-line no-unused-vars
+
+
+  var _useState5 = useState([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      filteredItems = _useState6[0],
+      setFilteredItems = _useState6[1];
+
+  useEffect(function () {
+    setLoading(true);
+  }, []);
+  useEffect(function () {
+    retrieveItems({});
+  }, [postType]);
+
+  var retrieveItems = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var itemList, config, endpoint, result;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(true);
+              itemList = [];
+              config = {
+                headers: {
+                  // eslint-disable-next-line no-undef
+                  'X-WP-Nonce': ptam_globals.rest_nonce
+                }
+              }; // eslint-disable-next-line no-undef
+
+              endpoint = ptam_globals.rest_url + "ptam/v2/get_hierarchical_items";
+              _context.prev = 4;
+              _context.next = 7;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(endpoint, {
+                post_type: postType
+              }, config);
+
+            case 7:
+              result = _context.sent;
+
+              if (Object.keys(result.data).length > 0) {
+                // eslint-disable-next-line no-undef
+                jQuery.each(result.data, function (key, value) {
+                  itemList.push({
+                    value: value.id,
+                    label: value.title
+                  });
+                });
+                setItems(itemList);
+                setLoading(false);
+              }
+
+              _context.next = 13;
+              break;
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](4);
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[4, 11]]);
+    }));
+
+    return function retrieveItems() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  if (loading) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, loadingText);
+  }
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ComboboxControl, {
+    label: label,
+    value: selectedItem,
+    options: items,
+    onInputChange: function onInputChange(inputValue) {
+      return setFilteredItems(items.filter(function (option) {
+        return option.label.toLowerCase().startsWith(inputValue.toLowerCase());
+      }));
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onFilterValueChange: function onFilterValueChange(inputValue) {},
+    onChange: function onChange(value) {
+      props.onChange(value);
+    }
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HierarchicalItems);
+
+/***/ }),
+
+/***/ "./src/components/responsive-tabs/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/responsive-tabs/index.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Responsive Tabs (forked from @GenerateBlocks).
+ */
+var __ = wp.i18n.__;
+var _wp$components = wp.components,
+    Tooltip = _wp$components.Tooltip,
+    Button = _wp$components.Button;
+
+var ResponsiveTabs = function ResponsiveTabs(props) {
+  var _onClick = props.onClick,
+      selectedDevice = props.selectedDevice;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-responsive-tabs"
+  }, /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for all devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Desktop' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Desktop');
+    }
+  }, __('Desktop', 'post-type-archive-mapping'))), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for tablet devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Tablet' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Tablet');
+    }
+  }, __('Tablet', 'post-type-archive-mapping'))), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Show options for mobile devices', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(Button, {
+    isPressed: 'Mobile' === selectedDevice ? true : false,
+    onClick: function onClick() {
+      _onClick('Mobile');
+    }
+  }, __('Mobile', 'post-type-archive-mapping')))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ResponsiveTabs);
+
+/***/ }),
+
+/***/ "./src/components/typography/GoogleFonts.js":
+/*!**************************************************!*\
+  !*** ./src/components/typography/GoogleFonts.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var fonts = {
+  Roboto: {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Open Sans': {
+    weight: ['300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  Lato: {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Montserrat: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Source Sans Pro': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Roboto Condensed': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Oswald: {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Roboto Mono': {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Raleway: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Poppins: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Noto Sans': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Roboto Slab': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'serif'
+  },
+  Merriweather: {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'PT Sans': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Ubuntu: {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Playfair Display': {
+    weight: ['regular', '500', '600', '700', '800', '900', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'serif'
+  },
+  Muli: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800', '900', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Open Sans Condensed': {
+    weight: ['300', '300italic', '700'],
+    fallback: 'sans-serif'
+  },
+  'PT Serif': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Lora: {
+    weight: ['regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'serif'
+  },
+  'Slabo 27px': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Nunito: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Noto Sans JP': {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Work Sans': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Rubik: {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Noto Serif': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Fira Sans': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Titillium Web': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '900'],
+    fallback: 'sans-serif'
+  },
+  Quicksand: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Noto Sans KR': {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Nanum Gothic': {
+    weight: ['regular', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Mukta: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  'Noto Sans TC': {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Nunito Sans': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Heebo: {
+    weight: ['100', '300', 'regular', '500', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'PT Sans Narrow': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Arimo: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Inconsolata: {
+    weight: ['regular', '700'],
+    fallback: 'monospace'
+  },
+  Barlow: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Oxygen: {
+    weight: ['300', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Dosis: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Bitter: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  'Libre Baskerville': {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  'Crimson Text': {
+    weight: ['regular', 'italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Libre Franklin': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Karla: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Josefin Sans': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Cabin: {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Anton: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Source Code Pro': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '900', '900italic'],
+    fallback: 'monospace'
+  },
+  Hind: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Abel: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Amiri: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Fjalla One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Lobster: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Pacifico: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Indie Flower': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Exo 2': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Dancing Script': {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'handwriting'
+  },
+  'Source Serif Pro': {
+    weight: ['regular', '600', '700'],
+    fallback: 'serif'
+  },
+  Arvo: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Hind Siliguri': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Varela Round': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Merriweather Sans': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  Cairo: {
+    weight: ['200', '300', 'regular', '600', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Yanone Kaffeesatz': {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Overpass: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Shadows Into Light': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Barlow Condensed': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'IBM Plex Sans': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Comfortaa: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'display'
+  },
+  Asap: {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Prompt: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Kanit: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Questrial: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Martel: {
+    weight: ['200', '300', 'regular', '600', '700', '800', '900'],
+    fallback: 'serif'
+  },
+  'Archivo Narrow': {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Abril Fatface': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Amatic SC': {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  Acme: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Catamaran: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Fira Sans Condensed': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'EB Garamond': {
+    weight: ['regular', '500', '600', '700', '800', 'italic', '500italic', '600italic', '700italic', '800italic'],
+    fallback: 'serif'
+  },
+  'Bree Serif': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Zilla Slab': {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Noto Sans SC': {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Cormorant Garamond': {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Hind Madurai': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Teko: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Righteous: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Signika: {
+    weight: ['300', 'regular', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Play: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Domine: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Exo: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Russo One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Cinzel: {
+    weight: ['regular', '700', '900'],
+    fallback: 'serif'
+  },
+  'PT Sans Caption': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Rajdhani: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Maven Pro': {
+    weight: ['regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Fredoka One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IBM Plex Serif': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Ubuntu Condensed': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Patua One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Caveat: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  'Permanent Marker': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Assistant: {
+    weight: ['200', '300', 'regular', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  ABeeZee: {
+    weight: ['regular', 'italic'],
+    fallback: 'sans-serif'
+  },
+  Vollkorn: {
+    weight: ['regular', 'italic', '600', '600italic', '700', '700italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'Crete Round': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Special Elite': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Rokkitt: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'serif'
+  },
+  Bangers: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Francois One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Barlow Semi Condensed': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Alegreya Sans': {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Satisfy: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Tajawal: {
+    weight: ['200', '300', 'regular', '500', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Bebas Neue': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Patrick Hand': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Cuprum: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Viga: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Courgette: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Ropa Sans': {
+    weight: ['regular', 'italic'],
+    fallback: 'sans-serif'
+  },
+  'Noto Serif JP': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '900'],
+    fallback: 'serif'
+  },
+  'Gochi Hand': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Alegreya: {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'Luckiest Guy': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Noticia Text': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Tinos: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Passion One': {
+    weight: ['regular', '700', '900'],
+    fallback: 'display'
+  },
+  'Alfa Slab One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Nanum Myeongjo': {
+    weight: ['regular', '700', '800'],
+    fallback: 'serif'
+  },
+  Monda: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Lobster Two': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  Kalam: {
+    weight: ['300', 'regular', '700'],
+    fallback: 'handwriting'
+  },
+  'Kaushan Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Archivo Black': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Cardo: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  Archivo: {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Great Vibes': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Volkhov: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Quattrocento Sans': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'News Cycle': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Pathway Gothic One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Sacramento: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Frank Ruhl Libre': {
+    weight: ['300', 'regular', '500', '700', '900'],
+    fallback: 'serif'
+  },
+  Yantramanav: {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  Cantarell: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Istok Web': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Didact Gothic': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Concert One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Taviraj: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'Old Standard TT': {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  'Montserrat Alternates': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Economica: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Changa: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  'Fira Sans Extra Condensed': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Gloria Hallelujah': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Parisienne: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Orbitron: {
+    weight: ['regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Asap Condensed': {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Playfair Display SC': {
+    weight: ['regular', 'italic', '700', '700italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  Chivo: {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Sriracha: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Hind Vadodara': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'DM Sans': {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Prata: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Quattrocento: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Cookie: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Poiret One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Handlee: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Sarabun: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  BenchNine: {
+    weight: ['300', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Merienda: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  'M PLUS 1p': {
+    weight: ['100', '300', 'regular', '500', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'PT Mono': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  Lalezar: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sanchez: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Lemonada: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'display'
+  },
+  'Markazi Text': {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Neuton: {
+    weight: ['200', '300', 'regular', 'italic', '700', '800'],
+    fallback: 'serif'
+  },
+  'Hind Guntur': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Josefin Slab': {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Philosopher: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Advent Pro': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Do Hyeon': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Sawarabi Mincho': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Ruda: {
+    weight: ['regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Vidaloka: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Ultra: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Neucha: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Arapey: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Gudea: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'sans-serif'
+  },
+  'Paytone One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Kreon: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'M PLUS Rounded 1c': {
+    weight: ['100', '300', 'regular', '500', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Pragati Narrow': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Press Start 2P': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Hammersmith One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Gentium Basic': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Monoton: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Alef: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Alice: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Aclonica: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Sigmar One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Spectral: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'serif'
+  },
+  'Marck Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Electrolize: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Actor: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Architects Daughter': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Adamina: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Pontano Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Audiowide: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Inter: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Cabin Condensed': {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Unica One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Yellowtail: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'El Messiri': {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Squada One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Staatliches: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Amaranth: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Enriqueta: {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Mitr: {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Glegoo: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Bowlby One SC': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Basic: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Nanum Gothic Coding': {
+    weight: ['regular', '700'],
+    fallback: 'monospace'
+  },
+  Sarala: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Bad Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Homemade Apple': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Tangerine: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  Cormorant: {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Oleo Script': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Karma: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'Julius Sans One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Carter One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Khand: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Nanum Pen Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Cambay: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Fugaz One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Shadows Into Light Two': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Coda: {
+    weight: ['regular', '800'],
+    fallback: 'display'
+  },
+  'Signika Negative': {
+    weight: ['300', 'regular', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Pridi: {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Playball: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Saira: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Rock Salt': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Gothic A1': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Gentium Book Basic': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Allura: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Yeseva One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'DM Serif Text': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Lusitana: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Jura: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Average: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Yrsa: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'Sorts Mill Goudy': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Cantata One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Armata: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Scada: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Abhaya Libre': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'serif'
+  },
+  Damion: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Marmelad: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Varela: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Quantico: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Covered By Your Grace': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'PT Serif Caption': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Ramabhadra: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Unna: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Encode Sans': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Arsenal: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Black Han Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Sawarabi Gothic': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Ubuntu Mono': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  'Pinyon Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Black Ops One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Marcellus: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Fauna One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Lilita One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sintony: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Khula: {
+    weight: ['300', 'regular', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Jaldi: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Rubik Mono One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Allan: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Reenie Beanie': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Alex Brush': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Mr Dafoe': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Palanquin: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  'Encode Sans Condensed': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Antic: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Knewave: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Caveat Brush': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Rambla: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Spinnaker: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'IBM Plex Mono': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Michroma: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Nothing You Could Do': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Kelly Slab': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Boogaloo: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Chewy: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'ZCOOL XiaoWei': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Rancho: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Noto Serif SC': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '900'],
+    fallback: 'serif'
+  },
+  Pangolin: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Fira Mono': {
+    weight: ['regular', '500', '700'],
+    fallback: 'monospace'
+  },
+  Forum: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Antic Slab': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Alegreya Sans SC': {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Anonymous Pro': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Lateef: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Annie Use Your Telescope': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Noto Sans HK': {
+    weight: ['100', '300', 'regular', '500', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Martel Sans': {
+    weight: ['200', '300', 'regular', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Chakra Petch': {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Rufina: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Bai Jamjuree': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Scheherazade: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Share: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  'Tenor Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'DM Serif Display': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  VT323: {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  'Share Tech Mono': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  Mali: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'handwriting'
+  },
+  Cousine: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  'Cinzel Decorative': {
+    weight: ['regular', '700', '900'],
+    fallback: 'display'
+  },
+  Overlock: {
+    weight: ['regular', 'italic', '700', '700italic', '900', '900italic'],
+    fallback: 'display'
+  },
+  'Arbutus Slab': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Reem Kufi': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Cabin Sketch': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Saira Extra Condensed': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Eczar: {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'serif'
+  },
+  'Leckerli One': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Krub: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Berkshire Swash': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Fredericka the Great': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Saira Condensed': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Overpass Mono': {
+    weight: ['300', 'regular', '600', '700'],
+    fallback: 'monospace'
+  },
+  Itim: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Rasa: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Bevan: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Arima Madurai': {
+    weight: ['100', '200', '300', 'regular', '500', '700', '800', '900'],
+    fallback: 'display'
+  },
+  Italianno: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Coda Caption': {
+    weight: ['800'],
+    fallback: 'sans-serif'
+  },
+  Shrikhand: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Just Another Hand': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Saira Semi Condensed': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Almarai: {
+    weight: ['300', 'regular', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  'Mukta Malar': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Oranienbaum: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Nobile: {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Candal: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Six Caps': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Space Mono': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Capriola: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Biryani: {
+    weight: ['200', '300', 'regular', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Halant: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Allerta: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Trirong: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  Mallanna: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Aldrich: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Aleo: {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Suez One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Caudex: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Niconne: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Mrs Saint Delafield': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Gruppo: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Miriam Libre': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Contrail One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Days One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Allerta Stencil': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Average Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Coming Soon': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Pattaya: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Londrina Solid': {
+    weight: ['100', '300', 'regular', '900'],
+    fallback: 'display'
+  },
+  Bungee: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Coustard: {
+    weight: ['regular', '900'],
+    fallback: 'serif'
+  },
+  'Marcellus SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Racing Sans One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bentham: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Bungee Inline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Magra: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Judson: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  Rochester: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Grand Hotel': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Gelasio: {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Yesteryear: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Syncopate: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Hanuman: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Kosugi Maru': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Copse: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Mada: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '900'],
+    fallback: 'sans-serif'
+  },
+  'Titan One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Noto Serif TC': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '900'],
+    fallback: 'serif'
+  },
+  Kameron: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Telex: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Norican: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Maitree: {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'IM Fell Double Pica': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Molengo: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Sunflower: {
+    weight: ['300', '500', '700'],
+    fallback: 'sans-serif'
+  },
+  'Alegreya SC': {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'Red Hat Display': {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Jua: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Ovo: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'IBM Plex Sans Condensed': {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Nixie One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Aladin: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Arizonia: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Bubblegum Sans': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Changa One': {
+    weight: ['regular', 'italic'],
+    fallback: 'display'
+  },
+  'Lexend Deca': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Sofia: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Jockey One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Suranna: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Amethysta: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Schoolbell: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Nanum Brush Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Cedarville Cursive': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Cutive Mono': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  Delius: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Raleway Dots': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Graduate: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Lustria: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Mukta Vaani': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Kadwa: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Rozha One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Buenard: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Cambo: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Marvel: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Krona One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Carrois Gothic': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Carme: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Slabo 13px': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Lemon: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Love Ya Like A Sister': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Rosario: {
+    weight: ['300', 'regular', '500', '600', '700', '300italic', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Merienda One': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Public Sans': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Petit Formal Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Ceviche One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Voltaire: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Fresca: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Averia Serif Libre': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  Rye: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Noto Serif KR': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '900'],
+    fallback: 'serif'
+  },
+  'Chelsea Market': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Calligraffitti: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Freckle Face': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Duru Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Trocchi: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Metrophobic: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Mate: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Harmattan: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Gilda Display': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Cormorant Infant': {
+    weight: ['300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Spartan: {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Oxygen Mono': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  Chonburi: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Goudy Bookletter 1911': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Sansita: {
+    weight: ['regular', 'italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  'Emilys Candy': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Amiko: {
+    weight: ['regular', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Kristi: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Palanquin Dark': {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Lekton: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'sans-serif'
+  },
+  Cutive: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Herr Von Muellerhoff': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'GFS Didot': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Radley: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Sue Ellen Francisco': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Pompiere: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gabriela: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Niramit: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Seaweed Script': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Sedgwick Ave': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Federo: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  McLaren: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IM Fell DW Pica': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Sniglet: {
+    weight: ['regular', '800'],
+    fallback: 'display'
+  },
+  'Mr De Haviland': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Shojumaru: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Poly: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Belleza: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Faustina: {
+    weight: ['regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'serif'
+  },
+  'IM Fell English': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Rammetto One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Amita: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  Inder: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Antic Didone': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Alike Angular': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Montez: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  K2D: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  UnifrakturMaguntia: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gurajada: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Proza Libre': {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  Athiti: {
+    weight: ['200', '300', 'regular', '500', '600', '700'],
+    fallback: 'sans-serif'
+  },
+  Andada: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Liu Jian Mao Cao': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Megrim: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Vast Shadow': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Wallpoet: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Unkempt: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Fanwood Text': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Doppio One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Comic Neue': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'handwriting'
+  },
+  Corben: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Frijole: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Balthazar: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Mirza: {
+    weight: ['regular', '500', '600', '700'],
+    fallback: 'display'
+  },
+  'IM Fell French Canon SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Brawler: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Oleo Script Swash Caps': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Mandali: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Convergence: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Fondamento: {
+    weight: ['regular', 'italic'],
+    fallback: 'handwriting'
+  },
+  Alike: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Baumans: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Esteban: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Gravitas One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Anaheim: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Wendy One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Stardos Stencil': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Spicy Rice': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Rakkas: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'La Belle Aurore': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Secular One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Belgrano: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Bungee Shade': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Crafty Girls': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Battambang: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Quando: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Mouse Memoirs': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Gugi: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Faster One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'B612 Mono': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Limelight: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Short Stack': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Mountains of Christmas': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Share Tech': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Laila: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Literata: {
+    weight: ['regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'serif'
+  },
+  'Cormorant SC': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'Fjord One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Podkova: {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'serif'
+  },
+  Homenaje: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Walter Turncoat': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Sen: {
+    weight: ['regular', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  'Patrick Hand SC': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Voces: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Qwigley: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Happy Monkey': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Rouge Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Baloo Chettan 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  NTR: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Skranji: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Strait: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Dawning of a New Day': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Iceland: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Expletus Sans': {
+    weight: ['regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  'Montserrat Subrayada': {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Oregano: {
+    weight: ['regular', 'italic'],
+    fallback: 'display'
+  },
+  'Give You Glory': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Alata: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Puritan: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Mako: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Andika: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Cormorant Upright': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  Zeyada: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Bowlby One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Aref Ruqaa': {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Numans: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Kurale: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Spirax: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Clicker Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Waiting for the Sunrise': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Holtwood One SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Katibeh: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Carrois Gothic SC': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Livvic: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Eater: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Fontdiner Swanky': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Finger Paint': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bellefair: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Wire One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Kosugi: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Charm: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  'Delius Swash Caps': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Vesper Libre': {
+    weight: ['regular', '500', '700', '900'],
+    fallback: 'serif'
+  },
+  'Red Hat Text': {
+    weight: ['regular', 'italic', '500', '500italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Gafata: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Averia Sans Libre': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  'Denk One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Geo: {
+    weight: ['regular', 'italic'],
+    fallback: 'sans-serif'
+  },
+  Tauri: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Cherry Swash': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Codystar: {
+    weight: ['300', 'regular'],
+    fallback: 'display'
+  },
+  'Cantora One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Encode Sans Semi Condensed': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Nova Square': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  BioRhyme: {
+    weight: ['200', '300', 'regular', '700', '800'],
+    fallback: 'serif'
+  },
+  Timmana: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Atma: {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'display'
+  },
+  Tienne: {
+    weight: ['regular', '700', '900'],
+    fallback: 'serif'
+  },
+  Meddon: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Galada: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Padauk: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Loved by the King': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'The Girl Next Door': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Darker Grotesque': {
+    weight: ['300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Life Savers': {
+    weight: ['regular', '700', '800'],
+    fallback: 'display'
+  },
+  Bilbo: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Shanti: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Headland One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Euphoria Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Imprima: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Aguafina Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Baloo 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  'Over the Rainbow': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Sarpanch: {
+    weight: ['regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Orienta: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Spectral SC': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'serif'
+  },
+  'Port Lligat Sans': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Artifika: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Ledger: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Ruluko: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Sail: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Alatsi: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Sonsie One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Bilbo Swash Caps': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Slackey: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Salsa: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Rationale: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Hepta Slab': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'serif'
+  },
+  Nosifer: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Dekko: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Encode Sans Expanded': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Lily Script One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Zilla Slab Highlight': {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Dokdo: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Kotta One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Macondo Swash Caps': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Encode Sans Semi Expanded': {
+    weight: ['100', '200', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  'Prosto One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Trade Winds': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Farsan: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Manuale: {
+    weight: ['regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic'],
+    fallback: 'serif'
+  },
+  Creepster: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Medula One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Ranchers: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'David Libre': {
+    weight: ['regular', '500', '700'],
+    fallback: 'serif'
+  },
+  'Libre Barcode 39': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Vampiro One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Metamorphous: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Bubbler One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Nova Mono': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  'Princess Sofia': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Just Me Again Down Here': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Notable: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Fascinate Inline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Vibur: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Vollkorn SC': {
+    weight: ['regular', '600', '700', '900'],
+    fallback: 'serif'
+  },
+  Crushed: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sumana: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Elsie: {
+    weight: ['regular', '900'],
+    fallback: 'display'
+  },
+  Ranga: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Port Lligat Slab': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Amarante: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Ruslan Display': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Germania One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Sirin Stencil': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Pavanam: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Peralta: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Scope One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Jomolhari: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Kranky: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Yatra One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Jacques Francois Shadow': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Ribeye: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Averia Libre': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  'Saira Stencil One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Cherry Cream Soda': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Mukta Mahee': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Srisakdi: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Trochut: {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'display'
+  },
+  Coiny: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Ma Shan Zheng': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Asul: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Ewert: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Arya: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Hanalei Fill': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Grenze: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'serif'
+  },
+  'Ribeye Marrow': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IM Fell English SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Chau Philomene One': {
+    weight: ['regular', 'italic'],
+    fallback: 'sans-serif'
+  },
+  Sarina: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Chicle: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Manjari: {
+    weight: ['100', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Montaga: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Italiana: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Akronim: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Habibi: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Englebert: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Dynalight: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Mate SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Henny Penny': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Sree Krushnadevaraya': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Engagement: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Girassol: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Kite One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Ibarra Real Nova': {
+    weight: ['regular', 'italic', '600', '600italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Gaegu: {
+    weight: ['300', 'regular', '700'],
+    fallback: 'handwriting'
+  },
+  Fenix: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Pirata One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Tulpen One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IM Fell Great Primer': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Chathura: {
+    weight: ['100', '300', 'regular', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  Unlock: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Nova Round': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sura: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Kumar One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Baskervville: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Quintessential: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Milonga: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bayon: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Be Vietnam': {
+    weight: ['100', '100italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic'],
+    fallback: 'sans-serif'
+  },
+  'Crimson Pro': {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800', '900', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic'],
+    fallback: 'serif'
+  },
+  B612: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'League Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Inknut Antiqua': {
+    weight: ['300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'serif'
+  },
+  Mogra: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Mystery Quest': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Monsieur La Doulaise': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Vibes: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Rosarivo: {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Uncial Antiqua': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Dorsa: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Almendra: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  Diplomata: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Simonetta: {
+    weight: ['regular', 'italic', '900', '900italic'],
+    fallback: 'display'
+  },
+  'New Rocker': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Snippet: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Petrona: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Ramaraja: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Averia Gruesa Libre': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Baloo Bhaina 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  Kodchasan: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Meera Inimai': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Flamenco: {
+    weight: ['300', 'regular'],
+    fallback: 'display'
+  },
+  Khmer: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Paprika: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Koulen: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Mansalva: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Lovers Quarrel': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Condiment: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Baloo Thambi 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  Stoke: {
+    weight: ['300', 'regular'],
+    fallback: 'serif'
+  },
+  Barrio: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Barriecito: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Donegal One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Kavoon: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Big Shoulders Display': {
+    weight: ['100', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'display'
+  },
+  Mina: {
+    weight: ['regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Big Shoulders Text': {
+    weight: ['100', '300', 'regular', '500', '600', '700', '800', '900'],
+    fallback: 'display'
+  },
+  Prociono: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Text Me One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'IM Fell French Canon': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  'Overlock SC': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Cagliostro: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Marko One': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Swanky and Moo Moo': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Maiden Orange': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Blinker: {
+    weight: ['100', '200', '300', 'regular', '600', '700', '800', '900'],
+    fallback: 'sans-serif'
+  },
+  Miniver: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Angkor: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Chango: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Thasadith: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Modak: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Junge: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Stint Ultra Condensed': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Stalemate: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Tillana: {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'handwriting'
+  },
+  UnifrakturCook: {
+    weight: ['700'],
+    fallback: 'display'
+  },
+  'Rum Raisin': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Farro: {
+    weight: ['300', 'regular', '500', '700'],
+    fallback: 'sans-serif'
+  },
+  'Delius Unicase': {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  Sancreek: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Julee: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Margarine: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Lakki Reddy': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Stint Ultra Expanded': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Bigshot One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Griffy: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Moul: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Diplomata SC': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Oxanium: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  Offside: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Fira Code': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'monospace'
+  },
+  'Eagle Lake': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Flavors: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Londrina Outline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Tomorrow: {
+    weight: ['100', '100italic', '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic'],
+    fallback: 'sans-serif'
+  },
+  Nokora: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Calistoga: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gotu: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Della Respira': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Cormorant Unicase': {
+    weight: ['300', 'regular', '500', '600', '700'],
+    fallback: 'serif'
+  },
+  'Libre Caslon Text': {
+    weight: ['regular', 'italic', '700'],
+    fallback: 'serif'
+  },
+  Buda: {
+    weight: ['300'],
+    fallback: 'display'
+  },
+  Asar: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Poller One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Autour One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Nova Slim': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Underdog: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Redressed: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Yeon Sung': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Content: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  Kantumruy: {
+    weight: ['300', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  'Baloo Paaji 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  'Jim Nightshade': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Glass Antiqua': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Snowburst One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Gamja Flower': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Revalia: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Metal Mania': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Charmonman: {
+    weight: ['regular', '700'],
+    fallback: 'handwriting'
+  },
+  'IM Fell DW Pica SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Inika: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  'Elsie Swash Caps': {
+    weight: ['regular', '900'],
+    fallback: 'display'
+  },
+  Wellfleet: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Chela One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Rhodium Libre': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Mrs Sheppards': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Sedgwick Ave Display': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Modern Antiqua': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Ravi Prakash': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Galdeano: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Oldenburg: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Arbutus: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Poor Story': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Hi Melody': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Joti One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Nova Flat': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'ZCOOL QingKe HuangYou': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Linden Hill': {
+    weight: ['regular', 'italic'],
+    fallback: 'serif'
+  },
+  Bokor: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Courier Prime': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'monospace'
+  },
+  Trykker: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  KoHo: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Song Myung': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Ruthie: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Libre Barcode 39 Extended Text': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Chilanka: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Fahkwang: {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Felipa: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Monofett: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Odibee Sans': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Smythe: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Major Mono Display': {
+    weight: ['regular'],
+    fallback: 'monospace'
+  },
+  Jomhuria: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Croissant One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Dangrek: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Original Surfer': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bahiana: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gorditas: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Odor Mean Chey': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Iceberg: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  MedievalSharp: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Caesar Dressing': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sahitya: {
+    weight: ['regular', '700'],
+    fallback: 'serif'
+  },
+  Stylish: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Nova Cut': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Purple Purse': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Devonshire: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Smokum: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Almendra Display': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Galindo: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Preahvihear: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Siemreap: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Irish Grover': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gupter: {
+    weight: ['regular', '500', '700'],
+    fallback: 'serif'
+  },
+  'Meie Script': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Libre Barcode 128': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Keania One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'GFS Neohellenic': {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Cute Font': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Londrina Shadow': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'East Sea Dokdo': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Libre Barcode 39 Extended': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Risque: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Lancelot: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Libre Caslon Display': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Plaster: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Goblin One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Asset: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Almendra SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Jacques Francois': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Jolly Lodger': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Lexend Exa': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Molle: {
+    weight: ['italic'],
+    fallback: 'handwriting'
+  },
+  Kavivanar: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Kirang Haerang': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Piedra: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Atomic Age': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Kulim Park': {
+    weight: ['200', '200italic', '300', '300italic', 'regular', 'italic', '600', '600italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  'Libre Barcode 39 Text': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IM Fell Great Primer SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Tenali Ramakrishna': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Butcherman: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Dr Sugiyama': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Geostar Fill': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Romanesco: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Libre Barcode 128 Text': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Sunshiney: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Kumar One Outline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Peddana: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Baloo Bhai 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  'Kdam Thmor': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Ruge Boogie': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Freehand: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bonbon: {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Caladea: {
+    weight: ['regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Single Day': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Baloo Tamma 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  'Inria Sans': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'sans-serif'
+  },
+  Hanalei: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Emblema One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Seymour One': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Miss Fajardose': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Sevillana: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Inria Serif': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'serif'
+  },
+  'Bungee Outline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Metal: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'IM Fell Double Pica SC': {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  'Lexend Giga': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'ZCOOL KuaiLe': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Astloch: {
+    weight: ['regular', '700'],
+    fallback: 'display'
+  },
+  'Mr Bedfort': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Macondo: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Butterfly Kids': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Supermercado One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Fruktur: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Taprom: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Lacquer: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Black And White Picture': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Bigelow Rules': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Beth Ellen': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Sofadi One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Combo: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Bellota: {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  Federant: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Miltonian Tattoo': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Londrina Sketch': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Suwannaphum: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Bungee Hairline': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Fascinate: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Erica One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Nova Oval': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Baloo Da 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  'Sulphur Point': {
+    weight: ['300', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Aubrey: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gidugu: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Bellota Text': {
+    weight: ['300', '300italic', 'regular', 'italic', '700', '700italic'],
+    fallback: 'display'
+  },
+  'Nova Script': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Miltonian: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Gayathri: {
+    weight: ['100', 'regular', '700'],
+    fallback: 'sans-serif'
+  },
+  Geostar: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Moulpali: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Passero One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Stalinist One': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Long Cang': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  Solway: {
+    weight: ['300', 'regular', '500', '700', '800'],
+    fallback: 'serif'
+  },
+  'Zhi Mang Xing': {
+    weight: ['regular'],
+    fallback: 'handwriting'
+  },
+  'Baloo Tammudu 2': {
+    weight: ['regular', '500', '600', '700', '800'],
+    fallback: 'display'
+  },
+  Chenla: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Suravaram: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Fasthand: {
+    weight: ['regular'],
+    fallback: 'serif'
+  },
+  Kenia: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Dhurjati: {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Lexend Tera': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'BioRhyme Expanded': {
+    weight: ['200', '300', 'regular', '700', '800'],
+    fallback: 'serif'
+  },
+  'Turret Road': {
+    weight: ['200', '300', 'regular', '500', '700', '800'],
+    fallback: 'display'
+  },
+  Warnes: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Viaoda Libre': {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  'Lexend Mega': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  Bahianita: {
+    weight: ['regular'],
+    fallback: 'display'
+  },
+  Manrope: {
+    weight: ['200', '300', 'regular', '500', '600', '700', '800'],
+    fallback: 'sans-serif'
+  },
+  'Lexend Zetta': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  },
+  'Lexend Peta': {
+    weight: ['regular'],
+    fallback: 'sans-serif'
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (fonts);
+
+/***/ }),
+
+/***/ "./src/components/typography/index.js":
+/*!********************************************!*\
+  !*** ./src/components/typography/index.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GoogleFonts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GoogleFonts */ "./src/components/typography/GoogleFonts.js");
+/* harmony import */ var _unit_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/* eslint-disable no-undef */
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+var __ = wp.i18n.__;
+var useState = wp.element.useState;
+var _wp$components = wp.components,
+    BaseControl = _wp$components.BaseControl,
+    SelectControl = _wp$components.SelectControl,
+    TextControl = _wp$components.TextControl,
+    ComboboxControl = _wp$components.ComboboxControl,
+    Tooltip = _wp$components.Tooltip,
+    Popover = _wp$components.Popover;
+
+var TypographyControls = function TypographyControls(props) {
+  // eslint-disable-next-line no-unused-vars
+  var _useState = useState([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      filteredItems = _useState2[0],
+      setFilteredItems = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isVisible = _useState4[0],
+      setIsVisible = _useState4[1];
+
+  var _props$options = props.options,
+      options = _props$options === void 0 ? {} : _props$options,
+      _props$label = props.label,
+      label = _props$label === void 0 ? __('Typography Options', 'post-type-archive-mapping') : _props$label,
+      _props$showFontFamily = props.showFontFamily,
+      showFontFamily = _props$showFontFamily === void 0 ? false : _props$showFontFamily,
+      _props$showFontSize = props.showFontSize,
+      showFontSize = _props$showFontSize === void 0 ? false : _props$showFontSize,
+      _props$showFontWeight = props.showFontWeight,
+      showFontWeight = _props$showFontWeight === void 0 ? false : _props$showFontWeight,
+      _props$showTextTransf = props.showTextTransform,
+      showTextTransform = _props$showTextTransf === void 0 ? false : _props$showTextTransf,
+      _props$showLineHeight = props.showLineHeight,
+      showLineHeight = _props$showLineHeight === void 0 ? false : _props$showLineHeight,
+      _props$showLetterSpac = props.showLetterSpacing,
+      showLetterSpacing = _props$showLetterSpac === void 0 ? false : _props$showLetterSpac; // Default Fonts + Google Fonts.
+
+  var fontOptions = [];
+
+  for (var fontKey in ptam_globals.fonts) {
+    fontOptions.push({
+      value: fontKey,
+      label: ptam_globals.fonts[fontKey]
+    });
+  }
+
+  Object.keys(_GoogleFonts__WEBPACK_IMPORTED_MODULE_0__["default"]).forEach(function (k) {
+    fontOptions.push({
+      value: k,
+      label: k
+    });
+  });
+  var weight = [{
+    value: '100',
+    label: '100'
+  }, {
+    value: '200',
+    label: '200'
+  }, {
+    value: '300',
+    label: '300'
+  }, {
+    value: '400',
+    label: '400'
+  }, {
+    value: '500',
+    label: '500'
+  }, {
+    value: '600',
+    label: '600'
+  }, {
+    value: '700',
+    label: '700'
+  }, {
+    value: '800',
+    label: '800'
+  }, {
+    value: '900',
+    label: '900'
+  }];
+  var transform = [{
+    value: '',
+    label: __('Default', 'post-type-archive-mapping')
+  }, {
+    value: 'uppercase',
+    label: __('Uppercase', 'post-type-archive-mapping')
+  }, {
+    value: 'lowercase',
+    label: __('Lowercase', 'post-type-archive-mapping')
+  }, {
+    value: 'capitalize',
+    label: __('Capitalize', 'post-type-archive-mapping')
+  }, {
+    value: 'initial',
+    label: __('Normal', 'post-type-archive-mapping')
+  }];
+
+  var onFontParamChanged = function onFontParamChanged(object) {
+    var fontObject = Object.assign(options, object);
+    props.onChange(fontObject);
+  };
+  /**
+   * Toggle whether the color popup is showing.
+   */
+
+
+  var toggleVisible = function toggleVisible() {
+    setIsVisible(true);
+  };
+  /**
+   * Close color popup if visible.
+   */
+
+
+  var toggleClose = function toggleClose() {
+    if (isVisible) {
+      setIsVisible(false);
+    }
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !isVisible && /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-typography-picker-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-typography-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-typography__item components-typography-option-picker__option",
+    onClick: function onClick() {
+      toggleVisible();
+    },
+    "aria-label": __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-typography-picker-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "ptam-typography-component-label"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
+    text: __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "aria-expanded": isVisible,
+    className: "components-typography__item components-typography-option-picker__option",
+    onClick: function onClick() {
+      toggleClose();
+    },
+    "aria-label": __('Typography Options', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(Popover, {
+    position: "top left",
+    className: "ptam-component-color-picker",
+    onClose: toggleClose
+  }, /*#__PURE__*/React.createElement("div", {
+    className: 'components-ptam-typography-weight-transform'
+  }, showFontWeight && 'fontWeight' in options && /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Weight', 'post-type-archive-mapping'),
+    value: options.fontWeight,
+    options: weight,
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        fontWeight: value
+      });
+    },
+    className: "components-base-control"
+  }), showTextTransform && 'textTransform' in options && /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Transform', 'post-type-archive-mapping'),
+    value: options.textTransform,
+    options: transform,
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        textTransform: value
+      });
+    },
+    className: "components-base-control"
+  })), showFontFamily && 'fontFamily' in options && /*#__PURE__*/React.createElement(BaseControl, {
+    className: 'ptam-font-family-shortcuts'
+  }, /*#__PURE__*/React.createElement(ComboboxControl, {
+    label: __('Font Family', 'post-type-archive-mapping'),
+    value: options.fontFamily,
+    options: fontOptions,
+    onInputChange: function onInputChange(inputValue) {
+      return setFilteredItems(fontOptions.filter(function (option) {
+        return option.label.toLowerCase().startsWith(inputValue.toLowerCase());
+      }));
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onFilterValueChange: function onFilterValueChange(inputValue) {},
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        fontFamily: value
+      });
+    }
+  })), showFontSize && 'fontSizeUnit' in options && 'fontSize' in options && /*#__PURE__*/React.createElement(BaseControl, null, /*#__PURE__*/React.createElement(_unit_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: __('Font Size', 'post-type-archive-mapping'),
+    value: options.fontSizeUnit,
+    units: ['px', 'em', 'rem'],
+    onClick: function onClick(value) {
+      onFontParamChanged({
+        fontSizeUnit: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-typography-control__inputs"
+  }, /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: options.fontSize,
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        fontSize: value
+      });
+    },
+    min: 1,
+    autoComplete: "off"
+  }))), showLineHeight && 'lineHeight' in options && 'lineHeightUnit' in options && /*#__PURE__*/React.createElement(BaseControl, null, /*#__PURE__*/React.createElement(_unit_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: __('Line Height', 'post-type-archive-mapping'),
+    value: options.lineHeightUnit,
+    units: ['px', 'em', 'rem'],
+    onClick: function onClick(value) {
+      onFontParamChanged({
+        lineHeightUnit: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-typography-control__inputs"
+  }, /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: options.lineHeight,
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        lineHeight: value
+      });
+    },
+    min: 0,
+    step: 0.1,
+    autoComplete: "off"
+  }))), showLetterSpacing && 'letterSpacing' in options && 'letterSpacingUnit' in options && /*#__PURE__*/React.createElement(BaseControl, null, /*#__PURE__*/React.createElement(_unit_picker__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: __('Letter Spacing', 'post-type-archive-mapping'),
+    value: 'em',
+    units: ['em'],
+    onClick: function onClick() {
+      return false;
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-typography-control__inputs"
+  }, /*#__PURE__*/React.createElement(TextControl, {
+    type: 'number',
+    value: options.letterSpacing,
+    placeholder: "0.01",
+    onChange: function onChange(value) {
+      onFontParamChanged({
+        letterSpacing: value
+      });
+    },
+    min: -1,
+    step: 0.01,
+    autoComplete: "off"
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TypographyControls);
+
+/***/ }),
+
+/***/ "./src/components/unit-picker/editor.scss":
+/*!************************************************!*\
+  !*** ./src/components/unit-picker/editor.scss ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/unit-picker/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/unit-picker/index.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.scss */ "./src/components/unit-picker/editor.scss");
+/**
+ * Unit Picker Component.
+ * Credit: Forked from @GenerateBlocks
+ */
+// Import CSS
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    sprintf = _wp$i18n.sprintf,
+    _x = _wp$i18n._x;
+var _wp$components = wp.components,
+    ButtonGroup = _wp$components.ButtonGroup,
+    Button = _wp$components.Button,
+    Tooltip = _wp$components.Tooltip;
+
+var UnitChooser = function UnitChooser(props) {
+  var label = props.label,
+      value = props.value,
+      _onClick = props.onClick,
+      units = props.units;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-units-control-header__units"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-units-control-label__units"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    className: "components-ptam-control__units"
+  }, /*#__PURE__*/React.createElement(ButtonGroup, {
+    className: "components-ptam-control-buttons__units",
+    "aria-label": __('Select Units', 'post-type-archive-mapping')
+  }, units.map(function (unit) {
+    var unitName = unit;
+
+    if ('px' === unit) {
+      unitName = _x('Pixel', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('em' === unit) {
+      unitName = _x('Em', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('%' === unit) {
+      unitName = _x('Percentage', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('rem' === unit) {
+      unitName = _x('Rem', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    if ('deg' === unit) {
+      unitName = _x('Degree', 'A size unit for CSS markup', 'post-type-archive-mapping');
+    }
+
+    return /*#__PURE__*/React.createElement(Tooltip, {
+      text: sprintf(
+      /* translators: Unit type (px, em, %) */
+      __('%s Units', 'post-type-archive-mapping'), unitName),
+      key: unit
+    }, /*#__PURE__*/React.createElement(Button, {
+      key: unit,
+      className: 'components-ptam-control-button__units--' + unit,
+      isSmall: true,
+      isPrimary: value === unit,
+      "aria-pressed": value === unit,
+      "aria-label": sprintf(
+      /* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
+      __('%s Units', 'post-type-archive-mapping'), unitName),
+      onClick: function onClick() {
+        return _onClick(unit);
+      }
+    }, unit));
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UnitChooser);
+
+/***/ }),
+
+/***/ "./src/icons/columns-icon.js":
+/*!***********************************!*\
+  !*** ./src/icons/columns-icon.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ColumnsIcon = function ColumnsIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M10 18h5V5h-5v13zm-6 0h5V5H4v13zM16 5v13h5V5h-5z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ColumnsIcon);
+
+/***/ }),
+
+/***/ "./src/icons/format-text-left-icon.js":
+/*!********************************************!*\
+  !*** ./src/icons/format-text-left-icon.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FormatTextLeftIcon = function FormatTextLeftIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormatTextLeftIcon);
+
+/***/ }),
+
+/***/ "./src/icons/full-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/full-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var FullIcon = function FullIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 15h16v-2H4v2zm0 4h16v-2H4v2zm0-8h16V9H4v2zm0-6v2h16V5H4z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FullIcon);
+
+/***/ }),
+
+/***/ "./src/icons/grid-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/grid-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var GridIcon = function GridIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("g", {
+    fillRule: "evenodd"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (GridIcon);
+
+/***/ }),
+
+/***/ "./src/icons/index.js":
+/*!****************************!*\
+  !*** ./src/icons/index.js ***!
+  \****************************/
+/*! exports provided: ColumnsIcon, FullIcon, GridIcon, ListIcon, FormatTextLeftIcon, OrderedListIcon, UnorderedListIcon, TypographyIcon */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _columns_icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./columns-icon */ "./src/icons/columns-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColumnsIcon", function() { return _columns_icon__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _full_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./full-icon */ "./src/icons/full-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FullIcon", function() { return _full_icon__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _grid_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./grid-icon */ "./src/icons/grid-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GridIcon", function() { return _grid_icon__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _list_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list-icon */ "./src/icons/list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ListIcon", function() { return _list_icon__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./format-text-left-icon */ "./src/icons/format-text-left-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "FormatTextLeftIcon", function() { return _format_text_left_icon__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ordered-list-icon */ "./src/icons/ordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OrderedListIcon", function() { return _ordered_list_icon__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./unordered-list-icon */ "./src/icons/unordered-list-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UnorderedListIcon", function() { return _unordered_list_icon__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _typography_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./typography-icon */ "./src/icons/typography-icon.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TypographyIcon", function() { return _typography_icon__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+
+/**
+ * Icons from Material UI Icons: https://fonts.google.com/icons?selected=Material+Icons
+ */
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/icons/list-icon.js":
+/*!********************************!*\
+  !*** ./src/icons/list-icon.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ListIcon = function ListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ListIcon);
+
+/***/ }),
+
+/***/ "./src/icons/ordered-list-icon.js":
+/*!****************************************!*\
+  !*** ./src/icons/ordered-list-icon.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var OrderedListIcon = function OrderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (OrderedListIcon);
+
+/***/ }),
+
+/***/ "./src/icons/typography-icon.js":
+/*!**************************************!*\
+  !*** ./src/icons/typography-icon.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var TypographyIcon = function TypographyIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    "data-prefix": "fad",
+    "data-icon": "font",
+    className: "svg-inline--fa fa-font fa-w-14",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 448 512"
+  }, /*#__PURE__*/React.createElement("g", {
+    className: "fa-group"
+  }, /*#__PURE__*/React.createElement("path", {
+    className: "fa-secondary",
+    fill: "currentColor",
+    d: "M432 416H304a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm-288 0H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z",
+    opacity: "0.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "fa-primary",
+    fill: "currentColor",
+    d: "M147.72 352h152.56l23.31 64h85L277.87 53.69C273.81 41.72 260.22 32 247.59 32h-47.18c-12.63 0-26.22 9.72-30.29 21.69L39.41 416h85zM224 142.52L271.16 272h-94.32z"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TypographyIcon);
+
+/***/ }),
+
+/***/ "./src/icons/unordered-list-icon.js":
+/*!******************************************!*\
+  !*** ./src/icons/unordered-list-icon.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var UnorderedListIcon = function UnorderedListIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 0 24 24",
+    width: "24px"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UnorderedListIcon);
 
 /***/ }),
 
@@ -19177,6 +26039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_custom_post_one_block_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block/custom-post-one/block.js */ "./src/block/custom-post-one/block.js");
 /* harmony import */ var _block_term_grid_block_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block/term-grid/block.js */ "./src/block/term-grid/block.js");
 /* harmony import */ var _block_featured_posts_block_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block/featured-posts/block.js */ "./src/block/featured-posts/block.js");
+/* harmony import */ var _block_child_posts_grid_block_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block/child-posts-grid/block.js */ "./src/block/child-posts-grid/block.js");
 /**
  * Gutenberg Blocks
  *
@@ -19192,6 +26055,8 @@ __webpack_require__.r(__webpack_exports__);
  // Import term grid block.
 
  // Import Featured Posts Block.
+
+ // Import Hierarchy Block.
 
 /***/ }),
 

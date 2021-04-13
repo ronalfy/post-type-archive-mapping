@@ -584,8 +584,8 @@ class Posts {
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'uniqueId' => array(
-						'type' => 'string',
+					'uniqueId'                           => array(
+						'type'    => 'string',
 						'default' => '',
 					),
 				),

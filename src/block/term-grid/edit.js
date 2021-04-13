@@ -60,10 +60,16 @@ class PTAM_Term_Grid extends Component {
 		this.setState({
 			loading: true,
 		});
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		axios
 			.post(ptam_globals.rest_url + `ptam/v2/get_tax_terms`, {
 				taxonomy: taxonomy,
-			})
+			}, config )
 			.then((response) => {
 				if (Object.keys(response.data).length > 0) {
 					termsList.push({
@@ -106,6 +112,12 @@ class PTAM_Term_Grid extends Component {
 		this.setState({
 			termLoading: true,
 		});
+		const config = {
+			headers: {
+				// eslint-disable-next-line no-undef
+				'X-WP-Nonce': ptam_globals.rest_nonce,
+			},
+		};
 		axios
 			.post(ptam_globals.rest_url + `ptam/v2/get_tax_term_data`, {
 				terms: termsToRetrieve,
@@ -116,7 +128,7 @@ class PTAM_Term_Grid extends Component {
 				backgroundImageSource: backgroundImageSource,
 				backgroundImageFallback: backgroundImageFallback,
 				backgroundImageMeta: backgroundImageMeta,
-			})
+			}, config )
 			.then((response) => {
 				if (Object.keys(response.data).length > 0) {
 					this.setState({

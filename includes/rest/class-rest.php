@@ -28,63 +28,93 @@ class Rest {
 			'ptam/v2',
 			'/get_terms',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_all_terms' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_all_terms' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_posts',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_posts' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_posts' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_taxonomies',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_taxonomies' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_taxonomies' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_images',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_image' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_image' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_tax_terms',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_tax_terms' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_tax_terms' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_tax_term_data',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_tax_term_data' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_tax_term_data' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 		register_rest_route(
 			'ptam/v2',
 			'/get_featured_posts',
 			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'get_featured_posts' ),
-				'permission_callback' => '__return_true',
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_featured_posts' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
+			)
+		);
+
+		/**
+		 * Get hierarchical items for display in a combobox.
+		 *
+		 * @since 6.0.0
+		 */
+		register_rest_route(
+			'ptam/v2',
+			'/get_hierarchical_items',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_hierarchical_items' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
+			)
+		);
+
+		/**
+		 * Retrieve hierarchical posts for use in the hierarchy block.
+		 *
+		 * @since 6.0.0
+		 */
+		register_rest_route(
+			'ptam/v2',
+			'/get_hierarchical_posts',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_hierarchical_posts' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
 	}
@@ -629,5 +659,116 @@ class Rest {
 			}
 		}
 		return $clauses;
+	}
+
+
+
+	/**
+	 * Return hierarchical posts based on a post type.
+	 *
+	 * @since 6.0.0
+	 *
+	 * @param WP_REST_Request $item_data The item data.
+	 */
+	public function get_hierarchical_items( $item_data ) {
+		if ( ! isset( $item_data['post_type'] ) ) {
+			return array();
+		}
+		$post_type          = sanitize_text_field( $item_data['post_type'] );
+		$hierarchical_items = Functions::get_hierarchical_items_from_post_type( $post_type );
+		return $hierarchical_items ? $hierarchical_items : array();
+	}
+
+	/**
+	 * Return posts based on post type and hierarchy.
+	 *
+	 * @since 6.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function get_hierarchical_posts( $post_data ) {
+		$order          = $post_data['order'];
+		$orderby        = $post_data['orderby'];
+		$post_type      = $post_data['post_type'];
+		$posts_per_page = $post_data['posts_per_page'];
+		$image_size     = $post_data['image_size'];
+		$post_parent    = $post_data['post_parent'];
+		$language       = $post_data['language'];
+		$hierarchy      = $post_data['hierarchy'];
+		$default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
+
+		// Set post parent to zero if hierarchy is parents only.
+		if ( 'parents' === $hierarchy ) {
+			$post_parent = 0;
+		}
+
+		$post_args = array(
+			'post_type'      => $post_type,
+			'post_status'    => 'publish',
+			'order'          => $order,
+			'orderby'        => $orderby,
+			'posts_per_page' => $posts_per_page,
+			'post_parent'    => $post_parent,
+		);
+
+		// WPML Compatability.
+		global $sitepress;
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $language );
+		}
+		$query = new \WP_Query( $post_args );
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $sitepress->get_default_language() );
+		}
+		$posts = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				global $post;
+				$query->the_post();
+				$thumbnail = get_the_post_thumbnail_url( $post->ID, $image_size );
+				if ( empty( $thumbnail ) ) {
+					$maybe_image = wp_get_attachment_image_src( $default_image, $image_size );
+					if ( $maybe_image ) {
+						$thumbnail = $maybe_image[0];
+					} else {
+						$thumbnail = '';
+					}
+				}
+				$post->featured_image_src = $thumbnail;
+
+				// Get author information.
+				$display_name = get_the_author_meta( 'display_name', $post->post_author );
+				$author_url   = get_author_posts_url( $post->post_author );
+
+				$post->author_info               = new \stdClass();
+				$post->author_info->display_name = $display_name;
+				$post->author_info->author_link  = $author_url;
+				$post->link                      = get_permalink( $post->ID );
+
+				if ( empty( $post->post_excerpt ) ) {
+					$post->post_excerpt = apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
+				}
+
+				if ( ! $post->post_excerpt ) {
+					$post->post_excerpt = null;
+				}
+
+				$post->post_excerpt = wp_kses_post( $post->post_excerpt );
+				$post->post_content = apply_filters( 'ptam_the_content', $post->post_content );
+				$posts[]            = $post;
+			}
+		}
+		return $posts;
+	}
+
+	/**
+	 * Make sure users can edit posts to access REST API.
+	 *
+	 * @since 6.0.0
+	 */
+	public function permissions_check() {
+		if ( current_user_can( 'edit_posts' ) ) {
+			return true;
+		}
+		return false;
 	}
 }

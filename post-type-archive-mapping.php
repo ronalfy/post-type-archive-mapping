@@ -22,6 +22,7 @@ define( 'PTAM_SPONSORS_URL', 'https://github.com/sponsors/MediaRon' );
 require_once 'autoloader.php';
 
 use PTAM\Includes\Admin\Options as Options;
+use PTAM\Includes\Functions as Functions;
 
 /**
  * Main plugin class.
@@ -87,17 +88,21 @@ class PostTypeArchiveMapping {
 			$this->rest = new PTAM\Includes\Rest\Rest();
 			$this->rest->run();
 
-			// Register Custom Post Type Block.
+			// Register Custom Post Type Query Block.
 			$this->cpt_block_one = new PTAM\Includes\Blocks\Custom_Post_Types\Custom_Post_Types();
 			$this->cpt_block_one->run();
 
-			// Register Term Grid Block.
+			// Register Term Grid Query Block.
 			$this->term_grid = new PTAM\Includes\Blocks\Term_Grid\Terms();
 			$this->term_grid->run();
 
-			// Register Featured Post Block.
+			// Register Featured Post Query Block.
 			$this->featured_posts = new PTAM\Includes\Blocks\Featured_Posts\Posts();
 			$this->featured_posts->run();
+
+			// Register the Parent/Child block.
+			$this->child_posts_grid = new PTAM\Includes\Blocks\Child_Posts_Grid\Hierarchy();
+			$this->child_posts_grid->run();
 
 			// Gutenberg Helper which sets the block categories.
 			$this->gutenberg = new PTAM\Includes\Admin\Gutenberg();
@@ -109,6 +114,12 @@ class PostTypeArchiveMapping {
 			// Page columns.
 			$this->page_columns = new PTAM\Includes\Admin\Page_Columns();
 			$this->page_columns->run();
+		}
+
+		// Add excerpts and featured images.
+		if ( true === Options::is_excerpts_enabled() || true === Options::is_featured_images_enabled() ) {
+			$this->post_type_supports = new PTAM\Includes\Admin\Post_Type_Args();
+			$this->post_type_supports->run();
 		}
 
 		// Yoast Compatibility.
@@ -142,6 +153,8 @@ class PostTypeArchiveMapping {
 
 			// 404 page detection.
 			add_filter( 'template_include', array( $this, 'maybe_force_404_template' ), 1 );
+
+			Functions::get_hierarchical_items_from_post_type( 'page' );
 		}
 	} //end init
 

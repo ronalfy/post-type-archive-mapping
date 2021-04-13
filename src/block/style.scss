@@ -2,10 +2,10 @@
  * Post grid styles
  * Loads on front end and back end
  */
- @import '../common';
+@import "../common";
 
- .entry-content {
-	 .ptam-block-post-grid-title {
+.entry-content {
+	.ptam-block-post-grid-title {
 		margin-top: 0;
 		margin-bottom: 15px;
 		font-size: 28px;
@@ -21,11 +21,11 @@
 		a {
 			color: #000;
 			box-shadow: none;
-			transition: .3s ease;
+			transition: 0.3s ease;
 		}
 	}
- }
- .ptam-block-post-grid {
+}
+.ptam-block-post-grid {
 	margin: 0 0 1.2em 0;
 	position: relative;
 
@@ -93,10 +93,6 @@
 		}
 	}
 
-	.ptam-post-grid-items .has_thumb .ptam-block-post-grid-image {
-
-	}
-
 	.ptam-block-post-grid-image {
 		margin: 10px 0;
 		img {
@@ -133,7 +129,7 @@
 		a {
 			color: #000;
 			box-shadow: none;
-			transition: .3s ease;
+			transition: 0.3s ease;
 		}
 	}
 
@@ -188,7 +184,7 @@
 	.ptam-block-post-grid-link {
 		display: inline-block;
 		box-shadow: none;
-		transition: .3s ease;
+		transition: 0.3s ease;
 		font-weight: bold;
 		color: #000;
 
@@ -300,9 +296,9 @@ button.ptam-media-alt-reset.components-button {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		background: #FFF;
+		background: #fff;
 		padding: 10px 20px;
-		border: 1px solid #EEE;
+		border: 1px solid #eee;
 		color: #000;
 
 		.woocommerce-tag__remove {
@@ -387,7 +383,7 @@ button.ptam-media-alt-reset.components-button {
 		min-height: 300px;
 		width: 100%;
 		background: #24292d;
-		color: #FFF;
+		color: #fff;
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
@@ -409,7 +405,7 @@ button.ptam-media-alt-reset.components-button {
 		.ptam-term-grid-button {
 			display: inline-block;
 			background-color: #32373c;
-			color: #FFF;
+			color: #fff;
 			border: none;
 			border-radius: 28px;
 			font-weight: 500;
@@ -426,7 +422,7 @@ button.ptam-media-alt-reset.components-button {
 			transition: background-color 0.5s ease;
 		}
 		h2 {
-			color: #FFFFFF;
+			color: #ffffff;
 			font-size: 2.2em;
 		}
 		.ptam-term-grid-item-description {
@@ -446,7 +442,7 @@ button.ptam-media-alt-reset.components-button {
 	}
 	.ptam-featured-post-item {
 		padding-bottom: 1.3em;
-		border-bottom: 1px solid #DDD;
+		border-bottom: 1px solid #ddd;
 		&:last-child {
 			border-bottom: 0;
 		}
@@ -481,8 +477,8 @@ button.ptam-media-alt-reset.components-button {
 						text-decoration: none;
 					}
 					&:before {
-						font-family: 'PTAM';
-						content: '\e71e';
+						font-family: "PTAM";
+						content: "\e71e";
 						display: inline-block;
 						margin-right: 2px;
 					}
@@ -491,8 +487,8 @@ button.ptam-media-alt-reset.components-button {
 			.post-date {
 				color: #6c6c6c;
 				&:before {
-					font-family: 'PTAM';
-					content: '\e789';
+					font-family: "PTAM";
+					content: "\e789";
 					display: inline-block;
 					margin-right: 2px;
 				}
@@ -500,8 +496,8 @@ button.ptam-media-alt-reset.components-button {
 			.post-comments {
 				color: #000;
 				&:before {
-					font-family: 'PTAM';
-					content: '\e7d6';
+					font-family: "PTAM";
+					content: "\e7d6";
 					display: inline-block;
 					margin-right: 2px;
 				}
@@ -575,4 +571,362 @@ body.has-blocks .fl-post-content .ptam-pagination {
 .ptam-term-select .components-base-control__field,
 .ptam-term-exclude .components-base-control__field {
 	display: none;
+}
+
+/* Dimensions Component */
+.components-ptam-dimensions-control__inputs,
+.components-ptam-dimensions-control__input-labels {
+	display: flex;
+}
+
+.components-ptam-dimensions-control input[type="number"] {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	height: 30px;
+	margin: 0 -1px 0 0;
+	padding: 5px;
+	width: calc(25% - 5px);
+}
+
+.components-ptam-dimensions-control input[type="number"]:not(:first-child) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.components-ptam-dimensions-control__input-labels > span {
+	width: calc(25% - 5px);
+	font-size: 11px;
+}
+
+.components-ptam-dimensions-control__input-labels > span:last-child {
+	width: 30px;
+}
+
+.components-ptam-dimensions-control_sync.components-button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	height: auto;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	padding: 0;
+	text-align: center;
+	text-shadow: none;
+	width: 30px;
+	height: 30px;
+}
+
+.components-ptam-dimensions-control_sync.components-button:not(.is-primary) {
+	background: #fff;
+	border: 1px solid #8d96a0;
+	color: #555d66;
+}
+
+.components-ptam-dimensions-control_sync.components-button svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+}
+
+.components-ptam-dimensions-control_sync.components-button:hover,
+.components-ptam-dimensions-control_sync.components-button:focus {
+	box-shadow: none !important;
+}
+
+/* Unit Picker Component - Forked from @GenerateBlocks */
+.components-ptam-units-control-header__units {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+	align-items: center;
+}
+
+.components-ptam-control__units {
+	.components-ptam-control-buttons__units {
+		button.components-button {
+			background: #fff;
+			box-shadow: none !important;
+			color: #929da7;
+			font-size: 10px;
+			padding: 0 5px;
+			position: relative;
+			text-align: center;
+			text-shadow: none;
+			border: 0;
+			border-radius: 0 !important;
+			line-height: 20px;
+			padding: 0 5px;
+			height: auto;
+
+			&.is-primary {
+				background: #fff !important;
+				color: #000 !important;
+				cursor: default;
+				z-index: 1;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+/* Color Component (forked from @GenerateBlocks) */
+.ptam-component-color-picker-wrapper {
+	> .components-base-control__field {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.components-color-palette__item-wrapper {
+			margin: 0;
+		}
+	}
+}
+
+.ptam-component-color-picker,
+.ptam-component-gradient-picker {
+	& > .components-base-control:first-child {
+		margin-bottom: 0;
+	}
+
+	.components-color-picker__inputs-wrapper {
+		min-width: auto;
+	}
+
+	.ptam-component-color-picker-palette {
+		padding: 16px;
+		margin-top: 10px;
+
+		.components-circular-option-picker {
+			display: flex;
+			flex-wrap: wrap;
+
+			.components-circular-option-picker__option-wrapper {
+				margin: 0 8px 8px 0;
+			}
+		}
+	}
+
+	.components-base-control__field,
+	.components-color-palette {
+		margin: 0;
+	}
+
+	.components-color-picker {
+		padding: 5px;
+	}
+
+	.components-color-picker__inputs-toggle {
+		display: none;
+	}
+
+	.components-color-picker__body {
+		padding-bottom: 0;
+	}
+
+	.components-popover__content {
+		padding: 10px;
+		width: 300px;
+	}
+
+	.components-color-picker__inputs-fields {
+		margin-right: 0;
+	}
+
+	.components-color-clear-color {
+		margin: 0 16px;
+	}
+}
+
+.ptam-component-color-opacity {
+	display: flex;
+	padding: 0 16px;
+	margin: 10px 0;
+
+	svg {
+		width: 22px;
+		height: 22px;
+
+		color: #585aa8;
+	}
+
+	.components-range-control {
+		flex-grow: 1;
+		padding-left: 5px;
+	}
+}
+
+.ptam-color-picker-area {
+	width: 28px;
+	height: 28px;
+}
+
+/* Gradients Component (forked from @GenerateBlocks) */
+.ptam-component-gradient-picker {
+	.components-popover__content {
+		width: 350px;
+		padding: 15px;
+	}
+	.components-base-control__label {
+		display: block;
+		margin-bottom: 20px;
+	}
+}
+.ptam-component-gradient-picker-wrapper
+	button.components-color-palette__item.components-circular-option-picker__option {
+	box-shadow: none;
+	&:hover {
+		box-shadow: none !important;
+	}
+}
+
+/* Responsive Tabs Component (forked from @GenerateBlocks)*/
+.ptam-responsive-tabs {
+	position: sticky;
+	top: 0;
+	background: #fff;
+	border-top: 1px solid #e2e4e7;
+	border-bottom: 1px solid #e2e4e7;
+	z-index: 10;
+	display: flex;
+
+	button {
+		flex-grow: 1;
+		justify-content: center;
+		padding: 10px;
+		height: unset;
+		border-radius: unset;
+		outline: 0 !important;
+
+		&.is-pressed:not(:disabled),
+		&:focus:not(:disabled),
+		&:active:not(:disabled),
+		&:hover:not(:disabled) {
+			box-shadow: unset !important;
+			background: #007cba !important;
+			color: #fff !important;
+		}
+	}
+}
+
+.block-editor-block-inspector .ptam-responsive-tabs + .components-panel__body {
+	border-top: 0;
+}
+
+/* Normal|Hover tabs - Forked from @GenerateBlocks */
+.ptam-control-tabs .components-tab-panel__tabs {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #e8eaeb;
+}
+
+.ptam-control-tabs .components-tab-panel__tabs button {
+	padding: 8px;
+	height: auto;
+	margin: 0;
+	margin-bottom: -1px;
+	cursor: pointer;
+	border: none;
+	border: 0;
+	border-radius: 0;
+	outline-offset: -1px;
+	flex: 1;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 400;
+
+	&.active-tab {
+		position: relative;
+		z-index: 1;
+		background: #585aa8 !important;
+		color: #fff !important;
+		box-shadow: 0 0 0 !important;
+	}
+}
+
+/* Typography Component Controls */
+.ptam-component-typography-picker-wrapper > div {
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.ptam-typography-component-label {
+	&~button {
+		cursor: pointer;
+		svg {
+			width: 24px;
+			height: 24px;
+			color: darken( #585aa8, 15%);
+
+			&:hover {
+				color: #585aa8;
+			}
+		}
+	}
+}
+.edit-post-settings-sidebar__panel-block .components-panel__body .components-base-control.ptam-font-family-shortcuts {
+    margin-bottom: 2px;
+}
+
+.components-ptam-typography-control__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.components-ptam-typography-control__inputs + .components-ptam-typography-control__header {
+    margin-top: 25px;
+}
+
+.components-ptam-typography-control__inputs {
+    display: flex;
+    justify-content: space-between;
+
+	button.components-button {
+	    line-height: unset;
+	    height: unset;
+	}
+
+	.components-base-control {
+		margin-bottom: 0;
+	}
+}
+
+.edit-post-settings-sidebar__panel-block .components-panel__body .components-ptam-typography-control__inputs .components-base-control,
+.components-ptam-typography-control__inputs .components-base-control .components-base-control__field {
+    margin-bottom: 0;
+}
+
+.components-ptam-typography-weight-transform {
+    display: flex;
+    justify-content: space-between;
+}
+
+.components-ptam-typography-weight-transform > div {
+    width: 48%;
+}
+
+.components-ptam-typography-control__units > .components-button-group .components-button.is-button:first-child:last-child {
+    border-radius: 3px;
+}
+
+.components-ptam-typography-control__inputs button {
+    margin-left: 10px;
+}
+
+.components-ptam-typography-control__inputs .components-base-control {
+    flex-grow: 1;
+}
+
+
+
+/* Hierarchical Grid Items */
+.ptam-hierarchical-grid-item,
+.ptam-hierarchical-grid-item * {
+	transition: all ease-in-out 0.5s;
 }
