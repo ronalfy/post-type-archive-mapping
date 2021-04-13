@@ -70,6 +70,8 @@ registerBlockType( 'ptam/child-posts-grid', {
 		__( 'post', 'poost-type-archive-mapping' ),
 		__( 'parent', 'post-type-archive-mapping' ),
 		__( 'hierarchy', 'post-type-archive-mapping' ),
+		__( 'grid', 'post-type-archive-mapping' ),
+		__( 'child', 'post-type-archive-mapping' ),
 
 	],
 	supports: {

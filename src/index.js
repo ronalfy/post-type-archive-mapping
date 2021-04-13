@@ -13,4 +13,4 @@ import './block/custom-post-one/block.js'; // Import main block.
 import './block/term-grid/block.js'; // Import term grid block.
 import './block/featured-posts/block.js'; // Import Featured Posts Block.
 import './block/child-posts-grid/block.js'; // Import Hierarchy Block.
-import './block/child-posts-columns/block.js'; // Import Hierarchy Block.
+import './block/child-posts-list/block.js'; // Import Hierarchy Block.

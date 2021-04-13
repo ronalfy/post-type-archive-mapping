@@ -25,9 +25,9 @@ const validAlignments = [ 'left', 'center', 'right', 'wide', 'full' ];
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'ptam/child-posts-columns', {
+registerBlockType( 'ptam/child-posts-list', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Child Posts Columns', 'post-type-archive-mapping' ), // Block title.
+	title: __( 'Child Posts List', 'post-type-archive-mapping' ), // Block title.
 	icon: (
 		<svg
 			aria-hidden="true"
@@ -70,6 +70,7 @@ registerBlockType( 'ptam/child-posts-columns', {
 		__( 'post', 'poost-type-archive-mapping' ),
 		__( 'parent', 'post-type-archive-mapping' ),
 		__( 'hierarchy', 'post-type-archive-mapping' ),
+		__( 'list', 'post-type-archive-mapping' ),
 
 	],
 	supports: {

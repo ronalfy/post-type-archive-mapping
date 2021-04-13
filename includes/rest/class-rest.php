@@ -104,7 +104,7 @@ class Rest {
 		);
 
 		/**
-		 * Retrieve hierarchical posts for use in the hierarchy block.
+		 * Retrieve hierarchical posts for use in the child posts grid block.
 		 *
 		 * @since 6.0.0
 		 */
@@ -114,6 +114,21 @@ class Rest {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_hierarchical_posts' ),
+				'permission_callback' => array( $this, 'permissions_check' ),
+			)
+		);
+
+		/**
+		 * Retrieve hierarchical posts for use in the child posts columns block with more variables accepted (including custom fields) and returned translated.
+		 *
+		 * @since 6.0.0
+		 */
+		register_rest_route(
+			'ptam/v2',
+			'/get_hierarchical_posts_extra',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_hierarchical_posts_extra' ),
 				'permission_callback' => array( $this, 'permissions_check' ),
 			)
 		);
@@ -686,6 +701,87 @@ class Rest {
 	 * @param WP_REST_Request $post_data Post data.
 	 */
 	public function get_hierarchical_posts( $post_data ) {
+		$order          = $post_data['order'];
+		$orderby        = $post_data['orderby'];
+		$post_type      = $post_data['post_type'];
+		$posts_per_page = $post_data['posts_per_page'];
+		$image_size     = $post_data['image_size'];
+		$post_parent    = $post_data['post_parent'];
+		$language       = $post_data['language'];
+		$hierarchy      = $post_data['hierarchy'];
+		$default_image  = isset( $post_data['default_image']['id'] ) ? absint( $post_data['default_image']['id'] ) : 0;
+
+		// Set post parent to zero if hierarchy is parents only.
+		if ( 'parents' === $hierarchy ) {
+			$post_parent = 0;
+		}
+
+		$post_args = array(
+			'post_type'      => $post_type,
+			'post_status'    => 'publish',
+			'order'          => $order,
+			'orderby'        => $orderby,
+			'posts_per_page' => $posts_per_page,
+			'post_parent'    => $post_parent,
+		);
+
+		// WPML Compatability.
+		global $sitepress;
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $language );
+		}
+		$query = new \WP_Query( $post_args );
+		if ( ! empty( $sitepress ) ) {
+			$sitepress->switch_lang( $sitepress->get_default_language() );
+		}
+		$posts = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				global $post;
+				$query->the_post();
+				$thumbnail = get_the_post_thumbnail_url( $post->ID, $image_size );
+				if ( empty( $thumbnail ) ) {
+					$maybe_image = wp_get_attachment_image_src( $default_image, $image_size );
+					if ( $maybe_image ) {
+						$thumbnail = $maybe_image[0];
+					} else {
+						$thumbnail = '';
+					}
+				}
+				$post->featured_image_src = $thumbnail;
+
+				// Get author information.
+				$display_name = get_the_author_meta( 'display_name', $post->post_author );
+				$author_url   = get_author_posts_url( $post->post_author );
+
+				$post->author_info               = new \stdClass();
+				$post->author_info->display_name = $display_name;
+				$post->author_info->author_link  = $author_url;
+				$post->link                      = get_permalink( $post->ID );
+
+				if ( empty( $post->post_excerpt ) ) {
+					$post->post_excerpt = apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
+				}
+
+				if ( ! $post->post_excerpt ) {
+					$post->post_excerpt = null;
+				}
+
+				$post->post_excerpt = wp_kses_post( $post->post_excerpt );
+				$post->post_content = apply_filters( 'ptam_the_content', $post->post_content );
+				$posts[]            = $post;
+			}
+		}
+		return $posts;
+	}
+
+	/**
+	 * Return posts based on post type and hierarchy and return and accept different params than above.
+	 *
+	 * @since 6.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function get_hierarchical_posts_extra( $post_data ) {
 		$order          = $post_data['order'];
 		$orderby        = $post_data['orderby'];
 		$post_type      = $post_data['post_type'];
