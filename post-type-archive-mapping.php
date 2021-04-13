@@ -104,6 +104,10 @@ class PostTypeArchiveMapping {
 			$this->child_posts_grid = new PTAM\Includes\Blocks\Child_Posts_Grid\Hierarchy();
 			$this->child_posts_grid->run();
 
+			// Register the Parent/Child columns block.
+			$this->child_posts_columns = new PTAM\Includes\Blocks\Child_Posts_Columns\Columns();
+			$this->child_posts_columns->run();
+
 			// Gutenberg Helper which sets the block categories.
 			$this->gutenberg = new PTAM\Includes\Admin\Gutenberg();
 			$this->gutenberg->run();

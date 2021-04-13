@@ -1,18 +1,18 @@
 <?php
 /**
- * Child Posts Grid Block.
+ * Child Posts Columns Block.
  *
  * @package PTAM
  */
 
-namespace PTAM\Includes\Blocks\Child_Posts_Grid;
+namespace PTAM\Includes\Blocks\Child_Posts_Columns;
 
 use PTAM\Includes\Functions as Functions;
 
 /**
- * Child Parent Hierarchy Grid Block.
+ * Child Posts Hierarchy Columns Block.
  */
-class Hierarchy {
+class Columns {
 
 	/**
 	 * Initialize hooks/actions for class.
@@ -43,7 +43,7 @@ class Hierarchy {
 		}
 
 		register_block_type(
-			'ptam/child-posts-grid',
+			'ptam/child-posts-columns',
 			array(
 				'attributes'      => array(
 					'uniqueId'                          => array(
