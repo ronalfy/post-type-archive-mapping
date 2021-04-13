@@ -192,6 +192,8 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		order,
 		orderBy,
 		numItems,
+		listFallbackImg,
+		listImageTypeSize,
 	] );
 
 	/**
@@ -304,11 +306,16 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 				className="ptam-hierarchical-list-item"
 			>
 				{ listShowTitle &&
-					<h2>{ posts[ i ].post_title }</h2>
+					// eslint-disable-next-line jsx-a11y/anchor-is-valid
+					<h2><a href="" onClick={ ( e ) => {
+						e.preventDefault();
+					} }>{ posts[ i ].post_title }</a></h2>
 				}
-				<figure>
-					<img src={ posts[ i ].featured_image_src } alt="" />
-				</figure>
+				{ listShowFeaturedImage &&
+					<figure>
+						<img src={ posts[ i ].featured_image_src } alt="" />
+					</figure>
+				}
 			</article>
 		) );
 	};
@@ -551,6 +558,44 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									value={ listBackgroundGradient }
 								/>
 							}
+							<PTAMColorPicker
+								value={ listBorderColor }
+								valueOpacity={ 1 }
+								onChange={ ( value ) => {
+									setAttributes( { listBorderColor: value } );
+								} }
+								// eslint-disable-next-line no-unused-vars
+								onOpacityChange={ ( value ) => { } }
+								label={ __(
+									'Border Color',
+									'post-type-archive-mapping'
+								) }
+								alpha={ false }
+							/>
+							<RangeControl
+								label={ __( 'Border Width', 'post-type-archive-mapping' ) }
+								value={ listBorderWidth }
+								onChange={ ( value ) => setAttributes( { listBorderWidth: value } ) }
+								min={ 0 }
+								max={ 100 }
+							/>
+							<DimensionsControl
+								label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								allowNegatives={ false }
+								attrTop="listBorderRadiusTopleft"
+								attrRight="listBorderRadiusTopRight"
+								attrBottom="listBorderRadiusBottomLeft"
+								attrLeft="listBorderRadiusBottomRight"
+								attrUnit="listBorderRadiusUnit"
+								attrSyncUnits="listBorderRadiusUnitsSync"
+								labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+								labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+								labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+								labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
+								units={ [ 'px', 'em', 'rem' ] }
+							/>
 						</>
 				}
 				{ 'Tablet' === getDeviceType() &&
@@ -873,91 +918,6 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					}
 				</>
 			</PanelBody>
-			<PanelBody
-				title={ __( 'Border', 'post-type-archive-mapping' ) }
-				initialOpen={ false }
-			>
-				<TabPanel
-					className="layout-tab-panel ptam-control-tabs"
-					activeClass="active-tab"
-					tabs={ [
-						{
-							name: 'list-border-color',
-							title: __( 'Normal', 'post-type-archive-mapping' ),
-							className: 'list-border-color',
-						},
-						{
-							name: 'list-border-color-hover',
-							title: __( 'Hover', 'post-type-archive-mapping' ),
-							className: 'list-border-color-hover',
-						},
-					] }
-				>
-					{ ( tab ) => {
-						const isNormal = tab.name === 'list-border-color';
-
-						return (
-							<div>
-								{ isNormal ? (
-									<PTAMColorPicker
-										value={ listBorderColor }
-										valueOpacity={ 1 }
-										onChange={ ( value ) => {
-											setAttributes( { listBorderColor: value } );
-										} }
-										// eslint-disable-next-line no-unused-vars
-										onOpacityChange={ ( value ) => { } }
-										label={ __(
-											'Border Color',
-											'post-type-archive-mapping'
-										) }
-										alpha={ false }
-									/>
-								) : (
-									<PTAMColorPicker
-										value={ listBorderColorHover }
-										valueOpacity={ 1 }
-										onChange={ ( value ) => {
-											setAttributes( { listBorderColorHover: value } );
-										} }
-										// eslint-disable-next-line no-unused-vars
-										onOpacityChange={ ( value ) => { } }
-										label={ __(
-											'Border Color',
-											'post-type-archive-mapping'
-										) }
-										alpha={ false }
-									/>
-								) }
-							</div>
-						);
-					} }
-				</TabPanel>
-				<RangeControl
-					label={ __( 'Border Width', 'post-type-archive-mapping' ) }
-					value={ listBorderWidth }
-					onChange={ ( value ) => setAttributes( { listBorderWidth: value } ) }
-					min={ 0 }
-					max={ 100 }
-				/>
-				<DimensionsControl
-					label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
-					attributes={ attributes }
-					setAttributes={ setAttributes }
-					allowNegatives={ false }
-					attrTop="listBorderRadiusTopleft"
-					attrRight="listBorderRadiusTopRight"
-					attrBottom="listBorderRadiusBottomLeft"
-					attrLeft="listBorderRadiusBottomRight"
-					attrUnit="listBorderRadiusUnit"
-					attrSyncUnits="listBorderRadiusUnitsSync"
-					labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
-					labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
-					labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
-					labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
-					units={ [ 'px', 'em', 'rem' ] }
-				/>
-			</PanelBody>
 		</Fragment>
 	);
 
@@ -1086,44 +1046,42 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	builder.addCSS(
 		'.ptam-hierarchical-list-items',
 		`
-		display: list;
-		list-template-columns: 1fr 1fr;
+		display: grid;
+		grid-template-columns: 1fr;
 		column-gap: 20px;
 		row-gap: 20px;
 		background-repeat: no-repeat;
-		word-break: break-all;
-		transition: all ease-in-out 0.5s;
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-1',
 		`
-		list-template-columns: 1fr;
+		grid-template-columns: 1fr;
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-2',
 		`
-		list-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-3',
 		`
-		list-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-4',
 		`
-		list-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 		`
 	);
 	if ( 'Tablet' === getDeviceType() ) {
 		builder.addCSS(
 			'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-4, .ptam-hierarchical-list-items.ptam-hierarchical-list-columns-3, .ptam-hierarchical-list-items.ptam-hierarchical-list-columns-2',
 			`
-			list-template-columns: 1fr 1fr !important;
+			grid-template-columns: 1fr 1fr !important;
 			`
 		);
 	}
@@ -1131,7 +1089,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		builder.addCSS(
 			'.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-4, .ptam-hierarchical-list-items.ptam-hierarchical-list-columns-3, .ptam-hierarchical-list-items.ptam-hierarchical-list-columns-2',
 			`
-			list-template-columns: 1fr !important;
+			grid-template-columns: 1fr !important;
 			`
 		);
 	}
@@ -1140,12 +1098,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	builder.addCSS(
 		'.ptam-hierarchical-list-item',
 		`
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
 		min-height: ${ valueWithUnit( listMinHeight, listMinHeightUnit ) };
-		transition: all ease-in-out 0.5s;
 		`
 	);
 	if ( 'Tablet' === getDeviceType() ) {
@@ -1165,6 +1118,102 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		);
 	}
 
+	// List item figure reset.
+	builder.addCSS(
+		'.ptam-hierarchical-list-item figure',
+		`
+		margin: 0;
+		`
+	);
+
+	// List Item Background styles.
+	if ( 'gradient' === listBackgroundType ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			background: ${ listBackgroundGradient };
+			`
+		);
+	} else {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			background: ${ hexToRgba( listBackgroundColor, 1 ) };
+			`
+		);
+	}
+
+	// List Padding.
+	builder.addCSS(
+		'.ptam-hierarchical-list-item',
+		`
+		padding: ${ shorthandCSS( listPaddingTop, listPaddingRight, listPaddingBottom, listPaddingLeft, listPaddingUnit ) };
+		`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			padding: ${ shorthandCSS( listPaddingTopTablet, listPaddingRightTablet, listPaddingBottomTablet, listPaddingLeftTablet, listPaddingUnitTablet ) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			padding: ${ shorthandCSS( listPaddingTopMobile, listPaddingRightMobile, listPaddingBottomMobile, listPaddingLeftMobile, listPaddingUnitMobile ) };
+			`
+		);
+	}
+
+	// List Margin.
+	builder.addCSS(
+		'.ptam-hierarchical-list-item',
+		`
+		margin: ${ shorthandCSS( listMarginTop, listMarginRight, listMarginBottom, listMarginLeft, listMarginUnit ) };
+		`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			margin: ${ shorthandCSS( listMarginTopTablet, listMarginRightTablet, listMarginBottomTablet, listMarginLeftTablet, listMarginUnitTablet ) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			margin: ${ shorthandCSS( listMarginTopMobile, listMarginRightMobile, listMarginBottomMobile, listMarginLeftMobile, listMarginUnitMobile ) };
+			`
+		);
+	}
+
+	// List Item Border Styles.
+	builder.addCSS(
+		'.ptam-hierarchical-list-item',
+		`
+		border-radius: ${ shorthandCSS( listBorderRadiusTopleft, listBorderRadiusTopRight, listBorderRadiusBottomRight, listBorderRadiusBottomLeft, listBorderRadiusUnit ) };
+		`
+	);
+	if ( '' !== listBorderColor ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			border-color: ${ hexToRgba( listBorderColor, 1 ) };
+			`
+		);
+	}
+	if ( 0 < listBorderWidth ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item',
+			`
+			border: ${ valueWithUnit( listBorderWidth, 'px' ) } solid ${ hexToRgba( listBorderColor, 1 ) };
+			`
+		);
+	}
 	return (
 		<>
 			{ inspectorControls }
