@@ -149,6 +149,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listTitleMarginUnitsSyncMobile,
 		listFallbackImg,
 		listImageTypeSize,
+		listFeaturedImageAlign,
 		listMinHeight,
 		listMinHeightTablet,
 		listMinHeightMobile,
@@ -802,6 +803,13 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								setAttributes( { listImageTypeSize: value } );
 							} }
 						/>
+						<AlignmentGroup
+							onClick={ ( value ) => {
+								setAttributes( { listFeaturedImageAlign: value } );
+							} }
+							alignment={ listFeaturedImageAlign }
+							label={ __( 'Change Featured Image Alignment', 'post-type-archive-mapping' ) }
+						/>
 					</Fragment>
 				) }
 			</PanelBody>
@@ -902,6 +910,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 											setAttributes( { listTitleAlign: value } );
 										} }
 										alignment={ listTitleAlign }
+										label={ __( 'Change Title Alignment', 'post-type-archive-mapping' ) }
 									/>
 									<DimensionsControl
 										attributes={ attributes }
@@ -1393,6 +1402,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	) };
 		line-height: ${ valueWithUnit( listTitleLineHeight, listTitleLineHeightUnit ) };
 		text-transform: ${ listTitleTextTransform };
+		text-align: ${ listTitleAlign };
 		`
 	);
 	builder.addCSS(
@@ -1490,6 +1500,14 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 			`
 		);
 	}
+
+	// Featured Image Styles.
+	builder.addCSS(
+		'.ptam-hierarchical-list-item > figure',
+		`
+		text-align: ${ listFeaturedImageAlign };
+		`
+	);
 	return (
 		<>
 			{ inspectorControls }

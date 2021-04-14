@@ -855,12 +855,12 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	align-items: center;
 }
 .ptam-typography-component-label {
-	&~button {
+	& ~ button {
 		cursor: pointer;
 		svg {
 			width: 24px;
 			height: 24px;
-			color: darken( #585aa8, 15%);
+			color: darken(#585aa8, 15%);
 
 			&:hover {
 				color: #585aa8;
@@ -868,28 +868,31 @@ body.has-blocks .fl-post-content .ptam-pagination {
 		}
 	}
 }
-.edit-post-settings-sidebar__panel-block .components-panel__body .components-base-control.ptam-font-family-shortcuts {
-    margin-bottom: 2px;
+.edit-post-settings-sidebar__panel-block
+	.components-panel__body
+	.components-base-control.ptam-font-family-shortcuts {
+	margin-bottom: 2px;
 }
 
 .components-ptam-typography-control__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+	align-items: center;
 }
 
-.components-ptam-typography-control__inputs + .components-ptam-typography-control__header {
-    margin-top: 25px;
+.components-ptam-typography-control__inputs
+	+ .components-ptam-typography-control__header {
+	margin-top: 25px;
 }
 
 .components-ptam-typography-control__inputs {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 
 	button.components-button {
-	    line-height: unset;
-	    height: unset;
+		line-height: unset;
+		height: unset;
 	}
 
 	.components-base-control {
@@ -897,33 +900,48 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	}
 }
 
-.edit-post-settings-sidebar__panel-block .components-panel__body .components-ptam-typography-control__inputs .components-base-control,
-.components-ptam-typography-control__inputs .components-base-control .components-base-control__field {
-    margin-bottom: 0;
+.edit-post-settings-sidebar__panel-block
+	.components-panel__body
+	.components-ptam-typography-control__inputs
+	.components-base-control,
+.components-ptam-typography-control__inputs
+	.components-base-control
+	.components-base-control__field {
+	margin-bottom: 0;
 }
 
 .components-ptam-typography-weight-transform {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .components-ptam-typography-weight-transform > div {
-    width: 48%;
+	width: 48%;
 }
 
-.components-ptam-typography-control__units > .components-button-group .components-button.is-button:first-child:last-child {
-    border-radius: 3px;
+.components-ptam-typography-control__units
+	> .components-button-group
+	.components-button.is-button:first-child:last-child {
+	border-radius: 3px;
 }
 
 .components-ptam-typography-control__inputs button {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .components-ptam-typography-control__inputs .components-base-control {
-    flex-grow: 1;
+	flex-grow: 1;
 }
 
-
+/* Alignment Group Component Styles */
+.ptam-alignment-component-base {
+	margin: 10px 0;
+	transition: all ease-in-out 0.5s;
+	.ptam-alignment-component-label {
+		display: block;
+		margin-bottom: 5px;
+	}
+}
 
 /* Hierarchical Grid Items */
 .ptam-hierarchical-grid-item,

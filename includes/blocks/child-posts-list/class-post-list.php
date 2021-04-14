@@ -386,17 +386,21 @@ class Post_List {
 						'type'    => 'object',
 						'default' => '',
 					),
+					'listFeaturedImageAlign' => array(
+						'type' => 'string',
+						'default' => 'left',
+					),
 					'listMinHeight'                     => array(
 						'type'    => 'integer',
-						'default' => 300,
+						'default' => 0,
 					),
 					'listMinHeightTablet'               => array(
 						'type'    => 'integer',
-						'default' => 300,
+						'default' => 0,
 					),
 					'listMinHeightMobile'               => array(
 						'type'    => 'integer',
-						'default' => 300,
+						'default' => 0,
 					),
 					'listMinHeightUnit'                 => array(
 						'type'    => 'string',
@@ -476,7 +480,7 @@ class Post_List {
 					),
 					'listTitleColorHover'               => array(
 						'type'    => 'string',
-						'default' => '#FFFFFF',
+						'default' => '#DDDDDD',
 					),
 					'listTitleFontFamily'               => array(
 						'type'    => 'string',

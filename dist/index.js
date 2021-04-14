@@ -16481,6 +16481,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listTitleMarginUnitsSyncMobile = attributes.listTitleMarginUnitsSyncMobile,
       listFallbackImg = attributes.listFallbackImg,
       listImageTypeSize = attributes.listImageTypeSize,
+      listFeaturedImageAlign = attributes.listFeaturedImageAlign,
       listMinHeight = attributes.listMinHeight,
       listMinHeightTablet = attributes.listMinHeightTablet,
       listMinHeightMobile = attributes.listMinHeightMobile,
@@ -17105,6 +17106,14 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listImageTypeSize: value
       });
     }
+  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    onClick: function onClick(value) {
+      setAttributes({
+        listFeaturedImageAlign: value
+      });
+    },
+    alignment: listFeaturedImageAlign,
+    label: __('Change Featured Image Alignment', 'post-type-archive-mapping')
   }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Title', 'post-type-archive-mapping')
@@ -17183,7 +17192,8 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listTitleAlign: value
       });
     },
-    alignment: listTitleAlign
+    alignment: listTitleAlign,
+    label: __('Change Title Alignment', 'post-type-archive-mapping')
   }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
@@ -17460,7 +17470,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   } // Title Styles.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tfont-family: ".concat(listTitleFontFamily ? listTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleFontSize, listTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(listTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLetterSpacing, listTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLineHeight, listTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(listTitleTextTransform, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tfont-family: ".concat(listTitleFontFamily ? listTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleFontSize, listTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(listTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLetterSpacing, listTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLineHeight, listTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(listTitleTextTransform, ";\n\t\ttext-align: ").concat(listTitleAlign, ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item > h2 a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColor, 1), ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item > h2 a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColorHover, 1), ";\n\t\t")); // Title Padding.
 
@@ -17483,8 +17493,10 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   if ('Mobile' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleMarginTopMobile, listTitleMarginRightMobile, listTitleMarginBottomMobile, listTitleMarginLeftMobile, listTitleMarginUnitMobile), ";\n\t\t\t"));
-  }
+  } // Featured Image Styles.
 
+
+  builder.addCSS('.ptam-hierarchical-list-item > figure', "\n\t\ttext-align: ".concat(listFeaturedImageAlign, ";\n\t\t"));
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(listTitleFontFamily.replace(/ /g, '+'))
@@ -21812,18 +21824,38 @@ var Loading = function Loading(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var __ = wp.i18n.__;
+/**
+ * Alignment Group (Left|Center|Right) with a label and button icons.
+ *
+ * Pass onClick prop to propagate up to parent. Values are (left|center|right).
+ */
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _x = _wp$i18n._x;
 var _wp$components = wp.components,
     Button = _wp$components.Button,
     ButtonGroup = _wp$components.ButtonGroup;
 
 var AlignmentGroup = function AlignmentGroup(props) {
-  var alignment = props.alignment;
-  return /*#__PURE__*/React.createElement(ButtonGroup, null, /*#__PURE__*/React.createElement(Button, {
+  var _props$alignment = props.alignment,
+      alignment = _props$alignment === void 0 ? 'left' : _props$alignment,
+      _props$label = props.label,
+      label = _props$label === void 0 ? __('Change Alignment', 'post-type-archive-mapping') : _props$label,
+      _props$alignLeftLabel = props.alignLeftLabel,
+      alignLeftLabel = _props$alignLeftLabel === void 0 ? _x('Align Left', 'Align items left', 'post-type-archive-mapping') : _props$alignLeftLabel,
+      _props$alignCenterLab = props.alignCenterLabel,
+      alignCenterLabel = _props$alignCenterLab === void 0 ? _x('Align Center', 'Align items center/middle', 'post-type-archive-mapping') : _props$alignCenterLab,
+      _props$alignRightLabe = props.alignRightLabel,
+      alignRightLabel = _props$alignRightLabe === void 0 ? _x('Align Right', 'Align items right', 'post-type-archive-mapping') : _props$alignRightLabe;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "ptam-alignment-component-base"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ptam-alignment-component-label"
+  }, label), /*#__PURE__*/React.createElement(ButtonGroup, null, /*#__PURE__*/React.createElement(Button, {
     isPressed: 'left' === alignment ? true : false,
     isSecondary: true,
     icon: "editor-alignleft",
-    label: __('Align Left', 'post-type-archive-mapping'),
+    label: alignLeftLabel,
     onClick: function onClick() {
       props.onClick('left');
     }
@@ -21831,7 +21863,7 @@ var AlignmentGroup = function AlignmentGroup(props) {
     isPressed: 'center' === alignment ? true : false,
     isSecondary: true,
     icon: "editor-aligncenter",
-    label: __('Align Center', 'post-type-archive-mapping'),
+    label: alignCenterLabel,
     onClick: function onClick() {
       props.onClick('center');
     }
@@ -21839,11 +21871,11 @@ var AlignmentGroup = function AlignmentGroup(props) {
     isPressed: 'right' === alignment ? true : false,
     isSecondary: true,
     icon: "editor-alignright",
-    label: __('Align Right', 'post-type-archive-mapping'),
+    label: alignRightLabel,
     onClick: function onClick() {
       props.onClick('right');
     }
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AlignmentGroup);
