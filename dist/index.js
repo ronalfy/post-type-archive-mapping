@@ -16379,9 +16379,7 @@ var _wp$components = wp.components,
     SelectControl = _wp$components.SelectControl,
     TextControl = _wp$components.TextControl,
     ToggleControl = _wp$components.ToggleControl,
-    TabPanel = _wp$components.TabPanel,
-    Button = _wp$components.Button,
-    ButtonGroup = _wp$components.ButtonGroup;
+    TabPanel = _wp$components.TabPanel;
 var _wp$blockEditor = wp.blockEditor,
     MediaUpload = _wp$blockEditor.MediaUpload,
     InspectorControls = _wp$blockEditor.InspectorControls,
@@ -16717,7 +16715,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       /*#__PURE__*/
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       React.createElement("h2", null, /*#__PURE__*/React.createElement("a", {
-        href: "",
+        href: posts[i].link,
         onClick: function onClick(e) {
           e.preventDefault();
         }
@@ -17058,7 +17056,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listMarginUnitMobile",
     attrSyncUnits: "listMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }))), /*#__PURE__*/React.createElement(PanelBody, {
+  }))), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Featured Image', 'post-type-archive-mapping')
   }, /*#__PURE__*/React.createElement(ToggleControl, {
@@ -17117,7 +17115,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Title', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Show Title', 'post-type-archive-mapping'),
     checked: listShowTitle,
     onChange: function onChange(value) {
@@ -17125,7 +17123,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listShowTitle: value
       });
     }
-  }), listShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+  }), listShowTitle && /*#__PURE__*/React.createElement(React.Fragment, null, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(TabPanel, {
     className: "layout-tab-panel ptam-control-tabs",
     activeClass: "active-tab",
     tabs: [{
@@ -17307,7 +17305,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitleMarginUnitMobile",
     attrSyncUnits: "listTitleMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }))))));
+  })))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
@@ -17474,7 +17472,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   builder.addCSS('.ptam-hierarchical-list-item > h2 a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColor, 1), ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item > h2 a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColorHover, 1), ";\n\t\t")); // Title Padding.
 
-  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingLeft, listTitlePaddingRight, listTitlePaddingBottom, listTitlePaddingLeft, listTitlePaddingUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingTop, listTitlePaddingRight, listTitlePaddingBottom, listTitlePaddingLeft, listTitlePaddingUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingTopTablet, listTitlePaddingRightTablet, listTitlePaddingBottomTablet, listTitlePaddingLeftTablet, listTitlePaddingUnitTablet), ";\n\t\t\t"));

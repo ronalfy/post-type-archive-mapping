@@ -46,512 +46,512 @@ class Post_List {
 			'ptam/child-posts-list',
 			array(
 				'attributes'      => array(
-					'uniqueId'                          => array(
+					'uniqueId'                        => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'align'                             => array(
+					'align'                           => array(
 						'type'    => 'string',
 						'default' => 'full',
 					),
-					'postType'                          => array(
+					'postType'                        => array(
 						'type'    => 'string',
 						'default' => 'page',
 					),
-					'hierarchy'                         => array(
+					'hierarchy'                       => array(
 						'type'    => 'string',
 						'default' => 'parents', // parents or children.
 					),
-					'parentItem'                        => array(
+					'parentItem'                      => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'order'                             => array(
+					'order'                           => array(
 						'type'    => 'string',
 						'default' => 'ASC',
 					),
-					'orderBy'                           => array(
+					'orderBy'                         => array(
 						'type'    => 'string',
 						'default' => 'title',
 					),
-					'postsPerPage'                      => array(
+					'postsPerPage'                    => array(
 						'type'    => 'integer',
 						'default' => 20,
 					),
-					'wpmlLanguage'                      => array(
+					'wpmlLanguage'                    => array(
 						'type'    => 'string',
 						'default' => 'en',
 					),
-					'disableStyles'                     => array(
+					'disableStyles'                   => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'pagination'                        => array(
+					'pagination'                      => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'listPaddingTop'                    => array(
+					'listPaddingTop'                  => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingRight'                  => array(
+					'listPaddingRight'                => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingBottom'                 => array(
+					'listPaddingBottom'               => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingLeft'                   => array(
+					'listPaddingLeft'                 => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingUnit'                   => array(
+					'listPaddingUnit'                 => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listPaddingUnitsSync'              => array(
+					'listPaddingUnitsSync'            => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listPaddingTopTablet'              => array(
+					'listPaddingTopTablet'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingRightTablet'            => array(
+					'listPaddingRightTablet'          => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingBottomTablet'           => array(
+					'listPaddingBottomTablet'         => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingLeftTablet'             => array(
+					'listPaddingLeftTablet'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingUnitTablet'             => array(
+					'listPaddingUnitTablet'           => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listPaddingUnitsSyncTablet'        => array(
+					'listPaddingUnitsSyncTablet'      => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listPaddingTopMobile'              => array(
+					'listPaddingTopMobile'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingRightMobile'            => array(
+					'listPaddingRightMobile'          => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingBottomMobile'           => array(
+					'listPaddingBottomMobile'         => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingLeftMobile'             => array(
+					'listPaddingLeftMobile'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listPaddingUnitMobile'             => array(
+					'listPaddingUnitMobile'           => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listPaddingUnitsSyncMobile'        => array(
+					'listPaddingUnitsSyncMobile'      => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listMarginTop'                    => array(
+					'listMarginTop'                   => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginRight'                  => array(
+					'listMarginRight'                 => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginBottom'                 => array(
+					'listMarginBottom'                => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginLeft'                   => array(
+					'listMarginLeft'                  => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginUnit'                   => array(
+					'listMarginUnit'                  => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listMarginUnitsSync'              => array(
+					'listMarginUnitsSync'             => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listMarginTopTablet'              => array(
+					'listMarginTopTablet'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginRightTablet'            => array(
+					'listMarginRightTablet'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginBottomTablet'           => array(
+					'listMarginBottomTablet'          => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginLeftTablet'             => array(
+					'listMarginLeftTablet'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginUnitTablet'             => array(
+					'listMarginUnitTablet'            => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listMarginUnitsSyncTablet'        => array(
+					'listMarginUnitsSyncTablet'       => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listMarginTopMobile'              => array(
+					'listMarginTopMobile'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginRightMobile'            => array(
+					'listMarginRightMobile'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginBottomMobile'           => array(
+					'listMarginBottomMobile'          => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginLeftMobile'             => array(
+					'listMarginLeftMobile'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMarginUnitMobile'             => array(
+					'listMarginUnitMobile'            => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listMarginUnitsSyncMobile'        => array(
+					'listMarginUnitsSyncMobile'       => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitlePaddingTop'                    => array(
+					'listTitlePaddingTop'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingRight'                  => array(
+					'listTitlePaddingRight'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingBottom'                 => array(
+					'listTitlePaddingBottom'          => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingLeft'                   => array(
+					'listTitlePaddingLeft'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingUnit'                   => array(
+					'listTitlePaddingUnit'            => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitlePaddingUnitsSync'              => array(
+					'listTitlePaddingUnitsSync'       => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitlePaddingTopTablet'              => array(
+					'listTitlePaddingTopTablet'       => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingRightTablet'            => array(
+					'listTitlePaddingRightTablet'     => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingBottomTablet'           => array(
+					'listTitlePaddingBottomTablet'    => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingLeftTablet'             => array(
+					'listTitlePaddingLeftTablet'      => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingUnitTablet'             => array(
+					'listTitlePaddingUnitTablet'      => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitlePaddingUnitsSyncTablet'        => array(
+					'listTitlePaddingUnitsSyncTablet' => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitlePaddingTopMobile'              => array(
+					'listTitlePaddingTopMobile'       => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingRightMobile'            => array(
+					'listTitlePaddingRightMobile'     => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingBottomMobile'           => array(
+					'listTitlePaddingBottomMobile'    => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingLeftMobile'             => array(
+					'listTitlePaddingLeftMobile'      => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitlePaddingUnitMobile'             => array(
+					'listTitlePaddingUnitMobile'      => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitlePaddingUnitsSyncMobile'        => array(
+					'listTitlePaddingUnitsSyncMobile' => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitleMarginTop'                    => array(
+					'listTitleMarginTop'              => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginRight'                  => array(
+					'listTitleMarginRight'            => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginBottom'                 => array(
+					'listTitleMarginBottom'           => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginLeft'                   => array(
+					'listTitleMarginLeft'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginUnit'                   => array(
+					'listTitleMarginUnit'             => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleMarginUnitsSync'              => array(
+					'listTitleMarginUnitsSync'        => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitleMarginTopTablet'              => array(
+					'listTitleMarginTopTablet'        => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginRightTablet'            => array(
+					'listTitleMarginRightTablet'      => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginBottomTablet'           => array(
+					'listTitleMarginBottomTablet'     => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginLeftTablet'             => array(
+					'listTitleMarginLeftTablet'       => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginUnitTablet'             => array(
+					'listTitleMarginUnitTablet'       => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleMarginUnitsSyncTablet'        => array(
+					'listTitleMarginUnitsSyncTablet'  => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitleMarginTopMobile'              => array(
+					'listTitleMarginTopMobile'        => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginRightMobile'            => array(
+					'listTitleMarginRightMobile'      => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginBottomMobile'           => array(
+					'listTitleMarginBottomMobile'     => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginLeftMobile'             => array(
+					'listTitleMarginLeftMobile'       => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listTitleMarginUnitMobile'             => array(
+					'listTitleMarginUnitMobile'       => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleMarginUnitsSyncMobile'        => array(
+					'listTitleMarginUnitsSyncMobile'  => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listImageTypeSize'                 => array(
+					'listImageTypeSize'               => array(
 						'type'    => 'string',
 						'default' => 'large',
 					),
-					'listFallbackImg'                   => array(
+					'listFallbackImg'                 => array(
 						'type'    => 'object',
 						'default' => '',
 					),
-					'listFeaturedImageAlign' => array(
-						'type' => 'string',
+					'listFeaturedImageAlign'          => array(
+						'type'    => 'string',
 						'default' => 'left',
 					),
-					'listMinHeight'                     => array(
+					'listMinHeight'                   => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMinHeightTablet'               => array(
+					'listMinHeightTablet'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMinHeightMobile'               => array(
+					'listMinHeightMobile'             => array(
 						'type'    => 'integer',
 						'default' => 0,
 					),
-					'listMinHeightUnit'                 => array(
+					'listMinHeightUnit'               => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listMinHeightUnitTablet'           => array(
+					'listMinHeightUnitTablet'         => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listMinHeightUnitMobile'           => array(
+					'listMinHeightUnitMobile'         => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listNumberColumns'                 => array(
+					'listNumberColumns'               => array(
 						'type'    => 'integer',
 						'default' => 1,
 					),
-					'listBackgroundType' => array(
-						'type' => 'string',
+					'listBackgroundType'              => array(
+						'type'    => 'string',
 						'default' => 'color',
 					),
-					'listBackgroundColor' => array(
-						'type' => 'string',
+					'listBackgroundColor'             => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'listBackgroundGradient' => array(
-						'type' => 'string',
+					'listBackgroundGradient'          => array(
+						'type'    => 'string',
 						'default' => '',
 					),
-					'listShowFeaturedImage' => array(
-						'type' => 'boolean',
-						'default' => true,
-					),
-					'listBorderWidth'                   => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-					'listBorderRadiusTopleft'           => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-					'listBorderRadiusTopRight'          => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-					'listBorderRadiusBottomLeft'        => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-					'listBorderRadiusBottomRight'       => array(
-						'type'    => 'integer',
-						'default' => 0,
-					),
-					'listBorderRadiusUnitsSync'         => array(
+					'listShowFeaturedImage'           => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listBorderRadiusUnit'              => array(
-						'type'    => 'string',
-						'default' => 'px',
+					'listBorderWidth'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
 					),
-					'listBorderColor'                   => array(
-						'type'    => 'string',
-						'default' => '',
+					'listBorderRadiusTopleft'         => array(
+						'type'    => 'integer',
+						'default' => 0,
 					),
-					'listBorderColorHover'              => array(
-						'type'    => 'string',
-						'default' => '',
+					'listBorderRadiusTopRight'        => array(
+						'type'    => 'integer',
+						'default' => 0,
 					),
-					'listShowTitle'                     => array(
+					'listBorderRadiusBottomLeft'      => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listBorderRadiusBottomRight'     => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listBorderRadiusUnitsSync'       => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listTitleColor'                    => array(
+					'listBorderRadiusUnit'            => array(
 						'type'    => 'string',
-						'default' => '#DDDDDD',
+						'default' => 'px',
 					),
-					'listTitleColorHover'               => array(
-						'type'    => 'string',
-						'default' => '#DDDDDD',
-					),
-					'listTitleFontFamily'               => array(
+					'listBorderColor'                 => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'listTitleFontSizeUnit'             => array(
+					'listBorderColorHover'            => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'listShowTitle'                   => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listTitleColor'                  => array(
+						'type'    => 'string',
+						'default' => '#DDDDDD',
+					),
+					'listTitleColorHover'             => array(
+						'type'    => 'string',
+						'default' => '#DDDDDD',
+					),
+					'listTitleFontFamily'             => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'listTitleFontSizeUnit'           => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleFontSizeUnitTablet'       => array(
+					'listTitleFontSizeUnitTablet'     => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleFontSizeUnitMobile'       => array(
+					'listTitleFontSizeUnitMobile'     => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
-					'listTitleFontSize'                 => array(
+					'listTitleFontSize'               => array(
 						'type'    => 'string',
 						'default' => '20',
 					),
-					'listTitleFontSizeTablet'           => array(
+					'listTitleFontSizeTablet'         => array(
 						'type'    => 'string',
 						'default' => '20',
 					),
-					'listTitleFontSizeMobile'           => array(
+					'listTitleFontSizeMobile'         => array(
 						'type'    => 'string',
 						'default' => '20',
 					),
-					'listTitleFontWeight'               => array(
+					'listTitleFontWeight'             => array(
 						'type'    => 'string',
 						'default' => 400.,
 					),
-					'listTitleLetterSpacing'            => array(
+					'listTitleLetterSpacing'          => array(
 						'type'    => 'string',
 						'default' => '0',
 					),
-					'listTitleLetterSpacingTablet'      => array(
+					'listTitleLetterSpacingTablet'    => array(
 						'type'    => 'string',
 						'default' => '0',
 					),
-					'listTitleLetterSpacingMobile'      => array(
+					'listTitleLetterSpacingMobile'    => array(
 						'type'    => 'string',
 						'default' => '0',
 					),
-					'listTitleLetterSpacingUnit'        => array(
+					'listTitleLetterSpacingUnit'      => array(
 						'type'    => 'string',
 						'default' => 'em',
 					),
-					'listTitleTextTransform'            => array(
+					'listTitleTextTransform'          => array(
 						'type'    => 'string',
 						'default' => 'none',
 					),
-					'listTitleLineHeight'               => array(
+					'listTitleLineHeight'             => array(
 						'type'    => 'string',
 						'default' => '1.2',
 					),
-					'listTitleLineHeightTablet'         => array(
+					'listTitleLineHeightTablet'       => array(
 						'type'    => 'string',
 						'default' => '1.2',
 					),
-					'listTitleLineHeightMobile'         => array(
+					'listTitleLineHeightMobile'       => array(
 						'type'    => 'string',
 						'default' => '1.2',
 					),
-					'listTitleLineHeightUnit'           => array(
+					'listTitleLineHeightUnit'         => array(
 						'type'    => 'string',
 						'default' => 'em',
 					),
-					'listTitleAlign' => array(
-						'type' => 'string',
+					'listTitleAlign'                  => array(
+						'type'    => 'string',
 						'default' => 'left',
 					),
 				),

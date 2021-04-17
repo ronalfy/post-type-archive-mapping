@@ -32,8 +32,6 @@ const {
 	TextControl,
 	ToggleControl,
 	TabPanel,
-	Button,
-	ButtonGroup,
 } = wp.components;
 
 const {
@@ -352,7 +350,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					// eslint-disable-next-line jsx-a11y/anchor-is-valid
 					<h2>
 						<a
-							href=""
+							href={ posts[ i ].link }
 							onClick={ ( e ) => {
 								e.preventDefault();
 							} }
@@ -736,88 +734,96 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					</>
 				) }
 			</PanelBody>
-			<PanelBody
-				initialOpen={ false }
-				title={ __( 'Featured Image', 'post-type-archive-mapping' ) }
-			>
-				<ToggleControl
-					label={ __( 'Show Featured Image', 'post-type-archive-mapping' ) }
-					checked={ listShowFeaturedImage }
-					onChange={ ( value ) => {
-						setAttributes( {
-							listShowFeaturedImage: value,
-						} );
-					} }
-				/>
-				{ listShowFeaturedImage && (
-					<Fragment>
-						<MediaUpload
-							onSelect={ ( imageObject ) => {
-								props.setAttributes( { listFallbackImg: imageObject } );
-							} }
-							type="image"
-							value={ listFallbackImg.url }
-							render={ ( { open } ) => (
-								<Fragment>
-									<button
-										className="ptam-media-alt-upload components-button is-button is-secondary"
-										onClick={ open }
-									>
-										{ __( 'Fallback Featured Image', 'post-type-archive-mapping' ) }
-									</button>
-									{ listFallbackImg && (
-										<Fragment>
-											<div>
-												<img
-													src={ listFallbackImg.url }
-													alt={ __(
-														'Featured Image',
-														'post-type-archive-mapping'
-													) }
-													width="250"
-													height="250"
-												/>
-											</div>
-											<div>
-												<button
-													className="ptam-media-alt-reset components-button is-button is-secondary"
-													// eslint-disable-next-line no-unused-vars
-													onClick={ ( event ) => {
-														setAttributes( { listFallbackImg: '' } );
-													} }
-												>
-													{ __( 'Reset Image', 'post-type-archive-mapping' ) }
-												</button>
-											</div>
-										</Fragment>
-									) }
-								</Fragment>
-							) }
-						/>
+			{ 'Desktop' === getDeviceType() && (
+				<PanelBody
+					initialOpen={ false }
+					title={ __( 'Featured Image', 'post-type-archive-mapping' ) }
+				>
+					<ToggleControl
+						label={ __( 'Show Featured Image', 'post-type-archive-mapping' ) }
+						checked={ listShowFeaturedImage }
+						onChange={ ( value ) => {
+							setAttributes( {
+								listShowFeaturedImage: value,
+							} );
+						} }
+					/>
+					{ listShowFeaturedImage && (
+						<Fragment>
+							<MediaUpload
+								onSelect={ ( imageObject ) => {
+									props.setAttributes( { listFallbackImg: imageObject } );
+								} }
+								type="image"
+								value={ listFallbackImg.url }
+								render={ ( { open } ) => (
+									<Fragment>
+										<button
+											className="ptam-media-alt-upload components-button is-button is-secondary"
+											onClick={ open }
+										>
+											{ __(
+												'Fallback Featured Image',
+												'post-type-archive-mapping'
+											) }
+										</button>
+										{ listFallbackImg && (
+											<Fragment>
+												<div>
+													<img
+														src={ listFallbackImg.url }
+														alt={ __(
+															'Featured Image',
+															'post-type-archive-mapping'
+														) }
+														width="250"
+														height="250"
+													/>
+												</div>
+												<div>
+													<button
+														className="ptam-media-alt-reset components-button is-button is-secondary"
+														// eslint-disable-next-line no-unused-vars
+														onClick={ ( event ) => {
+															setAttributes( { listFallbackImg: '' } );
+														} }
+													>
+														{ __( 'Reset Image', 'post-type-archive-mapping' ) }
+													</button>
+												</div>
+											</Fragment>
+										) }
+									</Fragment>
+								) }
+							/>
 
-						<SelectControl
-							label={ __( 'Featured Image Size', 'post-type-archive-mapping' ) }
-							options={ imageSizeOptions }
-							value={ listImageTypeSize }
-							onChange={ ( value ) => {
-								setAttributes( { listImageTypeSize: value } );
-							} }
-						/>
-						<AlignmentGroup
-							onClick={ ( value ) => {
-								setAttributes( { listFeaturedImageAlign: value } );
-							} }
-							alignment={ listFeaturedImageAlign }
-							label={ __( 'Change Featured Image Alignment', 'post-type-archive-mapping' ) }
-						/>
-					</Fragment>
-				) }
-			</PanelBody>
+							<SelectControl
+								label={ __( 'Featured Image Size', 'post-type-archive-mapping' ) }
+								options={ imageSizeOptions }
+								value={ listImageTypeSize }
+								onChange={ ( value ) => {
+									setAttributes( { listImageTypeSize: value } );
+								} }
+							/>
+							<AlignmentGroup
+								onClick={ ( value ) => {
+									setAttributes( { listFeaturedImageAlign: value } );
+								} }
+								alignment={ listFeaturedImageAlign }
+								label={ __(
+									'Change Featured Image Alignment',
+									'post-type-archive-mapping'
+								) }
+							/>
+						</Fragment>
+					) }
+				</PanelBody>
+			) }
 			<PanelBody
 				initialOpen={ false }
 				title={ __( 'Title', 'post-type-archive-mapping' ) }
 			>
-				<>
+				{ 'Desktop' === getDeviceType() && (
 					<ToggleControl
 						label={ __( 'Show Title', 'post-type-archive-mapping' ) }
 						checked={ listShowTitle }
@@ -827,8 +833,11 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							} );
 						} }
 					/>
-					{ listShowTitle && (
-						<>
+				) }
+
+				{ listShowTitle && (
+					<>
+						{ 'Desktop' === getDeviceType() && (
 							<TabPanel
 								className="layout-tab-panel ptam-control-tabs"
 								activeClass="active-tab"
@@ -879,175 +888,175 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									);
 								} }
 							</TabPanel>
-							{ 'Desktop' === getDeviceType() && (
-								<>
-									<TypographyControls
-										label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
-										options={ listTitleFontParamsDesktop }
-										showFontFamily={ true }
-										showFontSize={ true }
-										showFontWeight={ true }
-										showTextTransform={ true }
-										showLineHeight={ true }
-										showLetterSpacing={ true }
-										onChange={ ( fontObject ) => {
-											setAttributes( {
-												listTitleFontFamily: fontObject.fontFamily,
-												listTitleFontSize: fontObject.fontSize,
-												listTitleFontSizeUnit: fontObject.fontSizeUnit,
-												listTitleFontWeight: fontObject.fontWeight,
-												listTitleLetterSpacing: fontObject.letterSpacing,
-												listTitleLetterSpacingUnit:
-													fontObject.letterSpacingUnit,
-												listTitleLineHeight: fontObject.lineHeight,
-												listTitleLineHeightUnit: fontObject.lineHeightUnit,
-												listTitleTextTransform: fontObject.textTransform,
-											} );
-										} }
-									/>
-									<AlignmentGroup
-										onClick={ ( value ) => {
-											setAttributes( { listTitleAlign: value } );
-										} }
-										alignment={ listTitleAlign }
-										label={ __( 'Change Title Alignment', 'post-type-archive-mapping' ) }
-									/>
-									<DimensionsControl
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitlePaddingTop"
-										attrRight="listTitlePaddingRight"
-										attrBottom="listTitlePaddingBottom"
-										attrLeft="listTitlePaddingLeft"
-										attrUnit="listTitlePaddingUnit"
-										attrSyncUnits="listTitlePaddingUnitsSync"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-									<DimensionsControl
-										label={ __( 'Margin', 'post-type-archive-mapping' ) }
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitleMarginTop"
-										attrRight="listTitleMarginRight"
-										attrBottom="listTitleMarginBottom"
-										attrLeft="listTitleMarginLeft"
-										attrUnit="listTitleMarginUnit"
-										attrSyncUnits="listTitleMarginUnitsSync"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-								</>
-							) }
-							{ 'Tablet' === getDeviceType() && (
-								<>
-									<TypographyControls
-										label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
-										options={ listTitleFontParamsTablet }
-										showFontFamily={ false }
-										showFontSize={ true }
-										showFontWeight={ false }
-										showTextTransform={ false }
-										showLineHeight={ true }
-										showLetterSpacing={ true }
-										onChange={ ( fontObject ) => {
-											setAttributes( {
-												listTitleFontFamily: fontObject.fontFamily,
-												listTitleFontSizeTablet: fontObject.fontSize,
-												listTitleFontSizeUnitTablet: fontObject.fontSizeUnit,
-												listTitleFontWeight: fontObject.fontWeight,
-												listTitleLetterSpacingTablet: fontObject.letterSpacing,
-												listTitleLetterSpacingUnit:
-													fontObject.letterSpacingUnit,
-												listTitleLineHeightTablet: fontObject.lineHeight,
-												listTitleLineHeightUnit: fontObject.lineHeightUnit,
-												listTitleTextTransform: fontObject.textTransform,
-											} );
-										} }
-									/>
-									<DimensionsControl
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitlePaddingTopTablet"
-										attrRight="listTitlePaddingRightTablet"
-										attrBottom="listTitlePaddingBottomTablet"
-										attrLeft="listTitlePaddingLeftTablet"
-										attrUnit="listTitlePaddingUnitTablet"
-										attrSyncUnits="listTitlePaddingUnitsSyncTablet"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-									<DimensionsControl
-										label={ __( 'Margin', 'post-type-archive-mapping' ) }
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitleMarginTopTablet"
-										attrRight="listTitleMarginRightTablet"
-										attrBottom="listTitleMarginBottomTablet"
-										attrLeft="listTitleMarginLeftTablet"
-										attrUnit="listTitleMarginUnitTablet"
-										attrSyncUnits="listTitleMarginUnitsSyncTablet"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-								</>
-							) }
-							{ 'Mobile' === getDeviceType() && (
-								<>
-									<TypographyControls
-										label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
-										options={ listTitleFontParamsMobile }
-										showFontFamily={ false }
-										showFontSize={ true }
-										showFontWeight={ false }
-										showTextTransform={ false }
-										showLineHeight={ true }
-										showLetterSpacing={ true }
-										onChange={ ( fontObject ) => {
-											setAttributes( {
-												listTitleFontFamily: fontObject.fontFamily,
-												listTitleFontSizeMobile: fontObject.fontSize,
-												listTitleFontSizeUnitMobile: fontObject.fontSizeUnit,
-												listTitleFontWeight: fontObject.fontWeight,
-												listTitleLetterSpacingMobile: fontObject.letterSpacing,
-												listTitleLetterSpacingUnit:
-													fontObject.letterSpacingUnit,
-												listTitleLineHeightMobile: fontObject.lineHeight,
-												listTitleLineHeightUnit: fontObject.lineHeightUnit,
-												listTitleTextTransform: fontObject.textTransform,
-											} );
-										} }
-									/>
-									<DimensionsControl
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitlePaddingTopMobile"
-										attrRight="listTitlePaddingRightMobile"
-										attrBottom="listTitlePaddingBottomMobile"
-										attrLeft="listTitlePaddingLeftMobile"
-										attrUnit="listTitlePaddingUnitMobile"
-										attrSyncUnits="listTitlePaddingUnitsSyncMobile"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-									<DimensionsControl
-										label={ __( 'Margin', 'post-type-archive-mapping' ) }
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										allowNegatives={ false }
-										attrTop="listTitleMarginTopMobile"
-										attrRight="listTitleMarginRightMobile"
-										attrBottom="listTitleMarginBottomMobile"
-										attrLeft="listTitleMarginLeftMobile"
-										attrUnit="listTitleMarginUnitMobile"
-										attrSyncUnits="listTitleMarginUnitsSyncMobile"
-										units={ [ 'px', 'em', 'rem' ] }
-									/>
-								</>
-							) }
-						</>
-					) }
-				</>
+						) }
+						{ 'Desktop' === getDeviceType() && (
+							<>
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ listTitleFontParamsDesktop }
+									showFontFamily={ true }
+									showFontSize={ true }
+									showFontWeight={ true }
+									showTextTransform={ true }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											listTitleFontFamily: fontObject.fontFamily,
+											listTitleFontSize: fontObject.fontSize,
+											listTitleFontSizeUnit: fontObject.fontSizeUnit,
+											listTitleFontWeight: fontObject.fontWeight,
+											listTitleLetterSpacing: fontObject.letterSpacing,
+											listTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											listTitleLineHeight: fontObject.lineHeight,
+											listTitleLineHeightUnit: fontObject.lineHeightUnit,
+											listTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+								<AlignmentGroup
+									onClick={ ( value ) => {
+										setAttributes( { listTitleAlign: value } );
+									} }
+									alignment={ listTitleAlign }
+									label={ __(
+										'Change Title Alignment',
+										'post-type-archive-mapping'
+									) }
+								/>
+								<DimensionsControl
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitlePaddingTop"
+									attrRight="listTitlePaddingRight"
+									attrBottom="listTitlePaddingBottom"
+									attrLeft="listTitlePaddingLeft"
+									attrUnit="listTitlePaddingUnit"
+									attrSyncUnits="listTitlePaddingUnitsSync"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+								<DimensionsControl
+									label={ __( 'Margin', 'post-type-archive-mapping' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitleMarginTop"
+									attrRight="listTitleMarginRight"
+									attrBottom="listTitleMarginBottom"
+									attrLeft="listTitleMarginLeft"
+									attrUnit="listTitleMarginUnit"
+									attrSyncUnits="listTitleMarginUnitsSync"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+							</>
+						) }
+						{ 'Tablet' === getDeviceType() && (
+							<>
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ listTitleFontParamsTablet }
+									showFontFamily={ false }
+									showFontSize={ true }
+									showFontWeight={ false }
+									showTextTransform={ false }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											listTitleFontFamily: fontObject.fontFamily,
+											listTitleFontSizeTablet: fontObject.fontSize,
+											listTitleFontSizeUnitTablet: fontObject.fontSizeUnit,
+											listTitleFontWeight: fontObject.fontWeight,
+											listTitleLetterSpacingTablet: fontObject.letterSpacing,
+											listTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											listTitleLineHeightTablet: fontObject.lineHeight,
+											listTitleLineHeightUnit: fontObject.lineHeightUnit,
+											listTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+								<DimensionsControl
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitlePaddingTopTablet"
+									attrRight="listTitlePaddingRightTablet"
+									attrBottom="listTitlePaddingBottomTablet"
+									attrLeft="listTitlePaddingLeftTablet"
+									attrUnit="listTitlePaddingUnitTablet"
+									attrSyncUnits="listTitlePaddingUnitsSyncTablet"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+								<DimensionsControl
+									label={ __( 'Margin', 'post-type-archive-mapping' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitleMarginTopTablet"
+									attrRight="listTitleMarginRightTablet"
+									attrBottom="listTitleMarginBottomTablet"
+									attrLeft="listTitleMarginLeftTablet"
+									attrUnit="listTitleMarginUnitTablet"
+									attrSyncUnits="listTitleMarginUnitsSyncTablet"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+							</>
+						) }
+						{ 'Mobile' === getDeviceType() && (
+							<>
+								<TypographyControls
+									label={ __( 'Title Typography', 'post-type-archive-mapping' ) }
+									options={ listTitleFontParamsMobile }
+									showFontFamily={ false }
+									showFontSize={ true }
+									showFontWeight={ false }
+									showTextTransform={ false }
+									showLineHeight={ true }
+									showLetterSpacing={ true }
+									onChange={ ( fontObject ) => {
+										setAttributes( {
+											listTitleFontFamily: fontObject.fontFamily,
+											listTitleFontSizeMobile: fontObject.fontSize,
+											listTitleFontSizeUnitMobile: fontObject.fontSizeUnit,
+											listTitleFontWeight: fontObject.fontWeight,
+											listTitleLetterSpacingMobile: fontObject.letterSpacing,
+											listTitleLetterSpacingUnit: fontObject.letterSpacingUnit,
+											listTitleLineHeightMobile: fontObject.lineHeight,
+											listTitleLineHeightUnit: fontObject.lineHeightUnit,
+											listTitleTextTransform: fontObject.textTransform,
+										} );
+									} }
+								/>
+								<DimensionsControl
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitlePaddingTopMobile"
+									attrRight="listTitlePaddingRightMobile"
+									attrBottom="listTitlePaddingBottomMobile"
+									attrLeft="listTitlePaddingLeftMobile"
+									attrUnit="listTitlePaddingUnitMobile"
+									attrSyncUnits="listTitlePaddingUnitsSyncMobile"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+								<DimensionsControl
+									label={ __( 'Margin', 'post-type-archive-mapping' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listTitleMarginTopMobile"
+									attrRight="listTitleMarginRightMobile"
+									attrBottom="listTitleMarginBottomMobile"
+									attrLeft="listTitleMarginLeftMobile"
+									attrUnit="listTitleMarginUnitMobile"
+									attrSyncUnits="listTitleMarginUnitsSyncMobile"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+							</>
+						) }
+					</>
+				) }
 			</PanelBody>
 		</Fragment>
 	);
@@ -1422,7 +1431,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		'.ptam-hierarchical-list-item > h2',
 		`
 		padding: ${ shorthandCSS(
-		listTitlePaddingLeft,
+		listTitlePaddingTop,
 		listTitlePaddingRight,
 		listTitlePaddingBottom,
 		listTitlePaddingLeft,
