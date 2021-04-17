@@ -16528,7 +16528,11 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listShowPostMetaAuthor = attributes.listShowPostMetaAuthor,
       listShowPostMetaDate = attributes.listShowPostMetaDate,
       listShowPostMetaTerms = attributes.listShowPostMetaTerms,
-      listShowPostMetaComments = attributes.listShowPostMetaComments; // Retrieve WPML languages.
+      listShowPostMetaComments = attributes.listShowPostMetaComments,
+      listMetaDateFormat = attributes.listMetaDateFormat,
+      listMetaIconColor = attributes.listMetaIconColor,
+      listMetaLinkColor = attributes.listMetaLinkColor,
+      listMetaLinkColorHover = attributes.listMetaLinkColorHover; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16742,7 +16746,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("time", {
         dateTime: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format(),
         className: 'ptam-block-post-grid-date'
-      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY')))), listShowPostMetaTerms && posts[i].taxonomies && /*#__PURE__*/React.createElement("div", {
+      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format(listMetaDateFormat)))), listShowPostMetaTerms && posts[i].taxonomies && /*#__PURE__*/React.createElement("div", {
         className: "ptam-terms"
       }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), listShowPostMetaComments && posts[i].comment_count > 0 && /*#__PURE__*/React.createElement("div", {
         className: "ptam-comments"
@@ -16923,6 +16927,20 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   }, {
     value: 'alignright',
     label: _x('Align Right', 'Items will be aligned right', 'post-type-archive-mapping')
+  }];
+  var currentTime = new Date();
+  var postMetaDateFormatOptions = [{
+    value: 'YYYY-MM-DD',
+    label: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(currentTime.getTime()).format('YYYY-MM-DD')
+  }, {
+    value: 'MMMM DD, YYYY',
+    label: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(currentTime.getTime()).format('MMMM DD, YYYY')
+  }, {
+    value: 'MM/DD/YYYY',
+    label: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(currentTime.getTime()).format('MM/DD/YYYY')
+  }, {
+    value: 'DD/MM/YYYY',
+    label: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(currentTime.getTime()).format('DD/MM/YYYY')
   }];
   var listOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
     selectedDevice: getDeviceType(),
@@ -17417,6 +17435,15 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     onChange: function onChange(value) {
       setAttributes({
         listShowPostMetaComments: value
+      });
+    }
+  }), listShowPostMetaDate && /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Date Format', 'post-type-archive-mapping'),
+    options: postMetaDateFormatOptions,
+    value: listMetaDateFormat,
+    onChange: function onChange(value) {
+      setAttributes({
+        listMetaDateFormat: value
       });
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {

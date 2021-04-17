@@ -578,6 +578,10 @@ class Post_List {
 						'type'    => 'boolean',
 						'default' => false,
 					),
+					'listMetaDateFormat' => array(
+						'type' => 'string',
+						'default' => 'MMMM DD, YYYY',
+					)
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

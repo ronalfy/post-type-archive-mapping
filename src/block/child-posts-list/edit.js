@@ -201,6 +201,10 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listShowPostMetaDate,
 		listShowPostMetaTerms,
 		listShowPostMetaComments,
+		listMetaDateFormat,
+		listMetaIconColor,
+		listMetaLinkColor,
+		listMetaLinkColorHover,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -380,7 +384,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 										dateTime={ dayjs( posts[ i ].post_date_gmt ).format() }
 										className={ 'ptam-block-post-grid-date' }
 									>
-										{ dayjs( posts[ i ].post_date_gmt ).format( 'MMMM DD, YYYY' ) }
+										{ dayjs( posts[ i ].post_date_gmt ).format( listMetaDateFormat ) }
 									</time>
 								</span>
 							</div>
@@ -611,6 +615,26 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 				'Items will be aligned right',
 				'post-type-archive-mapping'
 			),
+		},
+	];
+
+	const currentTime = new Date();
+	const postMetaDateFormatOptions = [
+		{
+			value: 'YYYY-MM-DD',
+			label: dayjs( currentTime.getTime() ).format( 'YYYY-MM-DD' ),
+		},
+		{
+			value: 'MMMM DD, YYYY',
+			label: dayjs( currentTime.getTime() ).format( 'MMMM DD, YYYY' ),
+		},
+		{
+			value: 'MM/DD/YYYY',
+			label: dayjs( currentTime.getTime() ).format( 'MM/DD/YYYY' ),
+		},
+		{
+			value: 'DD/MM/YYYY',
+			label: dayjs( currentTime.getTime() ).format( 'DD/MM/YYYY' ),
 		},
 	];
 
@@ -1226,6 +1250,18 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 										} );
 									} }
 								/>
+								{ listShowPostMetaDate &&
+									<SelectControl
+										label={ __( 'Date Format', 'post-type-archive-mapping' ) }
+										options={ postMetaDateFormatOptions }
+										value={ listMetaDateFormat }
+										onChange={ ( value ) => {
+											setAttributes( {
+												listMetaDateFormat: value,
+											} );
+										} }
+									/>
+								}
 								<SelectControl
 									label={ __( 'Appearance', 'post-type-archive-mapping' ) }
 									options={ postMetaAppearanceOptions }

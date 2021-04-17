@@ -954,6 +954,7 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	align-items: center;
 	justify-content: space-evenly;
 	float: none;
+	flex-wrap: wrap;
 
 	.ptam-author,
 	.ptam-date,
