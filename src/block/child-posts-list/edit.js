@@ -367,7 +367,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					</h2>
 				) }
 				{ listShowPostMeta &&
-					<div className="ptam-hierarchical-list-item-meta">
+					<div className={ classnames( 'ptam-hierarchical-list-item-meta', listShowPostMetaAppearance ) }>
 						{ listShowPostMetaAuthor &&
 							<div className="ptam-author"><span><a onClick={ ( e ) => {
 								e.preventDefault();

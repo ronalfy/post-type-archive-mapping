@@ -953,6 +953,7 @@ body.has-blocks .fl-post-content .ptam-pagination {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	float: none;
 
 	.ptam-author,
 	.ptam-date,
@@ -966,6 +967,28 @@ body.has-blocks .fl-post-content .ptam-pagination {
 		& > span {
 			display: inline-block;
 			margin-left: 5px;
+		}
+	}
+
+	&.alignleft > div {
+		margin-right: 15px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	&.alignright > div {
+		margin-left: 15px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+	&.stacked > div {
+		margin-bottom: 5px;
+
+		&:last-child {
+			margin-bottom: 0;
 		}
 	}
 

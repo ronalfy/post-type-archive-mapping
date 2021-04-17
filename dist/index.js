@@ -16729,7 +16729,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
           e.preventDefault();
         }
       }, posts[i].post_title)), listShowPostMeta && /*#__PURE__*/React.createElement("div", {
-        className: "ptam-hierarchical-list-item-meta"
+        className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('ptam-hierarchical-list-item-meta', listShowPostMetaAppearance)
       }, listShowPostMetaAuthor && /*#__PURE__*/React.createElement("div", {
         className: "ptam-author"
       }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("a", {
