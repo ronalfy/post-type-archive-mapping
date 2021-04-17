@@ -581,6 +581,22 @@ class Post_List {
 					'listMetaDateFormat' => array(
 						'type' => 'string',
 						'default' => 'MMMM DD, YYYY',
+					),
+					'listMetaIconColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'listMetaTextColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'listMetaLinkColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'listMetaLinkColorHover' => array(
+						'type' => 'string',
+						'default' => '#000000',
 					)
 				),
 				'render_callback' => array( $this, 'output' ),

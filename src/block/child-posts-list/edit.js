@@ -203,6 +203,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listShowPostMetaComments,
 		listMetaDateFormat,
 		listMetaIconColor,
+		listMetaTextColor,
 		listMetaLinkColor,
 		listMetaLinkColorHover,
 	} = attributes;
@@ -370,14 +371,28 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 						</a>
 					</h2>
 				) }
-				{ listShowPostMeta &&
-					<div className={ classnames( 'ptam-hierarchical-list-item-meta', listShowPostMetaAppearance ) }>
-						{ listShowPostMetaAuthor &&
-							<div className="ptam-author"><span><a onClick={ ( e ) => {
-								e.preventDefault();
-							} } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
-						}
-						{ listShowPostMetaDate &&
+				{ listShowPostMeta && (
+					<div
+						className={ classnames(
+							'ptam-hierarchical-list-item-meta',
+							listShowPostMetaAppearance
+						) }
+					>
+						{ listShowPostMetaAuthor && (
+							<div className="ptam-author">
+								<span>
+									<a
+										onClick={ ( e ) => {
+											e.preventDefault();
+										} }
+										href={ posts[ i ].author_info.author_link }
+									>
+										{ posts[ i ].author_info.display_name }
+									</a>
+								</span>
+							</div>
+						) }
+						{ listShowPostMetaDate && (
 							<div className="ptam-date">
 								<span>
 									<time
@@ -388,11 +403,13 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									</time>
 								</span>
 							</div>
-						}
-						{ listShowPostMetaTerms && posts[ i ].taxonomies &&
-							<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
-						}
-						{ listShowPostMetaComments && posts[ i ].comment_count > 0 &&
+						) }
+						{ listShowPostMetaTerms && posts[ i ].taxonomies && (
+							<div className="ptam-terms">
+								<span>{ outputPostTerms( posts[ i ] ) }</span>
+							</div>
+						) }
+						{ listShowPostMetaComments && posts[ i ].comment_count > 0 && (
 							<div className="ptam-comments">
 								<span>
 									{ posts[ i ].comment_count }{ ' ' }
@@ -404,9 +421,9 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									) }
 								</span>
 							</div>
-						}
+						) }
 					</div>
-				}
+				) }
 				{ listShowFeaturedImage && '' !== posts[ i ].featured_image_src && (
 					<figure>
 						<a
@@ -434,7 +451,9 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 			/* Tag mapping courtesy: @imos https://stackoverflow.com/a/40276830 */
 			return (
 				<Fragment key={ taxKey }>
-					<span className="ptam-hierarchical-list-meta-tax-name">{ taxData.label }:&nbsp;</span>
+					<span className="ptam-hierarchical-list-meta-tax-name">
+						{ taxData.label }:&nbsp;
+					</span>
 					{ Object.values( taxData.terms ).map( ( termData, i ) => [
 						i > 0 && ', ',
 						<a
@@ -1212,7 +1231,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								} );
 							} }
 						/>
-						{ listShowPostMeta &&
+						{ listShowPostMeta && 'Desktop' === getDeviceType() && (
 							<>
 								<ToggleControl
 									label={ __( 'Show Author', 'post-type-archive-mapping' ) }
@@ -1250,7 +1269,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 										} );
 									} }
 								/>
-								{ listShowPostMetaDate &&
+								{ listShowPostMetaDate && (
 									<SelectControl
 										label={ __( 'Date Format', 'post-type-archive-mapping' ) }
 										options={ postMetaDateFormatOptions }
@@ -1261,7 +1280,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 											} );
 										} }
 									/>
-								}
+								) }
 								<SelectControl
 									label={ __( 'Appearance', 'post-type-archive-mapping' ) }
 									options={ postMetaAppearanceOptions }
@@ -1272,8 +1291,80 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 										} );
 									} }
 								/>
+								<PTAMColorPicker
+									value={ listMetaIconColor }
+									valueOpacity={ 1 }
+									onChange={ ( value ) => {
+										setAttributes( { listMetaIconColor: value } );
+									} }
+									// eslint-disable-next-line no-unused-vars
+									onOpacityChange={ ( value ) => {} }
+									label={ __( 'Icon Color', 'post-type-archive-mapping' ) }
+									alpha={ false }
+								/>
+								<PTAMColorPicker
+									value={ listMetaTextColor }
+									valueOpacity={ 1 }
+									onChange={ ( value ) => {
+										setAttributes( { listMetaTextColor: value } );
+									} }
+									// eslint-disable-next-line no-unused-vars
+									onOpacityChange={ ( value ) => {} }
+									label={ __( 'Text Color', 'post-type-archive-mapping' ) }
+									alpha={ false }
+								/>
+								<TabPanel
+									className="layout-tab-panel ptam-control-tabs"
+									activeClass="active-tab"
+									tabs={ [
+										{
+											name: 'list-meta-link-color',
+											title: __( 'Normal', 'post-type-archive-mapping' ),
+											className: 'list-meta-link-color',
+										},
+										{
+											name: 'list-meta-link-color-hover',
+											title: __( 'Hover', 'post-type-archive-mapping' ),
+											className: 'list-meta-link-color-hover',
+										},
+									] }
+								>
+									{ ( tab ) => {
+										const isNormal = tab.name === 'list-meta-link-color';
+
+										return (
+											<div>
+												{ isNormal ? (
+													<PTAMColorPicker
+														value={ listMetaLinkColor }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listMetaLinkColor: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __( 'Link Color', 'post-type-archive-mapping' ) }
+														alpha={ false }
+													/>
+												) : (
+													<PTAMColorPicker
+														value={ listMetaLinkColorHover }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listMetaLinkColorHover: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __( 'Link Color', 'post-type-archive-mapping' ) }
+														alpha={ false }
+													/>
+												) }
+											</div>
+										);
+									} }
+								</TabPanel>
 							</>
-						}
+						) }
 					</>
 				) }
 			</PanelBody>
@@ -1770,6 +1861,31 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 			`
 		);
 	}
+	builder.addCSS(
+		'.ptam-hierarchical-list-item-meta',
+		`
+		color: ${ hexToRgba( listMetaTextColor, 1 ) };
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-list-item-meta > div:before',
+		`
+		color: ${ hexToRgba( listMetaIconColor, 1 ) };
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-list-item-meta > div a',
+		`
+		color: ${ hexToRgba( listMetaLinkColor, 1 ) };
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-list-item-meta > div a:hover',
+		`
+		color: ${ hexToRgba( listMetaLinkColorHover, 1 ) };
+		`
+	);
+
 	return (
 		<>
 			{ inspectorControls }

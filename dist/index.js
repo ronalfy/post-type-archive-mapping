@@ -16531,6 +16531,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listShowPostMetaComments = attributes.listShowPostMetaComments,
       listMetaDateFormat = attributes.listMetaDateFormat,
       listMetaIconColor = attributes.listMetaIconColor,
+      listMetaTextColor = attributes.listMetaTextColor,
       listMetaLinkColor = attributes.listMetaLinkColor,
       listMetaLinkColorHover = attributes.listMetaLinkColorHover; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
@@ -17405,7 +17406,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listShowPostMeta: value
       });
     }
-  }), listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+  }), listShowPostMeta && 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Show Author', 'post-type-archive-mapping'),
     checked: listShowPostMetaAuthor,
     onChange: function onChange(value) {
@@ -17455,6 +17456,69 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listShowPostMetaAppearance: value
       });
     }
+  }), /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: listMetaIconColor,
+    valueOpacity: 1,
+    onChange: function onChange(value) {
+      setAttributes({
+        listMetaIconColor: value
+      });
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onOpacityChange: function onOpacityChange(value) {},
+    label: __('Icon Color', 'post-type-archive-mapping'),
+    alpha: false
+  }), /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: listMetaTextColor,
+    valueOpacity: 1,
+    onChange: function onChange(value) {
+      setAttributes({
+        listMetaTextColor: value
+      });
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onOpacityChange: function onOpacityChange(value) {},
+    label: __('Text Color', 'post-type-archive-mapping'),
+    alpha: false
+  }), /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'list-meta-link-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'list-meta-link-color'
+    }, {
+      name: 'list-meta-link-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'list-meta-link-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'list-meta-link-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listMetaLinkColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listMetaLinkColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Link Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listMetaLinkColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listMetaLinkColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Link Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
   })))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
@@ -17662,6 +17726,10 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tjustify-content: space-evenly;\n\t\t\t");
   }
 
+  builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaTextColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item-meta > div:before', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaIconColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item-meta > div a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaLinkColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item-meta > div a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaLinkColorHover, 1), ";\n\t\t"));
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(listTitleFontFamily.replace(/ /g, '+'))
