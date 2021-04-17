@@ -195,6 +195,11 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listTitleLineHeightMobile,
 		listTitleLineHeightUnit,
 		listTitleAlign,
+		listShowPostMeta,
+		listShowPostMetaAuthor,
+		listShowPostMetaDate,
+		listShowPostMetaTerms,
+		listShowPostMetaComments,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -360,35 +365,41 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 						</a>
 					</h2>
 				) }
-				<div className="ptam-hierarchical-list-item-meta">
-					<div className="ptam-author"><span><a onClick={ ( e ) => { e.preventDefault(); } } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
-					<div className="ptam-date">
-						<span>
-							<time
-								dateTime={ dayjs( posts[ i ].post_date_gmt ).format() }
-								className={ 'ptam-block-post-grid-date' }
-							>
-								{ dayjs( posts[ i ].post_date_gmt ).format( 'MMMM DD, YYYY' ) }
-							</time>
-						</span>
+				{ listShowPostMeta &&
+					<div className="ptam-hierarchical-list-item-meta">
+						{ listShowPostMetaAuthor &&
+							<div className="ptam-author"><span><a onClick={ ( e ) => { e.preventDefault(); } } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
+						}
+						{ listShowPostMetaDate &&
+							<div className="ptam-date">
+								<span>
+									<time
+										dateTime={ dayjs( posts[ i ].post_date_gmt ).format() }
+										className={ 'ptam-block-post-grid-date' }
+									>
+										{ dayjs( posts[ i ].post_date_gmt ).format( 'MMMM DD, YYYY' ) }
+									</time>
+								</span>
+							</div>
+						}
+						{ listShowPostMetaTerms && posts[ i ].taxonomies &&
+							<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
+						}
+						{ listShowPostMetaComments && posts[ i ].comment_count > 0 &&
+							<div className="ptam-comments">
+								<span>
+									{ posts[ i ].comment_count }{ ' ' }
+									{ _n(
+										'Comment',
+										'Comments',
+										posts[ i ].comment_count,
+										'post-type-archive-mapping'
+									) }
+								</span>
+							</div>
+						}
 					</div>
-					{ posts[ i ].taxonomies &&
-						<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
-					}
-					{ posts[ i ].comment_count > 0 &&
-						<div className="ptam-comments">
-							<span>
-								{ posts[ i ].comment_count }{ ' ' }
-								{ _n(
-									'Comment',
-									'Comments',
-									posts[ i ].comment_count,
-									'post-type-archive-mapping'
-								) }
-							</span>
-						</div>
-					}
-				</div>
+				}
 				{ listShowFeaturedImage && '' !== posts[ i ].featured_image_src && (
 					<figure>
 						<a
@@ -1121,6 +1132,64 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								/>
 							</>
 						) }
+					</>
+				) }
+			</PanelBody>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Post Meta', 'post-type-archive-mapping' ) }
+			>
+				{ 'Desktop' === getDeviceType() && (
+					<>
+						<ToggleControl
+							label={ __( 'Show Post Meta', 'post-type-archive-mapping' ) }
+							checked={ listShowPostMeta }
+							onChange={ ( value ) => {
+								setAttributes( {
+									listShowPostMeta: value,
+								} );
+							} }
+						/>
+						{ listShowPostMeta &&
+							<>
+								<ToggleControl
+									label={ __( 'Show Author', 'post-type-archive-mapping' ) }
+									checked={ listShowPostMetaAuthor }
+									onChange={ ( value ) => {
+										setAttributes( {
+											listShowPostMetaAuthor: value,
+										} );
+									} }
+								/>
+								<ToggleControl
+									label={ __( 'Show Date', 'post-type-archive-mapping' ) }
+									checked={ listShowPostMetaDate}
+									onChange={ ( value ) => {
+										setAttributes( {
+											listShowPostMetaDate: value,
+										} );
+									} }
+								/>
+								<ToggleControl
+									label={ __( 'Show Taxonomy Terms', 'post-type-archive-mapping' ) }
+									checked={ listShowPostMetaTerms}
+									onChange={ ( value ) => {
+										setAttributes( {
+											listShowPostMetaTerms: value,
+										} );
+									} }
+								/>
+								<ToggleControl
+									label={ __( 'Show Comment Count', 'post-type-archive-mapping' ) }
+									checked={ listShowPostMetaComments}
+									onChange={ ( value ) => {
+										setAttributes( {
+											listShowPostMetaComments: value,
+										} );
+									} }
+								/>
+							</>
+						}
 					</>
 				) }
 			</PanelBody>

@@ -16522,7 +16522,12 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listTitleLineHeightTablet = attributes.listTitleLineHeightTablet,
       listTitleLineHeightMobile = attributes.listTitleLineHeightMobile,
       listTitleLineHeightUnit = attributes.listTitleLineHeightUnit,
-      listTitleAlign = attributes.listTitleAlign; // Retrieve WPML languages.
+      listTitleAlign = attributes.listTitleAlign,
+      listShowPostMeta = attributes.listShowPostMeta,
+      listShowPostMetaAuthor = attributes.listShowPostMetaAuthor,
+      listShowPostMetaDate = attributes.listShowPostMetaDate,
+      listShowPostMetaTerms = attributes.listShowPostMetaTerms,
+      listShowPostMetaComments = attributes.listShowPostMetaComments; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16722,23 +16727,23 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         onClick: function onClick(e) {
           e.preventDefault();
         }
-      }, posts[i].post_title)), /*#__PURE__*/React.createElement("div", {
+      }, posts[i].post_title)), listShowPostMeta && /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-list-item-meta"
-      }, /*#__PURE__*/React.createElement("div", {
+      }, listShowPostMetaAuthor && /*#__PURE__*/React.createElement("div", {
         className: "ptam-author"
       }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("a", {
         onClick: function onClick(e) {
           e.preventDefault();
         },
         href: posts[i].author_info.author_link
-      }, posts[i].author_info.display_name))), /*#__PURE__*/React.createElement("div", {
+      }, posts[i].author_info.display_name))), listShowPostMetaDate && /*#__PURE__*/React.createElement("div", {
         className: "ptam-date"
       }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("time", {
         dateTime: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format(),
         className: 'ptam-block-post-grid-date'
-      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY')))), posts[i].taxonomies && /*#__PURE__*/React.createElement("div", {
+      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY')))), listShowPostMetaTerms && posts[i].taxonomies && /*#__PURE__*/React.createElement("div", {
         className: "ptam-terms"
-      }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), posts[i].comment_count > 0 && /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), listShowPostMetaComments && posts[i].comment_count > 0 && /*#__PURE__*/React.createElement("div", {
         className: "ptam-comments"
       }, /*#__PURE__*/React.createElement("span", null, posts[i].comment_count, ' ', _n('Comment', 'Comments', posts[i].comment_count, 'post-type-archive-mapping')))), listShowFeaturedImage && '' !== posts[i].featured_image_src && /*#__PURE__*/React.createElement("figure", null, /*#__PURE__*/React.createElement("a", {
         href: posts[i].link,
@@ -17357,6 +17362,49 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitleMarginUnitMobile",
     attrSyncUnits: "listTitleMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
+  })))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Post Meta', 'post-type-archive-mapping')
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Post Meta', 'post-type-archive-mapping'),
+    checked: listShowPostMeta,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMeta: value
+      });
+    }
+  }), listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Author', 'post-type-archive-mapping'),
+    checked: listShowPostMetaAuthor,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMetaAuthor: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Date', 'post-type-archive-mapping'),
+    checked: listShowPostMetaDate,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMetaDate: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Taxonomy Terms', 'post-type-archive-mapping'),
+    checked: listShowPostMetaTerms,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMetaTerms: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Comment Count', 'post-type-archive-mapping'),
+    checked: listShowPostMetaComments,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMetaComments: value
+      });
+    }
   })))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),

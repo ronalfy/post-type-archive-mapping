@@ -554,6 +554,26 @@ class Post_List {
 						'type'    => 'string',
 						'default' => 'left',
 					),
+					'listShowPostMeta' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
+					'listShowPostMetaAuthor' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+					'listShowPostMetaDate' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+					'listShowPostMetaTerms' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
+					'listShowPostMetaComments' => array(
+						'type' => 'boolean',
+						'default' => false,
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
