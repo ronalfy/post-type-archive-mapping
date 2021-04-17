@@ -1700,6 +1700,40 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		text-align: ${ listFeaturedImageAlign };
 		`
 	);
+
+	// Post Meta Styles.
+	if ( 'stacked' === listShowPostMetaAppearance ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item-meta',
+			`
+			display: block;
+			`
+		);
+	}
+	if ( 'alignleft' === listShowPostMetaAppearance ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item-meta',
+			`
+			justify-content: flex-start;
+			`
+		);
+	}
+	if ( 'alignright' === listShowPostMetaAppearance ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item-meta',
+			`
+			justify-content: flex-end;
+			`
+		);
+	}
+	if ( 'aligncenter' === listShowPostMetaAppearance ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-item-meta',
+			`
+			justify-content: space-evenly;
+			`
+		);
+	}
 	return (
 		<>
 			{ inspectorControls }

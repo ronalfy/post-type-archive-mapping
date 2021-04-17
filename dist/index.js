@@ -17617,7 +17617,24 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   } // Featured Image Styles.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item > figure', "\n\t\ttext-align: ".concat(listFeaturedImageAlign, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > figure', "\n\t\ttext-align: ".concat(listFeaturedImageAlign, ";\n\t\t")); // Post Meta Styles.
+
+  if ('stacked' === listShowPostMetaAppearance) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tdisplay: block;\n\t\t\t");
+  }
+
+  if ('alignleft' === listShowPostMetaAppearance) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tjustify-content: flex-start;\n\t\t\t");
+  }
+
+  if ('alignright' === listShowPostMetaAppearance) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tjustify-content: flex-end;\n\t\t\t");
+  }
+
+  if ('aligncenter' === listShowPostMetaAppearance) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tjustify-content: space-evenly;\n\t\t\t");
+  }
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(listTitleFontFamily.replace(/ /g, '+'))
