@@ -4,6 +4,7 @@
  */
 import classnames from 'classnames';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import DimensionsControl from '../../components/dimensions';
 import PTAMColorPicker from '../../components/color-picker';
 import PTAMGradientPicker from '../../components/gradient-picker';
@@ -360,10 +361,33 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					</h2>
 				) }
 				<div className="ptam-hierarchical-list-item-meta">
-					<div className="ptam-author"><span>Ronald Huereca</span></div>
-					<div className="ptam-date"><span>Feb 10, 2015</span></div>
-					<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
-					<div className="ptam-comments"><span>0 Comments</span></div>
+					<div className="ptam-author"><span><a onClick={ ( e ) => { e.preventDefault(); } } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
+					<div className="ptam-date">
+						<span>
+							<time
+								dateTime={ dayjs( posts[ i ].post_date_gmt ).format() }
+								className={ 'ptam-block-post-grid-date' }
+							>
+								{ dayjs( posts[ i ].post_date_gmt ).format( 'MMMM DD, YYYY' ) }
+							</time>
+						</span>
+					</div>
+					{ posts[ i ].taxonomies &&
+						<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
+					}
+					{ posts[ i ].comment_count > 0 &&
+						<div className="ptam-comments">
+							<span>
+								{ posts[ i ].comment_count }{ ' ' }
+								{ _n(
+									'Comment',
+									'Comments',
+									posts[ i ].comment_count,
+									'post-type-archive-mapping'
+								) }
+							</span>
+						</div>
+					}
 				</div>
 				{ listShowFeaturedImage && '' !== posts[ i ].featured_image_src && (
 					<figure>
@@ -381,11 +405,17 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		) );
 	};
 
+	/**
+	 * Output the terms in comma-separated format. (Taxonomy: term 1, term 2, term3)
+	 *
+	 * @param {Object} post The individual post object.
+	 * @return {JSX} Taxonomy term list.
+	 */
 	const outputPostTerms = ( post ) => {
-		return Object.values( post.taxonomies ).map( ( taxData ) => {
+		return Object.values( post.taxonomies ).map( ( taxData, taxKey ) => {
 			/* Tag mapping courtesy: @imos https://stackoverflow.com/a/40276830 */
-			const taxWrapper = (
-				<>
+			return (
+				<Fragment key={ taxKey }>
 					<span className="ptam-hierarchical-list-meta-tax-name">{ taxData.label }:&nbsp;</span>
 					{ Object.values( taxData.terms ).map( ( termData, i ) => [
 						i > 0 && ', ',
@@ -399,13 +429,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							{ termData.label }
 						</a>,
 					] ) }
-				</>
-			);
-
-			return (
-				<>
-					{ taxWrapper }
-				</>
+				</Fragment>
 			);
 		} );
 	};

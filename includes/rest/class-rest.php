@@ -863,7 +863,7 @@ class Rest {
 						}
 					}
 				}
-				$post->taxonomies = $term_tax_array;
+				$post->taxonomies = ! empty( $term_tax_array ) ? $term_tax_array : false;
 
 				if ( empty( $post->post_excerpt ) ) {
 					$post->post_excerpt = apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );

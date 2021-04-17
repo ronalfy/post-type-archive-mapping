@@ -16307,21 +16307,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
-/* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
-/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
-/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
-/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
-/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
-/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
-/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
-/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
-/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
-/* harmony import */ var _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography/GoogleFonts */ "./src/components/typography/GoogleFonts.js");
-/* harmony import */ var _components_alignment__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/alignment */ "./src/components/alignment/index.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_dimensions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/dimensions */ "./src/components/dimensions/index.js");
+/* harmony import */ var _components_color_picker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/color-picker */ "./src/components/color-picker/index.js");
+/* harmony import */ var _components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/gradient-picker */ "./src/components/gradient-picker/index.js");
+/* harmony import */ var _components_unit_picker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/unit-picker */ "./src/components/unit-picker/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Loading */ "./src/components/Loading.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! hex-to-rgba */ "./node_modules/hex-to-rgba/build/index.js");
+/* harmony import */ var hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _utilities_css_builder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/css-builder */ "./src/utilities/css-builder/index.js");
+/* harmony import */ var _utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/value-with-unit */ "./src/utilities/value-with-unit/index.js");
+/* harmony import */ var _utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utilities/shorthand-css */ "./src/utilities/shorthand-css/index.js");
+/* harmony import */ var _components_responsive_tabs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/responsive-tabs */ "./src/components/responsive-tabs/index.js");
+/* harmony import */ var _components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/hierarchical-items */ "./src/components/hierarchical-items/index.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+/* harmony import */ var _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/typography/GoogleFonts */ "./src/components/typography/GoogleFonts.js");
+/* harmony import */ var _components_alignment__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/alignment */ "./src/components/alignment/index.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -16347,6 +16349,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -16723,13 +16726,21 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         className: "ptam-hierarchical-list-item-meta"
       }, /*#__PURE__*/React.createElement("div", {
         className: "ptam-author"
-      }, /*#__PURE__*/React.createElement("span", null, "Ronald Huereca")), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("a", {
+        onClick: function onClick(e) {
+          e.preventDefault();
+        },
+        href: posts[i].author_info.author_link
+      }, posts[i].author_info.display_name))), /*#__PURE__*/React.createElement("div", {
         className: "ptam-date"
-      }, /*#__PURE__*/React.createElement("span", null, "Feb 10, 2015")), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("time", {
+        dateTime: dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format(),
+        className: 'ptam-block-post-grid-date'
+      }, dayjs__WEBPACK_IMPORTED_MODULE_2___default()(posts[i].post_date_gmt).format('MMMM DD, YYYY')))), posts[i].taxonomies && /*#__PURE__*/React.createElement("div", {
         className: "ptam-terms"
-      }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), posts[i].comment_count > 0 && /*#__PURE__*/React.createElement("div", {
         className: "ptam-comments"
-      }, /*#__PURE__*/React.createElement("span", null, "0 Comments"))), listShowFeaturedImage && '' !== posts[i].featured_image_src && /*#__PURE__*/React.createElement("figure", null, /*#__PURE__*/React.createElement("a", {
+      }, /*#__PURE__*/React.createElement("span", null, posts[i].comment_count, ' ', _n('Comment', 'Comments', posts[i].comment_count, 'post-type-archive-mapping')))), listShowFeaturedImage && '' !== posts[i].featured_image_src && /*#__PURE__*/React.createElement("figure", null, /*#__PURE__*/React.createElement("a", {
         href: posts[i].link,
         onClick: function onClick(e) {
           e.preventDefault();
@@ -16740,11 +16751,20 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       }))));
     });
   };
+  /**
+   * Output the terms in comma-separated format. (Taxonomy: term 1, term 2, term3)
+   *
+   * @param {Object} post The individual post object.
+   * @return {JSX} Taxonomy term list.
+   */
+
 
   var outputPostTerms = function outputPostTerms(post) {
-    return Object.values(post.taxonomies).map(function (taxData) {
+    return Object.values(post.taxonomies).map(function (taxData, taxKey) {
       /* Tag mapping courtesy: @imos https://stackoverflow.com/a/40276830 */
-      var taxWrapper = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+      return /*#__PURE__*/React.createElement(Fragment, {
+        key: taxKey
+      }, /*#__PURE__*/React.createElement("span", {
         className: "ptam-hierarchical-list-meta-tax-name"
       }, taxData.label, ":\xA0"), Object.values(taxData.terms).map(function (termData, i) {
         return [i > 0 && ', ', /*#__PURE__*/React.createElement("a", {
@@ -16755,7 +16775,6 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
           key: i
         }, termData.label)];
       }));
-      return /*#__PURE__*/React.createElement(React.Fragment, null, taxWrapper);
     });
   };
   /**
@@ -16886,7 +16905,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     value: 'color',
     label: __('Color', 'post-type-archive-mapping')
   }];
-  var listOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+  var listOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
     selectedDevice: getDeviceType(),
     onClick: function onClick(device) {
       changeDeviceType(device);
@@ -16894,7 +16913,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   })), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Container', 'post-type-archive-mapping')
-  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: __('Minimum Height', 'post-type-archive-mapping'),
     value: listMinHeightUnit,
     units: ['px', 'em', 'vh'],
@@ -16921,7 +16940,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     },
     min: 1,
     max: 4
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -16932,7 +16951,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listPaddingUnit",
     attrSyncUnits: "listPaddingUnitsSync",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: __('Margin', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
@@ -16953,7 +16972,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listBackgroundType: value
       });
     }
-  }), 'color' === listBackgroundType && /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), 'color' === listBackgroundType && /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
     value: listBackgroundColor,
     valueOpacity: 1,
     onChange: function onChange(value) {
@@ -16965,7 +16984,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     onOpacityChange: function onOpacityChange(value) {},
     label: __('Background Color', 'post-type-archive-mapping'),
     alpha: false
-  }), 'gradient' === listBackgroundType && /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), 'gradient' === listBackgroundType && /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onChange: function onChange(value) {
       setAttributes({
         listBackgroundGradient: value
@@ -16973,7 +16992,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     },
     label: __('Background Gradient', 'post-type-archive-mapping'),
     value: listBackgroundGradient
-  }), /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
     value: listBorderColor,
     valueOpacity: 1,
     onChange: function onChange(value) {
@@ -16995,7 +17014,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     },
     min: 0,
     max: 100
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: __('Border Radius', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
@@ -17011,7 +17030,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     labelBottom: __('B-Right', 'post-type-archive-mapping'),
     labelLeft: __('B-Left', 'post-type-archive-mapping'),
     units: ['px', 'em', 'rem']
-  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: __('Minimum Height', 'post-type-archive-mapping'),
     value: listMinHeightUnitTablet,
     units: ['px', 'em', 'vh'],
@@ -17028,7 +17047,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listMinHeightTablet: parseFloat(value)
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17039,7 +17058,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listPaddingUnitTablet",
     attrSyncUnits: "listPaddingUnitsSyncTablet",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17050,7 +17069,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listMarginUnitTablet",
     attrSyncUnits: "listMarginUnitsSyncTablet",
     units: ['px', 'em', 'rem']
-  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_unit_picker__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: __('Minimum Height', 'post-type-archive-mapping'),
     value: listMinHeightUnitMobile,
     units: ['px', 'em', 'vh'],
@@ -17067,7 +17086,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listMinHeightMobile: parseFloat(value)
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17078,7 +17097,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listPaddingUnitMobile",
     attrSyncUnits: "listPaddingUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17137,7 +17156,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listImageTypeSize: value
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onClick: function onClick(value) {
       setAttributes({
         listFeaturedImageAlign: value
@@ -17170,7 +17189,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     }]
   }, function (tab) {
     var isNormal = tab.name === 'list-title-color';
-    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
       value: listTitleColor,
       valueOpacity: 1,
       onChange: function onChange(value) {
@@ -17182,7 +17201,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       onOpacityChange: function onOpacityChange(value) {},
       label: __('Title Color', 'post-type-archive-mapping'),
       alpha: false
-    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
       value: listTitleColorHover,
       valueOpacity: 1,
       onChange: function onChange(value) {
@@ -17195,7 +17214,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       label: __('Title Color', 'post-type-archive-mapping'),
       alpha: false
     }));
-  }), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
     label: __('Title Typography', 'post-type-archive-mapping'),
     options: listTitleFontParamsDesktop,
     showFontFamily: true,
@@ -17217,7 +17236,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listTitleTextTransform: fontObject.textTransform
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onClick: function onClick(value) {
       setAttributes({
         listTitleAlign: value
@@ -17225,7 +17244,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     },
     alignment: listTitleAlign,
     label: __('Change Title Alignment', 'post-type-archive-mapping')
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17236,7 +17255,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitlePaddingUnit",
     attrSyncUnits: "listTitlePaddingUnitsSync",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: __('Margin', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
@@ -17248,7 +17267,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitleMarginUnit",
     attrSyncUnits: "listTitleMarginUnitsSync",
     units: ['px', 'em', 'rem']
-  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  })), 'Tablet' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
     label: __('Title Typography', 'post-type-archive-mapping'),
     options: listTitleFontParamsTablet,
     showFontFamily: false,
@@ -17270,7 +17289,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listTitleTextTransform: fontObject.textTransform
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17281,7 +17300,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitlePaddingUnitTablet",
     attrSyncUnits: "listTitlePaddingUnitsSyncTablet",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: __('Margin', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
@@ -17293,7 +17312,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitleMarginUnitTablet",
     attrSyncUnits: "listTitleMarginUnitsSyncTablet",
     units: ['px', 'em', 'rem']
-  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  })), 'Mobile' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
     label: __('Title Typography', 'post-type-archive-mapping'),
     options: listTitleFontParamsMobile,
     showFontFamily: false,
@@ -17315,7 +17334,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listTitleTextTransform: fontObject.textTransform
       });
     }
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
@@ -17326,7 +17345,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listTitlePaddingUnitMobile",
     attrSyncUnits: "listTitlePaddingUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
     label: __('Margin', 'post-type-archive-mapping'),
     attributes: attributes,
     setAttributes: setAttributes,
@@ -17360,7 +17379,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         hierarchy: value
       });
     }
-  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), 'children' === hierarchy && /*#__PURE__*/React.createElement(_components_hierarchical_items__WEBPACK_IMPORTED_MODULE_13__["default"], {
     label: __('Select a Parent Item', 'post-type-archive-mapping'),
     postType: postType,
     selectedItem: parentItem,
@@ -17427,11 +17446,11 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   if (loading) {
     return /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
       className: "ptam-term-list-loading"
-    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), " ", __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading…', 'post-type-archive-mapping')))));
+    }, /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], null), " ", __('Child Posts Grid', 'post-type-archive-mapping')), /*#__PURE__*/React.createElement("h2", null, __('Loading…', 'post-type-archive-mapping')))));
   } // Begin building CSS.
 
 
-  var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_8__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
+  var builder = new _utilities_css_builder__WEBPACK_IMPORTED_MODULE_9__["default"]("ptam-hierarchy-wrapper-".concat(uniqueId)); // Grid CSS.
 
   builder.addCSS('.ptam-hierarchical-list-items', "\n\t\tdisplay: grid;\n\t\tgrid-template-columns: 1fr;\n\t\tcolumn-gap: 20px;\n\t\trow-gap: 20px;\n\t\tbackground-repeat: no-repeat;\n\t\t");
   builder.addCSS('.ptam-hierarchical-list-items.ptam-hierarchical-list-columns-1', "\n\t\tgrid-template-columns: 1fr;\n\t\t");
@@ -17448,14 +17467,14 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   } // List Item Flex goodness.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listMinHeight, listMinHeightUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMinHeight, listMinHeightUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listMinHeightTablet, listMinHeightUnitTablet), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMinHeightTablet, listMinHeightUnitTablet), ";\n\t\t\t"));
   }
 
   if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listMinHeightMobile, listMinHeightUnitMobile), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmin-height: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMinHeightMobile, listMinHeightUnitMobile), ";\n\t\t\t"));
   } // List item figure reset.
 
 
@@ -17464,71 +17483,71 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   if ('gradient' === listBackgroundType) {
     builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tbackground: ".concat(listBackgroundGradient, ";\n\t\t\t"));
   } else {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listBackgroundColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listBackgroundColor, 1), ";\n\t\t\t"));
   } // List Padding.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listPaddingTop, listPaddingRight, listPaddingBottom, listPaddingLeft, listPaddingUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listPaddingTop, listPaddingRight, listPaddingBottom, listPaddingLeft, listPaddingUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listPaddingTopTablet, listPaddingRightTablet, listPaddingBottomTablet, listPaddingLeftTablet, listPaddingUnitTablet), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listPaddingTopTablet, listPaddingRightTablet, listPaddingBottomTablet, listPaddingLeftTablet, listPaddingUnitTablet), ";\n\t\t\t"));
   }
 
   if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listPaddingTopMobile, listPaddingRightMobile, listPaddingBottomMobile, listPaddingLeftMobile, listPaddingUnitMobile), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listPaddingTopMobile, listPaddingRightMobile, listPaddingBottomMobile, listPaddingLeftMobile, listPaddingUnitMobile), ";\n\t\t\t"));
   } // List Margin.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listMarginTop, listMarginRight, listMarginBottom, listMarginLeft, listMarginUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMarginTop, listMarginRight, listMarginBottom, listMarginLeft, listMarginUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listMarginTopTablet, listMarginRightTablet, listMarginBottomTablet, listMarginLeftTablet, listMarginUnitTablet), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMarginTopTablet, listMarginRightTablet, listMarginBottomTablet, listMarginLeftTablet, listMarginUnitTablet), ";\n\t\t\t"));
   }
 
   if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listMarginTopMobile, listMarginRightMobile, listMarginBottomMobile, listMarginLeftMobile, listMarginUnitMobile), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMarginTopMobile, listMarginRightMobile, listMarginBottomMobile, listMarginLeftMobile, listMarginUnitMobile), ";\n\t\t\t"));
   } // List Item Border Styles.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listBorderRadiusTopleft, listBorderRadiusTopRight, listBorderRadiusBottomRight, listBorderRadiusBottomLeft, listBorderRadiusUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listBorderRadiusTopleft, listBorderRadiusTopRight, listBorderRadiusBottomRight, listBorderRadiusBottomLeft, listBorderRadiusUnit), ";\n\t\t"));
 
   if ('' !== listBorderColor) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listBorderColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listBorderColor, 1), ";\n\t\t\t"));
   }
 
   if (0 < listBorderWidth) {
-    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listBorderColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item', "\n\t\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listBorderColor, 1), ";\n\t\t\t"));
   } // Title Styles.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tfont-family: ".concat(listTitleFontFamily ? listTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleFontSize, listTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(listTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLetterSpacing, listTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_9__["default"])(listTitleLineHeight, listTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(listTitleTextTransform, ";\n\t\ttext-align: ").concat(listTitleAlign, ";\n\t\t"));
-  builder.addCSS('.ptam-hierarchical-list-item > h2 a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColor, 1), ";\n\t\t"));
-  builder.addCSS('.ptam-hierarchical-list-item > h2 a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_7___default()(listTitleColorHover, 1), ";\n\t\t")); // Title Padding.
+  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tfont-family: ".concat(listTitleFontFamily ? listTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleFontSize, listTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(listTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLetterSpacing, listTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLineHeight, listTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(listTitleTextTransform, ";\n\t\ttext-align: ").concat(listTitleAlign, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2 a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listTitleColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2 a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listTitleColorHover, 1), ";\n\t\t")); // Title Padding.
 
-  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingTop, listTitlePaddingRight, listTitlePaddingBottom, listTitlePaddingLeft, listTitlePaddingUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitlePaddingTop, listTitlePaddingRight, listTitlePaddingBottom, listTitlePaddingLeft, listTitlePaddingUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingTopTablet, listTitlePaddingRightTablet, listTitlePaddingBottomTablet, listTitlePaddingLeftTablet, listTitlePaddingUnitTablet), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitlePaddingTopTablet, listTitlePaddingRightTablet, listTitlePaddingBottomTablet, listTitlePaddingLeftTablet, listTitlePaddingUnitTablet), ";\n\t\t\t"));
   }
 
   if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitlePaddingTopMobile, listTitlePaddingRightMobile, listTitlePaddingBottomMobile, listTitlePaddingLeftMobile, listTitlePaddingUnitMobile), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitlePaddingTopMobile, listTitlePaddingRightMobile, listTitlePaddingBottomMobile, listTitlePaddingLeftMobile, listTitlePaddingUnitMobile), ";\n\t\t\t"));
   } // List Margin.
 
 
-  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleMarginTop, listTitleMarginRight, listTitleMarginBottom, listTitleMarginLeft, listTitleMarginUnit), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitleMarginTop, listTitleMarginRight, listTitleMarginBottom, listTitleMarginLeft, listTitleMarginUnit), ";\n\t\t"));
 
   if ('Tablet' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleMarginTopTablet, listTitleMarginRightTablet, listTitleMarginBottomTablet, listTitleMarginLeftTablet, listTitleMarginUnitTablet), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitleMarginTopTablet, listTitleMarginRightTablet, listTitleMarginBottomTablet, listTitleMarginLeftTablet, listTitleMarginUnitTablet), ";\n\t\t\t"));
   }
 
   if ('Mobile' === getDeviceType()) {
-    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleMarginTopMobile, listTitleMarginRightMobile, listTitleMarginBottomMobile, listTitleMarginLeftMobile, listTitleMarginUnitMobile), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitleMarginTopMobile, listTitleMarginRightMobile, listTitleMarginBottomMobile, listTitleMarginLeftMobile, listTitleMarginUnitMobile), ";\n\t\t\t"));
   } // Featured Image Styles.
 
 
   builder.addCSS('.ptam-hierarchical-list-item > figure', "\n\t\ttext-align: ".concat(listFeaturedImageAlign, ";\n\t\t"));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_14__["default"] && /*#__PURE__*/React.createElement("link", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(listTitleFontFamily.replace(/ /g, '+'))
   }), /*#__PURE__*/React.createElement("div", {

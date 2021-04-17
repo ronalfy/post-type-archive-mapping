@@ -963,7 +963,7 @@ body.has-blocks .fl-post-content .ptam-pagination {
 			display: inline-block;
 			margin-right: 2px;
 		}
-		span {
+		& > span {
 			display: inline-block;
 			margin-left: 5px;
 		}
