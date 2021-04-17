@@ -196,6 +196,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listTitleLineHeightUnit,
 		listTitleAlign,
 		listShowPostMeta,
+		listShowPostMetaAppearance,
 		listShowPostMetaAuthor,
 		listShowPostMetaDate,
 		listShowPostMetaTerms,
@@ -368,7 +369,9 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 				{ listShowPostMeta &&
 					<div className="ptam-hierarchical-list-item-meta">
 						{ listShowPostMetaAuthor &&
-							<div className="ptam-author"><span><a onClick={ ( e ) => { e.preventDefault(); } } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
+							<div className="ptam-author"><span><a onClick={ ( e ) => {
+								e.preventDefault();
+							} } href={ posts[ i ].author_info.author_link }>{ posts[ i ].author_info.display_name }</a></span></div>
 						}
 						{ listShowPostMetaDate &&
 							<div className="ptam-date">
@@ -482,7 +485,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	const hierarchyOptions = [
 		{
 			value: 'parents',
-			label: __(
+			label: _x(
 				'Only Parents',
 				'Parent posts in a hierarchy',
 				'post-type-archive-mapping'
@@ -490,7 +493,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		},
 		{
 			value: 'children',
-			label: __(
+			label: _x(
 				'Only Children',
 				'Children posts in a hierarchy',
 				'post-type-archive-mapping'
@@ -573,6 +576,41 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		{
 			value: 'color',
 			label: __( 'Color', 'post-type-archive-mapping' ),
+		},
+	];
+
+	const postMetaAppearanceOptions = [
+		{
+			value: 'stacked',
+			label: _x(
+				'Stacked',
+				'Items will be stacked vertically',
+				'post-type-archive-mapping'
+			),
+		},
+		{
+			value: 'alignleft',
+			label: _x(
+				'Align Left',
+				'Items will be aligned left',
+				'post-type-archive-mapping'
+			),
+		},
+		{
+			value: 'aligncenter',
+			label: _x(
+				'Align Center',
+				'Items will be aligned center',
+				'post-type-archive-mapping'
+			),
+		},
+		{
+			value: 'alignright',
+			label: _x(
+				'Align Right',
+				'Items will be aligned right',
+				'post-type-archive-mapping'
+			),
 		},
 	];
 
@@ -1163,7 +1201,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								/>
 								<ToggleControl
 									label={ __( 'Show Date', 'post-type-archive-mapping' ) }
-									checked={ listShowPostMetaDate}
+									checked={ listShowPostMetaDate }
 									onChange={ ( value ) => {
 										setAttributes( {
 											listShowPostMetaDate: value,
@@ -1172,7 +1210,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								/>
 								<ToggleControl
 									label={ __( 'Show Taxonomy Terms', 'post-type-archive-mapping' ) }
-									checked={ listShowPostMetaTerms}
+									checked={ listShowPostMetaTerms }
 									onChange={ ( value ) => {
 										setAttributes( {
 											listShowPostMetaTerms: value,
@@ -1181,10 +1219,20 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								/>
 								<ToggleControl
 									label={ __( 'Show Comment Count', 'post-type-archive-mapping' ) }
-									checked={ listShowPostMetaComments}
+									checked={ listShowPostMetaComments }
 									onChange={ ( value ) => {
 										setAttributes( {
 											listShowPostMetaComments: value,
+										} );
+									} }
+								/>
+								<SelectControl
+									label={ __( 'Appearance', 'post-type-archive-mapping' ) }
+									options={ postMetaAppearanceOptions }
+									value={ listShowPostMetaAppearance }
+									onChange={ ( value ) => {
+										setAttributes( {
+											listShowPostMetaAppearance: value,
 										} );
 									} }
 								/>

@@ -16524,6 +16524,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listTitleLineHeightUnit = attributes.listTitleLineHeightUnit,
       listTitleAlign = attributes.listTitleAlign,
       listShowPostMeta = attributes.listShowPostMeta,
+      listShowPostMetaAppearance = attributes.listShowPostMetaAppearance,
       listShowPostMetaAuthor = attributes.listShowPostMetaAuthor,
       listShowPostMetaDate = attributes.listShowPostMetaDate,
       listShowPostMetaTerms = attributes.listShowPostMetaTerms,
@@ -16821,10 +16822,10 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   var hierarchyOptions = [{
     value: 'parents',
-    label: __('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
+    label: _x('Only Parents', 'Parent posts in a hierarchy', 'post-type-archive-mapping')
   }, {
     value: 'children',
-    label: __('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
+    label: _x('Only Children', 'Children posts in a hierarchy', 'post-type-archive-mapping')
   }]; // Order Params.
 
   var orderOptions = [{
@@ -16909,6 +16910,19 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   }, {
     value: 'color',
     label: __('Color', 'post-type-archive-mapping')
+  }];
+  var postMetaAppearanceOptions = [{
+    value: 'stacked',
+    label: _x('Stacked', 'Items will be stacked vertically', 'post-type-archive-mapping')
+  }, {
+    value: 'alignleft',
+    label: _x('Align Left', 'Items will be aligned left', 'post-type-archive-mapping')
+  }, {
+    value: 'aligncenter',
+    label: _x('Align Center', 'Items will be aligned center', 'post-type-archive-mapping')
+  }, {
+    value: 'alignright',
+    label: _x('Align Right', 'Items will be aligned right', 'post-type-archive-mapping')
   }];
   var listOptions = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(_components_responsive_tabs__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
     selectedDevice: getDeviceType(),
@@ -17403,6 +17417,15 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     onChange: function onChange(value) {
       setAttributes({
         listShowPostMetaComments: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Appearance', 'post-type-archive-mapping'),
+    options: postMetaAppearanceOptions,
+    value: listShowPostMetaAppearance,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostMetaAppearance: value
       });
     }
   })))));

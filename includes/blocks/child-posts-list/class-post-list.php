@@ -554,24 +554,28 @@ class Post_List {
 						'type'    => 'string',
 						'default' => 'left',
 					),
-					'listShowPostMeta' => array(
-						'type' => 'boolean',
+					'listShowPostMeta'                => array(
+						'type'    => 'boolean',
 						'default' => false,
 					),
-					'listShowPostMetaAuthor' => array(
-						'type' => 'boolean',
+					'listShowPostMetaAppearance'      => array(
+						'type'    => 'string',
+						'default' => 'aligncenter', /* stacked, aligncenter, alignright, alignleft */
+					),
+					'listShowPostMetaAuthor'          => array(
+						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listShowPostMetaDate' => array(
-						'type' => 'boolean',
+					'listShowPostMetaDate'            => array(
+						'type'    => 'boolean',
 						'default' => true,
 					),
-					'listShowPostMetaTerms' => array(
-						'type' => 'boolean',
+					'listShowPostMetaTerms'           => array(
+						'type'    => 'boolean',
 						'default' => false,
 					),
-					'listShowPostMetaComments' => array(
-						'type' => 'boolean',
+					'listShowPostMetaComments'        => array(
+						'type'    => 'boolean',
 						'default' => false,
 					),
 				),
