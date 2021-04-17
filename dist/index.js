@@ -16533,7 +16533,60 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listMetaIconColor = attributes.listMetaIconColor,
       listMetaTextColor = attributes.listMetaTextColor,
       listMetaLinkColor = attributes.listMetaLinkColor,
-      listMetaLinkColorHover = attributes.listMetaLinkColorHover; // Retrieve WPML languages.
+      listMetaLinkColorHover = attributes.listMetaLinkColorHover,
+      listMetaPaddingTop = attributes.listMetaPaddingTop,
+      listMetaPaddingRight = attributes.listMetaPaddingRight,
+      listMetaPaddingBottom = attributes.listMetaPaddingBottom,
+      listMetaPaddingLeft = attributes.listMetaPaddingLeft,
+      listMetaPaddingUnit = attributes.listMetaPaddingUnit,
+      listMetaPaddingUnitsSync = attributes.listMetaPaddingUnitsSync,
+      listMetaPaddingTopTablet = attributes.listMetaPaddingTopTablet,
+      listMetaPaddingRightTablet = attributes.listMetaPaddingRightTablet,
+      listMetaPaddingBottomTablet = attributes.listMetaPaddingBottomTablet,
+      listMetaPaddingLeftTablet = attributes.listMetaPaddingLeftTablet,
+      listMetaPaddingUnitTablet = attributes.listMetaPaddingUnitTablet,
+      listMetaPaddingUnitsSyncTablet = attributes.listMetaPaddingUnitsSyncTablet,
+      listMetaPaddingTopMobile = attributes.listMetaPaddingTopMobile,
+      listMetaPaddingRightMobile = attributes.listMetaPaddingRightMobile,
+      listMetaPaddingBottomMobile = attributes.listMetaPaddingBottomMobile,
+      listMetaPaddingLeftMobile = attributes.listMetaPaddingLeftMobile,
+      listMetaPaddingUnitMobile = attributes.listMetaPaddingUnitMobile,
+      listMetaPaddingUnitsSyncMobile = attributes.listMetaPaddingUnitsSyncMobile,
+      listMetaMarginTop = attributes.listMetaMarginTop,
+      listMetaMarginRight = attributes.listMetaMarginRight,
+      listMetaMarginBottom = attributes.listMetaMarginBottom,
+      listMetaMarginLeft = attributes.listMetaMarginLeft,
+      listMetaMarginUnit = attributes.listMetaMarginUnit,
+      listMetaMarginUnitsSync = attributes.listMetaMarginUnitsSync,
+      listMetaMarginTopTablet = attributes.listMetaMarginTopTablet,
+      listMetaMarginRightTablet = attributes.listMetaMarginRightTablet,
+      listMetaMarginBottomTablet = attributes.listMetaMarginBottomTablet,
+      listMetaMarginLeftTablet = attributes.listMetaMarginLeftTablet,
+      listMetaMarginUnitTablet = attributes.listMetaMarginUnitTablet,
+      listMetaMarginUnitsSyncTablet = attributes.listMetaMarginUnitsSyncTablet,
+      listMetaMarginTopMobile = attributes.listMetaMarginTopMobile,
+      listMetaMarginRightMobile = attributes.listMetaMarginRightMobile,
+      listMetaMarginBottomMobile = attributes.listMetaMarginBottomMobile,
+      listMetaMarginLeftMobile = attributes.listMetaMarginLeftMobile,
+      listMetaMarginUnitMobile = attributes.listMetaMarginUnitMobile,
+      listMetaMarginUnitsSyncMobile = attributes.listMetaMarginUnitsSyncMobile,
+      listMetaFontFamily = attributes.listMetaFontFamily,
+      listMetaFontSizeUnit = attributes.listMetaFontSizeUnit,
+      listMetaFontSizeUnitTablet = attributes.listMetaFontSizeUnitTablet,
+      listMetaFontSizeUnitMobile = attributes.listMetaFontSizeUnitMobile,
+      listMetaFontSize = attributes.listMetaFontSize,
+      listMetaFontSizeTablet = attributes.listMetaFontSizeTablet,
+      listMetaFontSizeMobile = attributes.listMetaFontSizeMobile,
+      listMetaFontWeight = attributes.listMetaFontWeight,
+      listMetaLetterSpacing = attributes.listMetaLetterSpacing,
+      listMetaLetterSpacingTablet = attributes.listMetaLetterSpacingTablet,
+      listMetaLetterSpacingMobile = attributes.listMetaLetterSpacingMobile,
+      listMetaLetterSpacingUnit = attributes.listMetaLetterSpacingUnit,
+      listMetaTextTransform = attributes.listMetaTextTransform,
+      listMetaLineHeight = attributes.listMetaLineHeight,
+      listMetaLineHeightTablet = attributes.listMetaLineHeightTablet,
+      listMetaLineHeightMobile = attributes.listMetaLineHeightMobile,
+      listMetaLineHeightUnit = attributes.listMetaLineHeightUnit; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16864,7 +16917,8 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   }, {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
-  }];
+  }]; // List title typography placeholders.
+
   var listTitleFontParamsDesktop = {
     fontFamily: listTitleFontFamily,
     fontSize: listTitleFontSize,
@@ -16897,6 +16951,40 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     textTransform: listTitleTextTransform,
     lineHeight: listTitleLineHeightMobile,
     lineHeightUnit: listTitleLineHeightUnit
+  }; // List Meta Typography Controls.
+
+  var listMetaFontParamsDesktop = {
+    fontFamily: listMetaFontFamily,
+    fontSize: listMetaFontSize,
+    fontSizeUnit: listMetaFontSizeUnit,
+    fontWeight: listMetaFontWeight,
+    letterSpacing: listMetaLetterSpacing,
+    letterSpacingUnit: listMetaLetterSpacingUnit,
+    textTransform: listMetaTextTransform,
+    lineHeight: listMetaLineHeight,
+    lineHeightUnit: listMetaLineHeightUnit
+  };
+  var listMetaFontParamsTablet = {
+    fontFamily: listMetaFontFamily,
+    fontSize: listMetaFontSizeTablet,
+    fontSizeUnit: listMetaFontSizeUnitTablet,
+    fontWeight: listMetaFontWeight,
+    letterSpacing: listMetaLetterSpacingTablet,
+    letterSpacingUnit: listMetaLetterSpacingUnit,
+    textTransform: listMetaTextTransform,
+    lineHeight: listMetaLineHeightTablet,
+    lineHeightUnit: listMetaLineHeightUnit
+  };
+  var listMetaFontParamsMobile = {
+    fontFamily: listMetaFontFamily,
+    fontSize: listMetaFontSizeMobile,
+    fontSizeUnit: listMetaFontSizeUnitMobile,
+    fontWeight: listMetaFontWeight,
+    letterSpacing: listMetaLetterSpacingMobile,
+    letterSpacingUnit: listMetaLetterSpacingUnit,
+    textTransform: listMetaTextTransform,
+    lineHeight: listMetaLineHeightMobile,
+    lineHeightUnit: listMetaLineHeightUnit
   }; // Image Sizes.
 
   var imageSizeOptions = [];
@@ -17519,7 +17607,142 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       label: __('Link Color', 'post-type-archive-mapping'),
       alpha: false
     }));
-  })))));
+  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Meta Typography', 'post-type-archive-mapping'),
+    options: listMetaFontParamsDesktop,
+    showFontFamily: true,
+    showFontSize: true,
+    showFontWeight: true,
+    showTextTransform: true,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listMetaFontFamily: fontObject.fontFamily,
+        listMetaFontSize: fontObject.fontSize,
+        listMetaFontSizeUnit: fontObject.fontSizeUnit,
+        listMetaFontWeight: fontObject.fontWeight,
+        listMetaLetterSpacing: fontObject.letterSpacing,
+        listMetaLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listMetaLineHeight: fontObject.lineHeight,
+        listMetaLineHeightUnit: fontObject.lineHeightUnit,
+        listMetaTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaPaddingTop",
+    attrRight: "listMetaPaddingRight",
+    attrBottom: "listMetaPaddingBottom",
+    attrLeft: "listMetaPaddingLeft",
+    attrUnit: "listMetaPaddingUnit",
+    attrSyncUnits: "listMetaPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaMarginTop",
+    attrRight: "listMetaMarginRight",
+    attrBottom: "listMetaMarginBottom",
+    attrLeft: "listMetaMarginLeft",
+    attrUnit: "listMetaMarginUnit",
+    attrSyncUnits: "listMetaMarginUnitsSync",
+    units: ['px', 'em', 'rem']
+  }))), 'Tablet' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Meta Typography', 'post-type-archive-mapping'),
+    options: listMetaFontParamsTablet,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listMetaFontFamily: fontObject.fontFamily,
+        listMetaFontSizeTablet: fontObject.fontSize,
+        listMetaFontSizeUnitTablet: fontObject.fontSizeUnit,
+        listMetaFontWeight: fontObject.fontWeight,
+        listMetaLetterSpacingTablet: fontObject.letterSpacing,
+        listMetaLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listMetaLineHeightTablet: fontObject.lineHeight,
+        listMetaLineHeightUnit: fontObject.lineHeightUnit,
+        listMetaTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaPaddingTopTablet",
+    attrRight: "listMetaPaddingRightTablet",
+    attrBottom: "listMetaPaddingBottomTablet",
+    attrLeft: "listMetaPaddingLeftTablet",
+    attrUnit: "listMetaPaddingUnitTablet",
+    attrSyncUnits: "listMetaPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaMarginTopTablet",
+    attrRight: "listMetaMarginRightTablet",
+    attrBottom: "listMetaMarginBottomTablet",
+    attrLeft: "listMetaMarginLeftTablet",
+    attrUnit: "listMetaMarginUnitTablet",
+    attrSyncUnits: "listMetaMarginUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Meta Typography', 'post-type-archive-mapping'),
+    options: listMetaFontParamsMobile,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listMetaFontFamily: fontObject.fontFamily,
+        listMetaFontSizeMobile: fontObject.fontSize,
+        listMetaFontSizeUnitMobile: fontObject.fontSizeUnit,
+        listMetaFontWeight: fontObject.fontWeight,
+        listMetaLetterSpacingMobile: fontObject.letterSpacing,
+        listMetaLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listMetaLineHeightMobile: fontObject.lineHeight,
+        listMetaLineHeightUnit: fontObject.lineHeightUnit,
+        listMetaTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaPaddingTopMobile",
+    attrRight: "listMetaPaddingRightMobile",
+    attrBottom: "listMetaPaddingBottomMobile",
+    attrLeft: "listMetaPaddingLeftMobile",
+    attrUnit: "listMetaPaddingUnitMobile",
+    attrSyncUnits: "listMetaPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listMetaMarginTopMobile",
+    attrRight: "listMetaMarginRightMobile",
+    attrBottom: "listMetaMarginBottomMobile",
+    attrLeft: "listMetaMarginLeftMobile",
+    attrUnit: "listMetaMarginUnitMobile",
+    attrSyncUnits: "listMetaMarginUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
     initialOpen: false
@@ -17683,6 +17906,15 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
 
   builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tfont-family: ".concat(listTitleFontFamily ? listTitleFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleFontSize, listTitleFontSizeUnit), ";\n\t\tfont-weight: ").concat(listTitleFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLetterSpacing, listTitleLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLineHeight, listTitleLineHeightUnit), ";\n\t\ttext-transform: ").concat(listTitleTextTransform, ";\n\t\ttext-align: ").concat(listTitleAlign, ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleFontSizeTablet, listTitleFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLetterSpacingTablet, listTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLineHeightTablet, listTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleFontSizeMobile, listTitleFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLetterSpacingMobile, listTitleLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listTitleLineHeightMobile, listTitleLineHeightUnit), ";\n\t\t\t"));
+  }
+
   builder.addCSS('.ptam-hierarchical-list-item > h2 a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listTitleColor, 1), ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item > h2 a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listTitleColorHover, 1), ";\n\t\t")); // Title Padding.
 
@@ -17694,7 +17926,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   if ('Mobile' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitlePaddingTopMobile, listTitlePaddingRightMobile, listTitlePaddingBottomMobile, listTitlePaddingLeftMobile, listTitlePaddingUnitMobile), ";\n\t\t\t"));
-  } // List Margin.
+  } // List Title Margin.
 
 
   builder.addCSS('.ptam-hierarchical-list-item > h2', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listTitleMarginTop, listTitleMarginRight, listTitleMarginBottom, listTitleMarginLeft, listTitleMarginUnit), ";\n\t\t"));
@@ -17730,6 +17962,37 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   builder.addCSS('.ptam-hierarchical-list-item-meta > div:before', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaIconColor, 1), ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item-meta > div a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaLinkColor, 1), ";\n\t\t"));
   builder.addCSS('.ptam-hierarchical-list-item-meta > div a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listMetaLinkColorHover, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\tfont-family: ".concat(listMetaFontFamily ? listMetaFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaFontSize, listMetaFontSizeUnit), ";\n\t\tfont-weight: ").concat(listMetaFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLetterSpacing, listMetaLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLineHeight, listMetaLineHeightUnit), ";\n\t\ttext-transform: ").concat(listMetaTextTransform, ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaFontSizeTablet, listMetaFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLetterSpacingTablet, listMetaLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLineHeightTablet, listMetaLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaFontSizeMobile, listMetaFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLetterSpacingMobile, listMetaLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listMetaLineHeightMobile, listMetaLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaPaddingTop, listMetaPaddingRight, listMetaPaddingBottom, listMetaPaddingLeft, listMetaPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaPaddingTopTablet, listMetaPaddingRightTablet, listMetaPaddingBottomTablet, listMetaPaddingLeftTablet, listMetaPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaPaddingTopMobile, listMetaPaddingRightMobile, listMetaPaddingBottomMobile, listMetaPaddingLeftMobile, listMetaPaddingUnitMobile), ";\n\t\t\t"));
+  } // List Margin.
+
+
+  builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaMarginTop, listMetaMarginRight, listMetaMarginBottom, listMetaMarginLeft, listMetaMarginUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaMarginTopTablet, listMetaMarginRightTablet, listMetaMarginBottomTablet, listMetaMarginLeftTablet, listMetaMarginUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaMarginTopMobile, listMetaMarginRightMobile, listMetaMarginBottomMobile, listMetaMarginLeftMobile, listMetaMarginUnitMobile), ";\n\t\t\t"));
+  }
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css?family=".concat(listTitleFontFamily.replace(/ /g, '+'))
@@ -27141,9 +27404,9 @@ var TypographyControls = function TypographyControls(props) {
     }
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, !isVisible && /*#__PURE__*/React.createElement(BaseControl, {
-    className: "ptam-component-typography-picker-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(BaseControl, {
+    className: "ptam-component-color-picker-wrapper"
+  }, !isVisible && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "ptam-typography-component-label"
   }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
     text: __('Typography Options', 'post-type-archive-mapping')
@@ -27155,9 +27418,7 @@ var TypographyControls = function TypographyControls(props) {
       toggleVisible();
     },
     "aria-label": __('Typography Options', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(BaseControl, {
-    className: "ptam-component-typography-picker-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__["TypographyIcon"], null)))), isVisible && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "ptam-typography-component-label"
   }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement(Tooltip, {
     text: __('Typography Options', 'post-type-archive-mapping')

@@ -92,9 +92,9 @@ const TypographyControls = ( props ) => {
 	};
 
 	return (
-		<>
+		<BaseControl className="ptam-component-color-picker-wrapper">
 			{ ! isVisible && (
-				<BaseControl className="ptam-component-typography-picker-wrapper">
+				<>
 					<div className="ptam-typography-component-label">
 						<span>{ label }</span>
 					</div>
@@ -111,10 +111,10 @@ const TypographyControls = ( props ) => {
 							<TypographyIcon />
 						</button>
 					</Tooltip>
-				</BaseControl>
+				</>
 			) }
 			{ isVisible && (
-				<BaseControl className="ptam-component-typography-picker-wrapper">
+				<>
 					<div className="ptam-typography-component-label">
 						<span>{ label }</span>
 					</div>
@@ -131,7 +131,7 @@ const TypographyControls = ( props ) => {
 							<TypographyIcon />
 						</button>
 					</Tooltip>
-				</BaseControl>
+				</>
 			) }
 			{ isVisible && (
 				<Popover
@@ -288,7 +288,7 @@ const TypographyControls = ( props ) => {
 					) }
 				</Popover>
 			) }
-		</>
+		</BaseControl>
 	);
 };
 

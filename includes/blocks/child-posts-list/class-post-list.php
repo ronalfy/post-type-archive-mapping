@@ -597,7 +597,219 @@ class Post_List {
 					'listMetaLinkColorHover' => array(
 						'type' => 'string',
 						'default' => '#000000',
-					)
+					),
+					'listMetaPaddingTop'                  => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingRight'                => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingBottom'               => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingLeft'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingUnit'                 => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaPaddingUnitsSync'            => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaPaddingTopTablet'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingRightTablet'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingBottomTablet'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingLeftTablet'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingUnitTablet'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaPaddingUnitsSyncTablet'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaPaddingTopMobile'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingRightMobile'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingBottomMobile'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingLeftMobile'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaPaddingUnitMobile'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaPaddingUnitsSyncMobile'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaMarginTop'                   => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginRight'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginBottom'                => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginLeft'                  => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginUnit'                  => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaMarginUnitsSync'             => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaMarginTopTablet'             => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginRightTablet'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginBottomTablet'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginLeftTablet'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginUnitTablet'            => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaMarginUnitsSyncTablet'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaMarginTopMobile'             => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginRightMobile'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginBottomMobile'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginLeftMobile'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listMetaMarginUnitMobile'            => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaMarginUnitsSyncMobile'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listMetaFontFamily'             => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'listMetaFontSizeUnit'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaFontSizeUnitTablet'     => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaFontSizeUnitMobile'     => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listMetaFontSize'               => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listMetaFontSizeTablet'         => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listMetaFontSizeMobile'         => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listMetaFontWeight'             => array(
+						'type'    => 'string',
+						'default' => 400.,
+					),
+					'listMetaLetterSpacing'          => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listMetaLetterSpacingTablet'    => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listMetaLetterSpacingMobile'    => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listMetaLetterSpacingUnit'      => array(
+						'type'    => 'string',
+						'default' => 'em',
+					),
+					'listMetaTextTransform'          => array(
+						'type'    => 'string',
+						'default' => 'none',
+					),
+					'listMetaLineHeight'             => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listMetaLineHeightTablet'       => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listMetaLineHeightMobile'       => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listMetaLineHeightUnit'         => array(
+						'type'    => 'string',
+						'default' => 'em',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
