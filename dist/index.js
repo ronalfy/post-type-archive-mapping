@@ -16719,10 +16719,43 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         onClick: function onClick(e) {
           e.preventDefault();
         }
-      }, posts[i].post_title)), listShowFeaturedImage && '' !== posts[i].featured_image_src && /*#__PURE__*/React.createElement("figure", null, /*#__PURE__*/React.createElement("img", {
+      }, posts[i].post_title)), /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-list-item-meta"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "ptam-author"
+      }, /*#__PURE__*/React.createElement("span", null, "Ronald Huereca")), /*#__PURE__*/React.createElement("div", {
+        className: "ptam-date"
+      }, /*#__PURE__*/React.createElement("span", null, "Feb 10, 2015")), /*#__PURE__*/React.createElement("div", {
+        className: "ptam-terms"
+      }, /*#__PURE__*/React.createElement("span", null, outputPostTerms(posts[i]))), /*#__PURE__*/React.createElement("div", {
+        className: "ptam-comments"
+      }, /*#__PURE__*/React.createElement("span", null, "0 Comments"))), listShowFeaturedImage && '' !== posts[i].featured_image_src && /*#__PURE__*/React.createElement("figure", null, /*#__PURE__*/React.createElement("a", {
+        href: posts[i].link,
+        onClick: function onClick(e) {
+          e.preventDefault();
+        }
+      }, /*#__PURE__*/React.createElement("img", {
         src: posts[i].featured_image_src,
         alt: ""
-      })));
+      }))));
+    });
+  };
+
+  var outputPostTerms = function outputPostTerms(post) {
+    return Object.values(post.taxonomies).map(function (taxData) {
+      /* Tag mapping courtesy: @imos https://stackoverflow.com/a/40276830 */
+      var taxWrapper = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+        className: "ptam-hierarchical-list-meta-tax-name"
+      }, taxData.label, ":\xA0"), Object.values(taxData.terms).map(function (termData, i) {
+        return [i > 0 && ', ', /*#__PURE__*/React.createElement("a", {
+          href: termData.link,
+          onClick: function onClick(e) {
+            e.preventDefault();
+          },
+          key: i
+        }, termData.label)];
+      }));
+      return /*#__PURE__*/React.createElement(React.Fragment, null, taxWrapper);
     });
   };
   /**

@@ -359,13 +359,55 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 						</a>
 					</h2>
 				) }
+				<div className="ptam-hierarchical-list-item-meta">
+					<div className="ptam-author"><span>Ronald Huereca</span></div>
+					<div className="ptam-date"><span>Feb 10, 2015</span></div>
+					<div className="ptam-terms"><span>{ outputPostTerms( posts[ i ] ) }</span></div>
+					<div className="ptam-comments"><span>0 Comments</span></div>
+				</div>
 				{ listShowFeaturedImage && '' !== posts[ i ].featured_image_src && (
 					<figure>
-						<img src={ posts[ i ].featured_image_src } alt="" />
+						<a
+							href={ posts[ i ].link }
+							onClick={ ( e ) => {
+								e.preventDefault();
+							} }
+						>
+							<img src={ posts[ i ].featured_image_src } alt="" />
+						</a>
 					</figure>
 				) }
 			</article>
 		) );
+	};
+
+	const outputPostTerms = ( post ) => {
+		return Object.values( post.taxonomies ).map( ( taxData ) => {
+			/* Tag mapping courtesy: @imos https://stackoverflow.com/a/40276830 */
+			const taxWrapper = (
+				<>
+					<span className="ptam-hierarchical-list-meta-tax-name">{ taxData.label }:&nbsp;</span>
+					{ Object.values( taxData.terms ).map( ( termData, i ) => [
+						i > 0 && ', ',
+						<a
+							href={ termData.link }
+							onClick={ ( e ) => {
+								e.preventDefault();
+							} }
+							key={ i }
+						>
+							{ termData.label }
+						</a>,
+					] ) }
+				</>
+			);
+
+			return (
+				<>
+					{ taxWrapper }
+				</>
+			);
+		} );
 	};
 
 	/**

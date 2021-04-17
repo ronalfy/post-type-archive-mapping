@@ -840,6 +840,31 @@ class Rest {
 				$post->author_info->author_link  = $author_url;
 				$post->link                      = get_permalink( $post->ID );
 
+				// Get taxonomy information.
+				$taxonomies     = get_object_taxonomies( $post->post_type, 'objects' );
+				$term_tax_array = array();
+				foreach ( $taxonomies as $key => $taxonomy ) {
+					// Continue if the taxonomy is not public.
+					if ( ( isset( $taxonomy->public ) && false === $taxonomy->public ) || 'author' === $key ) {
+						unset( $taxonomies[ $key ] );
+						continue;
+					}
+
+					// Form the term list.
+					$term_list = get_the_terms( $post->ID, $key );
+					if ( $term_list && ! empty( $term_list ) ) {
+						$term_tax_array[ $key ]['label'] = isset( $taxonomy->label ) ? sanitize_text_field( $taxonomy->label ) : esc_html( _x( 'General', 'General is the name of the unlabeled taxonomy', 'post-type-archive-mapping' ) );
+						$term_tax_array[ $key ]['terms'] = array();
+						foreach ( $term_list as $term ) {
+							$term_tax_array[ $key ]['terms'][] = array(
+								'link'  => esc_url( get_term_link( $term, $key ) ),
+								'label' => sanitize_text_field( $term->name ),
+							);
+						}
+					}
+				}
+				$post->taxonomies = $term_tax_array;
+
 				if ( empty( $post->post_excerpt ) ) {
 					$post->post_excerpt = apply_filters( 'the_excerpt', wp_strip_all_tags( strip_shortcodes( $post->post_content ) ) );
 				}

@@ -948,3 +948,37 @@ body.has-blocks .fl-post-content .ptam-pagination {
 .ptam-hierarchical-grid-item * {
 	transition: all ease-in-out 0.5s;
 }
+
+.ptam-hierarchical-list-item-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+
+	.ptam-author,
+	.ptam-date,
+	.ptam-terms,
+	.ptam-comments {
+		&:before {
+			font-family: "PTAM";
+			display: inline-block;
+			margin-right: 2px;
+		}
+		span {
+			display: inline-block;
+			margin-left: 5px;
+		}
+	}
+
+	.ptam-author:before {
+		content: "\e71e";
+	}
+	.ptam-date:before {
+		content: "\e789";
+	}
+	.ptam-terms:before {
+		content: "\e756";
+	}
+	.ptam-comments:before {
+		content: "\e7d6";
+	}
+}
