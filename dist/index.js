@@ -16366,6 +16366,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
+
 var _wp$element = wp.element,
     Fragment = _wp$element.Fragment,
     useState = _wp$element.useState,
@@ -16586,7 +16589,65 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listMetaLineHeight = attributes.listMetaLineHeight,
       listMetaLineHeightTablet = attributes.listMetaLineHeightTablet,
       listMetaLineHeightMobile = attributes.listMetaLineHeightMobile,
-      listMetaLineHeightUnit = attributes.listMetaLineHeightUnit; // Retrieve WPML languages.
+      listMetaLineHeightUnit = attributes.listMetaLineHeightUnit,
+      listContentPaddingTop = attributes.listContentPaddingTop,
+      listContentPaddingRight = attributes.listContentPaddingRight,
+      listContentPaddingBottom = attributes.listContentPaddingBottom,
+      listContentPaddingLeft = attributes.listContentPaddingLeft,
+      listContentPaddingUnit = attributes.listContentPaddingUnit,
+      listContentPaddingUnitsSync = attributes.listContentPaddingUnitsSync,
+      listContentPaddingTopTablet = attributes.listContentPaddingTopTablet,
+      listContentPaddingRightTablet = attributes.listContentPaddingRightTablet,
+      listContentPaddingBottomTablet = attributes.listContentPaddingBottomTablet,
+      listContentPaddingLeftTablet = attributes.listContentPaddingLeftTablet,
+      listContentPaddingUnitTablet = attributes.listContentPaddingUnitTablet,
+      listContentPaddingUnitsSyncTablet = attributes.listContentPaddingUnitsSyncTablet,
+      listContentPaddingTopMobile = attributes.listContentPaddingTopMobile,
+      listContentPaddingRightMobile = attributes.listContentPaddingRightMobile,
+      listContentPaddingBottomMobile = attributes.listContentPaddingBottomMobile,
+      listContentPaddingLeftMobile = attributes.listContentPaddingLeftMobile,
+      listContentPaddingUnitMobile = attributes.listContentPaddingUnitMobile,
+      listContentPaddingUnitsSyncMobile = attributes.listContentPaddingUnitsSyncMobile,
+      listContentMarginTop = attributes.listContentMarginTop,
+      listContentMarginRight = attributes.listContentMarginRight,
+      listContentMarginBottom = attributes.listContentMarginBottom,
+      listContentMarginLeft = attributes.listContentMarginLeft,
+      listContentMarginUnit = attributes.listContentMarginUnit,
+      listContentMarginUnitsSync = attributes.listContentMarginUnitsSync,
+      listContentMarginTopTablet = attributes.listContentMarginTopTablet,
+      listContentMarginRightTablet = attributes.listContentMarginRightTablet,
+      listContentMarginBottomTablet = attributes.listContentMarginBottomTablet,
+      listContentMarginLeftTablet = attributes.listContentMarginLeftTablet,
+      listContentMarginUnitTablet = attributes.listContentMarginUnitTablet,
+      listContentMarginUnitsSyncTablet = attributes.listContentMarginUnitsSyncTablet,
+      listContentMarginTopMobile = attributes.listContentMarginTopMobile,
+      listContentMarginRightMobile = attributes.listContentMarginRightMobile,
+      listContentMarginBottomMobile = attributes.listContentMarginBottomMobile,
+      listContentMarginLeftMobile = attributes.listContentMarginLeftMobile,
+      listContentMarginUnitMobile = attributes.listContentMarginUnitMobile,
+      listContentMarginUnitsSyncMobile = attributes.listContentMarginUnitsSyncMobile,
+      listContentFontFamily = attributes.listContentFontFamily,
+      listContentFontSizeUnit = attributes.listContentFontSizeUnit,
+      listContentFontSizeUnitTablet = attributes.listContentFontSizeUnitTablet,
+      listContentFontSizeUnitMobile = attributes.listContentFontSizeUnitMobile,
+      listContentFontSize = attributes.listContentFontSize,
+      listContentFontSizeTablet = attributes.listContentFontSizeTablet,
+      listContentFontSizeMobile = attributes.listContentFontSizeMobile,
+      listContentFontWeight = attributes.listContentFontWeight,
+      listContentLetterSpacing = attributes.listContentLetterSpacing,
+      listContentLetterSpacingTablet = attributes.listContentLetterSpacingTablet,
+      listContentLetterSpacingMobile = attributes.listContentLetterSpacingMobile,
+      listContentLetterSpacingUnit = attributes.listContentLetterSpacingUnit,
+      listContentTextTransform = attributes.listContentTextTransform,
+      listContentLineHeight = attributes.listContentLineHeight,
+      listContentLineHeightTablet = attributes.listContentLineHeightTablet,
+      listContentLineHeightMobile = attributes.listContentLineHeightMobile,
+      listContentLineHeightUnit = attributes.listContentLineHeightUnit,
+      listShowPostContent = attributes.listShowPostContent,
+      listContentAlign = attributes.listContentAlign,
+      listContentTextColor = attributes.listContentTextColor,
+      listContentLinkColor = attributes.listContentLinkColor,
+      listContentLinkColorHover = attributes.listContentLinkColorHover; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16774,6 +16835,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
 
   var outputListItemsHtml = function outputListItemsHtml() {
+    var htmlToReactParser = new HtmlToReactParser();
     return Object.keys(posts).map(function (item, i) {
       return /*#__PURE__*/React.createElement("article", {
         key: i,
@@ -16812,7 +16874,9 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       }, /*#__PURE__*/React.createElement("img", {
         src: posts[i].featured_image_src,
         alt: ""
-      }))));
+      }))), 'none' !== listShowPostContent && /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-list-content"
+      }, 'excerpt' === listShowPostContent ? htmlToReactParser.parse(posts[i].post_excerpt) : htmlToReactParser.parse(posts[i].post_content)));
     });
   };
   /**
@@ -16917,6 +16981,16 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
   }, {
     value: 'rand',
     label: __('Random', 'post-type-archive-mapping')
+  }];
+  var contentOptions = [{
+    value: 'none',
+    label: __('Show No Content', 'post-type-archive-mapping')
+  }, {
+    value: 'excerpt',
+    label: __('Show Excerpt', 'post-type-archive-mapping')
+  }, {
+    value: 'full',
+    label: __('Show Full Content', 'post-type-archive-mapping')
   }]; // List title typography placeholders.
 
   var listTitleFontParamsDesktop = {
@@ -16985,6 +17059,40 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     textTransform: listMetaTextTransform,
     lineHeight: listMetaLineHeightMobile,
     lineHeightUnit: listMetaLineHeightUnit
+  }; // List Content Typography Controls.
+
+  var listContentFontParamsDesktop = {
+    fontFamily: listContentFontFamily,
+    fontSize: listContentFontSize,
+    fontSizeUnit: listContentFontSizeUnit,
+    fontWeight: listContentFontWeight,
+    letterSpacing: listContentLetterSpacing,
+    letterSpacingUnit: listContentLetterSpacingUnit,
+    textTransform: listContentTextTransform,
+    lineHeight: listContentLineHeight,
+    lineHeightUnit: listContentLineHeightUnit
+  };
+  var listContentFontParamsTablet = {
+    fontFamily: listContentFontFamily,
+    fontSize: listContentFontSizeTablet,
+    fontSizeUnit: listContentFontSizeUnitTablet,
+    fontWeight: listContentFontWeight,
+    letterSpacing: listContentLetterSpacingTablet,
+    letterSpacingUnit: listContentLetterSpacingUnit,
+    textTransform: listContentTextTransform,
+    lineHeight: listContentLineHeightTablet,
+    lineHeightUnit: listContentLineHeightUnit
+  };
+  var listContentFontParamsMobile = {
+    fontFamily: listContentFontFamily,
+    fontSize: listContentFontSizeMobile,
+    fontSizeUnit: listContentFontSizeUnitMobile,
+    fontWeight: listContentFontWeight,
+    letterSpacing: listContentLetterSpacingMobile,
+    letterSpacingUnit: listContentLetterSpacingUnit,
+    textTransform: listContentTextTransform,
+    lineHeight: listContentLineHeightMobile,
+    lineHeightUnit: listContentLineHeightUnit
   }; // Image Sizes.
 
   var imageSizeOptions = [];
@@ -17234,62 +17342,6 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listMarginUnitMobile",
     attrSyncUnits: "listMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }))), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(PanelBody, {
-    initialOpen: false,
-    title: __('Featured Image', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Show Featured Image', 'post-type-archive-mapping'),
-    checked: listShowFeaturedImage,
-    onChange: function onChange(value) {
-      setAttributes({
-        listShowFeaturedImage: value
-      });
-    }
-  }), listShowFeaturedImage && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(imageObject) {
-      props.setAttributes({
-        listFallbackImg: imageObject
-      });
-    },
-    type: "image",
-    value: listFallbackImg.url,
-    render: function render(_ref2) {
-      var open = _ref2.open;
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-upload components-button is-button is-secondary",
-        onClick: open
-      }, __('Fallback Featured Image', 'post-type-archive-mapping')), listFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
-        src: listFallbackImg.url,
-        alt: __('Featured Image', 'post-type-archive-mapping'),
-        width: "250",
-        height: "250"
-      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
-        ,
-        onClick: function onClick(event) {
-          setAttributes({
-            listFallbackImg: ''
-          });
-        }
-      }, __('Reset Image', 'post-type-archive-mapping')))));
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Featured Image Size', 'post-type-archive-mapping'),
-    options: imageSizeOptions,
-    value: listImageTypeSize,
-    onChange: function onChange(value) {
-      setAttributes({
-        listImageTypeSize: value
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    onClick: function onClick(value) {
-      setAttributes({
-        listFeaturedImageAlign: value
-      });
-    },
-    alignment: listFeaturedImageAlign,
-    label: __('Change Featured Image Alignment', 'post-type-archive-mapping')
   }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Title', 'post-type-archive-mapping')
@@ -17742,6 +17794,268 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listMetaMarginUnitMobile",
     attrSyncUnits: "listMetaMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Post Content', 'post-type-archive-mapping')
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Post Content Display', 'post-type-archive-mapping'),
+    options: contentOptions,
+    value: listShowPostContent,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowPostContent: value
+      });
+    }
+  }), 'none' !== listShowPostContent && 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    onClick: function onClick(value) {
+      setAttributes({
+        listContentAlign: value
+      });
+    },
+    alignment: listContentAlign,
+    label: __('Change Content Alignment', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: listContentTextColor,
+    valueOpacity: 1,
+    onChange: function onChange(value) {
+      setAttributes({
+        listContentTextColor: value
+      });
+    } // eslint-disable-next-line no-unused-vars
+    ,
+    onOpacityChange: function onOpacityChange(value) {},
+    label: __('Text Color', 'post-type-archive-mapping'),
+    alpha: false
+  }), /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'list-content-link-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'list-content-link-color'
+    }, {
+      name: 'list-content-link-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'list-content-link-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'list-content-link-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listContentLinkColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listContentLinkColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Link Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listContentLinkColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listContentLinkColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Link Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsDesktop,
+    showFontFamily: true,
+    showFontSize: true,
+    showFontWeight: true,
+    showTextTransform: true,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSize: fontObject.fontSize,
+        listContentFontSizeUnit: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacing: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeight: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTop",
+    attrRight: "listContentPaddingRight",
+    attrBottom: "listContentPaddingBottom",
+    attrLeft: "listContentPaddingLeft",
+    attrUnit: "listContentPaddingUnit",
+    attrSyncUnits: "listContentPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTop",
+    attrRight: "listContentMarginRight",
+    attrBottom: "listContentMarginBottom",
+    attrLeft: "listContentMarginLeft",
+    attrUnit: "listContentMarginUnit",
+    attrSyncUnits: "listContentMarginUnitsSync",
+    units: ['px', 'em', 'rem']
+  }))), 'Tablet' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsTablet,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSizeTablet: fontObject.fontSize,
+        listContentFontSizeUnitTablet: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacingTablet: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeightTablet: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTopTablet",
+    attrRight: "listContentPaddingRightTablet",
+    attrBottom: "listContentPaddingBottomTablet",
+    attrLeft: "listContentPaddingLeftTablet",
+    attrUnit: "listContentPaddingUnitTablet",
+    attrSyncUnits: "listContentPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTopTablet",
+    attrRight: "listContentMarginRightTablet",
+    attrBottom: "listContentMarginBottomTablet",
+    attrLeft: "listContentMarginLeftTablet",
+    attrUnit: "listContentMarginUnitTablet",
+    attrSyncUnits: "listContentMarginUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsMobile,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSizeMobile: fontObject.fontSize,
+        listContentFontSizeUnitMobile: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacingMobile: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeightMobile: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTopMobile",
+    attrRight: "listContentPaddingRightMobile",
+    attrBottom: "listContentPaddingBottomMobile",
+    attrLeft: "listContentPaddingLeftMobile",
+    attrUnit: "listContentPaddingUnitMobile",
+    attrSyncUnits: "listContentPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTopMobile",
+    attrRight: "listContentMarginRightMobile",
+    attrBottom: "listContentMarginBottomMobile",
+    attrLeft: "listContentMarginLeftMobile",
+    attrUnit: "listContentMarginUnitMobile",
+    attrSyncUnits: "listContentMarginUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }))), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Featured Image', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Featured Image', 'post-type-archive-mapping'),
+    checked: listShowFeaturedImage,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowFeaturedImage: value
+      });
+    }
+  }), listShowFeaturedImage && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(imageObject) {
+      props.setAttributes({
+        listFallbackImg: imageObject
+      });
+    },
+    type: "image",
+    value: listFallbackImg.url,
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-upload components-button is-button is-secondary",
+        onClick: open
+      }, __('Fallback Featured Image', 'post-type-archive-mapping')), listFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: listFallbackImg.url,
+        alt: __('Featured Image', 'post-type-archive-mapping'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
+        ,
+        onClick: function onClick(event) {
+          setAttributes({
+            listFallbackImg: ''
+          });
+        }
+      }, __('Reset Image', 'post-type-archive-mapping')))));
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Featured Image Size', 'post-type-archive-mapping'),
+    options: imageSizeOptions,
+    value: listImageTypeSize,
+    onChange: function onChange(value) {
+      setAttributes({
+        listImageTypeSize: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    onClick: function onClick(value) {
+      setAttributes({
+        listFeaturedImageAlign: value
+      });
+    },
+    alignment: listFeaturedImageAlign,
+    label: __('Change Featured Image Alignment', 'post-type-archive-mapping')
   }))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),
@@ -17980,7 +18294,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   if ('Mobile' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaPaddingTopMobile, listMetaPaddingRightMobile, listMetaPaddingBottomMobile, listMetaPaddingLeftMobile, listMetaPaddingUnitMobile), ";\n\t\t\t"));
-  } // List Margin.
+  } // Meta Margin.
 
 
   builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaMarginTop, listMetaMarginRight, listMetaMarginBottom, listMetaMarginLeft, listMetaMarginUnit), ";\n\t\t"));
@@ -17991,6 +18305,41 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   if ('Mobile' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-item-meta', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listMetaMarginTopMobile, listMetaMarginRightMobile, listMetaMarginBottomMobile, listMetaMarginLeftMobile, listMetaMarginUnitMobile), ";\n\t\t\t"));
+  } // List content styles.
+
+
+  builder.addCSS('.ptam-hierarchical-list-content', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listContentTextColor, 1), ";\n\t\ttext-align: ").concat(listContentAlign, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-content a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listContentLinkColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-content a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listContentLinkColorHover, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-content', "\n\t\tfont-family: ".concat(listContentFontFamily ? listContentFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentFontSize, listContentFontSizeUnit), ";\n\t\tfont-weight: ").concat(listContentFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLetterSpacing, listContentLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLineHeight, listContentLineHeightUnit), ";\n\t\ttext-transform: ").concat(listContentTextTransform, ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentFontSizeTablet, listContentFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLetterSpacingTablet, listContentLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLineHeightTablet, listContentLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentFontSizeMobile, listContentFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLetterSpacingMobile, listContentLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listContentLineHeightMobile, listContentLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  builder.addCSS('.ptam-hierarchical-list-content', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentPaddingTop, listContentPaddingRight, listContentPaddingBottom, listContentPaddingLeft, listContentPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentPaddingTopTablet, listContentPaddingRightTablet, listContentPaddingBottomTablet, listContentPaddingLeftTablet, listContentPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentPaddingTopMobile, listContentPaddingRightMobile, listContentPaddingBottomMobile, listContentPaddingLeftMobile, listContentPaddingUnitMobile), ";\n\t\t\t"));
+  } // Meta Margin.
+
+
+  builder.addCSS('.ptam-hierarchical-list-content', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentMarginTop, listContentMarginRight, listContentMarginBottom, listContentMarginLeft, listContentMarginUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentMarginTopTablet, listContentMarginRightTablet, listContentMarginBottomTablet, listContentMarginLeftTablet, listContentMarginUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentMarginTopMobile, listContentMarginRightMobile, listContentMarginBottomMobile, listContentMarginLeftMobile, listContentMarginUnitMobile), ";\n\t\t\t"));
   }
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {
