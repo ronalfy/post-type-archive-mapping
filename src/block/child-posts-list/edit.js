@@ -394,6 +394,9 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listButtonPaddingUnitMobile,
 		// eslint-disable-next-line no-unused-vars
 		listButtonPaddingUnitsSyncMobile,
+		listButtonBorderWidth,
+		listButtonBorderColor,
+		listButtonBorderColorHover,
 		// eslint-disable-next-line no-unused-vars
 		listButtonRadiusTopleft,
 		// eslint-disable-next-line no-unused-vars
@@ -872,6 +875,41 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		lineHeightUnit: listMetaLineHeightUnit,
 	};
 
+	// List Meta Typography Controls.
+	const listButtonFontParamsDesktop = {
+		fontFamily: listButtonFontFamily,
+		fontSize: listButtonFontSize,
+		fontSizeUnit: listButtonFontSizeUnit,
+		fontWeight: listButtonFontWeight,
+		letterSpacing: listButtonLetterSpacing,
+		letterSpacingUnit: listButtonLetterSpacingUnit,
+		textTransform: listButtonTextTransform,
+		lineHeight: listButtonLineHeight,
+		lineHeightUnit: listButtonLineHeightUnit,
+	};
+	const listButtonFontParamsTablet = {
+		fontFamily: listButtonFontFamily,
+		fontSize: listButtonFontSizeTablet,
+		fontSizeUnit: listButtonFontSizeUnitTablet,
+		fontWeight: listButtonFontWeight,
+		letterSpacing: listButtonLetterSpacingTablet,
+		letterSpacingUnit: listButtonLetterSpacingUnit,
+		textTransform: listButtonTextTransform,
+		lineHeight: listButtonLineHeightTablet,
+		lineHeightUnit: listButtonLineHeightUnit,
+	};
+	const listButtonFontParamsMobile = {
+		fontFamily: listButtonFontFamily,
+		fontSize: listButtonFontSizeMobile,
+		fontSizeUnit: listButtonFontSizeUnitMobile,
+		fontWeight: listButtonFontWeight,
+		letterSpacing: listButtonLetterSpacingMobile,
+		letterSpacingUnit: listButtonLetterSpacingUnit,
+		textTransform: listButtonTextTransform,
+		lineHeight: listButtonLineHeightMobile,
+		lineHeightUnit: listButtonLineHeightUnit,
+	};
+
 	// List Content Typography Controls.
 	const listContentFontParamsDesktop = {
 		fontFamily: listContentFontFamily,
@@ -955,6 +993,26 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 			label: _x(
 				'Align Right',
 				'Items will be aligned right',
+				'post-type-archive-mapping'
+			),
+		},
+	];
+
+	// Button Width Style Options.
+	const buttonWidthOptions = [
+		{
+			value: 'full',
+			label: _x(
+				'Full',
+				'Items will be at full width',
+				'post-type-archive-mapping'
+			),
+		},
+		{
+			value: 'inline',
+			label: _x(
+				'Inline',
+				'Items have inline width',
 				'post-type-archive-mapping'
 			),
 		},
@@ -2124,6 +2182,16 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 						/>
 						{ listButtonShow && 'Desktop' === getDeviceType() && (
 							<>
+								<SelectControl
+									label={ __( 'Button Width', 'post-type-archive-mapping' ) }
+									options={ buttonWidthOptions }
+									value={ listButtonWidth }
+									onChange={ ( value ) => {
+										setAttributes( {
+											listButtonWidth: value,
+										} );
+									} }
+								/>
 								<AlignmentGroup
 									onClick={ ( value ) => {
 										setAttributes( { listButtonContainerAlign: value } );
@@ -2214,60 +2282,60 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 								) }
 								{ 'gradient' === listButtonBackgroundType && (
 									<>
-									<TabPanel
-										className="layout-tab-panel ptam-control-tabs"
-										activeClass="active-tab"
-										tabs={ [
-											{
-												name: 'list-button-background-gradient',
-												title: __( 'Normal', 'post-type-archive-mapping' ),
-												className: 'list-button-background-gradient',
-											},
-											{
-												name: 'llist-button-background-gradient-hover',
-												title: __( 'Hover', 'post-type-archive-mapping' ),
-												className: 'list-button-background-gradient-hover',
-											},
-										] }
-									>
-										{ ( tab ) => {
-											const isNormal = tab.name === 'list-button-background-gradient';
+										<TabPanel
+											className="layout-tab-panel ptam-control-tabs"
+											activeClass="active-tab"
+											tabs={ [
+												{
+													name: 'list-button-background-gradient',
+													title: __( 'Normal', 'post-type-archive-mapping' ),
+													className: 'list-button-background-gradient',
+												},
+												{
+													name: 'llist-button-background-gradient-hover',
+													title: __( 'Hover', 'post-type-archive-mapping' ),
+													className: 'list-button-background-gradient-hover',
+												},
+											] }
+										>
+											{ ( tab ) => {
+												const isNormal = tab.name === 'list-button-background-gradient';
 
-											return (
-												<div>
-													{ isNormal ? (
-														<PTAMGradientPicker
-															onChange={ ( value ) => {
-																setAttributes( {
-																	listButtonBackgroundGradient: value,
-																} );
-															} }
-															label={ __( 'Button Background Gradient', 'post-type-archive-mapping' ) }
-															value={ listButtonBackgroundGradient }
-														/>
-													) : (
-														<PTAMGradientPicker
-															onChange={ ( value ) => {
-																setAttributes( {
-																	listButtonBackgroundGradientHover: value,
-																} );
-															} }
-															label={ __( 'Button Background Gradient', 'post-type-archive-mapping' ) }
-															value={ listButtonBackgroundGradientHover }
-														/>
-													) }
-												</div>
-											);
-										} }
-									</TabPanel>
+												return (
+													<div>
+														{ isNormal ? (
+															<PTAMGradientPicker
+																onChange={ ( value ) => {
+																	setAttributes( {
+																		listButtonBackgroundGradient: value,
+																	} );
+																} }
+																label={ __( 'Button Background Gradient', 'post-type-archive-mapping' ) }
+																value={ listButtonBackgroundGradient }
+															/>
+														) : (
+															<PTAMGradientPicker
+																onChange={ ( value ) => {
+																	setAttributes( {
+																		listButtonBackgroundGradientHover: value,
+																	} );
+																} }
+																label={ __( 'Button Background Gradient', 'post-type-archive-mapping' ) }
+																value={ listButtonBackgroundGradientHover }
+															/>
+														) }
+													</div>
+												);
+											} }
+										</TabPanel>
 									</>
 								) }
 								<TypographyControls
 									label={ __(
-										'Post Content Typography',
+										'Button Typography',
 										'post-type-archive-mapping'
 									) }
-									options={ listContentFontParamsDesktop }
+									options={ listButtonFontParamsDesktop }
 									showFontFamily={ true }
 									showFontSize={ true }
 									showFontWeight={ true }
@@ -2276,52 +2344,149 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									showLetterSpacing={ true }
 									onChange={ ( fontObject ) => {
 										setAttributes( {
-											listContentFontFamily: fontObject.fontFamily,
-											listContentFontSize: fontObject.fontSize,
-											listContentFontSizeUnit: fontObject.fontSizeUnit,
-											listContentFontWeight: fontObject.fontWeight,
-											listContentLetterSpacing: fontObject.letterSpacing,
-											listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
-											listContentLineHeight: fontObject.lineHeight,
-											listContentLineHeightUnit: fontObject.lineHeightUnit,
-											listContentTextTransform: fontObject.textTransform,
+											listButtonFontFamily: fontObject.fontFamily,
+											listButtonFontSize: fontObject.fontSize,
+											listButtonFontSizeUnit: fontObject.fontSizeUnit,
+											listButtonFontWeight: fontObject.fontWeight,
+											listButtonLetterSpacing: fontObject.letterSpacing,
+											listButtonLetterSpacingUnit: fontObject.letterSpacingUnit,
+											listButtonLineHeight: fontObject.lineHeight,
+											listButtonLineHeightUnit: fontObject.lineHeightUnit,
+											listButtonTextTransform: fontObject.textTransform,
 										} );
 									} }
 								/>
 								<DimensionsControl
+									label={ __( 'Container Padding', 'post-type-archive-mapping' ) }
 									attributes={ attributes }
 									setAttributes={ setAttributes }
 									allowNegatives={ false }
-									attrTop="listContentPaddingTop"
-									attrRight="listContentPaddingRight"
-									attrBottom="listContentPaddingBottom"
-									attrLeft="listContentPaddingLeft"
-									attrUnit="listContentPaddingUnit"
-									attrSyncUnits="listContentPaddingUnitsSync"
+									attrTop="listButtonContainerPaddingTop"
+									attrRight="listButtonContainerContainerPaddingRight"
+									attrBottom="listButtonContainerPaddingBottom"
+									attrLeft="listButtonContainerPaddingLeft"
+									attrUnit="listButtonContainerPaddingUnit"
+									attrSyncUnits="listButtonContainerPaddingUnitsSync"
 									units={ [ 'px', 'em', 'rem' ] }
 								/>
 								<DimensionsControl
-									label={ __( 'Margin', 'post-type-archive-mapping' ) }
+									label={ __( 'Container Margin', 'post-type-archive-mapping' ) }
 									attributes={ attributes }
 									setAttributes={ setAttributes }
 									allowNegatives={ false }
-									attrTop="listContentMarginTop"
-									attrRight="listContentMarginRight"
-									attrBottom="listContentMarginBottom"
-									attrLeft="listContentMarginLeft"
-									attrUnit="listContentMarginUnit"
-									attrSyncUnits="listContentMarginUnitsSync"
+									attrTop="listButtonContainerMarginTop"
+									attrRight="listButtonContainerMarginRight"
+									attrBottom="listButtonContainerMarginBottom"
+									attrLeft="listButtonContainerMarginLeft"
+									attrUnit="listButtonContainerMarginUnit"
+									attrSyncUnits="listButtonContainerMarginUnitsSync"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+								<DimensionsControl
+									label={ __( 'Button Padding', 'post-type-archive-mapping' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listButtonPaddingTop"
+									attrRight="listButtonContainerPaddingRight"
+									attrBottom="listButtonPaddingBottom"
+									attrLeft="listButtonPaddingLeft"
+									attrUnit="listButtonPaddingUnit"
+									attrSyncUnits="listButtonPaddingUnitsSync"
+									units={ [ 'px', 'em', 'rem' ] }
+								/>
+								<RangeControl
+									label={ __( 'Border Width', 'post-type-archive-mapping' ) }
+									value={ listButtonBorderWidth }
+									onChange={ ( value ) => setAttributes( { listButtonBorderWidth: value } ) }
+									min={ 0 }
+									max={ 100 }
+								/>
+								<TabPanel
+									className="layout-tab-panel ptam-control-tabs"
+									activeClass="active-tab"
+									tabs={ [
+										{
+											name: 'list-button-border-color',
+											title: __( 'Normal', 'post-type-archive-mapping' ),
+											className: 'list-button-border-color',
+										},
+										{
+											name: 'list-button-border-color-hover',
+											title: __( 'Hover', 'post-type-archive-mapping' ),
+											className: 'list-button-border-color-hover',
+										},
+									] }
+								>
+									{ ( tab ) => {
+										const isNormal = tab.name === 'list-button-border-color';
+
+										return (
+											<div>
+												{ isNormal ? (
+													<PTAMColorPicker
+														value={ listButtonBorderColor }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listButtonBorderColor: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __(
+															'Button Border Color',
+															'post-type-archive-mapping'
+														) }
+														alpha={ false }
+													/>
+												) : (
+													<PTAMColorPicker
+														value={ listButtonBorderColorHover }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listButtonBorderColorHover: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __(
+															'Button Border Color',
+															'post-type-archive-mapping'
+														) }
+														alpha={ false }
+													/>
+												) }
+											</div>
+										);
+									} }
+								</TabPanel>
+								<DimensionsControl
+									label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									allowNegatives={ false }
+									attrTop="listButtonRadiusTopleft"
+									attrRight="listButtonRadiusTopRight"
+									attrBottom="listButtonRadiusBottomLeft"
+									attrLeft="listButtonRadiusBottomRight"
+									attrUnit="listButtonRadiusUnit"
+									attrSyncUnits="listButtonRadiusUnitsSync"
+									labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+									labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+									labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+									labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
 									units={ [ 'px', 'em', 'rem' ] }
 								/>
 							</>
 						) }
 					</>
 				) }
-				{ 'Tablet' === getDeviceType() && listShowPostMeta && (
+				{ 'Tablet' === getDeviceType() && listButtonShow && (
 					<>
 						<TypographyControls
-							label={ __( 'Post Content Typography', 'post-type-archive-mapping' ) }
-							options={ listContentFontParamsTablet }
+							label={ __(
+								'Button Typography',
+								'post-type-archive-mapping'
+							) }
+							options={ listButtonFontParamsTablet }
 							showFontFamily={ false }
 							showFontSize={ true }
 							showFontWeight={ false }
@@ -2330,50 +2495,81 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							showLetterSpacing={ true }
 							onChange={ ( fontObject ) => {
 								setAttributes( {
-									listContentFontFamily: fontObject.fontFamily,
-									listContentFontSizeTablet: fontObject.fontSize,
-									listContentFontSizeUnitTablet: fontObject.fontSizeUnit,
-									listContentFontWeight: fontObject.fontWeight,
-									listContentLetterSpacingTablet: fontObject.letterSpacing,
-									listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
-									listContentLineHeightTablet: fontObject.lineHeight,
-									listContentLineHeightUnit: fontObject.lineHeightUnit,
-									listContentTextTransform: fontObject.textTransform,
+									listButtonFontSizeTablet: fontObject.fontSize,
+									listButtonFontSizeUnitTablet: fontObject.fontSizeUnit,
+									listButtonLetterSpacingTablet: fontObject.letterSpacing,
+									listButtonLetterSpacingUnitTablet: fontObject.letterSpacingUnit,
+									listButtonLineHeightTablet: fontObject.lineHeight,
+									listButtonLineHeightUnitTablet: fontObject.lineHeightUnit,
 								} );
 							} }
 						/>
 						<DimensionsControl
+							label={ __( 'Container Padding', 'post-type-archive-mapping' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listContentPaddingTopTablet"
-							attrRight="listContentPaddingRightTablet"
-							attrBottom="listContentPaddingBottomTablet"
-							attrLeft="listContentPaddingLeftTablet"
-							attrUnit="listContentPaddingUnitTablet"
-							attrSyncUnits="listContentPaddingUnitsSyncTablet"
+							attrTop="listButtonContainerPaddingTopTablet"
+							attrRight="listButtonContainerContainerPaddingRightTablet"
+							attrBottom="listButtonContainerPaddingBottomTablet"
+							attrLeft="listButtonContainerPaddingLeftTablet"
+							attrUnit="listButtonContainerPaddingUnitTablet"
+							attrSyncUnits="listButtonContainerPaddingUnitsSyncTablet"
 							units={ [ 'px', 'em', 'rem' ] }
 						/>
 						<DimensionsControl
-							label={ __( 'Margin', 'post-type-archive-mapping' ) }
+							label={ __( 'Container Margin', 'post-type-archive-mapping' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listContentMarginTopTablet"
-							attrRight="listContentMarginRightTablet"
-							attrBottom="listContentMarginBottomTablet"
-							attrLeft="listContentMarginLeftTablet"
-							attrUnit="listContentMarginUnitTablet"
-							attrSyncUnits="listContentMarginUnitsSyncTablet"
+							attrTop="listButtonContainerMarginTopTablet"
+							attrRight="listButtonContainerMarginRightTablet"
+							attrBottom="listButtonContainerMarginBottomTablet"
+							attrLeft="listButtonContainerMarginLeftTablet"
+							attrUnit="listButtonContainerMarginUnitTablet"
+							attrSyncUnits="listButtonContainerMarginUnitsSyncTablet"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+						<DimensionsControl
+							label={ __( 'Button Padding', 'post-type-archive-mapping' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="listButtonPaddingTopTablet"
+							attrRight="listButtonContainerPaddingRightTablet"
+							attrBottom="listButtonPaddingBottomTablet"
+							attrLeft="listButtonPaddingLeftTablet"
+							attrUnit="listButtonPaddingUnitTablet"
+							attrSyncUnits="listButtonPaddingUnitsSyncTablet"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+						<DimensionsControl
+							label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="listButtonRadiusTopleftTablet"
+							attrRight="listButtonRadiusTopRightTablet"
+							attrBottom="listButtonRadiusBottomLeftTablet"
+							attrLeft="listButtonRadiusBottomRightTablet"
+							attrUnit="listButtonRadiusUnit"
+							attrSyncUnits="listButtonRadiusUnitsSync"
+							labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+							labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+							labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+							labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
 							units={ [ 'px', 'em', 'rem' ] }
 						/>
 					</>
 				) }
-				{ 'Mobile' === getDeviceType() && listShowPostMeta && (
+				{ 'Mobile' === getDeviceType() && listButtonShow && (
 					<>
 						<TypographyControls
-							label={ __( 'Post Content Typography', 'post-type-archive-mapping' ) }
-							options={ listContentFontParamsMobile }
+							label={ __(
+								'Button Typography',
+								'post-type-archive-mapping'
+							) }
+							options={ listButtonFontParamsMobile }
 							showFontFamily={ false }
 							showFontSize={ true }
 							showFontWeight={ false }
@@ -2382,41 +2578,69 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							showLetterSpacing={ true }
 							onChange={ ( fontObject ) => {
 								setAttributes( {
-									listContentFontFamily: fontObject.fontFamily,
-									listContentFontSizeMobile: fontObject.fontSize,
-									listContentFontSizeUnitMobile: fontObject.fontSizeUnit,
-									listContentFontWeight: fontObject.fontWeight,
-									listContentLetterSpacingMobile: fontObject.letterSpacing,
-									listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
-									listContentLineHeightMobile: fontObject.lineHeight,
-									listContentLineHeightUnit: fontObject.lineHeightUnit,
-									listContentTextTransform: fontObject.textTransform,
+									listButtonFontSizeMobile: fontObject.fontSize,
+									listButtonFontSizeUnitMobile: fontObject.fontSizeUnit,
+									listButtonLetterSpacingMobile: fontObject.letterSpacing,
+									listButtonLetterSpacingUnitMobile: fontObject.letterSpacingUnit,
+									listButtonLineHeightMobile: fontObject.lineHeight,
+									listButtonLineHeightUnitMobile: fontObject.lineHeightUnit,
 								} );
 							} }
 						/>
 						<DimensionsControl
+							label={ __( 'Container Padding', 'post-type-archive-mapping' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listContentPaddingTopMobile"
-							attrRight="listContentPaddingRightMobile"
-							attrBottom="listContentPaddingBottomMobile"
-							attrLeft="listContentPaddingLeftMobile"
-							attrUnit="listContentPaddingUnitMobile"
-							attrSyncUnits="listContentPaddingUnitsSyncMobile"
+							attrTop="listButtonContainerPaddingTopMobile"
+							attrRight="listButtonContainerContainerPaddingRightMobile"
+							attrBottom="listButtonContainerPaddingBottomMobile"
+							attrLeft="listButtonContainerPaddingLeftMobile"
+							attrUnit="listButtonContainerPaddingUnitMobile"
+							attrSyncUnits="listButtonContainerPaddingUnitsSyncMobile"
 							units={ [ 'px', 'em', 'rem' ] }
 						/>
 						<DimensionsControl
-							label={ __( 'Margin', 'post-type-archive-mapping' ) }
+							label={ __( 'Container Margin', 'post-type-archive-mapping' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listContentMarginTopMobile"
-							attrRight="listContentMarginRightMobile"
-							attrBottom="listContentMarginBottomMobile"
-							attrLeft="listContentMarginLeftMobile"
-							attrUnit="listContentMarginUnitMobile"
-							attrSyncUnits="listContentMarginUnitsSyncMobile"
+							attrTop="listButtonContainerMarginTopMobile"
+							attrRight="listButtonContainerMarginRighMobilet"
+							attrBottom="listButtonContainerMarginBottomMobile"
+							attrLeft="listButtonContainerMarginLeftMobile"
+							attrUnit="listButtonContainerMarginUnitMobile"
+							attrSyncUnits="listButtonContainerMarginUnitsSyncMobile"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+						<DimensionsControl
+							label={ __( 'Button Padding', 'post-type-archive-mapping' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="listButtonPaddingTopMobile"
+							attrRight="listButtonContainerPaddingRightMobile"
+							attrBottom="listButtonPaddingBottomMobile"
+							attrLeft="listButtonPaddingLeftMobile"
+							attrUnit="listButtonPaddingUnitMobile"
+							attrSyncUnits="listButtonPaddingUnitsSyncMobile"
+							units={ [ 'px', 'em', 'rem' ] }
+						/>
+						<DimensionsControl
+							label={ __( 'Border Radius', 'post-type-archive-mapping' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							allowNegatives={ false }
+							attrTop="listButtonRadiusTopleftMobile"
+							attrRight="listButtonRadiusTopRightMobile"
+							attrBottom="listButtonRadiusBottomLeftMobile"
+							attrLeft="listButtonRadiusBottomRightMobile"
+							attrUnit="listButtonRadiusUnit"
+							attrSyncUnits="listButtonRadiusUnitsSync"
+							labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
+							labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
+							labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
+							labelLeft={ __( 'B-Left', 'post-type-archive-mapping' ) }
 							units={ [ 'px', 'em', 'rem' ] }
 						/>
 					</>

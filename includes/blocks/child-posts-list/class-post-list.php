@@ -1362,6 +1362,10 @@ class Post_List {
 						'type'    => 'string',
 						'default' => '',
 					),
+					'listButtonBorderColorHover'           => array(
+						'type'    => 'string',
+						'default' => '',
+					),
 					'listButtonBackgroundType'             => array(
 						'type'    => 'string',
 						'default' => 'color',
