@@ -16647,7 +16647,96 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listContentAlign = attributes.listContentAlign,
       listContentTextColor = attributes.listContentTextColor,
       listContentLinkColor = attributes.listContentLinkColor,
-      listContentLinkColorHover = attributes.listContentLinkColorHover; // Retrieve WPML languages.
+      listContentLinkColorHover = attributes.listContentLinkColorHover,
+      listButtonShow = attributes.listButtonShow,
+      listButtonContainerPaddingTop = attributes.listButtonContainerPaddingTop,
+      listButtonContainerPaddingRight = attributes.listButtonContainerPaddingRight,
+      listButtonContainerPaddingBottom = attributes.listButtonContainerPaddingBottom,
+      listButtonContainerPaddingLeft = attributes.listButtonContainerPaddingLeft,
+      listButtonContainerPaddingUnit = attributes.listButtonContainerPaddingUnit,
+      listButtonContainerPaddingUnitsSync = attributes.listButtonContainerPaddingUnitsSync,
+      listButtonContainerPaddingTopTablet = attributes.listButtonContainerPaddingTopTablet,
+      listButtonContainerPaddingRightTablet = attributes.listButtonContainerPaddingRightTablet,
+      listButtonContainerPaddingBottomTablet = attributes.listButtonContainerPaddingBottomTablet,
+      listButtonContainerPaddingLeftTablet = attributes.listButtonContainerPaddingLeftTablet,
+      listButtonContainerPaddingUnitTablet = attributes.listButtonContainerPaddingUnitTablet,
+      listButtonContainerPaddingUnitsSyncTablet = attributes.listButtonContainerPaddingUnitsSyncTablet,
+      listButtonContainerPaddingTopMobile = attributes.listButtonContainerPaddingTopMobile,
+      listButtonContainerPaddingRightMobile = attributes.listButtonContainerPaddingRightMobile,
+      listButtonContainerPaddingBottomMobile = attributes.listButtonContainerPaddingBottomMobile,
+      listButtonContainerPaddingLeftMobile = attributes.listButtonContainerPaddingLeftMobile,
+      listButtonContainerPaddingUnitMobile = attributes.listButtonContainerPaddingUnitMobile,
+      listButtonContainerPaddingUnitsSyncMobile = attributes.listButtonContainerPaddingUnitsSyncMobile,
+      listButtonContainerMarginTop = attributes.listButtonContainerMarginTop,
+      listButtonContainerMarginRight = attributes.listButtonContainerMarginRight,
+      listButtonContainerMarginBottom = attributes.listButtonContainerMarginBottom,
+      listButtonContainerMarginLeft = attributes.listButtonContainerMarginLeft,
+      listButtonContainerMarginUnit = attributes.listButtonContainerMarginUnit,
+      listButtonContainerMarginUnitsSync = attributes.listButtonContainerMarginUnitsSync,
+      listButtonContainerMarginTopTablet = attributes.listButtonContainerMarginTopTablet,
+      listButtonContainerMarginRightTablet = attributes.listButtonContainerMarginRightTablet,
+      listButtonContainerMarginBottomTablet = attributes.listButtonContainerMarginBottomTablet,
+      listButtonContainerMarginLeftTablet = attributes.listButtonContainerMarginLeftTablet,
+      listButtonContainerMarginUnitTablet = attributes.listButtonContainerMarginUnitTablet,
+      listButtonContainerMarginUnitsSyncTablet = attributes.listButtonContainerMarginUnitsSyncTablet,
+      listButtonContainerMarginTopMobile = attributes.listButtonContainerMarginTopMobile,
+      listButtonContainerMarginRightMobile = attributes.listButtonContainerMarginRightMobile,
+      listButtonContainerMarginBottomMobile = attributes.listButtonContainerMarginBottomMobile,
+      listButtonContainerMarginLeftMobile = attributes.listButtonContainerMarginLeftMobile,
+      listButtonContainerMarginUnitMobile = attributes.listButtonContainerMarginUnitMobile,
+      listButtonContainerMarginUnitsSyncMobile = attributes.listButtonContainerMarginUnitsSyncMobile,
+      listButtonPaddingTop = attributes.listButtonPaddingTop,
+      listButtonPaddingRight = attributes.listButtonPaddingRight,
+      listButtonPaddingBottom = attributes.listButtonPaddingBottom,
+      listButtonPaddingLeft = attributes.listButtonPaddingLeft,
+      listButtonPaddingUnit = attributes.listButtonPaddingUnit,
+      listButtonPaddingUnitsSync = attributes.listButtonPaddingUnitsSync,
+      listButtonPaddingTopTablet = attributes.listButtonPaddingTopTablet,
+      listButtonPaddingRightTablet = attributes.listButtonPaddingRightTablet,
+      listButtonPaddingBottomTablet = attributes.listButtonPaddingBottomTablet,
+      listButtonPaddingLeftTablet = attributes.listButtonPaddingLeftTablet,
+      listButtonPaddingUnitTablet = attributes.listButtonPaddingUnitTablet,
+      listButtonPaddingUnitsSyncTablet = attributes.listButtonPaddingUnitsSyncTablet,
+      listButtonPaddingTopMobile = attributes.listButtonPaddingTopMobile,
+      listButtonPaddingRightMobile = attributes.listButtonPaddingRightMobile,
+      listButtonPaddingBottomMobile = attributes.listButtonPaddingBottomMobile,
+      listButtonPaddingLeftMobile = attributes.listButtonPaddingLeftMobile,
+      listButtonPaddingUnitMobile = attributes.listButtonPaddingUnitMobile,
+      listButtonPaddingUnitsSyncMobile = attributes.listButtonPaddingUnitsSyncMobile,
+      listButtonRadiusTopleft = attributes.listButtonRadiusTopleft,
+      listButtonRadiusTopRight = attributes.listButtonRadiusTopRight,
+      listButtonRadiusBottomLeft = attributes.listButtonRadiusBottomLeft,
+      listButtonRadiusBottomRight = attributes.listButtonRadiusBottomRight,
+      listButtonRadiusUnitsSync = attributes.listButtonRadiusUnitsSync,
+      listButtonRadiusUnit = attributes.listButtonRadiusUnit,
+      listButtonFontFamily = attributes.listButtonFontFamily,
+      listButtonFontSizeUnit = attributes.listButtonFontSizeUnit,
+      listButtonFontSizeUnitTablet = attributes.listButtonFontSizeUnitTablet,
+      listButtonFontSizeUnitMobile = attributes.listButtonFontSizeUnitMobile,
+      listButtonFontSize = attributes.listButtonFontSize,
+      listButtonFontSizeTablet = attributes.listButtonFontSizeTablet,
+      listButtonFontSizeMobile = attributes.listButtonFontSizeMobile,
+      listButtonFontWeight = attributes.listButtonFontWeight,
+      listButtonLetterSpacing = attributes.listButtonLetterSpacing,
+      listButtonLetterSpacingTablet = attributes.listButtonLetterSpacingTablet,
+      listButtonLetterSpacingMobile = attributes.listButtonLetterSpacingMobile,
+      listButtonLetterSpacingUnit = attributes.listButtonLetterSpacingUnit,
+      listButtonTextTransform = attributes.listButtonTextTransform,
+      listButtonLineHeight = attributes.listButtonLineHeight,
+      listButtonLineHeightTablet = attributes.listButtonLineHeightTablet,
+      listButtonLineHeightMobile = attributes.listButtonLineHeightMobile,
+      listButtonLineHeightUnit = attributes.listButtonLineHeightUnit,
+      listButtonBackgroundType = attributes.listButtonBackgroundType,
+      listButtonBackgroundColor = attributes.listButtonBackgroundColor,
+      listButtonBackgroundColorHover = attributes.listButtonBackgroundColorHover,
+      listButtonBackgroundGradient = attributes.listButtonBackgroundGradient,
+      listButtonBackgroundGradientHover = attributes.listButtonBackgroundGradientHover,
+      listButtonTextColor = attributes.listButtonTextColor,
+      listButtonTextColorHover = attributes.listButtonTextColorHover,
+      listButtonContainerAlign = attributes.listButtonContainerAlign,
+      listButtonTextAlign = attributes.listButtonTextAlign,
+      listButtonWidth = attributes.listButtonWidth,
+      listButtonMaxWidth = attributes.listButtonMaxWidth; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16876,7 +16965,14 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         alt: ""
       }))), 'none' !== listShowPostContent && /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-list-content"
-      }, 'excerpt' === listShowPostContent ? htmlToReactParser.parse(posts[i].post_excerpt) : htmlToReactParser.parse(posts[i].post_content)));
+      }, 'excerpt' === listShowPostContent ? htmlToReactParser.parse(posts[i].post_excerpt) : htmlToReactParser.parse(posts[i].post_content)), /*#__PURE__*/React.createElement("div", {
+        className: "ptam-hierarchical-list-button-container"
+      }, /*#__PURE__*/React.createElement("a", {
+        href: posts[i].link,
+        onClick: function onClick(e) {
+          e.preventDefault();
+        }
+      }, "Continue Reading...")));
     });
   };
   /**
@@ -17794,6 +17890,62 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listMetaMarginUnitMobile",
     attrSyncUnits: "listMetaMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
+  }))), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(PanelBody, {
+    initialOpen: false,
+    title: __('Featured Image', 'post-type-archive-mapping')
+  }, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Featured Image', 'post-type-archive-mapping'),
+    checked: listShowFeaturedImage,
+    onChange: function onChange(value) {
+      setAttributes({
+        listShowFeaturedImage: value
+      });
+    }
+  }), listShowFeaturedImage && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(imageObject) {
+      props.setAttributes({
+        listFallbackImg: imageObject
+      });
+    },
+    type: "image",
+    value: listFallbackImg.url,
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-upload components-button is-button is-secondary",
+        onClick: open
+      }, __('Fallback Featured Image', 'post-type-archive-mapping')), listFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: listFallbackImg.url,
+        alt: __('Featured Image', 'post-type-archive-mapping'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
+        ,
+        onClick: function onClick(event) {
+          setAttributes({
+            listFallbackImg: ''
+          });
+        }
+      }, __('Reset Image', 'post-type-archive-mapping')))));
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Featured Image Size', 'post-type-archive-mapping'),
+    options: imageSizeOptions,
+    value: listImageTypeSize,
+    onChange: function onChange(value) {
+      setAttributes({
+        listImageTypeSize: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    onClick: function onClick(value) {
+      setAttributes({
+        listFeaturedImageAlign: value
+      });
+    },
+    alignment: listFeaturedImageAlign,
+    label: __('Change Featured Image Alignment', 'post-type-archive-mapping')
   }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
     title: __('Post Content', 'post-type-archive-mapping')
@@ -18000,62 +18152,247 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attrUnit: "listContentMarginUnitMobile",
     attrSyncUnits: "listContentMarginUnitsSyncMobile",
     units: ['px', 'em', 'rem']
-  }))), 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(PanelBody, {
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
     initialOpen: false,
-    title: __('Featured Image', 'post-type-archive-mapping')
-  }, /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Show Featured Image', 'post-type-archive-mapping'),
-    checked: listShowFeaturedImage,
+    title: __('Read More Button', 'post-type-archive-mapping')
+  }, 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Show Read More Button', 'post-type-archive-mapping'),
+    checked: listButtonShow,
     onChange: function onChange(value) {
       setAttributes({
-        listShowFeaturedImage: value
+        listButtonShow: value
       });
     }
-  }), listShowFeaturedImage && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(imageObject) {
-      props.setAttributes({
-        listFallbackImg: imageObject
+  }), listButtonShow && 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    onClick: function onClick(value) {
+      setAttributes({
+        listButtonContainerAlign: value
       });
     },
-    type: "image",
-    value: listFallbackImg.url,
-    render: function render(_ref2) {
-      var open = _ref2.open;
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-upload components-button is-button is-secondary",
-        onClick: open
-      }, __('Fallback Featured Image', 'post-type-archive-mapping')), listFallbackImg && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
-        src: listFallbackImg.url,
-        alt: __('Featured Image', 'post-type-archive-mapping'),
-        width: "250",
-        height: "250"
-      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
-        className: "ptam-media-alt-reset components-button is-button is-secondary" // eslint-disable-next-line no-unused-vars
-        ,
-        onClick: function onClick(event) {
-          setAttributes({
-            listFallbackImg: ''
-          });
-        }
-      }, __('Reset Image', 'post-type-archive-mapping')))));
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Featured Image Size', 'post-type-archive-mapping'),
-    options: imageSizeOptions,
-    value: listImageTypeSize,
-    onChange: function onChange(value) {
-      setAttributes({
-        listImageTypeSize: value
-      });
-    }
+    alignment: listButtonContainerAlign,
+    label: __('Button Alignment', 'post-type-archive-mapping')
   }), /*#__PURE__*/React.createElement(_components_alignment__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onClick: function onClick(value) {
       setAttributes({
-        listFeaturedImageAlign: value
+        listButtonTextAlign: value
       });
     },
-    alignment: listFeaturedImageAlign,
-    label: __('Change Featured Image Alignment', 'post-type-archive-mapping')
+    alignment: listButtonTextAlign,
+    label: __('Button Text Alignment', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Background Type', 'post-type-archive-mapping'),
+    options: listBackgroundChoices,
+    value: listButtonBackgroundType,
+    onChange: function onChange(value) {
+      setAttributes({
+        listButtonBackgroundType: value
+      });
+    }
+  }), 'color' === listButtonBackgroundType && /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'list-button-background-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'list-button-background-color'
+    }, {
+      name: 'list-button-background-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'list-button-background-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'list-button-background-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listButtonBackgroundColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonBackgroundColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Button Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listButtonBackgroundColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonBackgroundColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Button Background Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
+  }), 'gradient' === listButtonBackgroundType && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'list-button-background-gradient',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'list-button-background-gradient'
+    }, {
+      name: 'llist-button-background-gradient-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'list-button-background-gradient-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'list-button-background-gradient';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonBackgroundGradient: value
+        });
+      },
+      label: __('Button Background Gradient', 'post-type-archive-mapping'),
+      value: listButtonBackgroundGradient
+    }) : /*#__PURE__*/React.createElement(_components_gradient_picker__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonBackgroundGradientHover: value
+        });
+      },
+      label: __('Button Background Gradient', 'post-type-archive-mapping'),
+      value: listButtonBackgroundGradientHover
+    }));
+  })), /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsDesktop,
+    showFontFamily: true,
+    showFontSize: true,
+    showFontWeight: true,
+    showTextTransform: true,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSize: fontObject.fontSize,
+        listContentFontSizeUnit: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacing: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeight: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTop",
+    attrRight: "listContentPaddingRight",
+    attrBottom: "listContentPaddingBottom",
+    attrLeft: "listContentPaddingLeft",
+    attrUnit: "listContentPaddingUnit",
+    attrSyncUnits: "listContentPaddingUnitsSync",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTop",
+    attrRight: "listContentMarginRight",
+    attrBottom: "listContentMarginBottom",
+    attrLeft: "listContentMarginLeft",
+    attrUnit: "listContentMarginUnit",
+    attrSyncUnits: "listContentMarginUnitsSync",
+    units: ['px', 'em', 'rem']
+  }))), 'Tablet' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsTablet,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSizeTablet: fontObject.fontSize,
+        listContentFontSizeUnitTablet: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacingTablet: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeightTablet: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTopTablet",
+    attrRight: "listContentPaddingRightTablet",
+    attrBottom: "listContentPaddingBottomTablet",
+    attrLeft: "listContentPaddingLeftTablet",
+    attrUnit: "listContentPaddingUnitTablet",
+    attrSyncUnits: "listContentPaddingUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTopTablet",
+    attrRight: "listContentMarginRightTablet",
+    attrBottom: "listContentMarginBottomTablet",
+    attrLeft: "listContentMarginLeftTablet",
+    attrUnit: "listContentMarginUnitTablet",
+    attrSyncUnits: "listContentMarginUnitsSyncTablet",
+    units: ['px', 'em', 'rem']
+  })), 'Mobile' === getDeviceType() && listShowPostMeta && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_typography__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    label: __('Post Content Typography', 'post-type-archive-mapping'),
+    options: listContentFontParamsMobile,
+    showFontFamily: false,
+    showFontSize: true,
+    showFontWeight: false,
+    showTextTransform: false,
+    showLineHeight: true,
+    showLetterSpacing: true,
+    onChange: function onChange(fontObject) {
+      setAttributes({
+        listContentFontFamily: fontObject.fontFamily,
+        listContentFontSizeMobile: fontObject.fontSize,
+        listContentFontSizeUnitMobile: fontObject.fontSizeUnit,
+        listContentFontWeight: fontObject.fontWeight,
+        listContentLetterSpacingMobile: fontObject.letterSpacing,
+        listContentLetterSpacingUnit: fontObject.letterSpacingUnit,
+        listContentLineHeightMobile: fontObject.lineHeight,
+        listContentLineHeightUnit: fontObject.lineHeightUnit,
+        listContentTextTransform: fontObject.textTransform
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentPaddingTopMobile",
+    attrRight: "listContentPaddingRightMobile",
+    attrBottom: "listContentPaddingBottomMobile",
+    attrLeft: "listContentPaddingLeftMobile",
+    attrUnit: "listContentPaddingUnitMobile",
+    attrSyncUnits: "listContentPaddingUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
+  }), /*#__PURE__*/React.createElement(_components_dimensions__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    label: __('Margin', 'post-type-archive-mapping'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    allowNegatives: false,
+    attrTop: "listContentMarginTopMobile",
+    attrRight: "listContentMarginRightMobile",
+    attrBottom: "listContentMarginBottomMobile",
+    attrLeft: "listContentMarginLeftMobile",
+    attrUnit: "listContentMarginUnitMobile",
+    attrSyncUnits: "listContentMarginUnitsSyncMobile",
+    units: ['px', 'em', 'rem']
   }))));
   var inspectorControls = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query', 'post-type-archive-mapping'),

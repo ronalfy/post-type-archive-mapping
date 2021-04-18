@@ -1042,6 +1042,358 @@ class Post_List {
 						'type'    => 'string',
 						'default' => 'left',
 					),
+					'listButtonContainerPaddingTop'                  => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingRight'                => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingBottom'               => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingLeft'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingUnit'                 => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerPaddingUnitsSync'            => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonContainerPaddingTopTablet'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingRightTablet'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingBottomTablet'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingLeftTablet'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingUnitTablet'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerPaddingUnitsSyncTablet'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonContainerPaddingTopMobile'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingRightMobile'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingBottomMobile'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingLeftMobile'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerPaddingUnitMobile'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerPaddingUnitsSyncMobile'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonContainerMarginTop'                   => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginRight'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginBottom'                => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginLeft'                  => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginUnit'                  => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerMarginUnitsSync'             => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonContainerMarginTopTablet'             => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginRightTablet'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginBottomTablet'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginLeftTablet'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginUnitTablet'            => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerMarginUnitsSyncTablet'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonContainerMarginTopMobile'             => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginRightMobile'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginBottomMobile'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginLeftMobile'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonContainerMarginUnitMobile'            => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonContainerMarginUnitsSyncMobile'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonPaddingTop'                  => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingRight'                => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingBottom'               => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingLeft'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingUnit'                 => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonPaddingUnitsSync'            => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonPaddingTopTablet'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingRightTablet'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingBottomTablet'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingLeftTablet'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingUnitTablet'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonPaddingUnitsSyncTablet'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonPaddingTopMobile'            => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingRightMobile'          => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingBottomMobile'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingLeftMobile'           => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonPaddingUnitMobile'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonPaddingUnitsSyncMobile'      => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonShow' => array(
+						'type' => 'boolean',
+						'default' => true,
+					),
+					'listButtonBorderWidth'                 => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonBorderRadiusTopleft'         => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonBorderRadiusTopRight'        => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonBorderRadiusBottomLeft'      => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonBorderRadiusBottomRight'     => array(
+						'type'    => 'integer',
+						'default' => 0,
+					),
+					'listButtonBorderRadiusUnitsSync'       => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
+					'listButtonBorderRadiusUnit'            => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonFontFamily'             => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'listButtonFontSizeUnit'           => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonFontSizeUnitTablet'     => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonFontSizeUnitMobile'     => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'listButtonFontSize'               => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listButtonFontSizeTablet'         => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listButtonFontSizeMobile'         => array(
+						'type'    => 'string',
+						'default' => '20',
+					),
+					'listButtonFontWeight'             => array(
+						'type'    => 'string',
+						'default' => 400.,
+					),
+					'listButtonLetterSpacing'          => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listButtonLetterSpacingTablet'    => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listButtonLetterSpacingMobile'    => array(
+						'type'    => 'string',
+						'default' => '0',
+					),
+					'listButtonLetterSpacingUnit'      => array(
+						'type'    => 'string',
+						'default' => 'em',
+					),
+					'listButtonTextTransform'          => array(
+						'type'    => 'string',
+						'default' => 'none',
+					),
+					'listButtonLineHeight'             => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listButtonLineHeightTablet'       => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listButtonLineHeightMobile'       => array(
+						'type'    => 'string',
+						'default' => '1.2',
+					),
+					'listButtonLineHeightUnit'         => array(
+						'type'    => 'string',
+						'default' => 'em',
+					),
+					'listButtonBorderColor'                 => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+					'listButtonBackgroundType' => array(
+						'type' => 'string',
+						'default' => 'color',
+					),
+					'listButtonBackgroundColor' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'listButtonBackgroundColorHover' => array(
+						'type' => 'string',
+						'default' => '#000000',
+					),
+					'listButtonBackgroundGradient' => array(
+						'type' => 'string',
+						'default' => '',
+					),
+					'listButtonBackgroundGradientHover' => array(
+						'type' => 'string',
+						'default' => '',
+					),
+					'listButtonContainerAlign' => array(
+						'type' => 'string',
+						'default' => 'left',
+					),
+					'listButtonTextAlign' => array(
+						'type' => 'string',
+						'default' => 'center',
+					),
+					'listButtonWidth' => array(
+						'type' => 'string',
+						'default' => 'inline',
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',
