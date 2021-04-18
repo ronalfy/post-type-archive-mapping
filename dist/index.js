@@ -16706,12 +16706,19 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listButtonBorderWidth = attributes.listButtonBorderWidth,
       listButtonBorderColor = attributes.listButtonBorderColor,
       listButtonBorderColorHover = attributes.listButtonBorderColorHover,
-      listButtonRadiusTopleft = attributes.listButtonRadiusTopleft,
-      listButtonRadiusTopRight = attributes.listButtonRadiusTopRight,
-      listButtonRadiusBottomLeft = attributes.listButtonRadiusBottomLeft,
-      listButtonRadiusBottomRight = attributes.listButtonRadiusBottomRight,
-      listButtonRadiusUnitsSync = attributes.listButtonRadiusUnitsSync,
-      listButtonRadiusUnit = attributes.listButtonRadiusUnit,
+      listButtonBorderRadiusTopleft = attributes.listButtonBorderRadiusTopleft,
+      listButtonBorderRadiusTopRight = attributes.listButtonBorderRadiusTopRight,
+      listButtonBorderRadiusBottomRight = attributes.listButtonBorderRadiusBottomRight,
+      listButtonBorderRadiusBottomLeft = attributes.listButtonBorderRadiusBottomLeft,
+      listButtonBorderRadiusTopleftTablet = attributes.listButtonBorderRadiusTopleftTablet,
+      listButtonBorderRadiusTopRightTablet = attributes.listButtonBorderRadiusTopRightTablet,
+      listButtonBorderRadiusBottomRightTablet = attributes.listButtonBorderRadiusBottomRightTablet,
+      listButtonBorderRadiusBottomLeftTablet = attributes.listButtonBorderRadiusBottomLeftTablet,
+      listButtonBorderRadiusTopleftMobile = attributes.listButtonBorderRadiusTopleftMobile,
+      listButtonBorderRadiusTopRightMobile = attributes.listButtonBorderRadiusTopRightMobile,
+      listButtonBorderRadiusBottomRightMobile = attributes.listButtonBorderRadiusBottomRightMobile,
+      listButtonBorderRadiusBottomLeftMobile = attributes.listButtonBorderRadiusBottomLeftMobile,
+      listButtonBorderRadiusUnit = attributes.listButtonBorderRadiusUnit,
       listButtonFontFamily = attributes.listButtonFontFamily,
       listButtonFontSizeUnit = attributes.listButtonFontSizeUnit,
       listButtonFontSizeUnitTablet = attributes.listButtonFontSizeUnitTablet,
@@ -16738,8 +16745,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listButtonTextColorHover = attributes.listButtonTextColorHover,
       listButtonContainerAlign = attributes.listButtonContainerAlign,
       listButtonTextAlign = attributes.listButtonTextAlign,
-      listButtonWidth = attributes.listButtonWidth,
-      listButtonMaxWidth = attributes.listButtonMaxWidth; // Retrieve WPML languages.
+      listButtonWidth = attributes.listButtonWidth; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -18340,7 +18346,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonContainerPaddingTop",
-    attrRight: "listButtonContainerContainerPaddingRight",
+    attrRight: "listButtonContainerPaddingRight",
     attrBottom: "listButtonContainerPaddingBottom",
     attrLeft: "listButtonContainerPaddingLeft",
     attrUnit: "listButtonContainerPaddingUnit",
@@ -18364,7 +18370,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonPaddingTop",
-    attrRight: "listButtonContainerPaddingRight",
+    attrRight: "listButtonPaddingRight",
     attrBottom: "listButtonPaddingBottom",
     attrLeft: "listButtonPaddingLeft",
     attrUnit: "listButtonPaddingUnit",
@@ -18424,12 +18430,12 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
-    attrTop: "listButtonRadiusTopleft",
-    attrRight: "listButtonRadiusTopRight",
-    attrBottom: "listButtonRadiusBottomLeft",
-    attrLeft: "listButtonRadiusBottomRight",
-    attrUnit: "listButtonRadiusUnit",
-    attrSyncUnits: "listButtonRadiusUnitsSync",
+    attrTop: "listButtonBorderRadiusTopleft",
+    attrRight: "listButtonBorderRadiusTopRight",
+    attrBottom: "listButtonBorderRadiusBottomLeft",
+    attrLeft: "listButtonBorderRadiusBottomRight",
+    attrUnit: "listButtonBorderRadiusUnit",
+    attrSyncUnits: "listButtonBorderRadiusUnitsSync",
     labelTop: __('T-Left', 'post-type-archive-mapping'),
     labelRight: __('T-Right', 'post-type-archive-mapping'),
     labelBottom: __('B-Right', 'post-type-archive-mapping'),
@@ -18460,7 +18466,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonContainerPaddingTopTablet",
-    attrRight: "listButtonContainerContainerPaddingRightTablet",
+    attrRight: "listButtonContainerPaddingRightTablet",
     attrBottom: "listButtonContainerPaddingBottomTablet",
     attrLeft: "listButtonContainerPaddingLeftTablet",
     attrUnit: "listButtonContainerPaddingUnitTablet",
@@ -18484,7 +18490,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonPaddingTopTablet",
-    attrRight: "listButtonContainerPaddingRightTablet",
+    attrRight: "listButtonPaddingRightTablet",
     attrBottom: "listButtonPaddingBottomTablet",
     attrLeft: "listButtonPaddingLeftTablet",
     attrUnit: "listButtonPaddingUnitTablet",
@@ -18495,12 +18501,12 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
-    attrTop: "listButtonRadiusTopleftTablet",
-    attrRight: "listButtonRadiusTopRightTablet",
-    attrBottom: "listButtonRadiusBottomLeftTablet",
-    attrLeft: "listButtonRadiusBottomRightTablet",
-    attrUnit: "listButtonRadiusUnit",
-    attrSyncUnits: "listButtonRadiusUnitsSync",
+    attrTop: "listButtonBorderRadiusTopleftTablet",
+    attrRight: "listButtonBorderRadiusTopRightTablet",
+    attrBottom: "listButtonBorderRadiusBottomLeftTablet",
+    attrLeft: "listButtonBorderRadiusBottomRightTablet",
+    attrUnit: "listButtonBorderRadiusUnit",
+    attrSyncUnits: "listButtonBorderRadiusUnitsSync",
     labelTop: __('T-Left', 'post-type-archive-mapping'),
     labelRight: __('T-Right', 'post-type-archive-mapping'),
     labelBottom: __('B-Right', 'post-type-archive-mapping'),
@@ -18531,7 +18537,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonContainerPaddingTopMobile",
-    attrRight: "listButtonContainerContainerPaddingRightMobile",
+    attrRight: "listButtonContainerPaddingRightMobile",
     attrBottom: "listButtonContainerPaddingBottomMobile",
     attrLeft: "listButtonContainerPaddingLeftMobile",
     attrUnit: "listButtonContainerPaddingUnitMobile",
@@ -18555,7 +18561,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     setAttributes: setAttributes,
     allowNegatives: false,
     attrTop: "listButtonPaddingTopMobile",
-    attrRight: "listButtonContainerPaddingRightMobile",
+    attrRight: "listButtonPaddingRightMobile",
     attrBottom: "listButtonPaddingBottomMobile",
     attrLeft: "listButtonPaddingLeftMobile",
     attrUnit: "listButtonPaddingUnitMobile",
@@ -18566,12 +18572,12 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     attributes: attributes,
     setAttributes: setAttributes,
     allowNegatives: false,
-    attrTop: "listButtonRadiusTopleftMobile",
-    attrRight: "listButtonRadiusTopRightMobile",
-    attrBottom: "listButtonRadiusBottomLeftMobile",
-    attrLeft: "listButtonRadiusBottomRightMobile",
-    attrUnit: "listButtonRadiusUnit",
-    attrSyncUnits: "listButtonRadiusUnitsSync",
+    attrTop: "listButtonBorderRadiusTopleftMobile",
+    attrRight: "listButtonBorderRadiusTopRightMobile",
+    attrBottom: "listButtonBorderRadiusBottomLeftMobile",
+    attrLeft: "listButtonBorderRadiusBottomRightMobile",
+    attrUnit: "listButtonBorderRadiusUnit",
+    attrSyncUnits: "listButtonBorderRadiusUnitsSync",
     labelTop: __('T-Left', 'post-type-archive-mapping'),
     labelRight: __('T-Right', 'post-type-archive-mapping'),
     labelBottom: __('B-Right', 'post-type-archive-mapping'),
@@ -18861,6 +18867,92 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   if ('Mobile' === getDeviceType()) {
     builder.addCSS('.ptam-hierarchical-list-content', "\n\t\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listContentMarginTopMobile, listContentMarginRightMobile, listContentMarginBottomMobile, listContentMarginLeftMobile, listContentMarginUnitMobile), ";\n\t\t\t"));
+  } // Button Styles.
+
+
+  builder.addCSS('.ptam-hierarchical-list-button-container', "\n\ttext-align: ".concat(listButtonContainerAlign, ";\n\tpadding: ").concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerPaddingTop, listButtonContainerPaddingRight, listButtonContainerPaddingBottom, listButtonContainerPaddingLeft, listButtonContainerPaddingUnit), ";\n\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerPaddingTopTablet, listButtonContainerPaddingRightTablet, listButtonContainerPaddingBottomTablet, listButtonContainerPaddingLeftTablet, listButtonContainerPaddingUnitTablet), ";\n\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerPaddingTopMobile, listButtonContainerPaddingRightMobile, listButtonContainerPaddingBottomMobile, listButtonContainerPaddingLeftMobile, listButtonContainerPaddingUnitMobile), ";\n\t\t"));
+  } // Button Container Margin.
+
+
+  builder.addCSS('.ptam-hierarchical-list-button-container', "\n\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerMarginTop, listButtonContainerMarginRight, listButtonContainerMarginBottom, listButtonContainerMarginLeft, listButtonContainerMarginUnit), ";\n\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerMarginTopTablet, listButtonContainerMarginRightTablet, listButtonContainerMarginBottomTablet, listButtonContainerMarginLeftTablet, listButtonContainerMarginUnitTablet), ";\n\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container', "\n\t\tmargin: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonContainerMarginTopMobile, listButtonContainerMarginRightMobile, listButtonContainerMarginBottomMobile, listButtonContainerMarginLeftMobile, listButtonContainerMarginUnitMobile), ";\n\t\t"));
+  } // Button Border Styles.
+
+
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\ttext-align: ".concat(listButtonTextAlign, ";\n\tdisplay: inline-block;\n\tborder-radius: ").concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonBorderRadiusTopleft, listButtonBorderRadiusTopRight, listButtonBorderRadiusBottomRight, listButtonBorderRadiusBottomLeft, listButtonBorderRadiusUnit), ";\n"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonBorderRadiusTopleftTablet, listButtonBorderRadiusTopRightTablet, listButtonBorderRadiusBottomRightTablet, listButtonBorderRadiusBottomLeftTablet, listButtonBorderRadiusUnit), ";\n\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonBorderRadiusTopleftMobile, listButtonBorderRadiusTopRightMobile, listButtonBorderRadiusBottomRightMobile, listButtonBorderRadiusBottomLeftMobile, listButtonBorderRadiusUnit), ";\n\t"));
+  }
+
+  if ('block' === listButtonWidth) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tdisplay: block;\n\n\t");
+  }
+
+  if ('' !== listButtonBorderColor) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonBorderColor, 1), ";\n\t\t"));
+  }
+
+  if ('' !== listButtonBorderColorHover) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\tborder-color: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonBorderColorHover, 1), ";\n\t\t"));
+  }
+
+  if (0 < listButtonBorderWidth) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tborder: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonBorderWidth, 'px'), " solid ").concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonBorderColor, 1), ";\n"));
+  } // Button Font Styles.
+
+
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tfont-family: ".concat(listButtonFontFamily ? listButtonFontFamily : 'inherit', ";\n\t\tfont-size: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonFontSize, listButtonFontSizeUnit), ";\n\t\tfont-weight: ").concat(listButtonFontWeight, ";\n\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLetterSpacing, listButtonLetterSpacingUnit), ";\n\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLineHeight, listButtonLineHeightUnit), ";\n\t\ttext-transform: ").concat(listButtonTextTransform, ";\n\t\ttext-align: ").concat(listButtonTextAlign, ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonFontSizeTablet, listButtonFontSizeUnitTablet), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLetterSpacingTablet, listButtonLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLineHeightTablet, listButtonLineHeightUnit), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tfont-size: ".concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonFontSizeMobile, listButtonFontSizeUnitMobile), ";\n\t\t\tletter-spacing: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLetterSpacingMobile, listButtonLetterSpacingUnit), ";\n\t\t\tline-height: ").concat(Object(_utilities_value_with_unit__WEBPACK_IMPORTED_MODULE_10__["default"])(listButtonLineHeightMobile, listButtonLineHeightUnit), ";\n\t\t\t"));
+  } // Button Padding.
+
+
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonPaddingTop, listButtonPaddingRight, listButtonPaddingBottom, listButtonPaddingLeft, listButtonPaddingUnit), ";\n\t\t"));
+
+  if ('Tablet' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonPaddingTopTablet, listButtonPaddingRightTablet, listButtonPaddingBottomTablet, listButtonPaddingLeftTablet, listButtonPaddingUnitTablet), ";\n\t\t\t"));
+  }
+
+  if ('Mobile' === getDeviceType()) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tpadding: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonPaddingTopMobile, listButtonPaddingRightMobile, listButtonPaddingBottomMobile, listButtonPaddingLeftMobile, listButtonPaddingUnitMobile), ";\n\t\t\t"));
+  }
+
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\ttext-align: ".concat(listButtonTextAlign, ";\n\t\t")); // Button colors.
+
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tcolor: ".concat(listButtonTextColor, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\tcolor: ".concat(listButtonTextColorHover, ";\n\t\t"));
+
+  if ('color' === listButtonBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tbackground: ".concat(listButtonBackgroundColor, ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\t\tbackground: ".concat(listButtonBackgroundColorHover, ";\n\t\t\t"));
+  }
+
+  if ('gradient' === listButtonBackgroundType) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tbackground: ".concat(listButtonBackgroundGradient, ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\t\tbackground: ".concat(listButtonBackgroundGradientHover, ";\n\t\t\t"));
   }
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, inspectorControls, !disableStyles ? builder.printCSS() : '', listTitleFontFamily && listTitleFontFamily in _components_typography_GoogleFonts__WEBPACK_IMPORTED_MODULE_15__["default"] && /*#__PURE__*/React.createElement("link", {

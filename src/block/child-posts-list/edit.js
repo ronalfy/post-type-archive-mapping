@@ -397,18 +397,19 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listButtonBorderWidth,
 		listButtonBorderColor,
 		listButtonBorderColorHover,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusTopleft,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusTopRight,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusBottomLeft,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusBottomRight,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusUnitsSync,
-		// eslint-disable-next-line no-unused-vars
-		listButtonRadiusUnit,
+		listButtonBorderRadiusTopleft,
+		listButtonBorderRadiusTopRight,
+		listButtonBorderRadiusBottomRight,
+		listButtonBorderRadiusBottomLeft,
+		listButtonBorderRadiusTopleftTablet,
+		listButtonBorderRadiusTopRightTablet,
+		listButtonBorderRadiusBottomRightTablet,
+		listButtonBorderRadiusBottomLeftTablet,
+		listButtonBorderRadiusTopleftMobile,
+		listButtonBorderRadiusTopRightMobile,
+		listButtonBorderRadiusBottomRightMobile,
+		listButtonBorderRadiusBottomLeftMobile,
+		listButtonBorderRadiusUnit,
 		listButtonFontFamily,
 		listButtonFontSizeUnit,
 		listButtonFontSizeUnitTablet,
@@ -436,7 +437,6 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listButtonContainerAlign,
 		listButtonTextAlign,
 		listButtonWidth,
-		listButtonMaxWidth,
 
 	} = attributes;
 
@@ -2362,7 +2362,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									setAttributes={ setAttributes }
 									allowNegatives={ false }
 									attrTop="listButtonContainerPaddingTop"
-									attrRight="listButtonContainerContainerPaddingRight"
+									attrRight="listButtonContainerPaddingRight"
 									attrBottom="listButtonContainerPaddingBottom"
 									attrLeft="listButtonContainerPaddingLeft"
 									attrUnit="listButtonContainerPaddingUnit"
@@ -2388,7 +2388,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									setAttributes={ setAttributes }
 									allowNegatives={ false }
 									attrTop="listButtonPaddingTop"
-									attrRight="listButtonContainerPaddingRight"
+									attrRight="listButtonPaddingRight"
 									attrBottom="listButtonPaddingBottom"
 									attrLeft="listButtonPaddingLeft"
 									attrUnit="listButtonPaddingUnit"
@@ -2463,12 +2463,12 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 									attributes={ attributes }
 									setAttributes={ setAttributes }
 									allowNegatives={ false }
-									attrTop="listButtonRadiusTopleft"
-									attrRight="listButtonRadiusTopRight"
-									attrBottom="listButtonRadiusBottomLeft"
-									attrLeft="listButtonRadiusBottomRight"
-									attrUnit="listButtonRadiusUnit"
-									attrSyncUnits="listButtonRadiusUnitsSync"
+									attrTop="listButtonBorderRadiusTopleft"
+									attrRight="listButtonBorderRadiusTopRight"
+									attrBottom="listButtonBorderRadiusBottomLeft"
+									attrLeft="listButtonBorderRadiusBottomRight"
+									attrUnit="listButtonBorderRadiusUnit"
+									attrSyncUnits="listButtonBorderRadiusUnitsSync"
 									labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
 									labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
 									labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
@@ -2510,7 +2510,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
 							attrTop="listButtonContainerPaddingTopTablet"
-							attrRight="listButtonContainerContainerPaddingRightTablet"
+							attrRight="listButtonContainerPaddingRightTablet"
 							attrBottom="listButtonContainerPaddingBottomTablet"
 							attrLeft="listButtonContainerPaddingLeftTablet"
 							attrUnit="listButtonContainerPaddingUnitTablet"
@@ -2536,7 +2536,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
 							attrTop="listButtonPaddingTopTablet"
-							attrRight="listButtonContainerPaddingRightTablet"
+							attrRight="listButtonPaddingRightTablet"
 							attrBottom="listButtonPaddingBottomTablet"
 							attrLeft="listButtonPaddingLeftTablet"
 							attrUnit="listButtonPaddingUnitTablet"
@@ -2548,12 +2548,12 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listButtonRadiusTopleftTablet"
-							attrRight="listButtonRadiusTopRightTablet"
-							attrBottom="listButtonRadiusBottomLeftTablet"
-							attrLeft="listButtonRadiusBottomRightTablet"
-							attrUnit="listButtonRadiusUnit"
-							attrSyncUnits="listButtonRadiusUnitsSync"
+							attrTop="listButtonBorderRadiusTopleftTablet"
+							attrRight="listButtonBorderRadiusTopRightTablet"
+							attrBottom="listButtonBorderRadiusBottomLeftTablet"
+							attrLeft="listButtonBorderRadiusBottomRightTablet"
+							attrUnit="listButtonBorderRadiusUnit"
+							attrSyncUnits="listButtonBorderRadiusUnitsSync"
 							labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
 							labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
 							labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
@@ -2593,7 +2593,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
 							attrTop="listButtonContainerPaddingTopMobile"
-							attrRight="listButtonContainerContainerPaddingRightMobile"
+							attrRight="listButtonContainerPaddingRightMobile"
 							attrBottom="listButtonContainerPaddingBottomMobile"
 							attrLeft="listButtonContainerPaddingLeftMobile"
 							attrUnit="listButtonContainerPaddingUnitMobile"
@@ -2619,7 +2619,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
 							attrTop="listButtonPaddingTopMobile"
-							attrRight="listButtonContainerPaddingRightMobile"
+							attrRight="listButtonPaddingRightMobile"
 							attrBottom="listButtonPaddingBottomMobile"
 							attrLeft="listButtonPaddingLeftMobile"
 							attrUnit="listButtonPaddingUnitMobile"
@@ -2631,12 +2631,12 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							allowNegatives={ false }
-							attrTop="listButtonRadiusTopleftMobile"
-							attrRight="listButtonRadiusTopRightMobile"
-							attrBottom="listButtonRadiusBottomLeftMobile"
-							attrLeft="listButtonRadiusBottomRightMobile"
-							attrUnit="listButtonRadiusUnit"
-							attrSyncUnits="listButtonRadiusUnitsSync"
+							attrTop="listButtonBorderRadiusTopleftMobile"
+							attrRight="listButtonBorderRadiusTopRightMobile"
+							attrBottom="listButtonBorderRadiusBottomLeftMobile"
+							attrLeft="listButtonBorderRadiusBottomRightMobile"
+							attrUnit="listButtonBorderRadiusUnit"
+							attrSyncUnits="listButtonBorderRadiusUnitsSync"
 							labelTop={ __( 'T-Left', 'post-type-archive-mapping' ) }
 							labelRight={ __( 'T-Right', 'post-type-archive-mapping' ) }
 							labelBottom={ __( 'B-Right', 'post-type-archive-mapping' ) }
@@ -3463,6 +3463,318 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listContentMarginLeftMobile,
 		listContentMarginUnitMobile
 	) };
+			`
+		);
+	}
+
+	// Button Styles.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container',
+		`
+	text-align: ${ listButtonContainerAlign };
+	padding: ${ shorthandCSS(
+		listButtonContainerPaddingTop,
+		listButtonContainerPaddingRight,
+		listButtonContainerPaddingBottom,
+		listButtonContainerPaddingLeft,
+		listButtonContainerPaddingUnit
+	) };
+	`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container',
+			`
+		padding: ${ shorthandCSS(
+		listButtonContainerPaddingTopTablet,
+		listButtonContainerPaddingRightTablet,
+		listButtonContainerPaddingBottomTablet,
+		listButtonContainerPaddingLeftTablet,
+		listButtonContainerPaddingUnitTablet
+	) };
+		`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container',
+			`
+		padding: ${ shorthandCSS(
+		listButtonContainerPaddingTopMobile,
+		listButtonContainerPaddingRightMobile,
+		listButtonContainerPaddingBottomMobile,
+		listButtonContainerPaddingLeftMobile,
+		listButtonContainerPaddingUnitMobile
+	) };
+		`
+		);
+	}
+
+	// Button Container Margin.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container',
+		`
+	margin: ${ shorthandCSS(
+		listButtonContainerMarginTop,
+		listButtonContainerMarginRight,
+		listButtonContainerMarginBottom,
+		listButtonContainerMarginLeft,
+		listButtonContainerMarginUnit
+	) };
+	`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container',
+			`
+		margin: ${ shorthandCSS(
+		listButtonContainerMarginTopTablet,
+		listButtonContainerMarginRightTablet,
+		listButtonContainerMarginBottomTablet,
+		listButtonContainerMarginLeftTablet,
+		listButtonContainerMarginUnitTablet
+	) };
+		`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container',
+			`
+		margin: ${ shorthandCSS(
+		listButtonContainerMarginTopMobile,
+		listButtonContainerMarginRightMobile,
+		listButtonContainerMarginBottomMobile,
+		listButtonContainerMarginLeftMobile,
+		listButtonContainerMarginUnitMobile
+	) };
+		`
+		);
+	}
+
+	// Button Border Styles.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+	text-align: ${ listButtonTextAlign };
+	display: inline-block;
+	border-radius: ${ shorthandCSS(
+		listButtonBorderRadiusTopleft,
+		listButtonBorderRadiusTopRight,
+		listButtonBorderRadiusBottomRight,
+		listButtonBorderRadiusBottomLeft,
+		listButtonBorderRadiusUnit
+	) };
+` );
+
+if ( 'Tablet' === getDeviceType() ) {
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		border-radius: ${ shorthandCSS(
+			listButtonBorderRadiusTopleftTablet,
+			listButtonBorderRadiusTopRightTablet,
+			listButtonBorderRadiusBottomRightTablet,
+			listButtonBorderRadiusBottomLeftTablet,
+			listButtonBorderRadiusUnit
+		) };
+	`
+	);
+}
+if ( 'Mobile' === getDeviceType() ) {
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		border-radius: ${ shorthandCSS(
+			listButtonBorderRadiusTopleftMobile,
+			listButtonBorderRadiusTopRightMobile,
+			listButtonBorderRadiusBottomRightMobile,
+			listButtonBorderRadiusBottomLeftMobile,
+			listButtonBorderRadiusUnit
+		) };
+	`
+	);
+}
+
+	if ( 'block' === listButtonWidth ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+		display: block;
+
+	` );
+	}
+
+	if ( '' !== listButtonBorderColor ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+		border-color: ${ hexToRgba( listButtonBorderColor, 1 ) };
+		`
+		);
+	}
+	if ( '' !== listButtonBorderColorHover ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a:hover',
+			`
+		border-color: ${ hexToRgba( listButtonBorderColorHover, 1 ) };
+		`
+		);
+	}
+	if ( 0 < listButtonBorderWidth ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+		border: ${ valueWithUnit( listButtonBorderWidth, 'px' ) } solid ${ hexToRgba(
+	listButtonBorderColor,
+	1
+) };
+`
+		);
+	}
+
+	// Button Font Styles.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		font-family: ${ listButtonFontFamily ? listButtonFontFamily : 'inherit' };
+		font-size: ${ valueWithUnit( listButtonFontSize, listButtonFontSizeUnit ) };
+		font-weight: ${ listButtonFontWeight };
+		letter-spacing: ${ valueWithUnit(
+		listButtonLetterSpacing,
+		listButtonLetterSpacingUnit
+	) };
+		line-height: ${ valueWithUnit( listButtonLineHeight, listButtonLineHeightUnit ) };
+		text-transform: ${ listButtonTextTransform };
+		text-align: ${ listButtonTextAlign };
+		`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			font-size: ${ valueWithUnit(
+		listButtonFontSizeTablet,
+		listButtonFontSizeUnitTablet
+	) };
+			letter-spacing: ${ valueWithUnit(
+		listButtonLetterSpacingTablet,
+		listButtonLetterSpacingUnit
+	) };
+			line-height: ${ valueWithUnit(
+		listButtonLineHeightTablet,
+		listButtonLineHeightUnit
+	) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			font-size: ${ valueWithUnit(
+		listButtonFontSizeMobile,
+		listButtonFontSizeUnitMobile
+	) };
+			letter-spacing: ${ valueWithUnit(
+		listButtonLetterSpacingMobile,
+		listButtonLetterSpacingUnit
+	) };
+			line-height: ${ valueWithUnit(
+		listButtonLineHeightMobile,
+		listButtonLineHeightUnit
+	) };
+			`
+		);
+	}
+
+	// Button Padding.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		padding: ${ shorthandCSS(
+		listButtonPaddingTop,
+		listButtonPaddingRight,
+		listButtonPaddingBottom,
+		listButtonPaddingLeft,
+		listButtonPaddingUnit
+	) };
+		`
+	);
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			padding: ${ shorthandCSS(
+		listButtonPaddingTopTablet,
+		listButtonPaddingRightTablet,
+		listButtonPaddingBottomTablet,
+		listButtonPaddingLeftTablet,
+		listButtonPaddingUnitTablet
+	) };
+			`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			padding: ${ shorthandCSS(
+		listButtonPaddingTopMobile,
+		listButtonPaddingRightMobile,
+		listButtonPaddingBottomMobile,
+		listButtonPaddingLeftMobile,
+		listButtonPaddingUnitMobile
+	) };
+			`
+		);
+	}
+
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		text-align: ${ listButtonTextAlign };
+		`
+	);
+
+	// Button colors.
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a',
+		`
+		color: ${ listButtonTextColor };
+		`
+	);
+	builder.addCSS(
+		'.ptam-hierarchical-list-button-container a:hover',
+		`
+		color: ${ listButtonTextColorHover };
+		`
+	);
+	if ( 'color' === listButtonBackgroundType ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			background: ${ listButtonBackgroundColor };
+			`
+		);
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a:hover',
+			`
+			background: ${ listButtonBackgroundColorHover };
+			`
+		);
+	}
+	if ( 'gradient' === listButtonBackgroundType ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
+			background: ${ listButtonBackgroundGradient };
+			`
+		);
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a:hover',
+			`
+			background: ${ listButtonBackgroundGradientHover };
 			`
 		);
 	}
