@@ -1386,12 +1386,12 @@ class Post_List {
 						'type'    => 'string',
 						'default' => '',
 					),
-					'listButtonTextColor' => array(
-						'type' => 'string',
+					'listButtonTextColor'                  => array(
+						'type'    => 'string',
 						'default' => '#FFFFFF',
 					),
-					'listButtonTextColorHover' => array(
-						'type' => 'string',
+					'listButtonTextColorHover'             => array(
+						'type'    => 'string',
 						'default' => '#FFFFFF',
 					),
 					'listButtonContainerAlign'             => array(
@@ -1406,8 +1406,8 @@ class Post_List {
 						'type'    => 'string',
 						'default' => 'inline',
 					),
-					'listButtonReadMoreText' => array(
-						'type' => 'string',
+					'listButtonReadMoreText'               => array(
+						'type'    => 'string',
 						'default' => __( 'Read More', 'post-type-archivemapping' ),
 					),
 				),
