@@ -1398,6 +1398,10 @@ class Post_List {
 						'type'    => 'string',
 						'default' => 'inline',
 					),
+					'listButtonReadMoreText' => array(
+						'type' => 'string',
+						'default' => __( 'Read More', 'post-type-archivemapping' ),
+					),
 				),
 				'render_callback' => array( $this, 'output' ),
 				'editor_script'   => 'ptam-custom-posts-gutenberg',

@@ -437,7 +437,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		listButtonContainerAlign,
 		listButtonTextAlign,
 		listButtonWidth,
-
+		listButtonReadMoreText,
 	} = attributes;
 
 	// Retrieve WPML languages.
@@ -682,7 +682,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 							e.preventDefault();
 						} }
 					>
-						Continue Reading...
+						{ listButtonReadMoreText }
 					</a>
 				</div>
 			</article>
@@ -2182,6 +2182,17 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 						/>
 						{ listButtonShow && 'Desktop' === getDeviceType() && (
 							<>
+								<TextControl
+									label={ __(
+										'Read More Label',
+										'post-type-archive-mapping'
+									) }
+									type="text"
+									value={ listButtonReadMoreText }
+									onChange={ ( value ) => {
+										setAttributes( { listButtonReadMoreText: value } );
+									} }
+								/>
 								<SelectControl
 									label={ __( 'Button Width', 'post-type-archive-mapping' ) }
 									options={ buttonWidthOptions }
@@ -3567,34 +3578,34 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	) };
 ` );
 
-if ( 'Tablet' === getDeviceType() ) {
-	builder.addCSS(
-		'.ptam-hierarchical-list-button-container a',
-		`
+	if ( 'Tablet' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
 		border-radius: ${ shorthandCSS(
-			listButtonBorderRadiusTopleftTablet,
-			listButtonBorderRadiusTopRightTablet,
-			listButtonBorderRadiusBottomRightTablet,
-			listButtonBorderRadiusBottomLeftTablet,
-			listButtonBorderRadiusUnit
-		) };
+		listButtonBorderRadiusTopleftTablet,
+		listButtonBorderRadiusTopRightTablet,
+		listButtonBorderRadiusBottomRightTablet,
+		listButtonBorderRadiusBottomLeftTablet,
+		listButtonBorderRadiusUnit
+	) };
 	`
-	);
-}
-if ( 'Mobile' === getDeviceType() ) {
-	builder.addCSS(
-		'.ptam-hierarchical-list-button-container a',
-		`
+		);
+	}
+	if ( 'Mobile' === getDeviceType() ) {
+		builder.addCSS(
+			'.ptam-hierarchical-list-button-container a',
+			`
 		border-radius: ${ shorthandCSS(
-			listButtonBorderRadiusTopleftMobile,
-			listButtonBorderRadiusTopRightMobile,
-			listButtonBorderRadiusBottomRightMobile,
-			listButtonBorderRadiusBottomLeftMobile,
-			listButtonBorderRadiusUnit
-		) };
+		listButtonBorderRadiusTopleftMobile,
+		listButtonBorderRadiusTopRightMobile,
+		listButtonBorderRadiusBottomRightMobile,
+		listButtonBorderRadiusBottomLeftMobile,
+		listButtonBorderRadiusUnit
+	) };
 	`
-	);
-}
+		);
+	}
 
 	if ( 'block' === listButtonWidth ) {
 		builder.addCSS(

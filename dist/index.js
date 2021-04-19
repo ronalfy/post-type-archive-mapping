@@ -16745,7 +16745,8 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       listButtonTextColorHover = attributes.listButtonTextColorHover,
       listButtonContainerAlign = attributes.listButtonContainerAlign,
       listButtonTextAlign = attributes.listButtonTextAlign,
-      listButtonWidth = attributes.listButtonWidth; // Retrieve WPML languages.
+      listButtonWidth = attributes.listButtonWidth,
+      listButtonReadMoreText = attributes.listButtonReadMoreText; // Retrieve WPML languages.
   // eslint-disable-next-line no-undef
 
   var wpmlInstalled = ptam_globals.wpml_installed; // eslint-disable-next-line no-undef
@@ -16981,7 +16982,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         onClick: function onClick(e) {
           e.preventDefault();
         }
-      }, "Continue Reading...")));
+      }, listButtonReadMoreText)));
     });
   };
   /**
@@ -18214,7 +18215,16 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         listButtonShow: value
       });
     }
-  }), listButtonShow && 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+  }), listButtonShow && 'Desktop' === getDeviceType() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TextControl, {
+    label: __('Read More Label', 'post-type-archive-mapping'),
+    type: "text",
+    value: listButtonReadMoreText,
+    onChange: function onChange(value) {
+      setAttributes({
+        listButtonReadMoreText: value
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Button Width', 'post-type-archive-mapping'),
     options: buttonWidthOptions,
     value: listButtonWidth,
