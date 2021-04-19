@@ -16975,7 +16975,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
         alt: ""
       }))), 'none' !== listShowPostContent && /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-list-content"
-      }, 'excerpt' === listShowPostContent ? htmlToReactParser.parse(posts[i].post_excerpt) : htmlToReactParser.parse(posts[i].post_content)), /*#__PURE__*/React.createElement("div", {
+      }, 'excerpt' === listShowPostContent ? htmlToReactParser.parse(posts[i].post_excerpt) : htmlToReactParser.parse(posts[i].post_content)), listButtonShow && /*#__PURE__*/React.createElement("div", {
         className: "ptam-hierarchical-list-button-container"
       }, /*#__PURE__*/React.createElement("a", {
         href: posts[i].link,
@@ -18249,6 +18249,45 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     },
     alignment: listButtonTextAlign,
     label: __('Button Text Alignment', 'post-type-archive-mapping')
+  }), /*#__PURE__*/React.createElement(TabPanel, {
+    className: "layout-tab-panel ptam-control-tabs",
+    activeClass: "active-tab",
+    tabs: [{
+      name: 'list-button-text-color',
+      title: __('Normal', 'post-type-archive-mapping'),
+      className: 'list-button-text-color'
+    }, {
+      name: 'list-button-text-color-hover',
+      title: __('Hover', 'post-type-archive-mapping'),
+      className: 'list-button-text-color-hover'
+    }]
+  }, function (tab) {
+    var isNormal = tab.name === 'list-button-text-color';
+    return /*#__PURE__*/React.createElement("div", null, isNormal ? /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listButtonTextColor,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonTextColor: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Button Text Color', 'post-type-archive-mapping'),
+      alpha: false
+    }) : /*#__PURE__*/React.createElement(_components_color_picker__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      value: listButtonTextColorHover,
+      valueOpacity: 1,
+      onChange: function onChange(value) {
+        setAttributes({
+          listButtonTextColorHover: value
+        });
+      } // eslint-disable-next-line no-unused-vars
+      ,
+      onOpacityChange: function onOpacityChange(value) {},
+      label: __('Button Text Color', 'post-type-archive-mapping'),
+      alpha: false
+    }));
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Background Type', 'post-type-archive-mapping'),
     options: listBackgroundChoices,
@@ -18305,7 +18344,7 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
       title: __('Normal', 'post-type-archive-mapping'),
       className: 'list-button-background-gradient'
     }, {
-      name: 'llist-button-background-gradient-hover',
+      name: 'list-button-background-gradient-hover',
       title: __('Hover', 'post-type-archive-mapping'),
       className: 'list-button-background-gradient-hover'
     }]
@@ -18912,8 +18951,8 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
     builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tborder-radius: ".concat(Object(_utilities_shorthand_css__WEBPACK_IMPORTED_MODULE_11__["default"])(listButtonBorderRadiusTopleftMobile, listButtonBorderRadiusTopRightMobile, listButtonBorderRadiusBottomRightMobile, listButtonBorderRadiusBottomLeftMobile, listButtonBorderRadiusUnit), ";\n\t"));
   }
 
-  if ('block' === listButtonWidth) {
-    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tdisplay: block;\n\n\t");
+  if ('full' === listButtonWidth) {
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tdisplay: block;\n\t");
   }
 
   if ('' !== listButtonBorderColor) {
@@ -18952,12 +18991,12 @@ var PTAMHierarchyChildPostsList = function PTAMHierarchyChildPostsList(props) {
 
   builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\ttext-align: ".concat(listButtonTextAlign, ";\n\t\t")); // Button colors.
 
-  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tcolor: ".concat(listButtonTextColor, ";\n\t\t"));
-  builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\tcolor: ".concat(listButtonTextColorHover, ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonTextColor, 1), ";\n\t\t"));
+  builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\tcolor: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonTextColorHover, 1), ";\n\t\t"));
 
   if ('color' === listButtonBackgroundType) {
-    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tbackground: ".concat(listButtonBackgroundColor, ";\n\t\t\t"));
-    builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\t\tbackground: ".concat(listButtonBackgroundColorHover, ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-button-container a', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonBackgroundColor, 1), ";\n\t\t\t"));
+    builder.addCSS('.ptam-hierarchical-list-button-container a:hover', "\n\t\t\tbackground: ".concat(hex_to_rgba__WEBPACK_IMPORTED_MODULE_8___default()(listButtonBackgroundColorHover, 1), ";\n\t\t\t"));
   }
 
   if ('gradient' === listButtonBackgroundType) {

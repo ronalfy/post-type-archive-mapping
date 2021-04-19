@@ -675,16 +675,18 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 					</div>
 
 				}
-				<div className="ptam-hierarchical-list-button-container">
-					<a
-						href={ posts[ i ].link }
-						onClick={ ( e ) => {
-							e.preventDefault();
-						} }
-					>
-						{ listButtonReadMoreText }
-					</a>
-				</div>
+				{ listButtonShow &&
+					<div className="ptam-hierarchical-list-button-container">
+						<a
+							href={ posts[ i ].link }
+							onClick={ ( e ) => {
+								e.preventDefault();
+							} }
+						>
+							{ listButtonReadMoreText }
+						</a>
+					</div>
+				}
 			</article>
 		) );
 	};
@@ -2223,6 +2225,62 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 										'post-type-archive-mapping'
 									) }
 								/>
+								<TabPanel
+									className="layout-tab-panel ptam-control-tabs"
+									activeClass="active-tab"
+									tabs={ [
+										{
+											name: 'list-button-text-color',
+											title: __( 'Normal', 'post-type-archive-mapping' ),
+											className: 'list-button-text-color',
+										},
+										{
+											name: 'list-button-text-color-hover',
+											title: __( 'Hover', 'post-type-archive-mapping' ),
+											className: 'list-button-text-color-hover',
+										},
+									] }
+								>
+									{ ( tab ) => {
+										const isNormal = tab.name === 'list-button-text-color';
+
+										return (
+											<div>
+												{ isNormal ? (
+													<PTAMColorPicker
+														value={ listButtonTextColor }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listButtonTextColor: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __(
+															'Button Text Color',
+															'post-type-archive-mapping'
+														) }
+														alpha={ false }
+													/>
+												) : (
+													<PTAMColorPicker
+														value={ listButtonTextColorHover }
+														valueOpacity={ 1 }
+														onChange={ ( value ) => {
+															setAttributes( { listButtonTextColorHover: value } );
+														} }
+														// eslint-disable-next-line no-unused-vars
+														onOpacityChange={ ( value ) => {} }
+														label={ __(
+															'Button Text Color',
+															'post-type-archive-mapping'
+														) }
+														alpha={ false }
+													/>
+												) }
+											</div>
+										);
+									} }
+								</TabPanel>
 								<SelectControl
 									label={ __( 'Background Type', 'post-type-archive-mapping' ) }
 									options={ listBackgroundChoices }
@@ -2303,7 +2361,7 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 													className: 'list-button-background-gradient',
 												},
 												{
-													name: 'llist-button-background-gradient-hover',
+													name: 'list-button-background-gradient-hover',
 													title: __( 'Hover', 'post-type-archive-mapping' ),
 													className: 'list-button-background-gradient-hover',
 												},
@@ -3607,12 +3665,11 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 		);
 	}
 
-	if ( 'block' === listButtonWidth ) {
+	if ( 'full' === listButtonWidth ) {
 		builder.addCSS(
 			'.ptam-hierarchical-list-button-container a',
 			`
 		display: block;
-
 	` );
 	}
 
@@ -3752,26 +3809,26 @@ const PTAMHierarchyChildPostsList = ( props ) => {
 	builder.addCSS(
 		'.ptam-hierarchical-list-button-container a',
 		`
-		color: ${ listButtonTextColor };
+		color: ${ hexToRgba( listButtonTextColor, 1 ) };
 		`
 	);
 	builder.addCSS(
 		'.ptam-hierarchical-list-button-container a:hover',
 		`
-		color: ${ listButtonTextColorHover };
+		color: ${ hexToRgba( listButtonTextColorHover, 1 ) };
 		`
 	);
 	if ( 'color' === listButtonBackgroundType ) {
 		builder.addCSS(
 			'.ptam-hierarchical-list-button-container a',
 			`
-			background: ${ listButtonBackgroundColor };
+			background: ${ hexToRgba( listButtonBackgroundColor, 1 ) };
 			`
 		);
 		builder.addCSS(
 			'.ptam-hierarchical-list-button-container a:hover',
 			`
-			background: ${ listButtonBackgroundColorHover };
+			background: ${ hexToRgba( listButtonBackgroundColorHover, 1 ) };
 			`
 		);
 	}

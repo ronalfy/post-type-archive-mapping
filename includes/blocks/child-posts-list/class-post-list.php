@@ -1386,6 +1386,14 @@ class Post_List {
 						'type'    => 'string',
 						'default' => '',
 					),
+					'listButtonTextColor' => array(
+						'type' => 'string',
+						'default' => '#FFFFFF',
+					),
+					'listButtonTextColorHover' => array(
+						'type' => 'string',
+						'default' => '#FFFFFF',
+					),
 					'listButtonContainerAlign'             => array(
 						'type'    => 'string',
 						'default' => 'left',
