@@ -16,7 +16,7 @@ class Gutenberg {
 	 * Class initializer.
 	 */
 	public function run() {
-		add_filter( 'block_categories', array( $this, 'add_block_category' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $this, 'add_block_category' ), 10, 2 );
 	}
 
 	/**
