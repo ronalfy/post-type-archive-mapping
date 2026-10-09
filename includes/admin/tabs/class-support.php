@@ -7,8 +7,12 @@
 
 namespace PTAM\Includes\Admin\Tabs;
 
-use PTAM\Includes\Functions as Functions;
-use PTAM\Includes\Admin\Options as Options;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+use PTAM\Includes\Functions;
+use PTAM\Includes\Admin\Options;
 
 /**
  * Output the settings tab and content.

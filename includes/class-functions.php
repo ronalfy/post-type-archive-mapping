@@ -7,6 +7,10 @@
 
 namespace PTAM\Includes;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class functions
  */

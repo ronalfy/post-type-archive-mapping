@@ -7,6 +7,10 @@
 
 namespace PTAM\Includes\Blocks\Custom_Post_Types;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use PTAM\Includes\Admin\Options;
 
 use PTAM\Includes\Functions;

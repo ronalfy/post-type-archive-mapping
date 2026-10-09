@@ -7,6 +7,10 @@
 
 namespace PTAM\Includes;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use PTAM\Includes\Functions;
 use PTAM\Includes\Admin\Options;
 

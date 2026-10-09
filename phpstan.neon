@@ -13,8 +13,9 @@ parameters:
 			- build
 			- vendor
 			- node_modules (?)
-	# UnescapedHtmlInterpolationRule stays out of phpstan-baseline.neon.
-	# Regenerate the baseline without baselining ptam.unescapedHtmlInterpolation.
+	# UnescapedHtmlInterpolationRule and MissingDirectAccessGuardRule stay out of phpstan-baseline.neon.
+	# Regenerate the baseline without baselining ptam.unescapedHtmlInterpolation or ptam.missingDirectAccessGuard.
 
 rules:
 	- PTAM\PHPStan\UnescapedHtmlInterpolationRule
+	- PTAM\PHPStan\MissingDirectAccessGuardRule

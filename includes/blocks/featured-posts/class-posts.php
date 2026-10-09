@@ -7,7 +7,11 @@
 
 namespace PTAM\Includes\Blocks\Featured_Posts;
 
-use PTAM\Includes\Functions as Functions;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+use PTAM\Includes\Functions;
 
 /**
  * Featured Posts Block
@@ -219,10 +223,8 @@ class Posts {
 			if ( ! empty( $attributes['termTitle'] ) ) {
 				$term_name = $attributes['termTitle'];
 			}
-		} else {
-			if ( ! empty( $attributes['termTitle'] ) ) {
+		} elseif ( ! empty( $attributes['termTitle'] ) ) {
 				$term_name = $attributes['termTitle'];
-			}
 		}
 		?>
 		<h4 class="ptam-fp-term"><span><?php echo esc_html( $term_name ); ?></span></h4>

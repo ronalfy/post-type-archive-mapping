@@ -7,7 +7,11 @@
 
 namespace PTAM\Includes;
 
-use PTAM\Includes\Functions as Functions;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+use PTAM\Includes\Functions;
 
 /**
  * Class enqueue
@@ -20,7 +24,7 @@ class Yoast {
 	public function run() {
 		add_action(
 			'wp',
-			function() {
+			function () {
 				if ( get_query_var( 'original_archive_type' ) && get_query_var( 'original_archive_id' ) ) {
 					add_filter( 'wpseo_opengraph_desc', array( $this, 'opengraph_desc' ), 20, 1 );
 					add_filter( 'wpseo_twitter_description', array( $this, 'opengraph_desc' ), 20, 1 );

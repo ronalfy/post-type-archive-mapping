@@ -7,6 +7,10 @@
 
 namespace PTAM\Includes\Admin;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class Options
  */

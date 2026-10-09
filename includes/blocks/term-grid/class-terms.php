@@ -7,7 +7,11 @@
 
 namespace PTAM\Includes\Blocks\Term_Grid;
 
-use PTAM\Includes\Functions as Functions;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+use PTAM\Includes\Functions;
 
 /**
  * Custom Post Types Block helper methods.

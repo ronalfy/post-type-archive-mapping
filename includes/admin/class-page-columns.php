@@ -7,6 +7,10 @@
 
 namespace PTAM\Includes\Admin;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Page Columns class.
  */
@@ -55,7 +59,7 @@ class Page_Columns {
 			if ( $post_type && ! empty( $post_type ) ) {
 				$archive_link = get_post_type_archive_link( $post_type );
 				if ( $archive_link ) {
-					echo sprintf(
+					printf(
 						'<a href="%s">%s</a>',
 						esc_url( $archive_link ),
 						esc_html__( 'View Post Type Archive', 'post-type-archive-mapping' )
@@ -69,7 +73,7 @@ class Page_Columns {
 				if ( is_wp_error( $archive_link ) ) {
 					return;
 				}
-				echo sprintf(
+				printf(
 					'<a href="%s">%s</a>',
 					esc_url( $archive_link ),
 					esc_html__( 'View Term Archive', 'post-type-archive-mapping' )
