@@ -9,9 +9,10 @@ parameters:
 		- includes
 		- post-type-archive-mapping.php
 	excludePaths:
-		- build
-		- node_modules
-		- vendor
+		analyseAndScan:
+			- build
+			- vendor
+			- node_modules (?)
 	# UnescapedHtmlInterpolationRule stays out of phpstan-baseline.neon.
 	# Regenerate the baseline without baselining ptam.unescapedHtmlInterpolation.
 
