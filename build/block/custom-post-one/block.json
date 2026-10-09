@@ -150,7 +150,12 @@
     },
     "titleAlignment": {
       "type": "string",
-      "default": "left"
+      "default": "left",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     },
     "customFieldAlignment": {
       "type": "string",
@@ -162,11 +167,21 @@
     },
     "metaAlignment": {
       "type": "string",
-      "default": "left"
+      "default": "left",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     },
     "contentAlignment": {
       "type": "string",
-      "default": "left"
+      "default": "left",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
     },
     "padding": {
       "type": "integer",

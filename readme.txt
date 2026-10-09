@@ -1,10 +1,10 @@
 === Custom Query Blocks ===
-Contributors: ronalfy, chrislogan, paaljoachim
-Tags: map pages, archives, post type block, 404 page, category grid
+Contributors: ronalfy
+Tags: map pages, archives, post type block, adopt-me, category grid
 Requires at least: 6.5
 Requires PHP: 7.2
-Tested up to: 7.0
-Stable tag: 5.6.0
+Tested up to: 7.1
+Stable tag: 5.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://github.com/MediaRon/post-type-archive-mapping
@@ -15,23 +15,15 @@ Map your archives to pages. Map 404 and term archives as well.
 
 A WordPress plugin for displaying posts and terms (e.g., categories) using a Gutenberg block. Works well with posts, pages, custom post types, taxonomies, and terms.
 
-Bonus: archive mapping.
-
-> **Archive Pages Pro is here**: Map post types, terms, authors, and more to pages. <a href="https://dlxplugins.com/plugins/archive-pages-pro/">Learn more about Archive Pages Pro</a>
+Bonus
+> **Plugin Up for Adoption**
+> Custom Query Blocks will be im maintenance mode after October 1, 2026. Please find a replacement. Successor <a href="https://github.com/ronalfy/archive-pages-pro/releases/tag/1.0.2">Archive Pages Pro</a> has been archived and released.
 
 <ul>
 	<li>Map your post type archives to a page for customization of the post type archive page.</li>
 	<li>Map your category archives to a page for customization of the term archive page.</li>
 	<li>Map your 404 template to a page and easily customize your 404 page.</li>
 </ul>
-
-<a href="https://mediaron.com/custom-query-blocks/">View Documentation and Overview</a>
-
-The plugin currently has three blocks:
-
-* <a href="https://mediaron.com/custom-query-blocks/custom-post-types-block/">Custom Post Types Block</a>
-* <a href="https://mediaron.com/custom-query-blocks/term-category-grid-block/">Term (Category) Grid Block</a>
-* <a href="https://mediaron.com/custom-query-blocks/featured-posts-by-category-block/">Featured Posts by Category Block</a>
 
 === Post Type Archive Mapping ===
 
@@ -63,11 +55,11 @@ This plugin allows you to map a page to your 404 template, so you can customize 
 
 === Development is on GitHub ===
 
-<a href="https://github.com/MediaRon/post-type-archive-mapping">Development is on GitHub</a>
+<a href="https://github.com/ronalfy/post-type-archive-mapping">Development is on GitHub</a>
 
 === Archive Pages Pro ===
 
-Archive Pages Pro has all the mapping feature of this plugin and more. You can map post types, terms, authors, and more to pages. <a href="https://dlxplugins.com/plugins/archive-pages-pro/">Learn more about Archive Pages Pro</a>
+<a href="https://github.com/ronalfy/archive-pages-pro/releases/tag/1.0.2">Archive Pages Pro</a> was the pro version of this plugin, but has been archived and released.
 
 == Installation ==
 
@@ -121,6 +113,10 @@ Yes, just post in the support forums here and I'll do my best to address your is
 5. Term archive option.
 
 == Changelog ==
+
+= 5.7.0 =
+* Released 2026-10-09
+* Security fix: escape and allowlist allowed for XSS in block markup if edited and output.
 
 = 5.6.0 =
 * Released 2026-03-06
@@ -380,5 +376,5 @@ Yes, just post in the support forums here and I'll do my best to address your is
 
 == Upgrade Notice ==
 
-= 5.6.0 =
-Finalizing resolving XSS issue with image alignment as reported by Patchstack.
+= 5.7.0 =
+Security fix for Custom Posts block style attributes.

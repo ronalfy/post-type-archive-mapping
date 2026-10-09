@@ -1,0 +1,36 @@
+{
+    "name": "mediaron/post-type-archive-mapping",
+    "description": "Development tooling for Custom Query Blocks.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpstan/phpstan": "^2.1",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PTAM\\PHPStan\\": "phpstan/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "phpcs": "phpcs --runtime-set ignore_warnings_on_exit 1 --exclude=Universal.UseStatements.NoUselessAliases,Universal.ControlStructures.DisallowLonelyIf,Universal.CodeAnalysis.NoEchoSprintf,Squiz.Functions.MultiLineFunctionDeclaration,Modernize.FunctionCalls.Dirname,PSR2.Methods.FunctionClosingBrace,PSR2.Classes.ClassDeclaration,Generic.CodeAnalysis.UnusedFunctionParameter,Universal.NamingConventions.NoReservedKeywordParameterNames",
+        "phpcbf": "phpcbf",
+        "phpstan": "phpstan analyse --memory-limit=1G",
+        "lint": [
+            "@phpcs",
+            "@phpstan"
+        ],
+        "plugin-check": "echo 'Plugin Check runs in CI via wordpress/plugin-check-action with the security category. Locally: wp plugin check post-type-archive-mapping --categories=security'"
+    }
+}

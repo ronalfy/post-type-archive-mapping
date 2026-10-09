@@ -122,12 +122,12 @@ class Settings extends Tabs {
 					<div class="notice notice-success is-dismissible">
 						<p>
 							<?php
-							esc_html_e( 'Archive Pages Pro contains archive mapping, author mapping, and much more. Please check it out today.', 'dlx-ratings-nag' );
+							echo esc_html__( 'Archive Pages Pro contains archive mapping, author mapping, and much more. Please check it out today.', 'post-type-archive-mapping' );
 							?>
 						</p>
 						<p>
 							<a href="https://dlxplugins.com/plugins/archive-pages-pro/" class="button button-primary" target="_blank" rel="noopener noreferrer">
-								<?php esc_html_e( 'Visit Archive Pages Pro', 'dlx-ratings-nag' ); ?>
+								<?php echo esc_html__( 'Visit Archive Pages Pro', 'post-type-archive-mapping' ); ?>
 							</a>
 						</p>
 					</div>

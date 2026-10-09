@@ -1,0 +1,637 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Action callback returns array but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Expected 0 @param tags, found 1\.$#'
+			identifier: paramTag.count
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Expected 2 @param tags, found 3\.$#'
+			identifier: paramTag.count
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^One or more @param tags has an invalid name or invalid syntax\.$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(array Associative array of tabs\.\)\: Unexpected token "Associative", expected variable at offset 164 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Sub Tab\)\: Unexpected token "Sub", expected variable at offset 237 on line 10$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Tab\)\: Unexpected token "Tab", expected variable at offset 212 on line 9$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Variable \$sub_tab_html_array in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Variable \$sub_tabs in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Variable \$tabs in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/admin/class-admin-settings.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: includes/admin/class-options.php
+
+		-
+			message: '#^Method PTAM\\Includes\\Admin\\Options\:\:update_options\(\) should return array but returns WP_Error\.$#'
+			identifier: return.type
+			count: 1
+			path: includes/admin/class-options.php
+
+		-
+			message: '#^One or more @param tags has an invalid name or invalid syntax\.$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-options.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(array options\.\)\: Unexpected token "options", expected variable at offset 82 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-options.php
+
+		-
+			message: '#^One or more @param tags has an invalid name or invalid syntax\.$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-page-columns.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(bool true default\.\)\: Unexpected token "true", expected variable at offset 103 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/class-page-columns.php
+
+		-
+			message: '#^Variable \$post_type in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/admin/class-page-columns.php
+
+		-
+			message: '#^Variable \$term_id in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/admin/class-page-columns.php
+
+		-
+			message: '#^Callback expects 1\-2 parameters, \$accepted_args is set to 3\.$#'
+			identifier: arguments.count
+			count: 1
+			path: includes/admin/tabs/class-settings.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$tab Settings tab\.\)\: Unexpected token "\$tab", expected type at offset 49 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/tabs/class-settings.php
+
+		-
+			message: '#^Callback expects 1\-2 parameters, \$accepted_args is set to 3\.$#'
+			identifier: arguments.count
+			count: 1
+			path: includes/admin/tabs/class-support.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$tab Settings tab\.\)\: Unexpected token "\$tab", expected type at offset 49 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/tabs/class-support.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$tab Current tab\.\)\: Unexpected token "\$tab", expected type at offset 49 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/admin/tabs/class-tabs.php
+
+		-
+			message: '#^Property PTAM\\Includes\\Admin\\Tabs\\Tabs\:\:\$tab is unused\.$#'
+			identifier: property.unused
+			count: 1
+			path: includes/admin/tabs/class-tabs.php
+
+		-
+			message: '#^Expected 2 @param tags, found 3\.$#'
+			identifier: paramTag.count
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Negated boolean expression is always true\.$#'
+			identifier: booleanNot.alwaysTrue
+			count: 2
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Offset 0 on array\{list\<string\>, list\<non\-empty\-string\>\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^One or more @param tags has an invalid name or invalid syntax\.$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(bool true \(default\)\)\: Unexpected token "true", expected variable at offset 120 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Parameter \#1 \$args of function paginate_links expects array\{base\?\: string, format\?\: string, total\?\: int, current\?\: int, aria_current\?\: string, show_all\?\: bool, end_size\?\: int, mid_size\?\: int, \.\.\.\}, array\{total\: int, current\: mixed, format\: ''page/%%\#%%'', show_all\: false, type\: ''list'', end_size\: 1, mid_size\: 2, prev_next\: false, \.\.\.\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Variable \$term_list in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/blocks/custom-post-types/class-custom-post-types.php
+
+		-
+			message: '#^Call to function is_wp_error\(\) with WP_Term\|false will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/blocks/featured-posts/class-posts.php
+
+		-
+			message: '#^Expected 5 @param tags, found 4\.$#'
+			identifier: paramTag.count
+			count: 1
+			path: includes/blocks/featured-posts/class-posts.php
+
+		-
+			message: '#^Parameter \#1 \$args of function paginate_links expects array\{base\?\: string, format\?\: string, total\?\: int, current\?\: int, aria_current\?\: string, show_all\?\: bool, end_size\?\: int, mid_size\?\: int, \.\.\.\}, array\{total\: int, current\: int\<0, max\>, format\: ''page/%%\#%%'', show_all\: false, type\: ''list'', end_size\: 4, mid_size\: 4, prev_next\: false, \.\.\.\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/blocks/featured-posts/class-posts.php
+
+		-
+			message: '#^Result of && is always true\.$#'
+			identifier: booleanAnd.alwaysTrue
+			count: 1
+			path: includes/blocks/featured-posts/class-posts.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between ''all'' and int\<0, max\> will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 2
+			path: includes/blocks/featured-posts/class-posts.php
+
+		-
+			message: '#^Expected 3 @param tags, found 2\.$#'
+			identifier: paramTag.count
+			count: 1
+			path: includes/blocks/term-grid/class-terms.php
+
+		-
+			message: '#^Parameter \#3 \$deps of function wp_enqueue_style expects array\<string\>, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: includes/class-enqueue.php
+
+		-
+			message: '#^Parameter \#3 \$deps of function wp_register_style expects array\<string\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/class-enqueue.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-falsy\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 5
+			path: includes/class-functions.php
+
+		-
+			message: '#^Default value of the parameter \#2 \$opacity \(false\) of method PTAM\\Includes\\Functions\:\:hex2rgba\(\) is incompatible with type int\.$#'
+			identifier: parameter.defaultValue
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^Method PTAM\\Includes\\Functions\:\:get_plugin_version\(\) should return float but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^Offset 0 on array\{string, int, int, bool\} in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^One or more @param tags has an invalid name or invalid syntax\.$#'
+			identifier: phpDoc.parseError
+			count: 10
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(array  associative array of key/value pairs of fonts\.\)\: Unexpected token "associative", expected variable at offset 93 on line 6$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin Author URI\.\)\: Unexpected token "Plugin", expected variable at offset 152 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin Author name\.\)\: Unexpected token "Plugin", expected variable at offset 148 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin Menu Name\.\)\: Unexpected token "Plugin", expected variable at offset 147 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin Menu Name\.\)\: Unexpected token "Plugin", expected variable at offset 151 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin URI\.\)\: Unexpected token "Plugin", expected variable at offset 145 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin description\.\)\: Unexpected token "Plugin", expected variable at offset 146 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string Plugin name\.\)\: Unexpected token "Plugin", expected variable at offset 146 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string URL to the plugin icon\.\)\: Unexpected token "URL", expected variable at offset 146 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string URL to the plugin logo\.\)\: Unexpected token "URL", expected variable at offset 146 on line 8$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: includes/class-functions.php
+
+		-
+			message: '#^Variable \$image_sizes might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: includes/class-functions.php
+
+		-
+			message: '#^Call to function is_wp_error\(\) with WP_Term\|false will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: includes/class-yoast.php
+
+		-
+			message: '#^Access to an undefined property WP_Term\:\:\$background_image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to an undefined property WP_Term\:\:\$permalink\.$#'
+			identifier: property.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''avatar_size'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''backgroundImageFall…'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''backgroundImageMeta'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''backgroundImageSour…'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''default_image'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 6
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''imageSize'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''image_size'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''image_type'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''language'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 2
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''link_color'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 2
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''order'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 4
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''orderBy'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''orderby'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''post_type'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 5
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''posts_per_page'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''taxonomy'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 6
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''term'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''terms'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Access to offset ''termsExclude'' on an unknown class PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Cannot assign offset ''fields'' to string\.$#'
+			identifier: offsetAssign.dimType
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Empty array passed to foreach\.$#'
+			identifier: foreach.emptyArray
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Function remove_filter invoked with 4 parameters, 2\-3 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Offset ''fields'' does not exist on string\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \#1 \$author_id of function get_author_posts_url expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \#2 \$user_id of function get_the_author_meta expects int\|false, ''''\|numeric\-string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$post_data of method PTAM\\Includes\\Rest\\Rest\:\:get_featured_posts\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$post_data of method PTAM\\Includes\\Rest\\Rest\:\:get_image\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$post_data of method PTAM\\Includes\\Rest\\Rest\:\:get_posts\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$post_data of method PTAM\\Includes\\Rest\\Rest\:\:get_taxonomies\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$tax_data of method PTAM\\Includes\\Rest\\Rest\:\:get_all_terms\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$tax_data of method PTAM\\Includes\\Rest\\Rest\:\:get_tax_terms\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Parameter \$term_data of method PTAM\\Includes\\Rest\\Rest\:\:get_tax_term_data\(\) has invalid type PTAM\\Includes\\Rest\\WP_REST_Request\.$#'
+			identifier: class.notFound
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Variable \$post_types in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Variable \$taxonomies might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Variable \$term_list in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 2
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Variable \$terms might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: includes/rest/class-rest.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-falsy\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Parameter \#1 \$post_id of function delete_post_meta expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Parameter \#1 \$post_id of function update_post_meta expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: post-type-archive-mapping.php
+
+		-
+			message: '#^Right side of && is always false\.$#'
+			identifier: booleanAnd.rightAlwaysFalse
+			count: 1
+			path: post-type-archive-mapping.php

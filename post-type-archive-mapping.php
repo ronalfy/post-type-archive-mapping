@@ -4,7 +4,7 @@ Plugin Name: Custom Query Blocks
 Plugin URI: https://mediaron.com/custom-query-blocks/
 Description: Map your post type and term archives to a page and use our Gutenberg blocks to show posts or terms.
 Author: MediaRon LLC
-Version: 5.6.0
+Version: 5.7.0
 Requires at least: 6.5
 Author URI: https://mediaron.com
 Contributors: MediaRon LLC
@@ -17,13 +17,17 @@ Credit: Gutenberg block based on Atomic Blocks
 Credit: Chris Logan for the initial idea.
 Credit: Paal Joaquim for UX and Issue Triage.
 */
-define( 'PTAM_VERSION', '5.6.0' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+define( 'PTAM_VERSION', '5.7.0' );
 define( 'PTAM_FILE', __FILE__ );
 define( 'PTAM_SPONSORS_URL', 'https://github.com/sponsors/MediaRon' );
 
 require_once 'autoloader.php';
 
-use PTAM\Includes\Admin\Options as Options;
+use PTAM\Includes\Admin\Options;
 
 /**
  * Main plugin class.
@@ -77,7 +81,6 @@ class PostTypeArchiveMapping {
 	 */
 	private function __construct() {
 		add_action( 'init', array( $this, 'init' ), 9 );
-		load_plugin_textdomain( 'post-type-archive-mapping', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 		// Register scripts/styles for the plugin.
 		$enqueue = new PTAM\Includes\Enqueue();
@@ -414,7 +417,6 @@ class PostTypeArchiveMapping {
 			'reading',
 			'post-type-archive-mapping'
 		);
-
 	}
 
 	/**
@@ -553,12 +555,11 @@ class PostTypeArchiveMapping {
 	 */
 	public function settings_section() {
 	}
-
 }
 
 add_action(
 	'plugins_loaded',
-	function() {
+	function () {
 		PostTypeArchiveMapping::get_instance();
 	}
 );
