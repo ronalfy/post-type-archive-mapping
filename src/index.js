@@ -10,7 +10,6 @@
  */
 // Declare findIndex, as this is needed for WooCommerce term component.
 if ( typeof findIndex === "undefined" ) {
-	console.log( 'here' );
 	// Set up findIndex as global function.
 	
 
