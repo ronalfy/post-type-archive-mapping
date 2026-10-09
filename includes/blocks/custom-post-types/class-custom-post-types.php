@@ -287,7 +287,7 @@ class Custom_Post_Types {
 				$title = get_the_title( $post_id );
 
 				if ( ! $title ) {
-					$title = __( 'Untitled' );
+					$title = esc_html__( 'Untitled', 'post-type-archive-mapping' );
 				}
 
 				$display_post_anchor_link = isset( $attributes['displayTitleLink'] ) ? $attributes['displayTitleLink'] : true;
