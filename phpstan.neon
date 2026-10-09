@@ -1,0 +1,19 @@
+includes:
+	- vendor/szepeviktor/phpstan-wordpress/extension.neon
+	- phpstan-baseline.neon
+
+parameters:
+	level: 5
+	phpVersion: 70200
+	paths:
+		- includes
+		- post-type-archive-mapping.php
+	excludePaths:
+		- build
+		- node_modules
+		- vendor
+	# UnescapedHtmlInterpolationRule stays out of phpstan-baseline.neon.
+	# Regenerate the baseline without baselining ptam.unescapedHtmlInterpolation.
+
+rules:
+	- PTAM\PHPStan\UnescapedHtmlInterpolationRule

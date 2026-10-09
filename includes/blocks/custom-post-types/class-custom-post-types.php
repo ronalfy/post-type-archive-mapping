@@ -175,11 +175,11 @@ class Custom_Post_Types {
 			$paged = 0;
 		}
 		$post_args = array(
-			'post_type'      => $attributes['postType'],
-			'posts_per_page' => $attributes['postsToShow'],
+			'post_type'      => $this->sanitize_post_type( isset( $attributes['postType'] ) ? $attributes['postType'] : 'post' ),
+			'posts_per_page' => $this->sanitize_posts_to_show( isset( $attributes['postsToShow'] ) ? $attributes['postsToShow'] : 6 ),
 			'post_status'    => 'publish',
-			'order'          => $attributes['order'],
-			'orderby'        => $attributes['orderBy'],
+			'order'          => $this->sanitize_order( isset( $attributes['order'] ) ? $attributes['order'] : 'DESC' ),
+			'orderby'        => $this->sanitize_orderby( isset( $attributes['orderBy'] ) ? $attributes['orderBy'] : 'date' ),
 			'paged'          => $paged,
 		);
 		if ( isset( $attributes['taxonomy'] ) && isset( $attributes['term'] ) ) {
@@ -199,6 +199,11 @@ class Custom_Post_Types {
 		$attributes['metaFont']            = isset( $attributes['metaFont'] ) ? esc_attr( $attributes['metaFont'] ) : 'inherit';
 		$attributes['contentFont']         = isset( $attributes['contentFont'] ) ? esc_attr( $attributes['contentFont'] ) : 'inherit';
 		$attributes['continueReadingFont'] = isset( $attributes['continueReadingFont'] ) ? esc_attr( $attributes['continueReadingFont'] ) : 'inherit';
+		$attributes['titleAlignment']      = $this->sanitize_text_align( isset( $attributes['titleAlignment'] ) ? $attributes['titleAlignment'] : 'left' );
+		$attributes['metaAlignment']       = $this->sanitize_text_align( isset( $attributes['metaAlignment'] ) ? $attributes['metaAlignment'] : 'left' );
+		$attributes['contentAlignment']    = $this->sanitize_text_align( isset( $attributes['contentAlignment'] ) ? $attributes['contentAlignment'] : 'left' );
+		$attributes['titleColor']          = isset( $attributes['titleColor'] ) ? esc_attr( $attributes['titleColor'] ) : 'inherit';
+		$attributes['contentColor']        = isset( $attributes['contentColor'] ) ? esc_attr( $attributes['contentColor'] ) : 'inherit';
 		$attributes['titleHeadingTag']     = isset( $attributes['titleHeadingTag'] ) ? esc_html( $attributes['titleHeadingTag'] ) : 'h2';
 		$attributes['wpmlLanguage']        = isset( $attributes['wpmlLanguage'] ) ? esc_html( $attributes['wpmlLanguage'] ) : 'en';
 
@@ -301,7 +306,10 @@ class Custom_Post_Types {
 								'<%5$s class="ptam-block-post-grid-title" %3$s><a href="%1$s" rel="bookmark" style="%4$s">%2$s</a></%5$s>',
 								esc_url( get_permalink( $post_id ) ),
 								esc_html( $title ),
-								( 'grid' === $attributes['postLayout'] && ! $attributes['removeStyles'] ) ? "style='text-align: {$attributes['titleAlignment']}'" : '',
+								( 'grid' === $attributes['postLayout'] && ! $attributes['removeStyles'] ) ? sprintf(
+									'style="text-align: %s"',
+									esc_attr( $attributes['titleAlignment'] )
+								) : '',
 								sprintf(
 									'color: %1$s; font-family: %2$s; box-shadow: unset;',
 									esc_attr( $attributes['titleColor'] ),
@@ -313,7 +321,12 @@ class Custom_Post_Types {
 							$list_items_markup .= sprintf(
 								'<%3$s class="ptam-block-post-grid-title" %2$s>%1$s</%3$s>',
 								esc_html( $title ),
-								( 'grid' === $attributes['postLayout'] && ! $attributes['removeStyles'] ) ? "style='text-align: {$attributes['titleAlignment']}; color: {$attributes['titleColor']}; font-family: {$attributes['titleFont']}'" : '',
+								( 'grid' === $attributes['postLayout'] && ! $attributes['removeStyles'] ) ? sprintf(
+									'style="text-align: %1$s; color: %2$s; font-family: %3$s"',
+									esc_attr( $attributes['titleAlignment'] ),
+									esc_attr( $attributes['titleColor'] ),
+									esc_attr( $attributes['titleFont'] )
+								) : '',
 								$heading_tag
 							);
 						}
@@ -356,7 +369,7 @@ class Custom_Post_Types {
 
 								// We may have a custom field. Try ACF first.
 								if ( function_exists( 'get_field' ) ) {
-									$custom_field_value = get_field( $maybe_custom_field, $post_id );
+									$custom_field_value = \get_field( $maybe_custom_field, $post_id );
 									if ( $custom_field_value ) {
 										/**
 										 * Filter the custom field value.
@@ -424,7 +437,16 @@ class Custom_Post_Types {
 						$list_items_markup .= sprintf(
 							'<div class="ptam-block-post-grid-byline %s" %s>',
 							isset( $attributes['changeCapitilization'] ) && $attributes['changeCapitilization'] ? 'ptam-text-lower-case' : '',
-							'grid' === $attributes['postLayout'] ? "style='text-align: {$attributes['metaAlignment']}; color: {$attributes['contentColor']}; font-family: {$attributes['metaFont']}'" : "style='color: {$attributes['contentColor']}; font-family: {$attributes['metaFont']}'"
+							'grid' === $attributes['postLayout'] ? sprintf(
+								'style="text-align: %1$s; color: %2$s; font-family: %3$s"',
+								esc_attr( $attributes['metaAlignment'] ),
+								esc_attr( $attributes['contentColor'] ),
+								esc_attr( $attributes['metaFont'] )
+							) : sprintf(
+								'style="color: %1$s; font-family: %2$s"',
+								esc_attr( $attributes['contentColor'] ),
+								esc_attr( $attributes['metaFont'] )
+							)
 						);
 					} else {
 						$list_items_markup .= sprintf(
@@ -502,7 +524,16 @@ class Custom_Post_Types {
 				if ( ! $attributes['removeStyles'] ) {
 					$list_items_markup .= sprintf(
 						'<p class="ptam-block-post-grid-excerpt" %s>',
-						'grid' === $attributes['postLayout'] ? "style='text-align: {$attributes['contentAlignment']}; color: {$attributes['contentColor']}; font-family: {$attributes['contentFont']}'" : "style='color: {$attributes['contentColor']}; font-family: {$attributes['contentFont']}'"
+						'grid' === $attributes['postLayout'] ? sprintf(
+							'style="text-align: %1$s; color: %2$s; font-family: %3$s"',
+							esc_attr( $attributes['contentAlignment'] ),
+							esc_attr( $attributes['contentColor'] ),
+							esc_attr( $attributes['contentFont'] )
+						) : sprintf(
+							'style="color: %1$s; font-family: %2$s"',
+							esc_attr( $attributes['contentColor'] ),
+							esc_attr( $attributes['contentFont'] )
+						)
 					);
 				} else {
 					$list_items_markup .= '<p class="ptam-block-post-grid-excerpt">';
@@ -571,7 +602,19 @@ class Custom_Post_Types {
 				// Get the taxonomies.
 				if ( isset( $attributes['displayTaxonomies'] ) && $attributes['displayTaxonomies'] && 'below_content' === $taxonomy_placement_options ) {
 					if ( ! $attributes['removeStyles'] ) {
-						$list_items_markup .= sprintf( '<div %s>', 'grid' === $attributes['postLayout'] ? "style='text-align: {$attributes['metaAlignment']};color: {$attributes['contentColor']}; font-family: {$attributes['metaFont']}'" : "style='color: {$attributes['contentColor']}; font-family: {$attributes['metaFont']}'" );
+						$list_items_markup .= sprintf(
+							'<div %s>',
+							'grid' === $attributes['postLayout'] ? sprintf(
+								'style="text-align: %1$s; color: %2$s; font-family: %3$s"',
+								esc_attr( $attributes['metaAlignment'] ),
+								esc_attr( $attributes['contentColor'] ),
+								esc_attr( $attributes['metaFont'] )
+							) : sprintf(
+								'style="color: %1$s; font-family: %2$s"',
+								esc_attr( $attributes['contentColor'] ),
+								esc_attr( $attributes['metaFont'] )
+							)
+						);
 						$list_items_markup .= $this->get_taxonomy_terms( $post, $attributes );
 						$list_items_markup .= '</div>';
 					} else {
@@ -658,5 +701,87 @@ class Custom_Post_Types {
 			Functions::get_plugin_dir( 'build/block/custom-post-one/block.json' ),
 			array( 'render_callback' => array( $this, 'custom_posts' ) ),
 		);
+	}
+
+	/**
+	 * Restrict a text-align value to left, center, or right.
+	 *
+	 * @param mixed $alignment Raw alignment value.
+	 *
+	 * @return string Allowed alignment. Falls back to left.
+	 */
+	private function sanitize_text_align( $alignment ) {
+		$alignment = is_string( $alignment ) ? strtolower( $alignment ) : '';
+		$allowed   = array( 'left', 'center', 'right' );
+		if ( ! in_array( $alignment, $allowed, true ) ) {
+			return 'left';
+		}
+		return $alignment;
+	}
+
+	/**
+	 * Limit the block query to a public post type.
+	 *
+	 * @param mixed $post_type Raw post type attribute.
+	 *
+	 * @return string Public post type. Falls back to post.
+	 */
+	private function sanitize_post_type( $post_type ) {
+		if ( ! is_string( $post_type ) ) {
+			return 'post';
+		}
+		$public_post_types = get_post_types( array( 'public' => true ) );
+		if ( ! in_array( $post_type, $public_post_types, true ) ) {
+			return 'post';
+		}
+		return $post_type;
+	}
+
+	/**
+	 * Limit the query order to ASC or DESC.
+	 *
+	 * @param mixed $order Raw order attribute.
+	 *
+	 * @return string ASC or DESC.
+	 */
+	private function sanitize_order( $order ) {
+		$order = is_string( $order ) ? strtoupper( $order ) : '';
+		if ( ! in_array( $order, array( 'ASC', 'DESC' ), true ) ) {
+			return 'DESC';
+		}
+		return $order;
+	}
+
+	/**
+	 * Limit the query orderby to values the block editor offers.
+	 *
+	 * @param mixed $orderby Raw orderby attribute.
+	 *
+	 * @return string Allowed orderby. Falls back to date.
+	 */
+	private function sanitize_orderby( $orderby ) {
+		$allowed = array( 'ID', 'menu_order', 'author', 'date', 'modified', 'name', 'title', 'rand' );
+		if ( ! is_string( $orderby ) || ! in_array( $orderby, $allowed, true ) ) {
+			return 'date';
+		}
+		return $orderby;
+	}
+
+	/**
+	 * Bound the number of posts the block requests.
+	 *
+	 * @param mixed $posts_to_show Raw posts-to-show attribute.
+	 *
+	 * @return int Post count between 1 and 100.
+	 */
+	private function sanitize_posts_to_show( $posts_to_show ) {
+		$posts_to_show = absint( $posts_to_show );
+		if ( $posts_to_show < 1 ) {
+			return 1;
+		}
+		if ( $posts_to_show > 100 ) {
+			return 100;
+		}
+		return $posts_to_show;
 	}
 }

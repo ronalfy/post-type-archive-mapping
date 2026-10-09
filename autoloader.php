@@ -5,6 +5,10 @@
  * @package PTAM
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Register Autoloader
  */
@@ -40,7 +44,7 @@ spl_autoload_register(
 		$namespace = strtolower( str_replace( '_', '-', $namespace ) );
 
 		// Get the path to our files.
-		$directory = dirname( __FILE__ );
+		$directory = __DIR__;
 		if ( ! empty( $namespace ) ) {
 			$directory .= DIRECTORY_SEPARATOR . $namespace;
 		}

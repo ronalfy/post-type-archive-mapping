@@ -10,8 +10,11 @@
     <arg name="extensions" value="php"/>
 
     <file>.</file>
+    <!-- Generated assets and the PHPStan rule are not plugin runtime code. -->
     <exclude-pattern>*/node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/phpstan/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
     <exclude-pattern>*/tests/*</exclude-pattern>
     <exclude-pattern>*/package/*</exclude-pattern>
     <exclude-pattern>*.js</exclude-pattern>

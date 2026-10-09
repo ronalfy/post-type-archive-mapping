@@ -4,7 +4,7 @@ Tags: map pages, archives, post type block, 404 page, category grid
 Requires at least: 6.5
 Requires PHP: 7.2
 Tested up to: 7.0
-Stable tag: 5.6.0
+Stable tag: 5.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://github.com/MediaRon/post-type-archive-mapping
@@ -121,6 +121,10 @@ Yes, just post in the support forums here and I'll do my best to address your is
 5. Term archive option.
 
 == Changelog ==
+
+= 5.7.0 =
+* Released 2026-10-09
+* Security fix: escape and allowlist Custom Posts block style attributes.
 
 = 5.6.0 =
 * Released 2026-03-06
@@ -380,5 +384,5 @@ Yes, just post in the support forums here and I'll do my best to address your is
 
 == Upgrade Notice ==
 
-= 5.6.0 =
-Finalizing resolving XSS issue with image alignment as reported by Patchstack.
+= 5.7.0 =
+Security fix for Custom Posts block style attributes.
